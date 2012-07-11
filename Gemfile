@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'paperclip'
 gem 'twitter-bootstrap-rails'
+gem 'less-rails'
 #gem 'nifty-generators'
 
 # Gems used only for assets and not required

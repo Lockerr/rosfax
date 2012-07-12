@@ -21,7 +21,7 @@
           %li
             %a{"data-toggle" => "tab", :href => "#lG"} Сайт
         .tab-content
-          #lG.tab-pane.active
+          #lG.tab-pane
             - for image in @report.assets
               = image_tag (image.url(:thumb))
           #lA.tab-pane.active

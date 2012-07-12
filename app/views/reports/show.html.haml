@@ -18,7 +18,11 @@
             %a{"data-toggle" => "tab", :href => "#lF"} Повреждения
           %li
             %a{"data-toggle" => "tab", :href => "#lF"} Документы
+          %li
+            %a{"data-toggle" => "tab", :href => "#lG"} Сайт
         .tab-content
+          - for image in @report.assets
+            = image_tag (image.url)
           #lA.tab-pane.active
             .span6
               - placements = Report::PLACEMENTS

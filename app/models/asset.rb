@@ -1,12 +1,16 @@
 class Asset < ActiveRecord::Base
-  has_attached_file :data, :styles => {:medium => '300x200', :thumb => '75x50'}
+  has_attached_file :data, :styles => {
+          :medium => '300x200',
+          :thumb => '100x68',
+          :normal => '1200x800'
+  }
 
   belongs_to :attachable, :polymorphic => true
-  
+
   def url(*args)
     data.url(*args)
   end
-  
+
   def name
     data_file_name
   end

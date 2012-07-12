@@ -5,6 +5,8 @@ class Asset < ActiveRecord::Base
           :normal => '1200x800'
   }
 
+  process_in_background :data
+
   belongs_to :attachable, :polymorphic => true
 
   def url(*args)

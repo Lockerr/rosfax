@@ -15,12 +15,6 @@ $ ->
 
   droppable = $('.drop')
 
-#  addEvent bin, "dragover", (e) ->
-#    e.preventDefault()  if e.preventDefault
-#    @className = "over"
-#    e.dataTransfer.dropEffect = "copy"
-#    false
-
   $.each $('.drop'), ->
     this.ondrop  = (event) ->
       event.preventDefault()
@@ -30,8 +24,6 @@ $ ->
       $.ajax
         url: '/reports/' + $('.container').attr('data-report')  + '/place?place=' + $(this).parent().parent().attr('id') + '&asset='  + window.dragged.id + '&index=' + this.id
         type: 'post'
-        success: ->
-          alert('ok')
 
   $.each $('.photos img'), ->
     this.ondragstart = (event) ->

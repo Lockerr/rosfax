@@ -10,7 +10,8 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'paperclip'
 gem 'twitter-bootstrap-rails'
-#gem 'less-rails'
+gem 'delayed_job'
+gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 #gem 'nifty-generators'
 
 # Gems used only for assets and not required

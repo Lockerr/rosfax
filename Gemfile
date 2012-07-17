@@ -16,6 +16,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development do
+  gem 'rvm-capistrano'
+end
+
+
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false

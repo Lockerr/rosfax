@@ -1,14 +1,15 @@
-- placements = Report::PLACEMENTS
-- for place in placements
-  .row-fluid{:id => "#{place}"}
-    .span3.fluid
-      = place
-    .span3.fluid
-      .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-        = image_tag(@report.image(place, 0)) if @report.image(place, 0)
-    .span3.fluid
-      .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_1" }
-        = image_tag(@report.image(place, 1)) if @report.image(place, 1)
-    .span3.fluid
-      .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
-        = image_tag(@report.image(place, 2)) if @report.image(place, 2)
+#lA.tab-pane.active
+  - placements = Report::PLACEMENTS
+  - for place in placements
+    .row-fluid{:id => "#{place}"}
+      .span3.fluid
+        = place
+      .span3.fluid
+        .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
+          = image_tag(@report.image(place, 0)) if @report.image(place, 0)
+      .span3.fluid
+        .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_1" }
+          = image_tag(@report.image(place, 1)) if @report.image(place, 1)
+      .span3.fluid
+        .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
+          = image_tag(@report.image(place, 2)) if @report.image(place, 2)

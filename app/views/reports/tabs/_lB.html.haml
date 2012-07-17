@@ -1,9 +1,10 @@
-.span6
-  - for place in %w(:inter-front-left :inter-front-right :inter-rear-left :inter-rear-right :inter-trunk :inter-dashboard)
-    .row-fluid{:id => "#{place}"}
-      .span3
-        = place
-      .span3
-        .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-          = image_tag(@report.image(place, 0)) if @report.image(place, 0)
+#lB.tab-pane
+  .span6
+    - for place in %w(:inter-front-left :inter-front-right :inter-rear-left :inter-rear-right :inter-trunk :inter-dashboard)
+      .row-fluid{:id => "#{place}"}
+        .span3
+          = place
+        .span3
+          .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
+            = image_tag(@report.image(place, 0)) if @report.image(place, 0)
 

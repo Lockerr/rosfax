@@ -1,20 +1,21 @@
-= form_for @report do |form|
-  %fieldset
-    .control-group
-      %label.control-label{:for => "input01"} Выоста протектора колес
-      .control-group.form-inline
-        .input-append
-          %input#input01_01.input-small{:placeholder => 'Первое колесо', :type => 'text'}
-            %span.add-on мм
-          %input#input01_01.input-small{:placeholder => 'Второе колесо', :type => 'text'}
-            %span.add-on мм
-          %input#input01_01.input-small{:placeholder => 'Третье колесо', :type => 'text'}
-            %span.add-on мм
-          %input#input01_01.input-small{:placeholder => 'Четвертое колесо', :type => 'text'}
-            %span.add-on мм
-      .control-group.form-inline
-        .input-append
-          %input#input01_01.input-small{:placeholder => 'Пятое колесо', :type => 'text'}
-            %span.add-on мм
-    .control-group
-      %label.control-label{:for => "input01"} Какие-то еще данные
+#lC.tab-pane
+  = form_for @report do |form|
+    %fieldset
+      .control-group
+        %label.control-label{:for => "input01"} Выоста протектора колес
+        .control-group.form-inline
+          .input-append
+            %input#input01_01.input-small{:placeholder => 'Первое колесо', :type => 'text'}
+              %span.add-on мм
+            %input#input01_01.input-small{:placeholder => 'Второе колесо', :type => 'text'}
+              %span.add-on мм
+            %input#input01_01.input-small{:placeholder => 'Третье колесо', :type => 'text'}
+              %span.add-on мм
+            %input#input01_01.input-small{:placeholder => 'Четвертое колесо', :type => 'text'}
+              %span.add-on мм
+        .control-group.form-inline
+          .input-append
+            %input#input01_01.input-small{:placeholder => 'Пятое колесо', :type => 'text'}
+              %span.add-on мм
+      .control-group
+        %label.control-label{:for => "input01"} Какие-то еще данные

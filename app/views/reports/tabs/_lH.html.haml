@@ -1,2 +1,3 @@
-- for image in @report.assets
-  = image_tag (image.url(:thumb))
+#lH.tab-pane
+  - for image in @report.assets
+    = image_tag (image.url(:thumb))

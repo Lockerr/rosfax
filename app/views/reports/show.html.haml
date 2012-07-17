@@ -22,8 +22,7 @@
             %a{"data-toggle" => "tab", :href => "#lH"} Сайт
         .tab-content
           - for symbol in %w(A B C D E F G H)
-            .tab-pane{:id => "l#{symbol}"}
-              = render "reports/tabs/l#{symbol}"
+            = render "reports/tabs/l#{symbol}"
     .span4
       .photos{:style => 'overflow-y: scroll;height: 500px'}
         - for asset in @report.assets

@@ -1,0 +1,13 @@
+= form_for @report, :html => {:class => 'form-horizontal'} do |form|
+  %fieldset
+    .controls
+      .control-group
+        %label.control-label Radio buttons
+        .controls
+          %label.radio
+            %input#optionsRadios1{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
+              Юридическое лицо
+          %label.radio
+            %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
+              Физическое лицо
+  = form.submit('Сохранить', :class => 'btn btn-primary')

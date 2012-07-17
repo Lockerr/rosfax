@@ -1,0 +1,27 @@
+%h3 Документы
+= form_for @report, :html => {:class => 'form-horizontal'} do |form|
+  %fieldset
+    .control-group
+      %label.control-label Выдан
+      .controls
+        %input#input01_01.input-small{:placeholder => '', :type => 'text'}
+    .control-group
+      %label.control-label Техническое обслуживание
+      .controls
+        %label.radio
+          %input#optionsRadios1{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
+            Есть
+        %label.radio
+          %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
+            Нет
+        %input#input01_01.input-small{:placeholder => '', :type => 'text'}
+    .control-group
+      %label.control-label Форма собственности
+      .controls
+        %label.radio
+          %input#optionsRadios1{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
+            Юридическое лицо
+        %label.radio
+          %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
+            Физическое лицо
+  = form.submit('Сохранить', :class => 'btn btn-primary')

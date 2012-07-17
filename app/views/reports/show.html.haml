@@ -17,76 +17,13 @@
           %li
             %a{"data-toggle" => "tab", :href => "#lF"} Повреждения
           %li
-            %a{"data-toggle" => "tab", :href => "#lF"} Документы
+            %a{"data-toggle" => "tab", :href => "#lG"} Документы
           %li
-            %a{"data-toggle" => "tab", :href => "#lG"} Сайт
+            %a{"data-toggle" => "tab", :href => "#lH"} Сайт
         .tab-content
-          #lG.tab-pane
-            - for image in @report.assets
-              = image_tag (image.url(:thumb))
-          #lA.tab-pane.active
-            .span6
-              - placements = Report::PLACEMENTS
-              - for place in placements
-                .row-fluid{:id => "#{place}"}
-                  .span3.fluid
-                    = place
-                  .span3.fluid
-                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-                      = image_tag(@report.image(place, 0)) if @report.image(place, 0)
-                  .span3.fluid
-                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_1" }
-                      = image_tag(@report.image(place, 1)) if @report.image(place, 1)
-                  .span3.fluid
-                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
-                      = image_tag(@report.image(place, 2)) if @report.image(place, 2)
-          #lB.tab-pane
-            .span6
-              - for place in %w(:inter-front-left :inter-front-right :inter-rear-left :inter-rear-right :inter-trunk :inter-dashboard)
-                .row-fluid{:id => "#{place}"}
-                  .span3
-                    = place
-                  .span3
-                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-                      = image_tag(@report.image(place, 0)) if @report.image(place, 0)
-          #lC.tab-pane
-            = form_for @report do |form|
-              %fieldset
-                .control-group
-                  %label.control-label{:for => "input01"} Выоста протектора колес
-                  .control-group.form-inline
-                    .input-append
-                      %input#input01_01.input-small{:placeholder => 'Первое колесо', :type => 'text'}
-                        %span.add-on мм
-                      %input#input01_01.input-small{:placeholder => 'Второе колесо', :type => 'text'}
-                        %span.add-on мм
-                      %input#input01_01.input-small{:placeholder => 'Третье колесо', :type => 'text'}
-                        %span.add-on мм
-                      %input#input01_01.input-small{:placeholder => 'Четвертое колесо', :type => 'text'}
-                        %span.add-on мм
-                  .control-group.form-inline
-                    .input-append
-                      %input#input01_01.input-small{:placeholder => 'Пятое колесо', :type => 'text'}
-                        %span.add-on мм
-                .control-group
-                  %label.control-label{:for => "input01"} Какие-то еще данные
-          #lF.tab-pane
-            = form_for @report, :html => {:class => 'form-horizontal'} do |form|
-              %fieldset
-                .controls
-                  .control-group
-                    %label.control-label Radio buttons
-                    .controls
-                      %label.radio
-                        %input#optionsRadios1{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
-                          Юридическое лицо
-                      %label.radio
-                        %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
-                          Физическое лицо
-              = form.submit('Сохранить', :class => 'btn btn-primary')
-
-
-
+          - for symbol in %w(A B C D E F G H)
+            .tab-pane{:id => "l#{symbol}"}
+              = render "reports/tabs/l#{symbol}"
     .span4
       .photos{:style => 'overflow-y: scroll;height: 500px'}
         - for asset in @report.assets

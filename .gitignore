@@ -6,3 +6,4 @@ tmp/
 *.jpg
 *.png
 .idea/
+.idea/*.xml

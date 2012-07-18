@@ -16,10 +16,8 @@ set :use_sudo, true
 
 role :web, domain
 role :app, domain
-role :db,  domain, :primary => true # This is where Rails migrations will run
+role :db,  domain, :primary => true
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
 after 'update_code', 'bundle install'
 namespace :deploy do
   task :start do
@@ -31,12 +29,3 @@ namespace :deploy do
   end
 end
 
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end

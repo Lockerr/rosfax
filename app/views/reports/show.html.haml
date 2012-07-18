@@ -26,7 +26,7 @@
     .span4
       .photos{:style => 'overflow-y: scroll;height: 500px'}
         - for asset in @report.assets
-          = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move; width: 100px'
+          = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
       %hr/
       .files
         = form_for [@report, Asset.new], :html => { :class => "upload", :multipart => true } do |f|

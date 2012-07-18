@@ -1,15 +1,82 @@
 #lA.tab-pane.active
-  - placements = Report::PLACEMENTS
-  - for place in placements
-    .row-fluid{:id => "#{place}"}
-      .span3.fluid
-        = place
-      .span3.fluid
-        .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-          = image_tag(@report.image(place, 0)) if @report.image(place, 0)
-      .span3.fluid
-        .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_1" }
-          = image_tag(@report.image(place, 1)) if @report.image(place, 1)
-      .span3.fluid
-        .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
-          = image_tag(@report.image(place, 2)) if @report.image(place, 2)
+  .tabbable{:style => "margin-bottom: 18px;"}
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#tab1"} Фото
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab2"} Лкп
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab3"} Стекла
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab4"} Колеса
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab5"} Тормоза
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab6"} Амортизаторы
+    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;"}
+      #tab1.tab-pane.active
+        - placements = Report::PLACEMENTS
+        - for place in placements
+          .row-fluid{:id => "#{place}"}
+            .span3.fluid
+              = place
+            .span3.fluid
+              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
+                = image_tag(@report.image(place, 0)) if @report.image(place, 0)
+            .span3.fluid
+              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_1" }
+                = image_tag(@report.image(place, 1)) if @report.image(place, 1)
+            .span3.fluid
+              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
+                = image_tag(@report.image(place, 2)) if @report.image(place, 2)
+      #tab2.tab-pane
+        - for place in Report::COATING
+          .row-fluid{:id => "#{place}"}
+            .span3.fluid
+              = place
+            .span3.fluid
+              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
+                = image_tag(@report.image(place, 0)) if @report.image(place, 0)
+      #tab3.tab-pane
+        = form_for 'report', :method => :put do |form|
+          - for element in Report::WINDOWS
+            %fieldset
+              .control-group
+                %label.control-label{:for => "input01"}= element
+                .control-group.form-inline
+                  %input{:id => "report_windows[#{element}]", :name => "report[windows[#{element}]]", :placeholder => element, :size => "30", :type => "text", :value => @report.windows[element]}/
+          = form.submit
+      #tab4.tab-pane
+        = form_for @report do |form|
+          %fieldset
+            .control-group
+              %label.control-label{:for => "input01"} Выоста протектора колес
+              .control-group.form-inline
+                .input-append
+                  %input#input01_01.input-small{:placeholder => 'Первое колесо', :type => 'text'}
+                    %span.add-on мм
+                  %input#input01_01.input-small{:placeholder => 'Второе колесо', :type => 'text'}
+                    %span.add-on мм
+                  %input#input01_01.input-small{:placeholder => 'Третье колесо', :type => 'text'}
+                    %span.add-on мм
+                  %input#input01_01.input-small{:placeholder => 'Четвертое колесо', :type => 'text'}
+                    %span.add-on мм
+              .control-group.form-inline
+                .input-append
+                  %input#input01_01.input-small{:placeholder => 'Пятое колесо', :type => 'text'}
+                    %span.add-on мм
+            .control-group
+              .row-fluid
+                .span3.fluid
+                  - for place in Report::WHEEL
+                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
+                      = image_tag(@report.image(place,0)) if @report.image(place, 0)
+      #tab5.tab-pane
+        = form_for 'report', :method => :put do |form|
+          - for element in Report::BRAKES
+            %fieldset
+              .control-group
+                %label.control-label{:for => "input01"}= element
+                .control-group.form-inline
+                  %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :placeholder => element, :size => "30", :type => "text", :value => @report.brakes[element]}/
+          = form.submit

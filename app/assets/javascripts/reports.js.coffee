@@ -28,3 +28,4 @@ $ ->
   $.each $('.photos img'), ->
     this.ondragstart = (event) ->
       window.dragged = event.target
+

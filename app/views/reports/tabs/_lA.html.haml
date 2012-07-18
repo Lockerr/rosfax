@@ -2,7 +2,7 @@
   .tabbable{:style => "margin-bottom: 18px;"}
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "#exterior"} Фото
+        %a{"data-toggle" => "tab", :href => "#visual_interior"} Фото
       %li
         %a{"data-toggle" => "tab", :href => "#coating"} Лкп
       %li
@@ -16,19 +16,23 @@
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;"}
       #visual_interior.tab-pane.active
         - placements = Report::PLACEMENTS
-        - for place in placements
-          .row-fluid{:id => "#{place}"}
-            .span3.fluid
-              = place
-            .span3.fluid
-              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-                = image_tag(@report.image(place, 0)) if @report.image(place, 0)
-            .span3.fluid
-              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_1" }
-                = image_tag(@report.image(place, 1)) if @report.image(place, 1)
-            .span3.fluid
-              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
-                = image_tag(@report.image(place, 2)) if @report.image(place, 2)
+        .row-fluid
+          - for place in placements[0..2]
+            .nine.fluid{:style => 'border: 1px solid;height: 68px; width: 100px; float: left; margin: 10px'}
+              .drop
+                = @report.image(place, 0) ? image_tag(@report.image(place, 0)) : place
+        .row-fluid
+          - for place in placements[3..5]
+            .nine.fluid{:style => 'border: 1px solid;height: 68px; width: 100px; float: left; margin: 10px'}
+              .drop
+                = @report.image(place, 0) ? image_tag(@report.image(place, 0)) : place
+        .row-fluid
+          - for place in placements[6..8]
+            .nine.fluid{:style => 'border: 1px solid;height: 68px; width: 100px; float: left; margin: 10px'}
+              .drop
+                = @report.image(place, 0) ? image_tag(@report.image(place, 0)) : place
+        .row-fluid{:style => 'border: 1px solid; height: 100px; width: 346px; margin-top:10px; margin-left: 10px'}
+
       #coating.tab-pane
         - for place in Report::COATING
           .row-fluid{:id => "#{place}"}

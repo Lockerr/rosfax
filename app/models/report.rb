@@ -3,6 +3,20 @@ class Report < ActiveRecord::Base
   serialize :visual_interior, Hash
   serialize :windows, Hash
 
+  serialize :exterior, Hash
+  serialize :windows_lights, Hash
+  serialize :exterior_parts, Hash
+  serialize :powertrains, Hash
+  serialize :electric_parts, Hash
+  serialize :liquid_levels, Hash
+  serialize :chasis, Hash
+  serialize :completion, Hash
+  serialize :testdrtive, Hash
+  serialize :windows, Hash
+  serialize :dumpers, Hash
+  serialize :brakes, Hash
+
+
   PLACEMENTS = %w( :front_left :front :front_right :right :rear_right :rear :rear_left :left :roof )
   WHEEL = %w(:front_left_wheel :front_right_wheel :rear_right_wheel :rear_left_wheel :stepney)
   EXTERIOR_PARTS = %w(:hood :front_right_wing :right_front_door :rear_right_door :rear_right_wing :boot_lid :rear_left_wing :rear_left_door :front_left_door :front_left_wing_of_the :roof :front_bumper :skirt_front_bumper :rear_bumper :rear_apron :right_threshold :left_threshold)
@@ -21,7 +35,7 @@ class Report < ActiveRecord::Base
   WINDOWS = %w( :head-on_window :front_right_window :rear_right_window :rear_right_ventilator :rear_window :rear_left_ventilator :the_rear_left_window :front_left_window )
 
   BRAKES = %w(:front_pads :front_brake_discs :rear_pads :rear_brake_discs)
-  DUMPERS = %w(:right_front_bumper :left_front_bumper :right_rear_bumper :right_rear_bumper)
+  DUMPERS = %w(:right_front_bumper :left_front_bumper :right_rear_bumper :left_rear_bumper)
 
 
 

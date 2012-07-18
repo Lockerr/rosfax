@@ -1,20 +1,20 @@
-#lA.tab-pane.active
+#lA.tab-pane.left.active
   .tabbable{:style => "margin-bottom: 18px;"}
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "#tab1"} Фото
+        %a{"data-toggle" => "tab", :href => "#exterior"} Фото
       %li
-        %a{"data-toggle" => "tab", :href => "#tab2"} Лкп
+        %a{"data-toggle" => "tab", :href => "#coating"} Лкп
       %li
-        %a{"data-toggle" => "tab", :href => "#tab3"} Стекла
+        %a{"data-toggle" => "tab", :href => "#windows"} Стекла
       %li
-        %a{"data-toggle" => "tab", :href => "#tab4"} Колеса
+        %a{"data-toggle" => "tab", :href => "#wheels"} Колеса
       %li
-        %a{"data-toggle" => "tab", :href => "#tab5"} Тормоза
+        %a{"data-toggle" => "tab", :href => "#brakes"} Тормоза
       %li
-        %a{"data-toggle" => "tab", :href => "#tab6"} Амортизаторы
+        %a{"data-toggle" => "tab", :href => "#dumpers"} Амортизаторы
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;"}
-      #tab1.tab-pane.active
+      #visual_interior.tab-pane.active
         - placements = Report::PLACEMENTS
         - for place in placements
           .row-fluid{:id => "#{place}"}
@@ -29,7 +29,7 @@
             .span3.fluid
               .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
                 = image_tag(@report.image(place, 2)) if @report.image(place, 2)
-      #tab2.tab-pane
+      #coating.tab-pane
         - for place in Report::COATING
           .row-fluid{:id => "#{place}"}
             .span3.fluid
@@ -37,7 +37,7 @@
             .span3.fluid
               .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
                 = image_tag(@report.image(place, 0)) if @report.image(place, 0)
-      #tab3.tab-pane
+      #windows.tab-pane
         = form_for 'report', :method => :put do |form|
           - for element in Report::WINDOWS
             %fieldset
@@ -46,7 +46,7 @@
                 .control-group.form-inline
                   %input{:id => "report_windows[#{element}]", :name => "report[windows[#{element}]]", :placeholder => element, :size => "30", :type => "text", :value => @report.windows[element]}/
           = form.submit
-      #tab4.tab-pane
+      #wheels.tab-pane
         = form_for @report do |form|
           %fieldset
             .control-group
@@ -66,17 +66,52 @@
                   %input#input01_01.input-small{:placeholder => 'Пятое колесо', :type => 'text'}
                     %span.add-on мм
             .control-group
-              .row-fluid
+              .row-fluid{:id => "#{place}_photo"}
                 .span3.fluid
                   - for place in Report::WHEEL
-                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_2"  }
-                      = image_tag(@report.image(place,0)) if @report.image(place, 0)
-      #tab5.tab-pane
-        = form_for 'report', :method => :put do |form|
+                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"  }
+                      = image_tag(@report.image(place + '_photo',0)) if @report.image(place + '_photo', 0)
+      #brakes.tab-pane
+        = form_for 'report', :html => {:class => 'form-horizontal'},:method => :put do |form|
           - for element in Report::BRAKES
-            %fieldset
-              .control-group
-                %label.control-label{:for => "input01"}= element
-                .control-group.form-inline
-                  %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :placeholder => element, :size => "30", :type => "text", :value => @report.brakes[element]}/
+            .control-group
+              %label.control-label
+                =element
+              .controls
+                - if @report.brakes[element] == 'true'
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'true', :checked => ''}
+                      ок
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false'}
+                      требуют замены
+                - else
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'true'} ок
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false', :checked => true} требуют замены
           = form.submit
+      #dumpers.tab-pane
+        = form_for 'report',:html => {:class => 'form-horizontal'},  :method => :put do |form|
+          - for element in Report::DUMPERS
+            .control-group
+              %label.control-label
+                =element
+              .controls
+                - if @report.dumpers[element] == 'true'
+                  %label.radio
+                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'true', :checked => ''}
+                      true
+                  %label.radio
+                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'false'}
+                      false
+                - else
+                  %label.radio
+                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'true'} true
+                  %label.radio
+                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'false', :checked => true} false
+          = form.submit
+
+
+
+

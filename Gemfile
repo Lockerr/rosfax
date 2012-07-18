@@ -18,6 +18,7 @@ end
 
 group :development do
   gem 'rvm-capistrano'
+  gem 'quiet_assets'
 end
 
 

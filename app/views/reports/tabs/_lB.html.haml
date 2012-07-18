@@ -1,6 +1,6 @@
 #lB.tab-pane
   .span6
-    - for place in %w(:inter-front-left :inter-front-right :inter-rear-left :inter-rear-right :inter-trunk :inter-dashboard)
+    - for place in Report::INTERIOR_PARTS
       .row-fluid{:id => "#{place}"}
         .span3
           = place

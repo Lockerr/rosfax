@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718041349) do
+ActiveRecord::Schema.define(:version => 20120725071420) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -23,9 +23,21 @@ ActiveRecord::Schema.define(:version => 20120718041349) do
     t.datetime "updated_at"
     t.boolean  "data_processing"
     t.datetime "data_updated_at"
+    t.string   "position"
   end
 
   add_index "assets", ["attachable_id", "attachable_type"], :name => "index_assets_on_attachable_id_and_attachable_type"
+
+  create_table "defects", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "report_id"
+    t.string   "category"
+    t.string   "sub_category"
+    t.string   "defect_type"
+    t.string   "size"
+    t.string   "images"
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -59,6 +71,12 @@ ActiveRecord::Schema.define(:version => 20120718041349) do
     t.text     "windows"
     t.text     "dumpers"
     t.text     "brakes"
+    t.text     "wheels"
+    t.text     "interior"
+    t.text     "under_the_hood"
+    t.text     "photo_others"
+    t.text     "defects"
+    t.string   "coating"
   end
 
 end

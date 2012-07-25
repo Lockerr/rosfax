@@ -1,2 +1,31 @@
-#lC.tab-pane
- C
+#lC.tab-pane.left.active
+  .tabbable{:style => "margin-bottom: 18px;"}
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#compiled"} Все дефекты
+      %li
+        %a{"data-toggle" => "tab", :href => "#exterior"} Экстерьер
+      %li
+        %a{"data-toggle" => "tab", :href => "#interior"} Интерьер
+      %li
+        %a{"data-toggle" => "tab", :href => "#under_the_hood"} Под капотом
+      %li
+        %a{"data-toggle" => "tab", :href => "#other_photos"} Прочее
+      %li
+        %a{"data-toggle" => "tab", :href => "#wheels"} Колеса
+      %li
+        %a{"data-toggle" => "tab", :href => "#dumpers"} Видео
+    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd"}
+      #compiled.tab-pane.active
+        = render 'reports/defects/compiled'
+      #exterior.tab-pane
+        -#= render 'reports/tabs/def_exterior'
+      #interior.tab-pane
+        -#= render 'reports/tabs/def_interior'
+      #under_the_hood.tab-pane
+        -#= render 'reports/tabs/def_under_the_hood'
+      #other_photos.tab-pane
+        -#= render 'reports/tabs/def_other_photos'
+      #wheels.tab-pane
+        -#= render 'reports/tabs/def_wheels'
+      #brakes.tab-pane

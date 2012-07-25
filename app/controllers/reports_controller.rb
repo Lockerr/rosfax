@@ -1,6 +1,8 @@
 class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
+  layout 'report'
+
   def index
     @reports = Report.all
 
@@ -60,10 +62,8 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.update_attributes(params[:report])
-        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
     end
@@ -81,8 +81,22 @@ class ReportsController < ApplicationController
     end
   end
 
+  def images
+    @report = Report.find(params[:report_id])
+    ids = @report.send(params[:attribute])[params[:place]].map { |i| i.to_i }
+
+    assets = Asset.where(:id => ids).map { |i| i.url(:carousel) }
+    render :json => assets
+  end
+
   def place
-    Report.find(params[:report_id]).place params[:place], params[:asset], params[:index].split('_')[1]
+    report = Report.find(params[:report_id])
+    report.place(:position => params[:position], :asset => params[:asset], :attribute => params[:attribute])
     render :json => {:result => :ok}
+  end
+
+  def remove_asset
+    Report.find(params[:report_id]).remove_asset(params[:asset])
+    render :json => {:status => :ok}
   end
 end

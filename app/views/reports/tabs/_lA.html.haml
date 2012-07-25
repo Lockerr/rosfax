@@ -1,80 +1,29 @@
-#lA.tab-pane.left.active
+#lA.tab-pane.left
   .tabbable{:style => "margin-bottom: 18px;"}
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "#visual_interior"} Фото
+        %a{"data-toggle" => "tab", :href => "#exterior"} Экстерьер
       %li
-        %a{"data-toggle" => "tab", :href => "#coating"} Лкп
+        %a{"data-toggle" => "tab", :href => "#interior"} Интерьер
       %li
-        %a{"data-toggle" => "tab", :href => "#windows"} Стекла
+        %a{"data-toggle" => "tab", :href => "#under_the_hood"} Под капотом
+      %li
+        %a{"data-toggle" => "tab", :href => "#other_photos"} Прочее
       %li
         %a{"data-toggle" => "tab", :href => "#wheels"} Колеса
       %li
-        %a{"data-toggle" => "tab", :href => "#brakes"} Тормоза
-      %li
-        %a{"data-toggle" => "tab", :href => "#dumpers"} Амортизаторы
-    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;"}
-      #visual_interior.tab-pane.active
-        - placements = Report::PLACEMENTS
-        .row-fluid
-          - for place in placements[0..2]
-            .nine.fluid{:style => 'border: 1px solid;height: 68px; width: 100px; float: left; margin: 10px'}
-              .drop
-                = @report.image(place, 0) ? image_tag(@report.image(place, 0)) : place
-        .row-fluid
-          - for place in placements[3..5]
-            .nine.fluid{:style => 'border: 1px solid;height: 68px; width: 100px; float: left; margin: 10px'}
-              .drop
-                = @report.image(place, 0) ? image_tag(@report.image(place, 0)) : place
-        .row-fluid
-          - for place in placements[6..8]
-            .nine.fluid{:style => 'border: 1px solid;height: 68px; width: 100px; float: left; margin: 10px'}
-              .drop
-                = @report.image(place, 0) ? image_tag(@report.image(place, 0)) : place
-        .row-fluid{:style => 'border: 1px solid; height: 100px; width: 346px; margin-top:10px; margin-left: 10px'}
-
-      #coating.tab-pane
-        - for place in Report::COATING
-          .row-fluid{:id => "#{place}"}
-            .span3.fluid
-              = place
-            .span3.fluid
-              .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-                = image_tag(@report.image(place, 0)) if @report.image(place, 0)
-      #windows.tab-pane
-        = form_for 'report', :method => :put do |form|
-          - for element in Report::WINDOWS
-            %fieldset
-              .control-group
-                %label.control-label{:for => "input01"}= element
-                .control-group.form-inline
-                  %input{:id => "report_windows[#{element}]", :name => "report[windows[#{element}]]", :placeholder => element, :size => "30", :type => "text", :value => @report.windows[element]}/
-          = form.submit
+        %a{"data-toggle" => "tab", :href => "#dumpers"} Видео
+    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
+      #exterior.tab-pane.active
+        = render 'reports/tabs/exterior'
+      #interior.tab-pane
+        = render 'reports/tabs/interior'
+      #under_the_hood.tab-pane
+        = render 'reports/tabs/under_the_hood'
+      #other_photos.tab-pane
+        = render 'reports/tabs/other_photos'
       #wheels.tab-pane
-        = form_for @report do |form|
-          %fieldset
-            .control-group
-              %label.control-label{:for => "input01"} Выоста протектора колес
-              .control-group.form-inline
-                .input-append
-                  %input#input01_01.input-small{:placeholder => 'Первое колесо', :type => 'text'}
-                    %span.add-on мм
-                  %input#input01_01.input-small{:placeholder => 'Второе колесо', :type => 'text'}
-                    %span.add-on мм
-                  %input#input01_01.input-small{:placeholder => 'Третье колесо', :type => 'text'}
-                    %span.add-on мм
-                  %input#input01_01.input-small{:placeholder => 'Четвертое колесо', :type => 'text'}
-                    %span.add-on мм
-              .control-group.form-inline
-                .input-append
-                  %input#input01_01.input-small{:placeholder => 'Пятое колесо', :type => 'text'}
-                    %span.add-on мм
-            .control-group
-              .row-fluid{:id => "#{place}_photo"}
-                .span3.fluid
-                  - for place in Report::WHEEL
-                    .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"  }
-                      = image_tag(@report.image(place + '_photo',0)) if @report.image(place + '_photo', 0)
+        = render 'reports/tabs/wheels'
       #brakes.tab-pane
         = form_for 'report', :html => {:class => 'form-horizontal'},:method => :put do |form|
           - for element in Report::BRAKES
@@ -118,4 +67,15 @@
 
 
 
+#modal_carousel.modal.hide
+  #myCarousel.carousel.slide{:style => 'padding: 5px'}
+    / Carousel items
+    .carousel-inner
+      - for image in @report.images :group => 'visual_interior', :size => 'carousel'
+        .item{:id => "active_#{image[0]}"}
+          = image_tag(image[1])
 
+
+    / Carousel nav
+    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
+    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›

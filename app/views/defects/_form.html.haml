@@ -1,0 +1,10 @@
+= form_for @defect do |f|
+  -if @defect.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@defect.errors.count, "error")} prohibited this defect from being saved:"
+      %ul
+        - @defect.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

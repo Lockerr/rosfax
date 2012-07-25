@@ -7,3 +7,4 @@ tmp/
 *.png
 .idea/
 .idea/*.xml
+public/system/

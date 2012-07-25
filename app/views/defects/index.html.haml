@@ -1,0 +1,17 @@
+%h1 Listing defects
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @defects.each do |defect|
+    %tr
+      %td= link_to 'Show', defect
+      %td= link_to 'Edit', edit_defect_path(defect)
+      %td= link_to 'Destroy', defect, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Defect', new_defect_path

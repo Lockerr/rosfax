@@ -1,9 +1,9 @@
 class Asset < ActiveRecord::Base
   has_attached_file :data, :styles => {
-          :medium => '300x200',
           :thumb => '100x68',
-          :normal => '1200x800'
+          :carousel => '900x600'
   }
+
 
   process_in_background :data
 
@@ -24,4 +24,6 @@ class Asset < ActiveRecord::Base
   def file_size
     data_file_size
   end
+
+
 end

@@ -1,46 +1,26 @@
-%p#notice= notice
-.container{'data-report' => @report.id}
-  .row
-    .span8
-      .tabbable.tabs-left
-        %ul.nav.nav-tabs
-          %li.active
-            %a{"data-toggle" => "tab", :href => "#lA"} Экстерьер
-          %li
-            %a{"data-toggle" => "tab", :href => "#lB"} Интерьер
-          %li
-            %a{"data-toggle" => "tab", :href => "#lC"} Колеса
-          %li
-            %a{"data-toggle" => "tab", :href => "#lD"} Электроники
-          %li
-            %a{"data-toggle" => "tab", :href => "#lE"} Плюсы
-          %li
-            %a{"data-toggle" => "tab", :href => "#lF"} Повреждения
-          %li
-            %a{"data-toggle" => "tab", :href => "#lG"} Документы
-          %li
-            %a{"data-toggle" => "tab", :href => "#lH"} Сайт
-        .tab-content
-          - for symbol in %w(A B C D E F G H)
-            = render "reports/tabs/l#{symbol}"
-    .span4
-      .photos{:style => 'overflow-y: scroll;height: 500px'}
-        - for asset in @report.assets
-          = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
-      %hr/
-      .files
-        = form_for [@report, Asset.new], :html => { :class => "upload", :multipart => true } do |f|
-          = f.file_field :data
-          %div Перетащить сюда файлы
-        %table.upload_files
-        -#%table.download_files
-      %p
-        %b Car:
-        = @report.car_id
+-#.row-fluid
+-#  = 12.times do |i|
+-#    .span1{:style => 'background: lightgray; height: 10px'}
 
-      = link_to 'Edit', edit_report_path(@report)
-      \|
-      = link_to 'Back', reports_path
+%p#notice= notice
+.row-fluid
+  .span12
+    .tabbable.tabs-left
+      %ul.nav.nav-tabs
+        %li
+          %a{"data-toggle" => "tab", :href => "#lA"} Фото
+        %li
+          %a{"data-toggle" => "tab", :href => "#lB"} Чеклист
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#lC"} Дефекты
+        %li
+          %a{"data-toggle" => "tab", :href => "#lD"} Тест-драйв
+        %li
+          %a{"data-toggle" => "tab", :href => "#lE"} Комплектация
+      .tab-content
+        - for symbol in %w(A B C D E F G H)
+          = render "reports/tabs/l#{symbol}"
+
 
 
 

@@ -69,5 +69,5 @@
             = place
           .span3.fluid
             .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-              = image_tag(@report.image(place, 0)) if @report.image(place, 0)
+              -#= image_tag(@report.image(:place => place)) if @report.image(:place => place)
     = form.submit('Сохранить', :class => 'btn btn-primary')

@@ -33,3 +33,14 @@
   background:   #afa;
   border-color: #0f0;
 }
+
+.dropdown-element {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: rgb(51, 51, 51);
+  white-space: nowrap;
+  cursor: pointer;
+}

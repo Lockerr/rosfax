@@ -1,10 +1,36 @@
-#lB.tab-pane
-  .span6
-    - for place in Report::INTERIOR_PARTS
-      .row-fluid{:id => "#{place}"}
-        .span3
-          = place
-        .span3
-          .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-            = image_tag(@report.image(place, 0)) if @report.image(place, 0)
+#lB.tab-pane.left
+  .tabbable{:style => "margin-bottom: 18px;"}
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#documents"} Документа
+      %li
+        %a{"data-toggle" => "tab", :href => "#coating"} Краска
+      %li
+        %a{"data-toggle" => "tab", :href => "#lights"} Лампы
+      %li
+        %a{"data-toggle" => "tab", :href => "#electronic"} Электрика
+      %li
+        %a{"data-toggle" => "tab", :href => "#liquids"} Жидкость
+      %li
+        %a{"data-toggle" => "tab", :href => "#complection"} Комплект
+    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
+      #documents.tab-pane.active
+        = render 'reports/tabs/documents'
+      #coating.tab-pane
+        = render :partial => 'reports/tabs/coating', :locals => {:report => @report}
+      #lights.tab-pane
+        = render 'reports/tabs/lights'
+      #electronic.tab-pane
+        = render 'reports/tabs/electronic'
+      #liquids.tab-pane
+        = render 'reports/tabs/liquids'
+      #complection.tab-pane
+        = render 'reports/tabs/complection'
 
+-#<div class="control-group">
+-#            <label class="control-label" for="input01">Text input</label>
+-#            <div class="controls">
+-#              <input type="text" class="input-xlarge" id="input01">
+-#              <p class="help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p>
+-#            </div>
+-#          </div>

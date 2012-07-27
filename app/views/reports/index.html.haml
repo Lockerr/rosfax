@@ -1,19 +1,23 @@
-%h1 Listing reports
+.hero-unit
+  %h2 Список отчетов
 
-%table
-  %tr
-    %th Car
-    %th
-    %th
-    %th
+  %table.table-bordered.table-striped
+    %thead
+      %tr
+        %th Машина
+        %th
+        
+    %tbody
+      - @reports.each do |report|
+        %tr
+          %td= report.car_id
+          %td
+            .btn.btn-primary{:onclick => "window.location.href = '#{report_path(report)}'"}
+              Изменить
+            .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}
+              Уничтожить
 
-  - @reports.each do |report|
-    %tr
-      %td= report.car_id
-      %td= link_to 'Show', report
-      %td= link_to 'Edit', edit_report_path(report)
-      %td= link_to 'Destroy', report, :confirm => 'Are you sure?', :method => :delete
+  %br
 
-%br
-
-= link_to 'New Report', new_report_path
+  .btn.btn-primary{:onclick => "window.location.href = '#{new_report_path}'"}
+    Новый отчет

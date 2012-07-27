@@ -21,6 +21,6 @@
             .btn.remove_asset.btn-danger.btn-mini{:style => 'position: relative; top: -20px; left: 80px', :id => image[0]} x
 
   .span4
-    =render 'uploader'
+    =render :partial => 'uploader', :locals => {:attribute => 'under_the_hood'}
 
 

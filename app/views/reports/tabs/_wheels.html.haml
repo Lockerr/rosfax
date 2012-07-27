@@ -24,4 +24,4 @@
         %h5 Заднее правое колесо
         = render :partial => 'wheel-form', :locals => {:report => @report,:place => :rear_right}
   .span4
-    =render 'uploader'
+    =render :partial => 'uploader', :locals => {:attribute => 'wheels'}

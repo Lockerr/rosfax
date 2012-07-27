@@ -1,12 +1,10 @@
--#.row-fluid
--#  = 12.times do |i|
--#    .span1{:style => 'background: lightgray; height: 10px'}
-
 %p#notice= notice
 .row-fluid
   .span12
     .tabbable.tabs-left
       %ul.nav.nav-tabs
+        %li
+          %a{"data-toggle" => "tab", :href => "#info"} Информация
         %li
           %a{"data-toggle" => "tab", :href => "#lA"} Фото
         %li
@@ -20,6 +18,9 @@
       .tab-content
         - for symbol in %w(A B C D E F G H)
           = render "reports/tabs/l#{symbol}"
+        .tab-pane#info
+          = render 'reports/info'
+
 
 
 

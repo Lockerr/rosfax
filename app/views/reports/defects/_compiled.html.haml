@@ -1,6 +1,6 @@
 .span8.defects
   - for defect in @report.defects
-    .form-inline.defect{:data => {:id => defect.id}, :style => 'margin-bottom: -20px'}
+    .form-inline.defect{:data => {:report_id => @report.id, :id => defect.id}, :style => 'margin-bottom: -20px'}
       %fieldset
         .control-group{:style => 'margin: 0; padding: 0'}
           .btn-toolbar{:style => 'margin: 0; padding: 0'}
@@ -11,9 +11,7 @@
               %ul.dropdown-menu
                 - Report::DEFECTS_CATEGORIES.keys.each do |i|
                   %li
-                    .dropdown-element.category{'data-change' => 'category', 'category' => i}= (t(i).to_s)
-
-
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= (t(i).to_s)
             .btn-group
               %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
                 =t(defect.sub_category)
@@ -21,33 +19,18 @@
               %ul.dropdown-menu
                 - Report::DEFECTS_CATEGORIES[defect.category.to_sym].each do |i|
                   %li
-                    .dropdown-element{'data-change' => 'sub_category', 'sub_category' => i}= (t(i).to_s)
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= (t(i).to_s)
 
             .btn-group
               %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
                 =t(defect.defect_type)
                 %span.caret
-              %ul.dropdown-menu.pull-right
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'dent'} Вмятина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'scratch'} Царапина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'cleavage'} Скол
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'not_paint_cleavage'} Скол не по краске
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'crack'} Трещина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'attrition'} Потертость
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'rust'} Ржавчина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'traces_of_repair'} Следы прошлого ремонта
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'missing_part'} Отсутствует делать
+              %ul.dropdown-menu
+                - %w(dent scratch cleavage not_paont_cleaveage crack attrition rust traces_of_repair missing_part).each do |i|
+                  %li
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t(i).to_s)
             .btn-group
-              %button.btn.defect_size.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+              %button.btn.defect_size.dropdown-toggle{'data-attribute' => 'defect', "data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
                 =t(defect.size)
                 %span.caret
               %ul.dropdown-menu.pull-right
@@ -66,74 +49,52 @@
     Новый дефект
 
 
-  .defect_template.hide
-    .form-inline#defect_form
-      %fieldset
-        .control-group
-          .btn-toolbar
-            .btn-group
-              %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px'}
-                Категория
-                %span.caret
-              %ul.dropdown-menu
-                - Report::DEFECTS_CATEGORIES.keys.each do |i|
-                  %li
-                    .dropdown-element.category{'data-change' => 'category', 'category' => i}= (t(i).to_s)
+  .form-inline.defect_template.hide{:data => {:report_id => @report.id}, :style => 'margin-bottom: -20px'}
+    %fieldset
+      .control-group
+        .btn-toolbar
+          .btn-group
+            %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+              Категория
+              %span.caret
+            %ul.dropdown-menu
+              - Report::DEFECTS_CATEGORIES.keys.each do |i|
+                %li
+                  .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= (t(i).to_s)
 
 
-            .btn-group
-              %button.hide.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px'}
-                Подкатегория
-                %span.caret
-              %ul.dropdown-menu
-
+          .btn-group{:style => 'display: none'}
+            %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+              Подкатегория
+              %span.caret
+            %ul.dropdown-menu
+              - Report::DEFECTS_CATEGORIES[:interior].each do |i|
                 %li
-                  .dropdown-element Action
+                  .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= (t(i).to_s)
+          .btn-group.btn-group{:style => 'display: none'}
+            %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+              Тип дефекта
+              %span.caret
+            %ul.dropdown-menu
+              - %w(dent scratch cleavage not_paont_cleaveage crack attrition rust traces_of_repair missing_part).each do |i|
                 %li
-                  .dropdown-element Another action
-                %li
-                  .dropdown-element Something else here
-                %li
-                  .dropdown-element Separated link
-            .btn-group
-              %button.btn.defect_type.hide.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px'}
-                Тип дефекта
-                %span.caret
-              %ul.dropdown-menu.pull-right
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'dent'} Вмятина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'scratch'} Царапина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'cleavage'} Скол
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'not_paint_cleavage'} Скол не по краске
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'crack'} Трещина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'attrition'} Потертость
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'rust'} Ржавчина
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'traces_of_repair'} Следы прошлого ремонта
-                %li
-                  .dropdown-element{'data-change' => 'defect_type', 'defect_type' => 'missing_part'} Отсутствует делать
-            .btn-group
-              %button.btn.defect_size.hide.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px'}
-                Размер дефекта
-                %span.caret
-              %ul.dropdown-menu.pull-right
-                %li
-                  .dropdown-element{'data-change' => 'size', 'size' => '0-5 см'} 0-5 см
-                %li
-                  .dropdown-element{'data-change' => 'size', 'size' => '5-15 см'} 5-15 см
-                %li
-                  .dropdown-element{'data-change' => 'size', 'size' => '15-30 см'} 15-30 см
-                %li
-                  .dropdown-element{'data-change' => 'size', 'size' => '30+ см'} 30+ см
-            = render :partial => 'drop', :locals => {:object => Defect.new, :place => :one, :attribute => 'defects'}
+                  .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t(i).to_s)
+          .btn-group.btn-group{:style => 'display: none'}
+            %button.btn.defect_size.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+              Размер дефекта
+              %span.caret
+            %ul.dropdown-menu.pull-right
+              %li
+                .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'size', "size" =>'0-5 см'}} 0-5 см
+              %li
+                .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'size', "size" =>'5-15 см'}} 5-15 см
+              %li
+                .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'size', "size" =>'15-30 см'}} 15-30 см
+              %li
+                .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'size', "size" =>'30+ см'}} 30+ см
+          = render :partial => 'drop', :locals => {:object => Defect.new, :place => :one, :attribute => 'defects'}
 
   .categories.hide
     = Report.defects_categories.to_json
 .span4
-  =render 'uploader'
+  =render :partial => 'uploader', :locals => {:attribute => 'defect'}

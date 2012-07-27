@@ -83,10 +83,11 @@ class ReportsController < ApplicationController
 
   def images
     @report = Report.find(params[:report_id])
-    ids = @report.send(params[:attribute])[params[:place]].map { |i| i.to_i }
+    ids = @report.send(params[:attribute]).values.flatten.map { |i| i.to_i }
 
     assets = Asset.where(:id => ids).map { |i| i.url(:carousel) }
-    render :json => assets
+    assets.push Asset.where(:id => @report.send(params[:attribute])[params[:place]].first).first.url(:carousel)
+    render :json => assets.reverse.uniq
   end
 
   def place

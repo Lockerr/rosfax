@@ -2,87 +2,24 @@
   %h5 Переднее освещение
   .well
     .form-horizontal
-      .control-group
-        %label.control-label Ближний свет:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Дальний свет:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Противотуманки:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Габариты:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Поворотники:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
+      - %w( headlights distant_lights fog_lights marker_lights turn_signal).each do |param|
+        .control-group
+          %label.control-label= t(param).to_s+ ':'
+          .controls
+            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+              .btn-group.pads.radio
+                - 3.times do |i|
+                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :lights, :change => param, param => i}}=i
 .span6
   %h5 Переднее освещение
   .well
     .form-horizontal
-      .control-group
-        %label.control-label Тормоза:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Повторитель:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Противотуманки:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Габариты:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Поворотники:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
+      - %w(brake_lights repeater fog_lights marker_lights turn_signal).each do |param|
+        .control-group
+          %label.control-label= t(param).to_s+ ':'
+          .controls
+            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+              .btn-group.pads.radio
+                - 3.times do |i|
+                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :lights, :change => param, param => i}}=i
+     

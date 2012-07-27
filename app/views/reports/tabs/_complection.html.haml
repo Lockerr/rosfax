@@ -1,86 +1,25 @@
 .span6
+  %h5 Переднее освещение
   .well
     .form-horizontal
-      .control-group
-        %label.control-label Запасное колесо:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Домкрат:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Инструменты:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Герметик:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Компрессор:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Ключ замка КПП:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
+      - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
+        .control-group
+          %label.control-label= t(param).to_s+ ':'
+          .controls
+            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+              .btn-group.pads.radio
+                - 3.times do |i|
+                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completion, :change => param, param => i}}=i
 .span6
+  %h5 Переднее освещение
   .well
     .form-horizontal
-      .control-group
-        %label.control-label Серкретка от колес:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Брелок сигнализации:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Брелок WEBASTO:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
-      .control-group
-        %label.control-label Ключ от блокиратора:
-        .controls
-          .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.btn 1
-              %button.btn 2
-              %button.btn 3
+      - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
+        .control-group
+          %label.control-label= t(param).to_s+ ':'
+          .controls
+            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+              .btn-group.pads.radio
+                - 3.times do |i|
+                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completions, :change => param, param => i}}=i
+

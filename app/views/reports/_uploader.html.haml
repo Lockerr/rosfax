@@ -1,16 +1,21 @@
 .photos{:style => 'overflow-y: scroll;height: 500px'}
-  %ul.nav.nav-tabs
-    %li.active
-      %a{"data-toggle" => "tab", :href => "#foo"} unass
-    %li
-      %a{"data-toggle" => "tab", :href => "#bar"} all
-  .tab-content
-    #foo.tab-pane.active
-      - for asset in @report.assets.where('id not in (?)', @report.assigned.map {|i| i.to_i})
-        = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
-    #bar.tab-pane
-      - for asset in @report.assets
-        = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
+
+
+  .tabbable{:style => "margin-bottom: 18px;"}
+
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "##{attribute}_unassigned"} unass
+      %li
+        %a{"data-toggle" => "tab", :href => "##{attribute}_all_photos"} all
+    .tab-content
+      .tab-pane.active{:id => "#{attribute}_unassigned"}
+        - for asset in @report.unassigned
+          = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
+
+      .tab-pane{:id => "#{attribute}_all_photos"}
+        - for asset in @report.assets
+          = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
 %hr/
 .files
   = form_for [@report, Asset.new], :html => { :class => "upload", :multipart => true } do |f|

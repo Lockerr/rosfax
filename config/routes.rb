@@ -1,4 +1,6 @@
 Tradein::Application.routes.draw do
+  devise_for :users
+
   resources :defects do
     get 'images'
     resources :assets

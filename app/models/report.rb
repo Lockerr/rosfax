@@ -23,7 +23,8 @@ class Report < ActiveRecord::Base
   serialize :under_the_hood, Hash
   serialize :photo_others, Hash
   serialize :coating, Hash
-
+  serialize :checklist, Hash
+  serialize :testdrive, Hash
   default_scope includes(:assets)
 
   EXTERIOR = %w( :front_left :front :front_right :left  :roof :right :rear_left :rear :rear_right)
@@ -31,11 +32,11 @@ class Report < ActiveRecord::Base
   WHEEL = %w(:front_left_wheel :front_right_wheel :rear_right_wheel :rear_left_wheel :stepney)
   EXTERIOR_PARTS = %w(:hood :front_right_wing :right_front_door :rear_right_door :rear_right_wing :boot_lid :rear_left_wing :rear_left_door :front_left_door :front_left_wing_of_the :roof :front_bumper :skirt_front_bumper :rear_bumper :rear_apron :right_threshold :left_threshold)
   WINDOWS_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window),
-          INTERIOR_PARTS =%w(:front_left_seat :front_right_seat :back_sofa :third_row_seats :covering_left_front_door :covering_right_front_door :covering_left_rear_door :covering_rear_right_door :covering_trunk :ceiling :torpedo :central_console :armrest)
+  INTERIOR_PARTS =%w(:front_left_seat :front_right_seat :back_sofa :third_row_seats :covering_left_front_door :covering_right_front_door :covering_left_rear_door :covering_rear_right_door :covering_trunk :ceiling :torpedo :central_console :armrest)
   POWERTRAINS = %w(knock flow tear wear),
 
-          ELECTRONIC_PARTS = %w(low_lights distant_lights turning_lights foglights dimensions_lights brakes automatic_windows climate_control air_conditioning radio navigation control_lamps drive_down heated_seats ventilation_seat adjustment_heated_mirrors parktronic_rearview_camera sunroof seat_belts adjustable_steering_column janitors_rein_sensor ),
-          LIQUID_LEVELS = %w( oil_in_engine oil_in_gearbox brake_fluid fluid_power_steering )
+  ELECTRONIC_PARTS = %w(low_lights distant_lights turning_lights foglights dimensions_lights brakes automatic_windows climate_control air_conditioning radio navigation control_lamps drive_down heated_seats ventilation_seat adjustment_heated_mirrors parktronic_rearview_camera sunroof seat_belts adjustable_steering_column janitors_rein_sensor ),
+  LIQUID_LEVELS = %w( oil_in_engine oil_in_gearbox brake_fluid fluid_power_steering )
   CHASIS = %w(:full_drive_connection :air_suspension_all_levels :luft_knocking_in_steering_wheel :revolutions_of_twentieth :turns_gas_with_a_sharp)
 
   COMPLETION = %w(:spare_wheel :jack :tools :sealant)
@@ -48,7 +49,7 @@ class Report < ActiveRecord::Base
   DUMPERS = %w(:right_front_bumper :left_front_bumper :right_rear_bumper :left_rear_bumper)
 
   INTERIOR = %w(:one :two :three :four :five :six :seven :eight :nine)
-
+  
 
   DEFECTS_CATEGORIES ={
           :exterior => %w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold),
@@ -104,10 +105,21 @@ class Report < ActiveRecord::Base
 
   def assigned
     result = []
+    
     ["visual_interior", 'interior',"exterior", "windows_lights", "exterior_parts", "powertrains", "electric_parts", "liquid_levels", "chasis", "completion", "testdrtive", "windows", "dumpers", "brakes"].each do |i|
-      result += send(i).values
+      result.push send(i).values
     end
+    
     result.flatten.uniq
+    
+  end
+
+  def unassigned
+    if assigned.any?
+      assets.where('id not in (?)', assigned.map {|i| i.to_i})
+    else
+      assets
+    end
   end
 
   def remove_asset (asset)

@@ -21,20 +21,22 @@
     create_defect(defect)
 
 @create_defect = (defect) ->
-
+  console.log defect.data('report_id')
+  window.defect = defect
   $.ajax
     type: 'POST'
     data: {defect: defect.data()}
-    url: '/reports/' + $('.container').attr('data-report') + '/defects.json'
+    url: '/reports/' + defect.data('report_id') + '/defects.json'
     async: false
     success: (data) ->
       defect.data('id', data.id)
       defect.find('.drop').attr('object_id', data.id)
+
 @update_defect = (defect) ->
   $.ajax
     type: 'PUT'
     data: {defect: defect.data()}
-    url: '/reports/' + container.data('report') + '/defects/' + defect.data().id + '.json'
+    url: '/reports/' + defect.data('report_id') + '/defects/' + defect.data().id + '.json'
     async: false
 
 @assing_drops = ->
@@ -46,25 +48,107 @@
 
         event.preventDefault()
         event.dataTransfer.dropEffect = "copy"
-        attribute = $(this).attr('attribute')
+        attribute = $(this).data('attribute')
+        
+        imgbox = $('.imgbox')
+        
+        imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
+        imgbox.width(imgbox.width()+ 116)
+        
+        target = $(@)
 
-        $('.imgbox').append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
-        $('.imgbox').width($('.imgbox').width()+ 116)
         $('.thumbnail').last().prepend($.clone(window.dragged))
-        $(this).find('a').html(window.dragged)
-        if $(this).attr('object') == 'Report'
+        target.find('a').html(window.dragged)
+        target.find('.btn').text(parseInt(target.find('.btn').text())+1)
+
+
+
+        if target.attr('object') == 'Report'
           $.ajax
-            url: '/reports/' + $('.container').attr('data-report')  + '/place?position=' + $(this).attr('id') + '&asset='  + window.dragged.id + '&attribute=' + attribute
+            url: '/reports/' + $('.container').data('id')  + '/place?position=' + target.attr('id') + '&asset='  + window.dragged.id + '&attribute=' + attribute
             type: 'post'
-        else if $(this).attr('object') == 'Defect'
+        else if target.attr('object') == 'Defect'
           $.ajax
-            url: '/defects/' + $(this).attr('object_id')  + '/place?&asset='  + window.dragged.id
+            url: '/defects/' + target.attr('object_id')  + '/place?&asset='  + window.dragged.id
             type: 'post'
+
+@assign_click_for_dropdown = (container) ->
+  $('button.dropdown-toggle').parent().find('div.dropdown-element').click ->
+    element = $(@)
+
+    element.parents('div.btn-group').find('button.dropdown-toggle').text(@textContent)
+
+    attr           = element.data('attribute')
+    change         = element.data('change')
+
+    unless attr == 'defect'
+      container_data = container.data(attr) || new Object
+
+
+      if (place = element.data('place'))
+        container_data[place] ||= new Object
+        container_data[place][change] = element.data(change)
+      else
+        container_data[change] = element.data(change)
+
+      container.data(attr, container_data)
+      console.log 'container triggered'
+      container.trigger('change')
+
+    else
+      defect = $(@).parents('.defect')
+      data = defect.data()
+      if change == 'category'
+        console.log defect
+        defect.find('.btn-group').show()
+        defect.find('.drop').show()
+        defect.data('category',element.data('category'))
+        cat_list = defect.find('.undercat').parent().find('ul')
+        cat_list.empty()
+        for category in $.parseJSON($('.categories').text())[element.data(change)]
+          cat_list.append("<li><div class='dropdown-element' data-defect data-attribute='defect' data-change='sub_category' data-sub_category=#{category.k}>#{category.v}</div></li>") # :TODO remove this error
+
+        cat_list.find('.dropdown-element').click ->
+          element = $(@)
+          change         = element.data('change')
+          $(@).parents('div.btn-group').find('button.dropdown-toggle').text(@textContent)
+          defect.data(change, element.data(change))
+      else
+        defect.data(change, element.data(change))
+      defect.trigger('change')
+
+
 
 $ ->
   container = $('div.container')
-  container.data(JSON.parse($('.container').attr('source')))
+  if container.attr('source')
+    container.data(JSON.parse($('.container').attr('source')))
+    assign_click_for_dropdown(container)
 
+  report_id = $('.container').data('id')
+
+  for checkbox in $('button.checkbox')
+    button = $(checkbox)
+    boxlist = container.data(button.data('attribute'))  
+    if boxlist[button.data('place')]
+      if parseInt(container.data(button.data('attribute'))[button.data('place')][button.data('change')]) == button.data(button.data('change'))
+        button.addClass('btn-primary')
+      else if container.data(button.data('attribute'))[button.data('place')][button.data('change')] == button.data(button.data('change'))
+        button.addClass('btn-primary')
+
+
+  $('.checkbox').click ->
+    element      = $(@)
+    change       = element.data('change')
+    attribute    = element.data('attribute')
+    place        = element.data('place')
+    data         = container.data(attribute) || {}
+    data[place]||= {}
+    data[place][change] = element.data(change)
+
+    container.data(attribute, data)
+    console.log container.data()
+    container.trigger('change')  
 
   $(".upload").fileUploadUI
     uploadTable: $(".upload_files")
@@ -79,7 +163,7 @@ $ ->
   assing_drops()
 
   $('.remove_asset').live 'click', ->
-    report = $('.container').attr('data-report')
+
     $.ajax
       url: '/reports/' +report+ '/remove_asset?asset=' + this.id
       type: 'DELETE'
@@ -97,23 +181,79 @@ $ ->
   $('.drop').click ->
     $('#modal_carousel').modal('show')
     $('#modal_carousel .item').remove()
-    attribute = $(this).parent().parent().parent().attr('id')
-    report = $('.container').attr('data-report')
-    place = $(this).attr('id')
+    data = $(@).data()
+    
+    if object = 'Report'
+      url = '/reports/'+report_id+'/images?attribute=' +data.attribute+ '&place=' + data.place
 
-    url = '/reports/'+report+'/images?attribute=' +attribute+ '&place=' +place
+      $.ajax
+        url: url
+        success: (data) ->
+          console.log data
 
-    $.ajax
-      url: url
-      success: (data) ->
-        console.log data
+          for image_src in data
+            $('.carousel-inner').append("<div class='item'><img src='" + image_src + "'></div>")
 
-        for image_src in data
-          $('.carousel-inner').append("<div class='item'><img src='" + image_src + "'></div>")
+          $($('.carousel-inner .item')[0]).addClass('active')
 
-        $($('.carousel-inner .item')[0]).addClass('active')
+          $('#modal_carousel').modal('show')
+    else if object = 'Defect'
+      $.ajax
 
-        $('#modal_carousel').modal('show')
+
+
+
+  $('.add_defect').click ->
+    defect = $('.defect_template').clone()
+    defect.removeClass('defect_template')
+    defect.addClass('defect')
+    defect.find('.drop').hide()
+    window.scrollTo(0,0)
+    $('#compiled .defects').prepend(defect)
+    $('.defect').show()
+    assign_click_for_dropdown(defect)
+
+
+  $('.defect').live 'change', ->
+    store_defect($(@))
+    assing_drops()
+
+  $('.container').live 'change', ->
+    store_report()
+
+  $('.btn#save_defect').click ->
+
+  $('.destroy_report').click ->
+    confirmation = confirm('Точно?')
+    if confirmation
+      report = $(@).attr('report_id')
+      $.ajax
+        url: '/reports/' + report + '.json'
+        type: 'DELETE'
+        complete: ->
+          window.location.href = '/reports/'
+        
+
+
+
+
+#  $('.defect').find('.dropdown-element').live 'click', ->
+#    change = change
+#    $(@).parent().parent().parent().find('.dropdown-toggle').text(this.textContent)
+#    $(@).parents('.defect').data(change, $(@).attr(change) )
+#    $(@).parents('.defect').trigger('change')
+#    $(@).parent().parent().parent().parent().find('.undercat').show()
+#    $('.defect_type').show()
+#    $('.defect_size').show()
+#    $('#defect_form').find('.drop').show() # :TODO refactor this shit(many forms with same id, this is unnaceptable !!!1111oneone)
+#    cat_list = $(@).parent().parent().parent().parent().find('.undercat').parent().find('ul')
+#    cat_list.empty()
+#    for category in $.parseJSON($('.categories').text())[$(@).attr(change)]
+#      cat_list.append("<li><div class='dropdown-element' data-change= 'sub_category' sub_category=#{category.k}>#{category.v}</div></li>") # :TODO remove this error
+#    cat_list.find('.dropdown-element').click ->
+#      $(@).parent().parent().parent().find('.dropdown-toggle').text(this.textContent)
+#      $(@).parent().parent().parent().attr('category-selected', change)
+
 
   # dropdown common
 #
@@ -132,63 +272,9 @@ $ ->
 #
 #    $('.container').trigger('change')
 
-  $('button.dropdown-toggle').parent().find('div.dropdown-element').click ->
-    element = $(@)
-
-    element.parents('div.btn-group').find('button.dropdown-toggle').text(@textContent)
-
-    attr           = element.data('attribute')
-    container_data = container.data(attr) || new Object
-    change         = element.data('change')
-
-    if (place = element.data('place'))
-      container_data[place] ||= new Object
-      container_data[place][change] = element.data(change)
-    else
-      container_data[change] = element.data(change)
-
-    container.data(attr, container_data)
-    container.trigger('change')
-
   #-- end of dropdown
 
   # checkbox common
 
 
   #-- end of checkbox common
-
-
-  $('.add_defect').click ->
-    defect = $('.defect_template').clone()
-    defect.removeClass('defect_template')
-    defect.addClass('defect')
-    defect.find('.drop').hide()
-    window.scrollTo(0,0)
-    $('#compiled .defects').prepend(defect)
-    $('.defect').show()
-
-  $('.defect').find('.dropdown-element').live 'click', ->
-    $(this).parent().parent().parent().find('.dropdown-toggle').text(this.textContent)
-    $(this).parents('.defect').data($(this).attr('data-change'), $(this).attr($(this).attr('data-change')) )
-    $(this).parents('.defect').trigger('change')
-    $(this).parent().parent().parent().parent().find('.undercat').show()
-    $('.defect_type').show()
-    $('.defect_size').show()
-    $('#defect_form').find('.drop').show() # :TODO refactor this shit(many forms with same id, this is unnaceptable !!!1111oneone)
-    cat_list = $(this).parent().parent().parent().parent().find('.undercat').parent().find('ul')
-    cat_list.empty()
-    for category in $.parseJSON($('.categories').text())[$(this).attr($(this).attr('data-change'))]
-      cat_list.append("<li><div class='dropdown-element' data-change= 'sub_category' sub_category=#{category.k}>#{category.v}</div></li>") # :TODO remove this error
-    cat_list.find('.dropdown-element').click ->
-      $(this).parent().parent().parent().find('.dropdown-toggle').text(this.textContent)
-      $(this).parent().parent().parent().attr('category-selected', $(this).attr('data-change'))
-
-  $('.defect').live 'change', ->
-    store_defect($(this))
-    assing_drops()
-
-  $('.container').live 'change', ->
-    store_report()
-
-  $('.btn#save_defect').click ->
-

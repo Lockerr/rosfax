@@ -14,6 +14,7 @@ Tradein::Application.routes.draw do
     resources :assets
     post 'place'
     delete 'remove_asset'
+    get 'image'
     resources :defects
   end
 

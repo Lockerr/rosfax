@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+
+  before_filter :authenticate_user!
   # GET /reports
   # GET /reports.json
   layout 'report'
@@ -70,7 +72,7 @@ class ReportsController < ApplicationController
   end
 
   # DELETE /reports/1
-  # DELETE /reports/1.json
+  # DELETE /reports/1.jsonsdfsdf
   def destroy
     @report = Report.find(params[:id])
     @report.destroy
@@ -86,8 +88,19 @@ class ReportsController < ApplicationController
     ids = @report.send(params[:attribute]).values.flatten.map { |i| i.to_i }
 
     assets = Asset.where(:id => ids).map { |i| i.url(:carousel) }
-    assets.push Asset.where(:id => @report.send(params[:attribute])[params[:place]].first).first.url(:carousel)
+    assets.push Asset.where(:id => @report.send( params[:attribute] )[ params[:place] ].first).first.url(:carousel)
+
     render :json => assets.reverse.uniq
+  end
+
+  def image
+    @report = Report.find(params[:report_id])
+    if id = @report.send(params[:attribute])[params[:place]].first
+      image = Asset.find(id).url(:thumb)
+    else
+      image = '/assets/box.png'
+    end
+    render :json => image
   end
 
   def place
@@ -97,7 +110,8 @@ class ReportsController < ApplicationController
   end
 
   def remove_asset
-    Report.find(params[:report_id]).remove_asset(params[:asset])
-    render :json => {:status => :ok}
+    images = Report.find(params[:report_id]).remove_asset(params)
+
+    render :json => {:status => :ok, :images => images, :places => images.keys}
   end
 end

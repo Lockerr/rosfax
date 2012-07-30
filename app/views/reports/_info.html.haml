@@ -1,7 +1,7 @@
 
 .span6.well
 
-  %table.table
+  %table.table#car
     %thead
       %th Поле
       %th Значение
@@ -9,21 +9,22 @@
       %tr
         %td
           Производитель
-        %td
-          КБ Туполева
+        %td#mark
+          = text_field 'report[car]', 'mark', :value => @report.car[:mark]
       %tr
         %td
           Марка
-        %td
-          Ту-144
-      %tr
+        %td#model
+          = text_field 'report[car]', 'model', :value => @report.car[:model]
+      %t
         %td
           Привод
-        %td
-          Полный
+        %td#year
+          = text_field 'report[car]', 'year', :value => @report.car[:year]
       %tr
         %td
           Топливо
-        %td
-          Солярка
+        %td#vin
+          = text_field 'report[car]', 'vin', :value => @report.car[:vin]
+
 

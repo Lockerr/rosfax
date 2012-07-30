@@ -49,15 +49,15 @@
         event.preventDefault()
         event.dataTransfer.dropEffect = "copy"
         attribute = $(this).data('attribute')
-        
-        imgbox = $('.imgbox')
-        
-        imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
+
+        imgbox = $(".imgbox##{attribute}")
+
+        imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
         imgbox.width(imgbox.width()+ 116)
-        
+        imgbox.find('.thumbnail').last().prepend($.clone(window.dragged))
         target = $(@)
 
-        $('.thumbnail').last().prepend($.clone(window.dragged))
+
         target.find('a').html(window.dragged)
         target.find('.btn').text(parseInt(target.find('.btn').text())+1)
 
@@ -127,9 +127,13 @@ $ ->
 
   report_id = $('.container').data('id')
 
+  $( ".pick_date" ).datepicker({showOn: ".add-on"})
+  $('.add-on').click ->
+    $(@).parent().find('input').datepicker('show')
+
   for checkbox in $('button.checkbox')
     button = $(checkbox)
-    boxlist = container.data(button.data('attribute'))  
+    boxlist = container.data(button.data('attribute'))
     if boxlist[button.data('place')]
       if parseInt(container.data(button.data('attribute'))[button.data('place')][button.data('change')]) == button.data(button.data('change'))
         button.addClass('btn-primary')
@@ -148,7 +152,7 @@ $ ->
 
     container.data(attribute, data)
     console.log container.data()
-    container.trigger('change')  
+    container.trigger('change')
 
   $(".upload").fileUploadUI
     uploadTable: $(".upload_files")
@@ -165,12 +169,16 @@ $ ->
   $('.remove_asset').live 'click', ->
 
     $.ajax
-      url: '/reports/' +report+ '/remove_asset?asset=' + this.id
+      url: '/reports/' +report_id+ '/remove_asset?asset=' + this.id + '&attribute=' + $(@).data('attribute')
       type: 'DELETE'
-      success: =>
+      success: (responce) =>
         $(this).parent().remove()
-        $('.drop[image=' +this.id+ ']').find('a').html($('.drop[image=' +this.id+ ']').attr('id'))
-        $('.drop[image=' +this.id+ '] img')
+
+        for place in responce.places
+          drop = $(".drop[data-attribute=#{$(@).data('attribute')}][data-place='#{place}']")
+          drop.find('img').attr('src', responce.images[place][0])
+          drop.find('.btn').html(responce.images[place][1])
+
 
 
   $.each $('.photos img'), ->
@@ -182,7 +190,7 @@ $ ->
     $('#modal_carousel').modal('show')
     $('#modal_carousel .item').remove()
     data = $(@).data()
-    
+
     if object = 'Report'
       url = '/reports/'+report_id+'/images?attribute=' +data.attribute+ '&place=' + data.place
 
@@ -197,8 +205,7 @@ $ ->
           $($('.carousel-inner .item')[0]).addClass('active')
 
           $('#modal_carousel').modal('show')
-    else if object = 'Defect'
-      $.ajax
+
 
 
 
@@ -232,7 +239,10 @@ $ ->
         type: 'DELETE'
         complete: ->
           window.location.href = '/reports/'
-        
+
+  $('#car').find('input').live 'change', ->
+    $('.container').data('car')[$(@).parent().attr('id')] =  $(@).val()
+
 
 
 

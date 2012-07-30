@@ -28,15 +28,6 @@ ActiveRecord::Schema.define(:version => 20120730054058) do
 
   add_index "assets", ["attachable_id", "attachable_type"], :name => "index_assets_on_attachable_id_and_attachable_type"
 
-  create_table "cars", :force => true do |t|
-    t.string   "brand"
-    t.string   "model"
-    t.integer  "year"
-    t.string   "vin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "defects", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"

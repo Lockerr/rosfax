@@ -20,9 +20,10 @@ Tradein::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  # config.after_initialize do
-  #   Delayed::Job.scaler = :heroku_cedar
-  # end
+
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku
+  end
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH

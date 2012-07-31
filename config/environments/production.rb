@@ -23,7 +23,7 @@ Tradein::Application.configure do
 
 
   config.after_initialize do
-    Delayed::Job.scaler = :heroku
+    Delayed::Job.scaler = :null
   end
 
   # Defaults to Rails.root.join("public/assets")

@@ -6,3 +6,4 @@ development:
   access_key_id: AKIAJVTSIEA4Y2WZG5TQ
   secret_access_key: 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
   bucket: rosfax
+  s3_host_name: s3-website-eu-west-1.amazonaws.com

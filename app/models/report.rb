@@ -137,7 +137,7 @@ class Report < ActiveRecord::Base
         if collection.any?
           images[place] = [Asset.find(collection.first).url(:thumb), collection.size]
         else
-          images[place] = [asset_path('box.png'), 0]
+          images[place] = ['https://s3-eu-west-1.amazonaws.com/rosfax/coating.jpg', 0]
       end
     end
 

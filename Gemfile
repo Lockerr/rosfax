@@ -13,8 +13,9 @@ gem 'devise'
 gem 'heroku'
 gem 'aws-sdk'
 
-gem 'pg', :group  => :production
+gem 'pg'
 gem 'workless', :group => :production
+
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
   gem 'coffee-rails', '~> 3.1.1'

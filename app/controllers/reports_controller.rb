@@ -98,7 +98,7 @@ class ReportsController < ApplicationController
     if id = @report.send(params[:attribute])[params[:place]].first
       image = Asset.find(id).url(:thumb)
     else
-      image = '/assets/box.png'
+      image = 'https://s3-eu-west-1.amazonaws.com/rosfax/box.png'
     end
     render :json => image
   end

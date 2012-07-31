@@ -14,7 +14,7 @@ gem 'heroku'
 gem 'aws-sdk'
 
 gem 'pg'
-gem 'workless'
+# gem 'workless'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'

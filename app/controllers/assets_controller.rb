@@ -9,5 +9,14 @@ class AssetsController < ApplicationController
 
   end
 
+  def processed
+    result = {}
+    if assets = Asset.processed.where('id in (?)', params[:assets].uniq)
+      assets.each {|asset| result[asset.id] = asset.url(params[:size].to_sym)}
+    end
+    render :json => {:assets => result, :keys => result.keys}
+  end
+
+
 
 end

@@ -8,6 +8,7 @@ Tradein::Application.routes.draw do
   end
 
   get "asset/create"
+  get 'assets/processed'
 
   resources :reports do
     get 'images'
@@ -16,6 +17,7 @@ Tradein::Application.routes.draw do
     delete 'remove_asset'
     get 'image'
     resources :defects
+
   end
 
   root :to => 'reports#index'

@@ -5,12 +5,14 @@ class Asset < ActiveRecord::Base
           :s3_credentials => { :access_key_id => 'AKIAJVTSIEA4Y2WZG5TQ', :secret_access_key => '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' },
           :bucket => 'rosfax',
           :path => ":attachment/:id/:style.:extension",
-          :s3_host_name =>  's3-eu-west-1.amazonaws.com'
+          :s3_host_name =>  's3-eu-west-1.amazonaws.com',
+          :default_url => "/images/normal/missing.png"
 
 
   process_in_background :data
 
   belongs_to :attachable, :polymorphic => true
+  scope :processed, where(:data_processing => false)
 
   def url(*args)
     data.url(*args)

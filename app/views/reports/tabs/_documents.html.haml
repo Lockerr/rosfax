@@ -1,50 +1,51 @@
-.span12
-  .span4.well
-    %h5 ПТС
-    %form.form-horizontal
-      .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Серия
-        .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'series', :style => 'width: 175px'
-      .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Выдан
-        .controls{:style => 'margin-left: 48px'}
-          .input-append
-            = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date'
-            %span.add-on{:style => 'margin-left: -5px'} U
-      .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Кем
-        .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'dep', :style => 'width: 175px'
-      .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Страна
-        .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'country', :style => 'width: 175px'
-      .control-group
-        .controls{:style => 'margin-left: 48px'}
-          %label.checkbox.inline
-            %input{:type => 'checkbox', :id => 'original', :value => 'true'}  Оригинал
-          %label.checkbox.inline
-            %input{:type => 'checkbox', :id => 'original', :value => 'false'}  Дубликат
-      .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} VIN
-        .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'vin', :style => 'width: 175px'
-
-  .span8.well
-    %h5 Владельцы
-    .form-horizontal
-      - (1..6).to_a.each do |i|
-        .control-group.inline
-          %label.control-label{:for => 'owners', :style => 'width: 0px'}=i.to_s + '.'
-          .controls{:style => 'margin-left: 9px'}
-            .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
-              .btn-group.pads.radio
-                %button.btn{:data => {:attribute => :document, :place => "owner_number_#{i}", :change => 'exist', :exist => true}}ok
-                %button.btn.btn-ptimary{:data => {:attribute => :document, :place => "owner_number_#{i}", :change => 'exist', :exist => false}} не ok
+= cache 'documents' do
+  .span12
+    .span4.well
+      %h5 ПТС
+      %form.form-horizontal
+        .control-group
+          %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Серия
+          .controls{:style => 'margin-left: 48px'}
+            = text_field 'pts', 'series', :style => 'width: 175px'
+        .control-group
+          %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Выдан
+          .controls{:style => 'margin-left: 48px'}
             .input-append
-              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_start_owning"
-              .add-on{:style => 'margin-left: -5px'} U
-            .input-append
-              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_ends_owning"
+              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date'
               %span.add-on{:style => 'margin-left: -5px'} U
+        .control-group
+          %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Кем
+          .controls{:style => 'margin-left: 48px'}
+            = text_field 'pts', 'dep', :style => 'width: 175px'
+        .control-group
+          %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Страна
+          .controls{:style => 'margin-left: 48px'}
+            = text_field 'pts', 'country', :style => 'width: 175px'
+        .control-group
+          .controls{:style => 'margin-left: 48px'}
+            %label.checkbox.inline
+              %input{:type => 'checkbox', :id => 'original', :value => 'true'}  Оригинал
+            %label.checkbox.inline
+              %input{:type => 'checkbox', :id => 'original', :value => 'false'}  Дубликат
+        .control-group
+          %label.control-label{:for => 'pts_series', :style => 'width: 0px'} VIN
+          .controls{:style => 'margin-left: 48px'}
+            = text_field 'pts', 'vin', :style => 'width: 175px'
+
+    .span8.well
+      %h5 Владельцы
+      .form-horizontal
+        - (1..6).to_a.each do |i|
+          .control-group.inline
+            %label.control-label{:for => 'owners', :style => 'width: 0px'}=i.to_s + '.'
+            .controls{:style => 'margin-left: 9px'}
+              .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
+                .btn-group.pads.radio
+                  %button.btn{:data => {:attribute => :document, :place => "owner_number_#{i}", :change => 'exist', :exist => true}}ok
+                  %button.btn.btn-ptimary{:data => {:attribute => :document, :place => "owner_number_#{i}", :change => 'exist', :exist => false}} не ok
+              .input-append
+                = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_start_owning"
+                .add-on{:style => 'margin-left: -5px'} U
+              .input-append
+                = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_ends_owning"
+                %span.add-on{:style => 'margin-left: -5px'} U

@@ -1,25 +1,26 @@
-.span6
-  %h5 Переднее освещение
-  .well
-    .form-horizontal
-      - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
-        .control-group
-          %label.control-label= t(param).to_s+ ':'
-          .controls
-            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-              .btn-group.pads.radio
-                - 3.times do |i|
-                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completion, :change => param, param => i}}=i
-.span6
-  %h5 Переднее освещение
-  .well
-    .form-horizontal
-      - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
-        .control-group
-          %label.control-label= t(param).to_s+ ':'
-          .controls
-            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-              .btn-group.pads.radio
-                - 3.times do |i|
-                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completions, :change => param, param => i}}=i
+= cache 'completion' do
+  .span6
+    %h5 Переднее освещение
+    .well
+      .form-horizontal
+        - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
+          .control-group
+            %label.control-label= t(param).to_s+ ':'
+            .controls
+              .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                .btn-group.pads.radio
+                  - 3.times do |i|
+                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completion, :change => param, param => i}}=i
+  .span6
+    %h5 Переднее освещение
+    .well
+      .form-horizontal
+        - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
+          .control-group
+            %label.control-label= t(param).to_s+ ':'
+            .controls
+              .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                .btn-group.pads.radio
+                  - 3.times do |i|
+                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completions, :change => param, param => i}}=i
 

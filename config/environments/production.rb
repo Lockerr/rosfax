@@ -21,11 +21,6 @@ Tradein::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-
-  # config.after_initialize do
-  #   Delayed::Job.scaler = :null
-  # end
-
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 

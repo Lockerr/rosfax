@@ -10,12 +10,9 @@ gem 'twitter-bootstrap-rails'
 gem 'delayed_job'
 gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 gem 'devise'
-# gem 'heroku'
 gem 'aws-sdk'
 gem 'unicorn'
-
-# gem 'pg'
-# gem 'workless'
+gem 'postmark-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'

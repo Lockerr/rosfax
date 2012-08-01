@@ -1,0 +1,16 @@
+development: &base
+  postmark:
+    api_key: '2b727ff3-8e0e-452b-b0bb-d1f85aad8fdb'
+    signature: 'do-not-reply@rosfax.net'
+
+test:
+  <<: *base
+  postmark:
+    api_key: '2b727ff3-8e0e-452b-b0bb-d1f85aad8fdb'
+    signature: 'do-not-reply@rosfax.net'
+
+production:
+  <<: *base
+  postmark:
+    api_key: '2b727ff3-8e0e-452b-b0bb-d1f85aad8fdb'
+    signature: 'do-not-reply@rosfax.net'

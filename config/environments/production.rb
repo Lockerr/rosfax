@@ -22,9 +22,9 @@ Tradein::Application.configure do
   config.assets.digest = true
 
 
-  config.after_initialize do
-    Delayed::Job.scaler = :null
-  end
+  # config.after_initialize do
+  #   Delayed::Job.scaler = :null
+  # end
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH

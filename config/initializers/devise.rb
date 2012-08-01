@@ -208,3 +208,19 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 end
+
+module Devise
+  module Models
+    module Confirmable
+      handle_asynchronously :send_confirmation_instructions
+    end
+
+    module Recoverable
+      handle_asynchronously :send_reset_password_instructions
+    end
+
+    module Lockable
+      handle_asynchronously :send_unlock_instructions
+    end
+  end
+end

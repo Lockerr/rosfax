@@ -90,15 +90,15 @@ class ReportsController < ApplicationController
     ids = @report.send(params[:attribute]).values.flatten.map { |i| i.to_i }
 
     assets = Asset.where(:id => ids).map { |i| i.url(:carousel) }
-    assets.push Asset.where(:id => @report.send( params[:attribute] )[ params[:place] ].first).first.url(:carousel)
+    assets.push Asset.where(:id => @report.send( params[:attribute] )[ params[:place] ].first).first.url(:carousel) if  @report.send( params[:attribute] )[ params[:place] ]
 
     render :json => assets.reverse.uniq
   end
 
   def image
     @report = Report.find(params[:report_id])
-    if id = @report.send(params[:attribute])[params[:place]].first
-      image = Asset.find(id).url(:thumb)
+    if id = @report.send(params[:attribute])[params[:place]]
+      image = Asset.find(id.first).url(:thumb)
     else
       image = 'https://s3-eu-west-1.amazonaws.com/rosfax/box.png'
     end

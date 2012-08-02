@@ -45,25 +45,7 @@
                     %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false', :checked => true} требуют замены
           = form.submit
       #dumpers.tab-pane
-        = form_for 'report',:html => {:class => 'form-horizontal'},  :method => :put do |form|
-          - for element in Report::DUMPERS
-            .control-group
-              %label.control-label
-                =element
-              .controls
-                - if @report.dumpers[element] == 'true'
-                  %label.radio
-                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'true', :checked => ''}
-                      true
-                  %label.radio
-                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'false'}
-                      false
-                - else
-                  %label.radio
-                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'true'} true
-                  %label.radio
-                    %input{:id => "report_dumpers[#{element}]", :name => "report[dumpers[#{element}]]", :type => "radio", :value => 'false', :checked => true} false
-          = form.submit
+        Видео
 
 
 

@@ -5,12 +5,19 @@
     %thead
       %tr
         %th Машина
-        %th
-        
+        %th Год выпуска
+        %th VIN
+        %th Год выпуска
+        %th Дата создания
+
     %tbody
       - @reports.each do |report|
         %tr
-          %td= report.car_id
+          %td= report.car[:mark_model]
+          %td= report.car[:car][:year] if report.car[:car]
+          %td= report.car[:vin]
+          %td= report.car[:gov_number]
+          %td= report.created_at.strftime('%d.%m.%y')
           %td
             .btn.btn-primary{:onclick => "window.location.href = '#{report_path(report)}'"}
               Изменить

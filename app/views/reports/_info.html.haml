@@ -11,11 +11,26 @@
           Марка/модель
         %td#mark
           = text_field 'report[car]', 'mark_model', :value => @report.car['mark_model'], :data => {:provide => 'typeahead', :source => @models, :attribute => :car, :place => :mark_model}
-      %t
+      %tr
         %td
           Год выпуска
         %td#year
-          = text_field 'report[car]', 'year', :value => @report.car[:year],  :data => {:attribute => :car, :place => :year, :change => :year}
+          .btn-toolbar
+            .btn-group
+              %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 58px'}
+                = (@report.car[:car][:year] if @report.car[:car]) || '---'
+                %span.caret
+              %ul.dropdown-menu.pull-left
+                - (1980..2012).to_a.reverse.each do |i|
+                  %li
+                    .dropdown-element{:data => {:attribute => 'car', :place => 'car', :change => 'year', :year => i}}=i
+
+
+      %tr
+        %td
+          Гоc. номер
+        %td#year
+          = text_field 'report[car]', 'gov_number', :value => @report.car[:gov_number],  :data => {:attribute => :car, :place => :gov_number, :change => :gov_number}
       %tr
         %td
           vin

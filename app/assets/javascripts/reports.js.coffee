@@ -78,22 +78,33 @@
 
     element.parents('div.btn-group').find('button.dropdown-toggle').text(@textContent)
 
+    console.log "=============================="
+
     attr           = element.data('attribute')
     change         = element.data('change')
+
+
+    console.log "attr => #{attr}"
+    console.log "change => #{change}"
 
     unless attr == 'defect'
       container_data = container.data(attr) || new Object
 
+      console.log "container_data => #{container.data(attr)}"
 
       if (place = element.data('place'))
         container_data[place] ||= new Object
         container_data[place][change] = element.data(change)
+        console.log "preivous data => #{container_data[place][change]}"
+        console.log "data(change) => #{element.data(change)}"
       else
         container_data[change] = element.data(change)
 
       container.data(attr, container_data)
+      console.log "container.data(attr, container_data) => #{container.data(attr, container_data)}"
       console.log 'container triggered'
       container.trigger('change')
+
 
     else
       defect = $(@).parents('.defect')

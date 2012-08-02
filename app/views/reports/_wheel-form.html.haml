@@ -11,7 +11,7 @@
               = report.wheels[place] ? report.wheels[place][:width] : '---'
               %span.caret
             %ul.dropdown-menu
-              - [31,32,33,135,145,155,165,175,185,195,205,215,225,235,245,255,265,275,285,295,305,315,325,335,345].each do |i|
+              - [135,145,155,165,175,185,195,205,215,225,235,245,255,265,275,285,295,305,315,325,335,345].each do |i|
                 %li
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'width', :width => i}}=i
           %label{:style => 'vertical-align: top; padding-top: 2px'} \
@@ -20,7 +20,7 @@
               = report.wheels[place] ? report.wheels[place][:profile] : '---'
               %span.caret
             %ul.dropdown-menu{:data => {:attribute => 'wheel'}}
-              - [8.50,9.50,10.5,10.50,11.50,12.50,25,30,35,40,45,50,55,60,65,70,75,80,85,95,100].each do |i|
+              - [25,30,35,40,45,50,55,60,65,70,75,80,85,95,100].each do |i|
                 %li
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'profile', :profile => i}}=i
           %label{:style => 'vertical-align: top; padding-top: 2px'} R
@@ -45,7 +45,7 @@
               - [1,2,3,4,5,6,7,8].each do |i|
                 %li
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
-          %label{:style => 'vertical-align: top; padding-top: 2px'} \
+          %label{:style => 'vertical-align: top; padding-top: 2px'} мм.  \
           .btn-group
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 146px'}
               = report.wheels[place] ? report.wheels[place][:brand] : '---'

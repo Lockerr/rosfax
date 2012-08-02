@@ -25,7 +25,7 @@
         .controls{:style => 'margin-left: 43px'}
           .btn-group.pads.radio
             %button.btn{:data => {:attribute => :document, :place => :pts, :change => :document_validity, :exist => true}} Оригинал
-            %button.btn{:data => {:attribute => :document, :place => "", :change => 'exist', :exist => false}} Дубликат
+            %button.btn{:data => {:attribute => :document, :place => :pts, :change => :document_calidity, :exist => false}} Дубликат
       .control-group
         %label.control-label{:for => 'pts_series', :style => 'width: 0px'} VIN
         .controls{:style => 'margin-left: 48px'}
@@ -40,13 +40,13 @@
           .controls{:style => 'margin-left: 9px'}
             .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
               .btn-group.pads.radio
-                %button.btn{:data => {:attribute => :document, :place => "owner_number_#{i}", :change => 'exist', :exist => true}}ok
-                %button.btn.btn-ptimary{:data => {:attribute => :document, :place => "owner_number_#{i}", :change => 'exist', :exist => false}} не ok
+                %button.btn{:data => {:attribute => :document, :place => 'owner', :change => 'exist', :exist => true}}ok
+                %button.btn.btn-ptimary{:data => {:attribute => :document, :place => 'owner_number', :change => 'exist', :exist => false}} не ok
             .input-append
-              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_start_owning"
+              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :data => {:attribute => :documents, :place => :pts, :change => :"country"}
               .add-on{:style => 'margin-left: -5px'}
                 %i.icon-calendar
             .input-append
-              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_ends_owning"
+              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_ends_owning", :data => {:attribute => :documents, :place => :pts, :change => :"country"}
               %span.add-on{:style => 'margin-left: -5px'}
                 %i.icon-calendar

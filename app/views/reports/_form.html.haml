@@ -7,7 +7,7 @@
           %li= msg
 
   .field
-    = f.label :car_id
-    = f.number_field :car_id
+    = f.label 'Марка-модель'
+    = f.text_field :car_mark_model, :data => {:provide => 'typeahead', :source => @models}
   .actions
     = f.submit 'Save'

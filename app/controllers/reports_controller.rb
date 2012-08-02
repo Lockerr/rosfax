@@ -18,6 +18,7 @@ class ReportsController < ApplicationController
   # GET /reports/1.json
   def show
     @report = Report.find(params[:id])
+    @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,6 +30,7 @@ class ReportsController < ApplicationController
   # GET /reports/new.json
   def new
     @report = Report.new
+    @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
 
     respond_to do |format|
       format.html # new.html.erb
@@ -114,4 +116,5 @@ class ReportsController < ApplicationController
 
     render :json => {:status => :ok, :images => images, :places => images.keys}
   end
+
 end

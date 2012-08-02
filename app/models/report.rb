@@ -2,6 +2,8 @@ class Report < ActiveRecord::Base
   has_many :assets, :as => :attachable
   has_many :defects
 
+  attr_accessor :car_mark_model
+
   serialize :visual_interior, Hash
   serialize :windows, Hash
 
@@ -147,6 +149,10 @@ class Report < ActiveRecord::Base
     # end
     save
     images
+  end
+
+  def car_mark_model=(markmodel)
+    car['mark_model'] = markmodel
   end
 
 

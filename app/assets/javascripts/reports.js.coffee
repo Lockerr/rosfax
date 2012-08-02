@@ -5,14 +5,14 @@
 
 
 @store_report = ->
-  data = $('.container').data()
+  data = $('#report.container').data()
 
   report = new Object
 
   $.ajax
     type: 'PUT'
     data: {report: data}
-    url: '/reports/' + $('.container').attr('report')
+    url: '/reports/' + $('#report.container').attr('report')
 
 @store_defect = (defect) ->
   if defect.data().id
@@ -65,7 +65,7 @@
 
         if target.attr('object') == 'Report'
           $.ajax
-            url: '/reports/' + $('.container').data('id')  + '/place?position=' + target.attr('id') + '&asset='  + window.dragged.id + '&attribute=' + attribute
+            url: '/reports/' + $('#report.container').data('id')  + '/place?position=' + target.attr('id') + '&asset='  + window.dragged.id + '&attribute=' + attribute
             type: 'post'
         else if target.attr('object') == 'Defect'
           $.ajax
@@ -120,12 +120,12 @@
 
 
 $ ->
-  container = $('div.container')
+  container = $('#report.container')
   if container.attr('source')
-    container.data(JSON.parse($('.container').attr('source')))
+    container.data(JSON.parse($('#report.container').attr('source')))
     assign_click_for_dropdown(container)
 
-  report_id = $('.container').data('id')
+  report_id = $('#report.container').data('id')
 
   $( ".pick_date" ).datepicker({showOn: ".add-on",changeMonth: true,changeYear: true})
   $('.add-on').click ->
@@ -225,12 +225,14 @@ $ ->
     store_defect($(@))
     assing_drops()
 
-  $('.container').live 'change', ->
+  $('#report.container').live 'change', ->
     container = $(@)
-    inputs = $(".container input[type='text']")
+    inputs = $("#report.container input[type='text']")
     for input in inputs
       input = $(input)
-      container[input.data().attribute][input.data().place] = input.val()
+      container.data()[input.data().attribute] ||= {}
+      container.data()[input.data().attribute][input.data().place] = input.val()
+      console.log container.data()
 
     store_report()
 
@@ -246,8 +248,7 @@ $ ->
         complete: ->
           window.location.href = '/reports/'
 
-  $('#car').find('input').live 'change', ->
-    $('.container').data('car')[$(@).parent().attr('id')] =  $(@).val()
+
 
 
 

@@ -1,73 +1,73 @@
-#lG.tab-pane
-  %h3 Документы
-  = form_for @report, :html => {:class => 'form-horizontal'} do |form|
-    %fieldset
-      %h5 ПТС
+/ #lG.tab-pane
+/   %h3 Документы
+/   = form_for @report, :html => {:class => 'form-horizontal'} do |form|
+/     %fieldset
+/       %h5 ПТС
 
-      .control-group
-        %label.control-label Выдан
-        .controls
-          = text_field 'pts_when', '', :placeholder => 'Дата выдачи', :type => 'text', :class => 'input-small'
-      .control-group
-        .controls
-          %label.radio
-            = radio_button("user", "original", "true")
-            Оригинал
-          %label.radio
-            = radio_button("user", "owning_jur", "false")
-            Дубликат
+/       .control-group
+/         %label.control-label Выдан
+/         .controls
+/           = text_field 'pts_when', '', :placeholder => 'Дата выдачи', :type => 'text', :class => 'input-small'
+/       .control-group
+/         .controls
+/           %label.radio
+/             = radio_button("user", "original", "true")
+/             Оригинал
+/           %label.radio
+/             = radio_button("user", "owning_jur", "false")
+/             Дубликат
 
-      %h5 Владелец №1
-      .form-inline
-        .control-group
+/       %h5 Владелец №1
+/       .form-inline
+/         .control-group
 
-          .btn-group{"data-toggle" => "buttons-radio"}
-            %button.btn.btn-primary.active физ.лицо
-            %button.btn.btn-primary юр.лицо
-        .control-group
-          %input#input01_01.input-small{:type => 'text', :placeholder => 'ФИО'}
-          %input#input01_01.input-small{:type => 'text', :placeholder => 'дата покупки'}
-          %input#input01_01.input-small{:type => 'text', :placeholder => 'дата продажи'}
+/           .btn-group{"data-toggle" => "buttons-radio"}
+/             %button.btn.btn-primary.active физ.лицо
+/             %button.btn.btn-primary юр.лицо
+/         .control-group
+/           %input#input01_01.input-small{:type => 'text', :placeholder => 'ФИО'}
+/           %input#input01_01.input-small{:type => 'text', :placeholder => 'дата покупки'}
+/           %input#input01_01.input-small{:type => 'text', :placeholder => 'дата продажи'}
 
 
-      %hr/
-      .control-group
-        %label.control-label Форма собственности
-        .controls
-          %label.radio
-            %input#optionsRadios1{:checked => "", :name => "optionsRadios3", :type => "radio", :value => "option3"}
-              Собственник
-          %label.radio
-            %input#optionsRadios2{:name => "optionsRadios3", :type => "radio", :value => "option4"}
-              По доверенности
-      %hr/
-      .control-group
-        %label.control-label Юридическая форма владельца
-        .controls
-          %label.radio
-            %input#optionsRadios1{:checked => "", :name => "optionsRadios2", :type => "radio", :value => "option3"}
-              Юридическое лицо
-          %label.radio
-            %input#optionsRadios2{:name => "optionsRadios2", :type => "radio", :value => "option4"}
-              Физическое лицо
-      %hr/
-      .control-group
-        %label.control-label Техническое обслуживание
-        .controls
-          %label.radio
-            %input#optionsRadios1{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
-              Есть
-          %label.radio
-            %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
-              Нет
-          %input#input01_02.input-small{:placeholder => '', :type => 'text'}
-      %hr/
-      - placements = %w(pts chasis_number)
-      - for place in placements
-        .row-fluid{:id => "#{place}"}
-          .span3.fluid
-            = place
-          .span3.fluid
-            .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
-              -#= image_tag(@report.image(:place => place)) if @report.image(:place => place)
-    = form.submit('Сохранить', :class => 'btn btn-primary')
+/       %hr/
+/       .control-group
+/         %label.control-label Форма собственности
+/         .controls
+/           %label.radio
+/             %input#optionsRadios1{:checked => "", :name => "optionsRadios3", :type => "radio", :value => "option3"}
+/               Собственник
+/           %label.radio
+/             %input#optionsRadios2{:name => "optionsRadios3", :type => "radio", :value => "option4"}
+/               По доверенности
+/       %hr/
+/       .control-group
+/         %label.control-label Юридическая форма владельца
+/         .controls
+/           %label.radio
+/             %input#optionsRadios1{:checked => "", :name => "optionsRadios2", :type => "radio", :value => "option3"}
+/               Юридическое лицо
+/           %label.radio
+/             %input#optionsRadios2{:name => "optionsRadios2", :type => "radio", :value => "option4"}
+/               Физическое лицо
+/       %hr/
+/       .control-group
+/         %label.control-label Техническое обслуживание
+/         .controls
+/           %label.radio
+/             %input#optionsRadios1{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
+/               Есть
+/           %label.radio
+/             %input#optionsRadios2{:name => "optionsRadios", :type => "radio", :value => "option2"}
+/               Нет
+/           %input#input01_02.input-small{:placeholder => '', :type => 'text'}
+/       %hr/
+/       - placements = %w(pts chasis_number)
+/       - for place in placements
+/         .row-fluid{:id => "#{place}"}
+/           .span3.fluid
+/             = place
+/           .span3.fluid
+/             .drop{:style => 'width: 100px;height: 67px;border: 1px solid',:id => "index_0"}
+/               -#= image_tag(@report.image(:place => place)) if @report.image(:place => place)
+/     = form.submit('Сохранить', :class => 'btn btn-primary')

@@ -6,8 +6,8 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    - if @report
-      .container{'report' => @report.id, :source => @report.attributes.to_json}
+    - unless @report.new_record?
+      .container#report{'report' => @report.id, :source => @report.attributes.to_json}
         = yield
     - else
       .container

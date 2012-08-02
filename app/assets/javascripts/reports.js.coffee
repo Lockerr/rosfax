@@ -127,7 +127,7 @@ $ ->
 
   report_id = $('.container').data('id')
 
-  $( ".pick_date" ).datepicker({showOn: ".add-on"})
+  $( ".pick_date" ).datepicker({showOn: ".add-on",changeMonth: true,changeYear: true})
   $('.add-on').click ->
     $(@).parent().find('input').datepicker('show')
 
@@ -226,6 +226,12 @@ $ ->
     assing_drops()
 
   $('.container').live 'change', ->
+    container = $(@)
+    inputs = $(".container input[type='text']")
+    for input in inputs
+      input = $(input)
+      container[input.data().attribute][input.data().place] = input.val()
+
     store_report()
 
   $('.btn#save_defect').click ->

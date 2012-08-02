@@ -26,6 +26,7 @@ class Report < ActiveRecord::Base
   serialize :checklist, Hash
   serialize :testdrive, Hash
   serialize :car, Hash
+  serialize :documents, Hash
 
   default_scope includes(:assets)
 

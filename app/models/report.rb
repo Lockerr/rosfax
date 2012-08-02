@@ -91,7 +91,7 @@ class Report < ActiveRecord::Base
 
   def place(attrs= {})
     send(attrs[:attribute])[attrs[:position]] ||= []
-    send(attrs[:attribute])[attrs[:position]].push attrs[:asset]
+    send(attrs[:attribute])[attrs[:position]].unshift attrs[:asset]
 
     save
   end

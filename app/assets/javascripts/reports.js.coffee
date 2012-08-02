@@ -50,11 +50,17 @@
         event.dataTransfer.dropEffect = "copy"
         attribute = $(this).data('attribute')
 
+        $(this).find('img').data('attribute', attribute)
+        $(this).find('img').data('place', $(@).data('place'))
+
         imgbox = $(".imgbox##{attribute}")
 
         imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
         imgbox.width(imgbox.width()+ 116)
-        imgbox.find('.thumbnail').last().prepend($.clone(window.dragged))
+
+        new_image = $.clone(window.dragged)
+
+        imgbox.find('.thumbnail').last().prepend(new_image)
         target = $(@)
 
 
@@ -197,7 +203,7 @@ $ ->
       window.dragged = event.target
 
 
-  $('.drop, .imgbox').click ->
+  $(".drop").click ->
 
     $('#modal_carousel .item').remove()
     data = $(@).data()

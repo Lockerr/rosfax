@@ -10,9 +10,9 @@
 
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "##{attribute}_unassigned"} unass
+        %a{"data-toggle" => "tab", :href => "##{attribute}_unassigned"} Не использованные
       %li
-        %a{"data-toggle" => "tab", :href => "##{attribute}_all_photos"} all
+        %a{"data-toggle" => "tab", :href => "##{attribute}_all_photos"} Все
     .tab-content
       .tab-pane.active{:id => "#{attribute}_unassigned"}
         - for asset in @report.assets

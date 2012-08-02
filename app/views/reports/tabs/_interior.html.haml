@@ -16,7 +16,7 @@
       .imgbox#interior{:style => "height: 110px; width: #{@report.images(:group => 'interior', :size => 'thumb').size*116}px", :data => {:attribute => 'interior', :place => placements.first}}
         - for image in @report.images(:group => 'interior', :size => 'thumb')
           .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px'}
-            = image_tag(image[1])
+            = image_tag(image[1],:data => {:attribute => 'interior', :place => place})
             .btn.remove_asset.btn-danger.btn-mini{:style => 'position: relative; top: -20px; left: 80px',:id => image ? image[0] : '', :data => {:attribute => 'interior'}} x
 
   .span4

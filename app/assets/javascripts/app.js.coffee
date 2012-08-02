@@ -66,5 +66,5 @@ $(document).ready ->
         setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
 
 
-    refresh_rate = 1000
+    refresh_rate = 2000
     setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)

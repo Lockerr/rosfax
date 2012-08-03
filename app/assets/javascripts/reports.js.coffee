@@ -50,23 +50,25 @@
         event.dataTransfer.dropEffect = "copy"
         attribute = $(this).data('attribute')
 
-        $(this).find('img').data('attribute', attribute)
-        $(this).find('img').data('place', $(@).data('place'))
+        target = $(@)
+
+        image = document.createElement('div')
+        $(image).addClass('thumb')
+        $(image).attr('data-attribute', attribute)
+        $(image).attr('data-place', $(@).data('place'))
+        $(image).attr('style', 'cursor: pointer')
+
+        target.find('a').html(image)
+        target.find('.thumb').html(window.dragged)
+        target.find('.btn').text(parseInt(target.find('.btn').text())+1)
+        target.find('img').attr('style', '')
 
         imgbox = $(".imgbox##{attribute}")
 
         imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
         imgbox.width(imgbox.width()+ 116)
-
-        new_image = $.clone(window.dragged)
-
+        new_image = $.clone(target.find('.thumb')[0])
         imgbox.find('.thumbnail').last().prepend(new_image)
-        target = $(@)
-
-
-        target.find('a').html(window.dragged)
-        target.find('.btn').text(parseInt(target.find('.btn').text())+1)
-
 
 
         if target.attr('object') == 'Report'
@@ -203,7 +205,7 @@ $ ->
       window.dragged = event.target
 
 
-  $(".drop").click ->
+  $(".thumb").live 'click', ->
 
     $('#modal_carousel .item').remove()
     data = $(@).data()

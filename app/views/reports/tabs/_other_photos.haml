@@ -13,11 +13,12 @@
         = render :partial => 'drop', :locals => {:object => @report, :place => place, :attribute => 'photo_others'}
 
 
-    .span{:style => "height: 96px; overflow-x: scroll; width: 98%; overflow-y: hidden;border: 1px solid green"}
+    .span{:style => "height: 96px; overflow-x: scroll; width: 98%; overflow-y: hidden;border: 1px solid #08C"}
       .imgbox#photo_others{:style => "height: 110px; width: #{@report.images(:group => 'photo_others', :size => 'thumb').size*116}px", :data => {:attribute => 'photo_others', :place => placements.first}}
         - for image in @report.images(:group => 'photo_others', :size => 'thumb')
           .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px'}
-            = image_tag(image[1],:data => {:attribute => 'photo_others', :place => place})
+            .thumb{:data => {:attribute => 'photo_others', :place => place}}
+              = image_tag(image[1])
             .btn.remove_asset.btn-danger.btn-mini{:style => 'position: relative; top: -20px; left: 80px',:id => image ? image[0] : '', :data => {:attribute => 'photo_others'}} x
 
   .span4

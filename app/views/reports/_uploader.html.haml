@@ -1,7 +1,7 @@
 .files
   = form_for [@report, Asset.new], :html => { :class => "upload", :multipart => true } do |f|
     = f.file_field :data
-    %div Перетащить сюда файлы
+    %div{:style => 'color: #08C; font-size: 18pt;padding: 7px'} Перетащить сюда файлы
   %table.upload_files
 .photos{:style => 'overflow-y: scroll;height: 500px'}
 

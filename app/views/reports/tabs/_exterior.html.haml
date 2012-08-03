@@ -14,7 +14,7 @@
       - for place in placements[6..8]
         = render :partial => 'drop', :locals => {:object => @report, :place => place, :attribute => 'exterior'}
 
-    .span{:style => "height: 96px; overflow-x: scroll; width: 98%; overflow-y: hidden;border: 1px solid #08C"}
+    .span{:style => "height: 96px; overflow-x: scroll; width: 100%; overflow-y: hidden;border: 1px solid #08C; margin-left: 0"}
       .imgbox#exterior{:style => "height: 110px; width: #{@report.images(:group => 'exterior', :size => 'thumb').size*116}px", :data => {:attribute => 'exterior', :place => placements.first}}
         - for image in @report.images(:group => 'exterior', :size => 'thumb')
           .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px'}

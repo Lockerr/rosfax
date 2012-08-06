@@ -13,7 +13,7 @@
         %a{"data-toggle" => "tab", :href => "#liquids"} Жидкость
       %li
         %a{"data-toggle" => "tab", :href => "#complection"} Комплект
-    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
+    .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       #documents.tab-pane.active
         = render 'reports/tabs/documents'
       #coating.tab-pane

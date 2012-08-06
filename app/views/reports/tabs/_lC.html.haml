@@ -15,7 +15,7 @@
         %a{"data-toggle" => "tab", :href => "#wheels"} Колеса
       %li
         %a{"data-toggle" => "tab", :href => "#dumpers"} Видео
-    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd"}
+    .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd"}
       #compiled.tab-pane.active
         = render 'reports/defects/compiled'
       #exterior.tab-pane

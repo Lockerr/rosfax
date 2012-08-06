@@ -30,7 +30,10 @@ arrayDiff = (a1, a2) ->
     diff.push k  unless k of o1
   diff
 
+refreshing = false
+console.log "refreshing: #{refreshing}"
 get_images = ->
+  refreshing = true
   ids = $.map($(".processing"), (n, i) -> n.id ).unique()
   if ids.length > 0
     console.log ids
@@ -59,12 +62,15 @@ refresh_image = (refresh_rate, src, id) ->
 
 $(document).ready ->
 
+  $('.photos').live 'change', ->
+    console.log "refreshing: #{refreshing}"
+    unless refreshing
+      refresh_loop = (refresh_rate) ->
+          console.log(refresh_rate)
+          get_images()
 
-    refresh_loop = (refresh_rate) ->
-        console.log(refresh_rate)
-        get_images()
-        setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
+          setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
 
 
-    refresh_rate = 2000
-    setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
+      refresh_rate = 2000
+      setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)

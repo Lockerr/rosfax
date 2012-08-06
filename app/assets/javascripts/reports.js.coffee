@@ -2,7 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+@appendUploader = (tab) ->
+  tabs = ['#exterior', '#interior', '#under_the_hood', '#other_photos', '#wheels']
 
+  console.log tab in tabs
+  if tab in tabs
+    $("#{tab} #{tab}.row-fluid").append($('.uploader'))
 
 @store_report = ->
   data = $('#report.container').data()
@@ -174,14 +179,16 @@ $ ->
     container.trigger('change')
 
   $(".upload").fileUploadUI
-    uploadTable: $(".upload_files")
-    downloadTable: $(".download_files")
+    uploadTable: $("..photos .tab-pane.uploading")
+    downloadTable: $(".photos .tab-pane")
     buildUploadRow: (files, index) ->
+      console.log "file: #{file} index: #{index}"
       file = files[index]
       $ "<tr><td>" + file.name + "</td>" + "<td class=\"file_upload_progress\"><div></div></td>" + "<td class=\"file_upload_cancel\">" + "<button class=\"ui-state-default ui-corner-all\" title=\"Cancel\">" + "<span class=\"ui-icon ui-icon-cancel\">Cancel</span>" + "</button></td></tr>"
 
     buildDownloadRow: (file) ->
-      $ "<tr><td><img alt=\"Photo\" width=\"40\" height=\"40\" src=\"" + file.pic_path + "\">" + file.name + "</td></tr>"
+      $('.photos').trigger ('change')
+      $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{file.id}' processing='#{file.id}' src='/images/normal/missing.png' style='cursor: move;' width='96'>"
 
   assing_drops()
 
@@ -269,8 +276,21 @@ $ ->
         complete: ->
           window.location.href = '/reports/'
 
-  $('.nav-tabs li').click ->
-    console.log 'change'
+  $(' .nav-tabs.first li').click ->
+
+    # console.log $(@).find('a').attr('href')
+
+    console.log 'first'
+    console.log $("##{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href')
+
+    appendUploader($("##{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href'))
+
+  $(' .nav-tabs.second li').click ->
+    console.log 'second'
+    console.log  $(@).find('a').attr('href')
+
+    appendUploader($(@).find('a').attr('href'))
+
 
 
 

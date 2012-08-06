@@ -2,7 +2,7 @@
 .row-fluid
   .span12
     .tabbable.tabs-left
-      %ul.nav.nav-tabs
+      %ul.nav.nav-tabs.first
         %li.active
           %a{"data-toggle" => "tab", :href => "#info"} Информация
         %li
@@ -15,7 +15,7 @@
           %a{"data-toggle" => "tab", :href => "#lD"} Тест-драйв
         %li
           %a{"data-toggle" => "tab", :href => "#lE"} Комплектация
-      .tab-content
+      .tab-content.first
         - for symbol in %w(A B C D E F G H)
           = render "reports/tabs/l#{symbol}"
         .tab-pane#info.active
@@ -23,5 +23,6 @@
 
 
 
-
+.span4.uploader.hide
+  = render :partial => 'uploader', :locals => {:attribute => ''}
 

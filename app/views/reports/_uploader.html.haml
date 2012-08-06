@@ -10,9 +10,11 @@
 
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "##{attribute}_unassigned"} Не использованные
+        %a{"data-toggle" => "tab", :href => "##{attribute}_unassigned"} Не исп.
       %li
         %a{"data-toggle" => "tab", :href => "##{attribute}_all_photos"} Все
+      %li
+        %a{"data-toggle" => "tab", :href => "##{attribute}_uploading"} Загрузка
     .tab-content
       .tab-pane.active{:id => "#{attribute}_unassigned"}
         - for asset in @report.assets
@@ -27,4 +29,7 @@
             = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
           - else
             = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
+      .tab-pane.uploading{:id => "#{attribute}_uploading"}
+
+
 

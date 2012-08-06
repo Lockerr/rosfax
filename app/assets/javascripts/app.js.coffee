@@ -43,6 +43,7 @@ get_images = ->
       data: {assets: ids, size: 'thumb'}
       complete: (data) ->
         data = $.parseJSON(data.responseText)
+        refreshing = false
 
         if data.keys.length == 0
           if $(".processing").length > 0
@@ -52,7 +53,7 @@ get_images = ->
 
         else
           for i in data.keys
-            setTimeout(( -> refresh_image(1000, data.assets[i], i)), 1000)
+            setTimeout(( -> refresh_image(2000, data.assets[i], i)), 2000)
 
 refresh_image = (refresh_rate, src, id) ->
   setTimeout(( ->

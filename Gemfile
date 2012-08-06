@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'paperclip'
 gem 'twitter-bootstrap-rails'
-gem 'delayed_job'
+gem 'delayed_job_active_record'
 gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 gem 'devise'
 gem 'aws-sdk'
@@ -15,9 +15,9 @@ gem 'unicorn'
 gem 'postmark-rails'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
 
 group :development do

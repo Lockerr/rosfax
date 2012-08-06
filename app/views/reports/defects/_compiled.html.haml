@@ -11,7 +11,7 @@
               %ul.dropdown-menu
                 - Report::DEFECTS_CATEGORIES.keys.each do |i|
                   %li
-                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= (t("#{i}.title").to_s)
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
             .btn-group
               %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
                 =t(defect.sub_category)
@@ -60,7 +60,7 @@
             %ul.dropdown-menu
               - Report::DEFECTS_CATEGORIES.keys.each do |i|
                 %li
-                  .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= (t(i).to_s)
+                  .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
 
 
           .btn-group{:style => 'display: none'}

@@ -6,7 +6,7 @@ class ReportsController < ApplicationController
   layout 'report'
 
   def index
-    @reports = Report.all
+    current_user.admin? ? @reports = Report.all : @reports = current_user.reports
 
     respond_to do |format|
       format.html # index.html.erb
@@ -46,7 +46,7 @@ class ReportsController < ApplicationController
   # POST /reports
   # POST /reports.json
   def create
-    @report = Report.new(params[:report])
+    @report = current_user.reports.new(params[:report])
 
     respond_to do |format|
       if @report.save

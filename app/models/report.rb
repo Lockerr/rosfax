@@ -1,6 +1,7 @@
 class Report < ActiveRecord::Base
   has_many :assets, :as => :attachable
   has_many :defects
+  belongs_to :user
 
   attr_accessor :car_mark_model
 

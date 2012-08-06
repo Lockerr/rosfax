@@ -18,7 +18,7 @@
           .btn-toolbar
             .btn-group
               %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 58px'}
-                = (@report.car[:car][:year] if @report.car[:car]) || '---'
+                = (@report.car['car']['year'] if @report.car['car']) || '---'
                 %span.caret
               %ul.dropdown-menu.pull-left
                 - (1980..2012).to_a.reverse.each do |i|
@@ -30,11 +30,11 @@
         %td
           Гоc. номер
         %td#year
-          = text_field 'report[car]', 'gov_number', :value => @report.car[:gov_number],  :data => {:attribute => :car, :place => :gov_number, :change => :gov_number}
+          = text_field 'report[car]', 'gov_number', :value => @report.car['gov_number'],  :data => {:attribute => :car, :place => :gov_number, :change => :gov_number}
       %tr
         %td
           vin
         %td#vin
-          = text_field 'report[car]', 'vin', :value => @report.car[:vin],  :data => {:attribute => :car, :place => :vin, :change => :vin}
+          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :vin, :change => :vin}
 
 

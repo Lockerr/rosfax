@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802054156) do
+ActiveRecord::Schema.define(:version => 20120806091057) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -27,6 +27,11 @@ ActiveRecord::Schema.define(:version => 20120802054156) do
   end
 
   add_index "assets", ["attachable_id", "attachable_type"], :name => "index_assets_on_attachable_id_and_attachable_type"
+
+  create_table "brands", :force => true do |t|
+    t.string  "name",    :null => false
+    t.boolean "popular"
+  end
 
   create_table "cars", :force => true do |t|
     t.string   "brand"
@@ -63,6 +68,12 @@ ActiveRecord::Schema.define(:version => 20120802054156) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "models", :force => true do |t|
+    t.integer "brand_id"
+    t.string  "name",     :null => false
+    t.boolean "popular"
+  end
+
   create_table "reports", :force => true do |t|
     t.integer  "car_id"
     t.datetime "created_at"
@@ -90,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20120802054156) do
     t.text     "testdrive"
     t.text     "car"
     t.text     "documents"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|

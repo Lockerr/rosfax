@@ -1,10 +1,9 @@
-
 ru:
-  hello: "Hello world"
+  hello: Hello world
   interior:
     title: Интерьер
   under_the_roof:
-    title:  Под капотом
+    title: Под капотом
   wheels: Колеса
   other: Другое
   video: Видео
@@ -15,15 +14,12 @@ ru:
     title: Окна и свет
   powertrains:
     title: Силовой агрегат
-
   chasis:
     title: Ходовая
     full_drive_connection: Поключение (полный привод)
     air_suspension_all_levels: Пневмоподвеска (все уровни)
-
     revolution_of_twentienth: Обороты ХХ
     turn_gas_whith_a_sharp: Дым выхлопа при резком газе
-
   electric:
     title: Электрика
   liquids:
@@ -42,22 +38,49 @@ ru:
     front_left_door: Передняя левая дверь
     front_left_wing: Переднее левое крыло
     front_bumper: Передний бампер
-    skirt_front_bumper:
+    skirt_front_bumper: !!null
     rear_bumper: Задний бампер
     rear_apron: Задний фартук
     right_threshold: Правый порог
     left_threshold: Левый порог
-
     defect_type:
-      dent:
-      scratch:
-      cleavage:
-      not_paont_cleavage:
-      crack:
-      attrition:
+      dent: !!null
+      scratch: !!null
+      cleavage: !!null
+      not_paont_cleavage: !!null
+      crack: !!null
+      attrition: !!null
       rust: Ржавчина
       traces_of_repair: Следы ремонта
       missing_parts: Отсутствующие детали
-
-
-
+  activerecord:
+    attributes: {}
+    models: {}
+  helpers:
+    label:
+      user:
+        email: Почта
+        password: Пароль
+        remember_me: Запомни меня
+        password_confirmation: ''
+    submit:
+      report:
+        submit: Submit Report
+  report:
+    Марка-модель: ''
+  user:
+    signed_in: Вход в систему выполнен.
+  brakes: Тормоза
+  brake: Тормоз
+  brake_fluid: Тормозная жидкость
+  air_conditioning: Кондиционер
+  antifreeze: Антифриз
+  distant_lights: Дальний свет
+  mirrors: Зеркала
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: Уже используется

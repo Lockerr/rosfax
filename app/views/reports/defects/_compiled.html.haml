@@ -6,12 +6,12 @@
           .btn-toolbar{:style => 'margin: 0; padding: 0'}
             .btn-group
               %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
-                = t(defect.category)
+                = t("#{defect.category}.title")
                 %span.caret
               %ul.dropdown-menu
                 - Report::DEFECTS_CATEGORIES.keys.each do |i|
                   %li
-                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= (t(i).to_s)
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= (t("#{i}.title").to_s)
             .btn-group
               %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
                 =t(defect.sub_category)
@@ -19,7 +19,7 @@
               %ul.dropdown-menu
                 - Report::DEFECTS_CATEGORIES[defect.category.to_sym].each do |i|
                   %li
-                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= (t(i).to_s)
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= (t(defect.category.to_s + '.' + i.to_s).to_s)
 
             .btn-group
               %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
@@ -28,7 +28,7 @@
               %ul.dropdown-menu
                 - %w(dent scratch cleavage not_paont_cleaveage crack attrition rust traces_of_repair missing_part).each do |i|
                   %li
-                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t(i).to_s)
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t("defect_type.#{i}").to_s)
             .btn-group
               %button.btn.defect_size.dropdown-toggle{'data-attribute' => 'defect', "data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
                 =t(defect.size)

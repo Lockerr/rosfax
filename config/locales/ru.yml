@@ -1,12 +1,63 @@
 
 ru:
   hello: "Hello world"
-  exterior: "Экстерьер"
-  interior: Интерьер
-  under_the_roof: Под капотом
+  interior:
+    title: Интерьер
+  under_the_roof:
+    title:  Под капотом
   wheels: Колеса
   other: Другое
   video: Видео
   front_left_headlight: Передняя левая фара
   glass_elevators: Стеклоподъемники
   central_locking: Центральный замок
+  windows_and_lights:
+    title: Окна и свет
+  powertrains:
+    title: Силовой агрегат
+
+  chasis:
+    title: Ходовая
+    full_drive_connection: Поключение (полный привод)
+    air_suspension_all_levels: Пневмоподвеска (все уровни)
+
+    revolution_of_twentienth: Обороты ХХ
+    turn_gas_whith_a_sharp: Дым выхлопа при резком газе
+
+  electric:
+    title: Электрика
+  liquids:
+    title: Жидкости
+  exterior:
+    title: Экстерьер
+    hood: Капот
+    roof: Крыша
+    front_right_wing: Правое переднее крыло
+    right_front_door: Правая передняя дверь
+    rear_right_door: Задняя правая дверь
+    rear_right_wing: Заднее правое крыло
+    boot_lid: Крышка багажника
+    rear_left_wing: Заднее левое крыло
+    rear_left_door: Задняя левая дверь
+    front_left_door: Передняя левая дверь
+    front_left_wing: Переднее левое крыло
+    front_bumper: Передний бампер
+    skirt_front_bumper:
+    rear_bumper: Задний бампер
+    rear_apron: Задний фартук
+    right_threshold: Правый порог
+    left_threshold: Левый порог
+
+    defect_type:
+      dent:
+      scratch:
+      cleavage:
+      not_paont_cleavage:
+      crack:
+      attrition:
+      rust: Ржавчина
+      traces_of_repair: Следы ремонта
+      missing_parts: Отсутствующие детали
+
+
+

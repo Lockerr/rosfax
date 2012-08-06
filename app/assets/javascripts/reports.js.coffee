@@ -269,7 +269,8 @@ $ ->
         complete: ->
           window.location.href = '/reports/'
 
-
+  $('.nav-tabs li').click ->
+    console.log 'change'
 
 
 

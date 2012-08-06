@@ -1,14 +1,15 @@
-rails_root = 'cd /home/perekup/rosfax/current'
+rails_root = '/home/perekup/rosfax/current'
 
-1.times do |num|
+2.times do |num|
   God.watch do |w|
     w.name     = "dj-#{num}"
     w.group    = 'dj'
     w.interval = 30.seconds
-    w.start    = "rake -f #{rails_root}/Rakefile production jobs:work"
+    w.start    = "cd #{rails_root} && rake jobs:work RAILS_ENV=production"
+    w.log      = '/home/perekup/rosfax/shared/log/god_jobs.log'
 
-    w.uid = 'rosfax'
-    w.gid = 'rosfax'
+#    w.uid = 'rosfax'
+#    w.gid = 'rosfax'
 
     # retart if memory gets too high
     w.transition(:up, :restart) do |on|
@@ -17,6 +18,7 @@ rails_root = 'cd /home/perekup/rosfax/current'
         c.times = 2
       end
     end
+
 
     # determine the state on startup
     w.transition(:init, { true => :up, false => :start }) do |on|

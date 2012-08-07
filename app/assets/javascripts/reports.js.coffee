@@ -189,7 +189,7 @@ $ ->
         # "<span class=\"ui-icon ui-icon-cancel\">Cancel</span>" + "<button class=\"ui-state-default ui-corner-all\" title=\"Cancel\">" + "</button>
     buildDownloadRow: (file) ->
       $('.photos').trigger ('change')
-      $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{file.id}' processing='#{file.id}' src='/images/normal/missing.png' style='cursor: move;' width='96'>"
+      $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{file.id}' processing='#{file.id}' src='/assets/loading.gif' style='cursor: move;' width='96'>"
 
   assing_drops()
 

@@ -1,12 +1,13 @@
 class Asset < ActiveRecord::Base
   has_attached_file :data,
           :styles => {:thumb => '100x68', :carousel => '900x600'},
+          :default_url => "/assets/loading.gif",
           :storage => :s3,
           :s3_credentials => { :access_key_id => 'AKIAJVTSIEA4Y2WZG5TQ', :secret_access_key => '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' },
           :bucket => 'rosfax',
           :path => ":attachment/:id/:style.:extension",
-          :s3_host_name =>  's3-eu-west-1.amazonaws.com',
-          :default_url => "/assets/loading.gif"
+          :s3_host_name =>  's3-eu-west-1.amazonaws.com'
+
 
 
   process_in_background :data

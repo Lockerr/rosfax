@@ -13,6 +13,7 @@ gem 'devise'
 gem 'aws-sdk'
 gem 'unicorn'
 gem 'postmark-rails'
+gem "symbolize"
 
 group :assets do
   gem 'sass-rails'

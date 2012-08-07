@@ -1,6 +1,7 @@
 class Asset < ActiveRecord::Base
   has_attached_file :data,
           :styles => {:thumb => '100x68', :carousel => '900x600'},
+          :default_url => "asset_path('loading.gif')",
           :storage => :s3,
           :s3_credentials => { :access_key_id => 'AKIAJVTSIEA4Y2WZG5TQ', :secret_access_key => '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' },
           :bucket => 'rosfax',

@@ -78,4 +78,3 @@ $(document).ready ->
 
       refresh_rate = 2000
       setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
-.

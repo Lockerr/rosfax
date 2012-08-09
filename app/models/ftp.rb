@@ -11,7 +11,7 @@
  module Ftp
    class User < ActiveRecord::Base
        self.establish_connection :ftp
-       set_table_name :user
+       set_table_name :users
    end
 
      def foo

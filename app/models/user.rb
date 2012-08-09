@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     begin
       user = Ftp::User.new
       user.userid = email
-      user.password = password
+      user.passwd = ActiveRecord::Base.connection.execute("SELECT PASSWORD('#{password}')").first[0]
       user.save
     end
 

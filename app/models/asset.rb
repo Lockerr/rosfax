@@ -1,4 +1,7 @@
 class Asset < ActiveRecord::Base
+
+  FTP = Rails.root.join('tmp')
+
   has_attached_file :data,
           :styles => {:thumb => '100x68', :carousel => '900x600'},
           :default_url => "/assets/loading.gif",
@@ -31,5 +34,8 @@ class Asset < ActiveRecord::Base
     data_file_size
   end
 
+  def self.process_ftp
+
+  end
 
 end

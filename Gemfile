@@ -14,6 +14,8 @@ gem 'aws-sdk'
 gem 'unicorn'
 gem 'postmark-rails'
 gem "symbolize"
+gem 'rufus-scheduler'
+
 
 group :assets do
   gem 'sass-rails'

@@ -40,3 +40,10 @@ production:
   username: root
   password: 12345trewq
   socket: /var/run/mysqld/mysqld.sock
+
+ftp:
+  adapter: mysql2
+  encoding: utf8
+  database: proftpd
+  username: root
+  socket: /var/run/mysqld/mysqld.sock

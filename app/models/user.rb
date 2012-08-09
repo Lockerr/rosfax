@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  before_create :grand_access_to_ftp
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
@@ -13,5 +15,18 @@ class User < ActiveRecord::Base
     %w(antiqe@gmail.com lockerr@mail.ru).include?(email)
 
   end
+
+
+  def grand_access_to_ftp
+    begin
+      user = Ftp::User.new
+      user.userid = email
+      user.password = password
+      user.save
+    end
+
+  end
+
+
 
 end

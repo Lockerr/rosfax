@@ -59,6 +59,9 @@ refresh_image = (refresh_rate, src, id) ->
   setTimeout(( ->
           $(".processing[id=#{id}]").attr('src', src)
           $(".processing[id=#{id}]").removeClass('processing')
+          $.each $('.photos img'), ->
+            this.ondragstart = (event) ->
+              window.dragged = event.target
         ), 5000)
 
 $(document).ready ->
@@ -75,3 +78,4 @@ $(document).ready ->
 
       refresh_rate = 2000
       setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
+.

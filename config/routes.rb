@@ -56,7 +56,7 @@ Tradein::Application.routes.draw do
   #   end
 
   # Sample resource route with more complex sub-resources
-  #   resources :products do
+  #   resources :products do Чтобы знать.
   #     resources :comments
   #     resources :sales do
   #       get 'recent', :on => :collection
@@ -79,4 +79,7 @@ Tradein::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+  match 'index.php/rest', :controller => 'galleries', :action => 'rest'
+  match 'index.php/rest/item(/:id)', :controller => 'galleries', :action => 'test'
 end
+

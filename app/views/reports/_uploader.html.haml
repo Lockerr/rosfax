@@ -15,6 +15,9 @@
         %a{"data-toggle" => "tab", :href => "##{attribute}_all_photos"} Все
       %li
         %a{"data-toggle" => "tab", :href => "##{attribute}_uploading"} Загрузка
+      %li
+        %a{"data-toggle" => "tab", :href => "eye-fi"} Eye-fi
+
     .tab-content
       .tab-pane.active{:id => "#{attribute}_unassigned"}
         - for asset in @report.assets
@@ -30,6 +33,12 @@
           - else
             = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
       .tab-pane.uploading{:id => "#{attribute}_uploading"}
+      .tab-pane#eye-fi
+        - for asset in current_user.assets
+          -if asset.data_processing
+            = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
+          - else
+            = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
 
 
 

@@ -1,6 +1,6 @@
 class FtpController < ApplicationController
   def file
-    file = File.new('/home/perekup/ftp/ttt@tt.t/2012-08-10/new_file.ttt', 'w')
+    file = File.new('/home/perekup/ftp/ttt@tt.t/new_file.ttt', 'w')
     file.puts 'it`s a trap'
     file.close
 

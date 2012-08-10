@@ -1,7 +1,8 @@
 class FtpController < ApplicationController
   def file
-    file = File.new('/home/perekup/ftp/ttt@tt.t/2012-08-10/new_file.ttt')
+    file = File.new('/home/perekup/ftp/ttt@tt.t/2012-08-10/new_file.ttt', 'w')
     file.puts 'it`s a trap'
+    file.close
 
     user = User.find_by_email(params[:file].split(/\//)[4].gsub(/\\@/, '@'))
 

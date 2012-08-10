@@ -5,7 +5,7 @@ class FtpController < ApplicationController
     Rails.logger.warn params[:file].split(/\//)[4].inspect
     if user
 
-      file = File.new(params[:file].gsub('@', '\\@')
+      file = File.new(params[:file].gsub('@', '\\@'))
 
       asset = user.assets.new(:data => file)
       asset.save

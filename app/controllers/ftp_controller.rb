@@ -2,10 +2,13 @@ class FtpController < ApplicationController
   def file
     user = User.find_by_email(params[:file].split(/\//)[4])
     if user
-      file = params[:file]
-      file = File.new(file)
+      raise params[:file].inspect
+      file = File.new(params[:file])
 
-      user.assets.create :data => file
+      asset = user.assets.new :data => file
+      asset.save
+
+      Rails.logger.warn asset.inspect
 
     else
       Rails.logger.warn " ===================== params:\n #{params.inspect} \n ========================="

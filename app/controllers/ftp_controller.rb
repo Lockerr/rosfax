@@ -1,6 +1,7 @@
 class FtpController < ApplicationController
   def file
     user = User.find_by_email(params[:file].split(/\//)[4])
+    Rail.logger.warn params[:file].split(/\//)[4].inspect
     if user
       raise params[:file].inspect
       file = File.new(params[:file])

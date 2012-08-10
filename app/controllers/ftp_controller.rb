@@ -1,6 +1,7 @@
 class FtpController < ApplicationController
   def file
-    raise params.inspect
+    Rails.logger.warn " ===================== params:\n #{params.inspect} \n ========================="
+    raise Error
   end
 
 end

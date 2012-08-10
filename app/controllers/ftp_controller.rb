@@ -4,7 +4,7 @@ class FtpController < ApplicationController
 
     Rails.logger.warn params[:file].split(/\//)[4].inspect
     if user
-      raise params[:file].inspect
+
       file = File.new(params[:file])
 
       asset = user.assets.new :data => file

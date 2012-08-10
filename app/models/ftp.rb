@@ -1,21 +1,11 @@
-# class Ftp < ActiveRecord::Base
-#     self.establish_connection :ftp
-#     set_table_name :user
+module Ftp
+  class User < ActiveRecord::Base
+      self.establish_connection :ftp
+      set_table_name :users
+  end
 
+  def update_files
 
+  end
 
-# end
-
-
-
- module Ftp
-   class User < ActiveRecord::Base
-       self.establish_connection :ftp
-       set_table_name :users
-   end
-
-     def foo
-       'bbbbaaaaaaaaaaaar!!!!!!!1111oneone'
-       end
-
-   end
+end

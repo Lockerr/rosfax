@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_many :reports
-
+  has_many :assets, :as => :attachable
   def admin?
     %w(antiqe@gmail.com lockerr@mail.ru).include?(email)
 

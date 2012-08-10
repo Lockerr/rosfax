@@ -10,6 +10,7 @@ Tradein::Application.routes.draw do
   get "asset/create"
   get 'assets/processed'
 
+
   resources :reports do
     get 'images'
     resources :assets
@@ -81,5 +82,8 @@ Tradein::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
   match 'index.php/rest', :controller => 'galleries', :action => 'rest'
   match 'index.php/rest/item(/:id)', :controller => 'galleries', :action => 'test'
+
+  match 'new_file', :controller => 'ftp', :action => 'file'
+
 end
 

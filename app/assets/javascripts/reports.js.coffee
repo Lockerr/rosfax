@@ -9,6 +9,8 @@
   if tab in tabs
     $("#{tab} #{tab}.row-fluid").append($('.uploader'))
 
+
+
 @store_report = ->
   data = $('#report.container').data()
 
@@ -291,6 +293,8 @@ $ ->
     console.log  $(@).find('a').attr('href')
 
     appendUploader($(@).find('a').attr('href'))
+
+
 
 
 

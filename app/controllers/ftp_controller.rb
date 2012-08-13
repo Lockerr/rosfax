@@ -1,8 +1,6 @@
 class FtpController < ApplicationController
   def file
-    file = File.new('/home/perekup/ftp/ttt@tt.t/new_file.ttt', 'w')
-    file.puts 'it`s a trap'
-    file.close
+
 
     user = User.find_by_email(params[:file].split(/\//)[4].gsub(/\\@/, '@'))
 
@@ -27,5 +25,15 @@ class FtpController < ApplicationController
 
     render :json => {:status => 200}
   end
+
+  def update_eye_fi
+    result = current_user.assets.where('id not in (?)', params[:ids]).map{|i| i.id}
+
+    Rails.logger.info "result is: #{result}"
+
+    render :json => result
+
+  end
+
 
 end

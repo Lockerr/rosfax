@@ -21,7 +21,9 @@ Tradein::Application.routes.draw do
 
   end
 
+  get 'ftp/update_eye_fi'
   root :to => 'reports#index'
+
 
 
   # The priority is based upon order of creation:
@@ -82,7 +84,6 @@ Tradein::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
   match 'index.php/rest', :controller => 'galleries', :action => 'rest'
   match 'index.php/rest/item(/:id)', :controller => 'galleries', :action => 'test'
-
   match 'new_file', :controller => 'ftp', :action => 'file'
 
 end

@@ -32,6 +32,21 @@ arrayDiff = (a1, a2) ->
 
 refreshing = false
 console.log "refreshing: #{refreshing}"
+
+update_eye_fi = ->
+  # ids = $("#eye-fi img").map((i) -> $("#eye-fi img")[i].id)
+  ids = $.map($("#eye-fi img"), (n, i) -> n.id)
+  $.ajax
+    url: '/ftp/update_eye_fi'
+    data: {ids: ids}
+    success: (data) ->
+      console.log data
+
+      for id in data
+        img = $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{id}' processing='#{id}' src='/assets/loading.gif' style='cursor: move;' width='96'>"
+        $("#eye-fi").append(img)
+
+
 get_images = ->
   refreshing = true
   ids = $.map($(".processing"), (n, i) -> n.id ).unique()
@@ -66,6 +81,8 @@ refresh_image = (refresh_rate, src, id) ->
 
 $(document).ready ->
 
+
+
   $('.photos').live 'change', ->
     console.log "refreshing: #{refreshing}"
     unless refreshing
@@ -76,6 +93,14 @@ $(document).ready ->
           setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
 
 
-      refresh_rate = 2000
+      refresh_rate = 12000
       setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
   $('.photos').trigger 'change'
+
+  eye_fi_loop = ->
+      console.log(5000)
+      update_eye_fi()
+      setTimeout((-> eye_fi_loop(5000)), 5000)
+  setTimeout((-> eye_fi_loop(5000)), 5000)
+
+

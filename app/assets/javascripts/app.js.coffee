@@ -46,6 +46,10 @@ update_eye_fi = ->
         img = $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{id}' processing='#{id}' src='/assets/loading.gif' style='cursor: move;' width='96'>"
         $("#eye-fi").append(img)
 
+      $('.photos').trigger 'change'
+
+
+
 
 get_images = ->
   refreshing = true
@@ -95,6 +99,7 @@ $(document).ready ->
 
       refresh_rate = 5000
       setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
+
   $('.photos').trigger 'change'
 
   eye_fi_loop = ->

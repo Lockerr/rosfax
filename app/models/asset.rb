@@ -4,8 +4,8 @@ class Asset < ActiveRecord::Base
 
   has_attached_file :data,
           :styles => {
-            :thumb => {:geometry => '100x68>', :format => :jpg, :convert_options => "-auto-orient"},
-            :carousel => {:geometry => '900x600>', :format => :jpg, :convert_options => "-auto-orient"
+            :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
+            :carousel => {:geometry => '900x600>', :format => :jpg, :pre_convert_options => "-auto-orient"
           },
           :default_url => "/assets/loading.gif",
           :storage => :s3,

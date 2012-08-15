@@ -7,9 +7,9 @@
     = csrf_meta_tags
   %body
     - if @report and !@report.new_record?
-      .container#report{'report' => @report.id, :source => @report.attributes.to_json}
+      .container-fluid#report{'report' => @report.id, :source => @report.attributes.to_json}
         = yield
     - else
-      .container
+      .container-fluid
         = yield
 

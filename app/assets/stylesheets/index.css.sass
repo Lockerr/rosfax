@@ -1,0 +1,95 @@
+@import compass/css3, compass/utilities
+
+@font-face
+  font-family: Trebuchet
+  src: url("tahoma.ttf")
+
+body
+  padding: 0
+  font-family: Trebuchet
+.container-fluid
+  padding: 0
+
+.main-unit
+  margin-top: 5em
+  background: url('/assets/gradient.jpg') repeat no-repeat
+  height: 385px
+  margin-bottm: 10px
+
+
+@media (min-width: 1024px)
+  .function-frame
+
+    .logotype
+      font-size: 56px
+      padding-top: 62px
+    .links
+      padding-top: 34px
+      font-size: 18px
+    .main-search
+      margin-top: 39px
+    .main-input
+      height: 38px
+      margin-bottom: 0px
+      width: 173px
+      background-color: #edf7f6
+      border: 3px solid #CCC
+      +border-radius(8px)
+      font-size: 29px
+      width: 210px
+      z-index: 1
+
+
+  .main-frame
+    margin-left: 8em
+    .main-car
+      background: url('/assets/car.png') no-repeat
+      height: 325px
+      float: left
+      width: 31em
+      z-index: -1
+    .main-lines-1
+      display: n
+    .main-lines-1, .main-lines-2
+      z-index: 1
+      background: url('/assets/blue_yellow_green_lines.png') no-repeat
+      vertical-align: top
+      height: 325px
+      float: left
+      width: 44em
+      // margin-left: -24px
+      .line
+        height: 97px
+      .main-diggit
+        padding-top: 32px
+        font-size: 65px
+        margin-left: 7px
+        smaller
+          margin-left: -17px
+          font-size: 36px
+      .percentage
+
+        font-size: 53px
+        line-height: 72px
+        float: left
+      .speach2
+        color: #707888
+        font-size: 18px
+        padding-top: 22px
+        line-height: 23px
+
+      .speach
+        color: #707888
+        font-size: 26px
+        float: left
+        line-height: 27px
+        padding-top: 6px
+        margin-left: 3px
+        width: 253px
+        .epilogue
+          font-size: 19px
+          float: left
+          line-height: 16px
+@media (min-width: 1200px)
+  .main-frame
+    margin-left: 39em

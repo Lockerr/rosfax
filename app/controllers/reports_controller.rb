@@ -7,6 +7,8 @@ class ReportsController < ApplicationController
 
   def index
     current_user.admin? ? @reports = Report.all : @reports = current_user.reports
+    @models = {}
+    Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort
 
     respond_to do |format|
       format.html # index.html.erb
@@ -30,6 +32,8 @@ class ReportsController < ApplicationController
   # GET /reports/new.json
   def new
     @report = Report.new
+
+
     @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
 
     respond_to do |format|
@@ -46,7 +50,13 @@ class ReportsController < ApplicationController
   # POST /reports
   # POST /reports.json
   def create
+
     @report = current_user.reports.new(params[:report])
+
+    @models = {}
+    Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort
+
+    @report.model = Model.find( @models[params[:report][:car_mark_model]] )
 
     respond_to do |format|
       if @report.save
@@ -63,7 +73,7 @@ class ReportsController < ApplicationController
   # PUT /reports/1.json
   def update
     @report = Report.find(params[:id])
-
+    @report.model = params[:report][:car][:mark_model] if params[:report][:car][:mark_model]
     respond_to do |format|
       if @report.update_attributes(params[:report])
         format.json { head :ok }

@@ -7,6 +7,10 @@ Tradein::Application.routes.draw do
     post 'place'
   end
 
+  resources :models do
+    get 'index_block'
+  end
+
   get "asset/create"
   get 'assets/processed'
 

@@ -77,7 +77,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
 
     respond_to do |format|
-      if @report.update_attributes(params[:report])
+      if @report.update_attributes(params[:report].except!(:id))
         format.json { head :ok }
       else
         format.json { render json: @report.errors, status: :unprocessable_entity }

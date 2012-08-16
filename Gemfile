@@ -15,7 +15,7 @@ gem 'unicorn'
 gem 'postmark-rails'
 gem "symbolize"
 gem 'rufus-scheduler'
-
+gem 'sass'
 
 group :assets do
   gem 'sass-rails'

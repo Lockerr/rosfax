@@ -14,7 +14,7 @@
     to_show.show "slide",
       direction: 'left'
     , 500)
-  , 500)
+  , 600)
 
 $(document).ready ->
   scroll_forever = ->

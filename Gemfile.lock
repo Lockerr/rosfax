@@ -217,6 +217,7 @@ DEPENDENCIES
   rails (= 3.1.1)
   rufus-scheduler
   rvm-capistrano
+  sass
   sass-rails
   symbolize
   turn

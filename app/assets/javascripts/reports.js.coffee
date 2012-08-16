@@ -5,7 +5,7 @@
 @appendUploader = (tab) ->
   tabs = ['#exterior', '#interior', '#under_the_hood', '#other_photos', '#wheels']
 
-  console.log tab in tabs
+
   if tab in tabs
     $("#{tab} #{tab}.row-fluid").append($('.uploader'))
 
@@ -118,14 +118,14 @@
       container.data(attr, container_data)
       console.log "container.data(attr, container_data) => #{container.data(attr, container_data)}"
       console.log 'container triggered'
-      container.trigger('change')
+      store_report()
 
 
     else
       defect = $(@).parents('.defect')
       data = defect.data()
       if change == 'category'
-        console.log defect
+        console.log "defect => #{defect}"
         defect.find('.btn-group').show()
         defect.find('.drop').show()
         defect.data('category',element.data('category'))
@@ -173,11 +173,11 @@ $ ->
     attribute    = element.data('attribute')
     place        = element.data('place')
     data         = container.data(attribute) || {}
-    data[place]||= {}
+    data[place] ||= {}
     data[place][change] = element.data(change)
 
     container.data(attribute, data)
-    console.log container.data()
+    console.log "checkbox container => #{container.data()}"
     container.trigger('change')
 
   $(".upload").fileUploadUI
@@ -256,14 +256,14 @@ $ ->
     store_defect($(@))
     assing_drops()
 
-  $('#report.container').live 'change', ->
-    container = $(@)
+  $("#report.container input[type='text']").live 'change', ->
+    container = "#report.container"
     inputs = $("#report.container input[type='text']")
     for input in inputs
       input = $(input)
       container.data()[input.data().attribute] ||= {}
       container.data()[input.data().attribute][input.data().place] = input.val()
-      console.log container.data()
+    console.log "container trigger change => #{container.data()}"
 
     store_report()
 

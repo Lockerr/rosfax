@@ -62,7 +62,7 @@ get_images = ->
       data: {assets: ids, size: 'thumb'}
       complete: (data) ->
         data = $.parseJSON(data.responseText)
-        refreshing = false
+        setTimeout(( -> refreshing = false), 1000)
 
         if data.keys.length == 0
           if $(".processing").length > 0
@@ -72,7 +72,7 @@ get_images = ->
 
         else
           for i in data.keys
-            setTimeout(( -> refresh_image(112000, data.assets[i], i)), 112000)
+            setTimeout(( -> refresh_image(5000, data.assets[i], i)), 5000)
 
 refresh_image = (refresh_rate, src, id) ->
   setTimeout(( ->
@@ -87,11 +87,11 @@ $(document).ready ->
 
 
 
-  $('.photos').live 'change', ->
+  $('.photos').live 'custom_change', ->
     console.log "refreshing: #{refreshing}"
     unless refreshing
       refresh_loop = (refresh_rate) ->
-          console.log(refresh_rate)
+          console.log("inside photos refresh loop #{refresh_rate}")
           get_images()
 
           setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
@@ -100,7 +100,7 @@ $(document).ready ->
       refresh_rate = 5000
       setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
 
-  $('.photos').trigger 'change'
+  $('.photos').trigger 'custom_change'
 
   eye_fi_loop = ->
       update_eye_fi()

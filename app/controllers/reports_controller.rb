@@ -4,11 +4,13 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   layout 'report'
+  def models
+    @reports = Report.where(:model_id => params[:ids].split(','))
+    render :index
+  end
 
   def index
     current_user.admin? ? @reports = Report.all : @reports = current_user.reports
-    @models = {}
-    Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort
 
     respond_to do |format|
       format.html # index.html.erb
@@ -73,7 +75,7 @@ class ReportsController < ApplicationController
   # PUT /reports/1.json
   def update
     @report = Report.find(params[:id])
-    @report.model = params[:report][:car][:mark_model] if params[:report][:car][:mark_model]
+
     respond_to do |format|
       if @report.update_attributes(params[:report])
         format.json { head :ok }

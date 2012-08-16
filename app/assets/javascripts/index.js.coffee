@@ -17,6 +17,11 @@
   , 500)
 
 $(document).ready ->
+  scroll_forever = ->
+    scroll_logo()
+    setTimeout(( -> scroll_forever()), 7000)
+
+  setTimeout(( -> scroll_forever()), 7000)
 
   $('.main-input').change ->
     $.ajax
@@ -27,10 +32,16 @@ $(document).ready ->
         window.selected_models.push  document.models[$('.main-input').val()]
         $('.main-input').val('')
 
-
-
-
-
   $('.line').click ->
     scroll_logo()
+
+  $('.main-search img').click ->
+    arr = []
+
+    $.each $('.alert'), ->
+      arr.push this.id
+
+    console.log arr
+    window.location.href = "/reports/models/?ids=#{arr}"
+
 

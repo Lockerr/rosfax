@@ -72,7 +72,7 @@ get_images = ->
 
         else
           for i in data.keys
-            setTimeout(( -> refresh_image(2000, data.assets[i], i)), 2000)
+            setTimeout(( -> refresh_image(112000, data.assets[i], i)), 112000)
 
 refresh_image = (refresh_rate, src, id) ->
   setTimeout(( ->
@@ -81,7 +81,7 @@ refresh_image = (refresh_rate, src, id) ->
           $.each $('.photos img'), ->
             this.ondragstart = (event) ->
               window.dragged = event.target
-        ), 5000)
+        ), 115000)
 
 $(document).ready ->
 
@@ -103,7 +103,6 @@ $(document).ready ->
   $('.photos').trigger 'change'
 
   eye_fi_loop = ->
-      console.log(5000)
       update_eye_fi()
       setTimeout((-> eye_fi_loop(5000)), 5000)
   setTimeout((-> eye_fi_loop(5000)), 5000)

@@ -1,4 +1,6 @@
 Tradein::Application.routes.draw do
+  get "home/index"
+
   devise_for :users
 
   resources :defects do
@@ -22,11 +24,14 @@ Tradein::Application.routes.draw do
     delete 'remove_asset'
     get 'image'
     resources :defects
+    collection do
+      get 'models'
+    end
 
   end
 
   get 'ftp/update_eye_fi'
-  root :to => 'reports#index'
+  root :to => 'home#index'
 
 
 

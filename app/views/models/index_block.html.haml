@@ -1,4 +1,4 @@
-.alert.alert-success{:style => 'margin-bottom: 2px'}
+.alert.alert-success{:style => 'margin-bottom: 2px', :id => @model.id}
   %button.close{:type => "button", :data => {:dismiss => 'alert'}}
     x
   %strong= "#{@model.brand.name} #{@model.name}"

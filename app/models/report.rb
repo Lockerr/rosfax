@@ -72,6 +72,10 @@ class Report < ActiveRecord::Base
           :video => %w()
   }
 
+  def model_name
+    "#{model.brand.name} #{model.name}"
+  end
+
   def image(attrs)
     if send(attrs[:attribute])[attrs[:place]]
       image = Asset.find(send(attrs[:attribute])[attrs[:place]])

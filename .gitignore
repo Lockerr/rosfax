@@ -6,3 +6,4 @@ tmp/
 .idea/
 .idea/*.xml
 public/system/
+public/assets/

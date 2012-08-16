@@ -38,7 +38,7 @@ production:
   database: tradein_prod
   pool: 5
   username: root
-  password: 12345trewq
+  password:
   socket: /var/run/mysqld/mysqld.sock
 
 ftp:

@@ -1,4 +1,4 @@
-@import compass/css3, compass/utilities
+
 
 @font-face
   font-family: Trebuchet
@@ -34,7 +34,12 @@ body
       width: 173px
       background-color: #edf7f6
       border: 3px solid #CCC
-      +border-radius(8px)
+      -webkit-border-radius: 8px
+      -moz-border-radius: 8px
+      -ms-border-radius: 8px
+      -o-border-radius: 8px
+      border-radius: 8px
+
       font-size: 29px
       width: 210px
       z-index: 1
@@ -57,7 +62,6 @@ body
       height: 325px
       float: left
       width: 44em
-      // margin-left: -24px
       .line
         height: 97px
       .main-diggit

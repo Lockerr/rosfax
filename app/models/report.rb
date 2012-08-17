@@ -101,7 +101,7 @@ class Report < ActiveRecord::Base
        :testdrive => {
          :suspension => 7,
          :engine => 9,
-         :electronic => 12,
+
 
 
 
@@ -114,7 +114,7 @@ class Report < ActiveRecord::Base
       counters[key][:summ] = []
       counters[key][:summ][0] = 0
       for node in tabs[key].keys
-        puts "key => #{key.inspect}, node => #{node.inspect}, #{attributes.keys.include? node.to_s}"
+
         if attributes.keys.include? node.to_s
           counters[key][node] = [send(node).size, tabs[key][node], "#{send(node).size}/#{tabs[key][node]}"]
           counters[key][:summ][0] += send(node).size

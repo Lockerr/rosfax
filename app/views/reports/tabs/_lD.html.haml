@@ -1,10 +1,15 @@
 #lD.tab-pane
-  .tabbable{:style => "margin-bottom: 18px;"}  
+  .tabbable{:style => "margin-bottom: 18px;"}
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "#suspension"} Подвеска
+        %a{"data-toggle" => "tab", :href => "#suspension"}
+          Подвеска
+          %span{:style => 'color: #ddd'}= @report.counters[:testdrive][:suspension][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#engine"} КПП и ДВС
+        %a{"data-toggle" => "tab", :href => "#engine"}
+          КПП и ДВС
+          %span{:style => 'color: #ddd'}= @report.counters[:testdrive][:engine][2]
+
       %li
         %a{"data-toggle" => "tab", :href => "#other_tests"} Прочее
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
@@ -18,7 +23,7 @@
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
                       - %w(1 2 3).each do |i|
-                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :suspension, :change => param, param => i}}=i  
+                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :suspension, :change => param, param => i}}=i
       #engine.tab-pane
         .span5.well
           .form-horizontal
@@ -39,7 +44,7 @@
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
                       - %w(1 2 3).each do |i|
-                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :engine, :change => param, param => i}}=i  
+                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :engine, :change => param, param => i}}=i
 
       #other_tests.tab-pane
         .span8.well

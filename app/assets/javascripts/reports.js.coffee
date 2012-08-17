@@ -177,8 +177,9 @@ $ ->
     data[place][change] = element.data(change)
 
     container.data(attribute, data)
-    console.log "checkbox container => #{container.data()}"
-    container.trigger('change')
+    console.log "checkbox container =>"
+    console.log container.data()
+    store_report()
 
   $(".upload").fileUploadUI
     uploadTable: $("..photos .tab-pane.uploading")

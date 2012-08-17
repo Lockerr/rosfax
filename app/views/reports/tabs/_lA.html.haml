@@ -2,17 +2,28 @@
   .tabbable{:style => "margin-bottom: 18px;"}
     %ul.nav.nav-tabs.second
       %li.active
-        %a{"data-toggle" => "tab", :href => "#exterior"} Экстерьер
+        %a{"data-toggle" => "tab", :href => "#exterior"}
+          Экстерьер
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:exterior][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#interior"} Интерьер
+        %a{"data-toggle" => "tab", :href => "#interior"}
+          Интерьер
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:interior][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#under_the_hood"} Под капотом
+        %a{"data-toggle" => "tab", :href => "#under_the_hood"}
+          Под капотом
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:under_the_hood][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#other_photos"} Прочее
+        %a{"data-toggle" => "tab", :href => "#other_photos"}
+          Прочее
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:photo_others][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#wheels"} Колеса
+        %a{"data-toggle" => "tab", :href => "#wheels"}
+          Колеса
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:wheels][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#dumpers"} Видео
+        %a{"data-toggle" => "tab", :href => "#dumpers"}
+          Видео
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       #exterior.tab-pane.active
         = render 'reports/tabs/exterior'

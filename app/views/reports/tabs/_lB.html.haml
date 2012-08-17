@@ -2,17 +2,30 @@
   .tabbable{:style => "margin-bottom: 18px;"}
     %ul.nav.nav-tabs
       %li.active
-        %a{"data-toggle" => "tab", :href => "#documents"} Документа
+        %a{"data-toggle" => "tab", :href => "#documents"}
+          Документы
+          %span{:style => 'color: #ddd'}= @report.counters[:checklist][:documents][2]
+
       %li
-        %a{"data-toggle" => "tab", :href => "#coating"} Краска
+        %a{"data-toggle" => "tab", :href => "#coating"}
+          Краска
+          %span{:style => 'color: #ddd'}= @report.counters[:checklist][:coating][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#lights"} Лампы
+        %a{"data-toggle" => "tab", :href => "#lights"}
+          Лампы
+          %span{:style => 'color: #ddd'}= @report.counters[:checklist][:lights][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#electronic"} Электрика
+        %a{"data-toggle" => "tab", :href => "#electronic"}
+          Электрика
+          %span{:style => 'color: #ddd'}= @report.counters[:checklist][:electronic][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#liquids"} Жидкость
+        %a{"data-toggle" => "tab", :href => "#liquids"}
+          Жидкость
+          %span{:style => 'color: #ddd'}= @report.counters[:checklist][:liquids][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#complection"} Комплект
+        %a{"data-toggle" => "tab", :href => "#complection"}
+          Комплект
+          %span{:style => 'color: #ddd'}= @report.counters[:checklist][:completion][2]
     .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       #documents.tab-pane.active
         = render 'reports/tabs/documents'

@@ -5,8 +5,9 @@ class Report < ActiveRecord::Base
   belongs_to :user
   belongs_to :model
 
-  attr_accessor :car_mark_model
+  attr_accessor :car_mark_model, :counters
 
+  validates_presence_of :model
   serialize :visual_interior, Hash
   serialize :windows, Hash
 
@@ -74,6 +75,63 @@ class Report < ActiveRecord::Base
 
   def model_name
     "#{model.brand.name} #{model.name}"
+  end
+
+  def counters
+    counters = {}
+
+    tabs = {
+      :car => {:car => 4},
+      :photo => {
+        :exterior => 9,
+        :interior => 9,
+        :under_the_hood => 9,
+        :photo_others => 9,
+        :wheels => 36
+      },
+      :checklist => {
+        :documents => 6 + 18,
+        :coating => 11,
+        :lights => 10,
+        :electronic => 12,
+        :liquids => 6,
+        :completion => 10
+      },
+
+       :testdrive => {
+         :suspension => 7,
+         :engine => 9,
+         :electronic => 12,
+
+
+
+
+       }
+    }
+
+    for key in tabs.keys
+      counters[key] ||= {}
+      counters[key][:summ] = []
+      counters[key][:summ][0] = 0
+      for node in tabs[key].keys
+        puts "key => #{key.inspect}, node => #{node.inspect}, #{attributes.keys.include? node.to_s}"
+        if attributes.keys.include? node.to_s
+          counters[key][node] = [send(node).size, tabs[key][node], "#{send(node).size}/#{tabs[key][node]}"]
+          counters[key][:summ][0] += send(node).size
+        else
+          if send(key)[node.to_s]
+            counters[key][node] = [send(key)[node.to_s].size, tabs[key][node], "#{send(key)[node.to_s].size}/#{tabs[key][node]}"]
+            counters[key][:summ][0] += send(key)[node.to_s].size
+          end
+        end
+      end
+        counters[key][:summ][1] = tabs[key].values.sum
+        counters[key][:summ][2] = "#{counters[key][:summ][0]}/#{counters[key][:summ][1]}"
+    end
+
+    counters
+
+
   end
 
   def image(attrs)

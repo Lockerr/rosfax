@@ -16,6 +16,7 @@ gem 'postmark-rails'
 gem "symbolize"
 gem 'rufus-scheduler'
 gem 'sass'
+gem 'hirb'
 
 group :assets do
   gem 'sass-rails'

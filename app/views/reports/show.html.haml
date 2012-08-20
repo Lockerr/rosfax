@@ -10,11 +10,11 @@
 
 
         %li
-          %a{"data-toggle" => "tab", :href => "#lA"}
+          %a{"data-toggle" => "tab", :href => "#photo"}
             Фото
             %span{:style => 'color: #ddd'}= @report.counters[:photo][:summ][2]
         %li
-          %a{"data-toggle" => "tab", :href => "#lB"}
+          %a{"data-toggle" => "tab", :href => "#checklist"}
             Чеклист
             %span{:style => 'color: #ddd'}= @report.counters[:checklist][:summ][2]
         %li
@@ -28,8 +28,8 @@
         %li
           %a{"data-toggle" => "tab", :href => "#lE"} Комплектация
       .tab-content.first
-        - for symbol in %w(A B C D E F G H)
-          = render "reports/tabs/l#{symbol}"
+        - for symbol in %w(photo checklist)
+          = render "reports/tabs/#{symbol}"
         .tab-pane#info.active
           = render 'reports/info'
 

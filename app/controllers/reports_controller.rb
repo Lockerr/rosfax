@@ -1,8 +1,7 @@
 class ReportsController < ApplicationController
 
   before_filter :authenticate_user!
-  # GET /reports
-  # GET /reports.json
+
   layout 'report'
   def models
     @reports = Report.where(:model_id => params[:ids].split(','))
@@ -28,6 +27,11 @@ class ReportsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @report }
     end
+  end
+
+  def counters
+    @report = Report.find(params[:report_id])
+    render :json => {:counters => @report.counters}
   end
 
   # GET /reports/new

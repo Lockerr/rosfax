@@ -27,6 +27,7 @@ Tradein::Application.routes.draw do
     collection do
       get 'models'
     end
+    get 'counters'
 
   end
 

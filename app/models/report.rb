@@ -101,11 +101,6 @@ class Report < ActiveRecord::Base
        :testdrive => {
          :suspension => 7,
          :engine => 9,
-
-
-
-
-
        }
     }
 

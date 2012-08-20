@@ -1,0 +1,74 @@
+#photo.tab-pane.left
+  .tabbable{:style => "margin-bottom: 18px;"}
+    %ul.nav.nav-tabs.second
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#exterior"}
+          Экстерьер
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:exterior][2]
+      %li
+        %a{"data-toggle" => "tab", :href => "#interior"}
+          Интерьер
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:interior][2]
+      %li
+        %a{"data-toggle" => "tab", :href => "#under_the_hood"}
+          Под капотом
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:under_the_hood][2]
+      %li
+        %a{"data-toggle" => "tab", :href => "#other_photos"}
+          Прочее
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:photo_others][2]
+      %li
+        %a{"data-toggle" => "tab", :href => "#wheels"}
+          Колеса
+          %span{:style => 'color: #ddd'}= @report.counters[:photo][:wheels][2]
+      %li
+        %a{"data-toggle" => "tab", :href => "#dumpers"}
+          Видео
+    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
+      #exterior.tab-pane.active
+        = render 'reports/tabs/exterior'
+      #interior.tab-pane
+        = render 'reports/tabs/interior'
+      #under_the_hood.tab-pane
+        = render 'reports/tabs/under_the_hood'
+      #other_photos.tab-pane
+        = render 'reports/tabs/other_photos'
+      #wheels.tab-pane
+        = render 'reports/tabs/wheels'
+      #brakes.tab-pane
+        = form_for 'report', :html => {:class => 'form-horizontal'},:method => :put do |form|
+          - for element in Report::BRAKES
+            .control-group
+              %label.control-label
+                =element
+              .controls
+                - if @report.brakes[element] == 'true'
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'true', :checked => ''}
+                      ок
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false'}
+                      требуют замены
+                - else
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'true'} ок
+                  %label.radio
+                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false', :checked => true} требуют замены
+          = form.submit
+      #dumpers.tab-pane
+        Видео
+
+
+
+#modal_carousel.modal.hide
+  #myCarousel.carousel.slide{:style => 'padding: 5px'}
+    / Carousel items
+    .carousel-inner
+      - for image in @report.images :group => 'visual_interior', :size => 'carousel'
+        .item{:id => "active_#{image[0]}"}
+          = image_tag(image[1])
+
+
+    / Carousel nav
+    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
+    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›

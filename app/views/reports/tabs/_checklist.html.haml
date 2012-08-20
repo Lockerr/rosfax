@@ -1,0 +1,14 @@
+#checklist.tab-pane.left
+  .tabbable{:style => "margin-bottom: 18px;"}
+    %ul.nav.nav-tabs
+      - for tab in %w(documents coating lights electronic liquids completion)
+        %li.active
+          %a{"data-toggle" => "tab", :href => "##{tab}"}
+            = t("tab.#{tab}")
+            %span{:style => 'color: #ddd'}=  @report.counters[:checklist][tab.to_sym][2]
+
+
+    .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
+      - for tab in %w(documents coating lights electronic liquids completion)
+        .tab-pane{:id => tab}
+          = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report}

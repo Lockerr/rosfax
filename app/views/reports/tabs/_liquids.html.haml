@@ -2,7 +2,7 @@
   %h5 Уровни технических жидкостей
   .well
     .form-horizontal
-      - %w(engine transmission antifreeze power_steering brake fluid).each do |param|
+      - %w(engine transmission antifreeze power_steering brake).each do |param|
         .control-group
           %label.control-label= t(param).to_s+ ':'
           .controls

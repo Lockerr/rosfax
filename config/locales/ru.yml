@@ -10,6 +10,26 @@ ru:
       tirn_signal: Указатель поворота
       brake_lights: Сигнал тормоза
       repeater: повторитель
+    completion:
+      title: Комплектация
+      spare_wheel: Запасное колесо
+      tools: Инструменты
+      jack: Домкрат
+      sealant: герметик
+      compressor: Компрессор
+      key_lock_gear: Ключ замка КПП
+      theft_of_the_wheel: Секретка от колес
+      keychain_alarm: Брелок сигнализации
+      keychain_webasto: Брелок WEBASTO
+      key_to_the_locker: Ключ от блокиратора
+    liquids:
+      title: Уровни жидкостей
+      engine: Двигатель
+      transmission: Трансмиссия
+      antifreeze: Антифриз
+      power_steering: ГУР
+      brakes: Тормозная жидкость
+
     electronic:
       title: Электроника
       glass_elevators: Стеклоподъемники
@@ -22,6 +42,7 @@ ru:
       radio: Радио?
       adjustable_wheel: Регулировка руля
       closer_rain_sensor: Датчик дождя
+      seat_belt: Ремень безопасности
 
   hello: Hello world
   interior:

@@ -29,6 +29,9 @@ ru:
       antifreeze: Антифриз
       power_steering: ГУР
       brakes: Тормозная жидкость
+    testdrive:
+      title: Тест-драйв
+
 
     electronic:
       title: Электроника

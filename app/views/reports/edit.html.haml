@@ -28,7 +28,7 @@
         %li
           %a{"data-toggle" => "tab", :href => "#lE"} Комплектация
       .tab-content.first
-        - for symbol in %w(photo checklist)
+        - for symbol in %w(photo checklist defects testdrive)
           = render "reports/tabs/#{symbol}"
         .tab-pane#info.active
           = render 'reports/info'

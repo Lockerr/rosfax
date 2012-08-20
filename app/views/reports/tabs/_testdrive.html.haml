@@ -1,0 +1,55 @@
+#lD.tab-pane
+  .tabbable{:style => "margin-bottom: 18px;"}
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#suspension"}
+          Подвеска
+          %span{:style => 'color: #ddd'}
+            - if @report.counters[:testdrive][:suspension]
+              = @report.counters[:testdrive][:suspension][2]
+      %li
+        %a{"data-toggle" => "tab", :href => "#engine"}
+          КПП и ДВС
+          %span{:style => 'color: #ddd'}
+            - if @report.counters[:testdrive][:engine]
+              = @report.counters[:testdrive][:engine][2]
+
+      %li
+        %a{"data-toggle" => "tab", :href => "#other_tests"} Прочее
+
+    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
+      #suspension.tab-pane.active
+        .span8.well
+          .form-horizontal
+            - %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking).each do |param|
+              .control-group
+                %label.control-label= t(param).to_s+ ':'
+                .controls
+                  .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                    .btn-group.pads.radio
+                      - %w(1 2 3).each do |i|
+                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :suspension, :change => param, param => i}}=i
+      #engine.tab-pane
+        .span5.well
+          .form-horizontal
+            - %w(all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise ).each do |param|
+              .control-group
+                %label.control-label= t(param).to_s+ ':'
+                .controls
+                  .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                    .btn-group.pads.radio
+                      - %w(1 2 3).each do |i|
+                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :engine, :change => param, param => i}}=i
+        .span5.well
+          .form-horizontal
+            - %w(shifting_down shifting_up parking_brake sound_signal).each do |param|
+              .control-group
+                %label.control-label= t(param).to_s+ ':'
+                .controls
+                  .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                    .btn-group.pads.radio
+                      - %w(1 2 3).each do |i|
+                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :engine, :change => param, param => i}}=i
+
+      #other_tests.tab-pane
+        .span8.well

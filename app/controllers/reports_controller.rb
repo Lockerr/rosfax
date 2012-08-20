@@ -66,7 +66,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
-        format.html { redirect_to @report}
+        format.html { redirect_to edit_report_path(@report)}
         format.json { render json: @report, status: :created, location: @report }
       else
         format.html { render action: "new" }

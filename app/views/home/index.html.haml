@@ -8,10 +8,21 @@
         .logotype
           rosfax.ru
         .links
-          .link.pull-left
-            =link_to 'войти', new_user_session_path
-          .link.pull-left{:style => 'margin-left: 28px'}
-            =link_to 'зарегистрироваться', new_user_registration_path
+          - unless current_user
+            .link.pull-left
+              =link_to 'войти', new_user_session_path
+            .link.pull-left{:style => 'margin-left: 28px'}
+              =link_to 'зарегистрироваться', new_user_registration_path
+          - else
+            .link.pull-left
+              = current_user.email
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            .link.pull-left
+              = link_to 'Мои отчеты', reports_path
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            .link.pull-left
+              = link_to 'Выйти', destroy_user_session_path
+
           .main-search
             = text_field 'search', 'queue', :class => 'main-input', :data => {:provide => 'typeahead', :source => @models.keys}
             = image_tag asset_path('search.png')

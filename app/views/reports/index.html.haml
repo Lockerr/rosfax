@@ -20,10 +20,14 @@
           %td= report.car['gov_number']
           %td= report.created_at.strftime('%d.%m.%y')
           %td
-            .btn.btn-primary{:onclick => "window.location.href = '#{report_path(report)}'"}
-              Изменить
-            .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}
-              Уничтожить
+            - if current_user.reports.include? report
+              .btn.btn-primary{:onclick => "window.location.href = '#{edit_report_path(report)}'"}
+                Изменить
+              .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}
+                Уничтожить
+            - else
+              .btn.btn-primary{:onclick => "window.location.href = '#{report_path(report)}'"}
+                Просмотреть
 
   %br
 

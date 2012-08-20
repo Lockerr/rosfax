@@ -1,7 +1,40 @@
-%h1 Editing report
+%p#notice= notice
+.row-fluid
+  .span12
+    .tabbable.tabs-left
+      %ul.nav.nav-tabs.first
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#info"}
+            Информация
+            %span{:style => 'color: #ddd'}= @report.counters[:car][:summ][2]
 
-= render 'form'
 
-= link_to 'Show', @report
-\|
-= link_to 'Back', reports_path
+        %li
+          %a{"data-toggle" => "tab", :href => "#photo"}
+            Фото
+            %span{:style => 'color: #ddd'}= @report.counters[:photo][:summ][2]
+        %li
+          %a{"data-toggle" => "tab", :href => "#checklist"}
+            Чеклист
+            %span{:style => 'color: #ddd'}= @report.counters[:checklist][:summ][2]
+        %li
+          %a{"data-toggle" => "tab", :href => "#lC"}
+            Дефекты
+            %span{:style => 'color: #ddd'}= @report.defects.size
+        %li
+          %a{"data-toggle" => "tab", :href => "#lD"}
+            Тест-драйв
+            %span{:style => 'color: #ddd'}= @report.counters[:testdrive][:summ][2]
+        %li
+          %a{"data-toggle" => "tab", :href => "#lE"} Комплектация
+      .tab-content.first
+        - for symbol in %w(photo checklist)
+          = render "reports/tabs/#{symbol}"
+        .tab-pane#info.active
+          = render 'reports/info'
+
+
+
+.span4.uploader.hide
+  = render :partial => 'uploader', :locals => {:attribute => ''}
+

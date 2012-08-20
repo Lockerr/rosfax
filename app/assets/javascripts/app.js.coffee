@@ -84,6 +84,10 @@ refresh_image = (refresh_rate, src, id) ->
         ), 115000)
 
 $(document).ready ->
+  $.each $('.tab-content.second'), ->
+    $(this).children().first().addClass('active')
+  $.each $('.nav-tabs'), ->
+    $(this).children().first().addClass('active')
 
 
 

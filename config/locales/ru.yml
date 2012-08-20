@@ -1,4 +1,28 @@
 ru:
+  coating: Покраска
+  checklist:
+    title: Чеклист
+    lights:
+      title: Огни
+      headlights: Ближний свет
+      distant_lights: Дальний свет
+      fog_lights: Противотуманные фары
+      tirn_signal: Указатель поворота
+      brake_lights: Сигнал тормоза
+      repeater: повторитель
+    electronic:
+      title: Электроника
+      glass_elevators: Стеклоподъемники
+      central_locking: Центральный замок
+      seat_drive: Регулировка сидений
+      seat_heat: Подогрев сидений
+      mirrors: Зеркала
+      hatch: Багажник
+      climat: Климат контроль
+      radio: Радио?
+      adjustable_wheel: Регулировка руля
+      closer_rain_sensor: Датчик дождя
+
   hello: Hello world
   interior:
     title: Интерьер
@@ -53,6 +77,10 @@ ru:
       rust: Ржавчина
       traces_of_repair: Следы ремонта
       missing_parts: Отсутствующие детали
+  testdrive:
+    suspension:
+      title: Подвеска
+      divestment_steering: Увод руля
   activerecord:
     attributes: {}
     models: {}
@@ -84,3 +112,5 @@ ru:
           attributes:
             email:
               taken: Уже используется
+  mark_model:
+    title: Модель

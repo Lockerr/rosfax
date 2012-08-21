@@ -27,7 +27,7 @@
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      - %w(1 2 3).each do |i|
+                      - %w(ок слабо сильно).each do |i|
                         %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :suspension, :change => param, param => i}}=i
       #engine.tab-pane
         .span5.well

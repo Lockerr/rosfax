@@ -9,6 +9,8 @@ ru:
   coating: Покраска
   checklist:
     title: Чеклист
+    documents:
+      title: Документы
     lights:
       title: Огни
       headlights: Ближний свет
@@ -116,7 +118,9 @@ ru:
     traces_of_repair: Следы ремонта
     missing_parts: Отсутствующие детали
   testdrive:
+    title: Тест-драйв
     suspension:
+
       title: Подвеска
       divestment_steering: Увод руля
       steering_wheel_is_straight: Руль стоит прямо
@@ -170,3 +174,109 @@ ru:
               taken: Уже используется
   mark_model:
     title: Модель
+  car:
+    title: Информация
+    mark_model:
+      title: Модель
+    gov:
+      title: Государственный номер
+  coating:
+    title: Краска
+    front_left_wing:
+      title: Переднее левое крыло
+    front_right_wing:
+      title: Заднее левое крыло
+
+
+  defects:
+      exterior:
+        hood: Крыша
+        front_right_wing: Переднее правое крыло
+        right_front_door: Передняя правая дверь
+        rear_right_door: Задняя правая дверь
+        rear_right_wing: Заднее правое крыло
+        boot_lid: Крышка багажника
+        rear_left_wing: Заднее левое крыло
+        rear_left_door: Задняя левая дверь
+        front_left_door: Передняя левая дверь
+        front_left_wing_of_the: Переднее левое крыло
+        roof: Крыша
+        front_bumper: Передний бампер
+        skirt_front_bumper: Юбка переднего бампера
+        rear_bumper: Задний бампер
+        rear_apron: Юбка заднего бампера
+        right_threshold: Правый порог
+        left_threshold: Левый порог
+      interior:
+        front_left_seat: Переднее левое сидение
+        front_right_seat: Переднее правое сидение
+        back_sofa: Задний диван
+        third_row_seats: Третий ряд сидений
+        covering_left_front_door: Обшывка левой передней двери
+        covering_right_front_door: Обшивка правой передней двери
+        covering_left_rear_door: Обшивка левой задней двери
+        covering_rear_right_door: Обшивка правой задней двери
+        covering_trunk: Обшивка багажника
+        ceiling: Потолок
+        torpedo: Торпедо
+        central_console: Центральная консоль
+        armrest: Подлокотник
+      windows_and_lights:
+        front_left_headlight: Передняя левая фара
+        front_right_headlight: Передняя правая фара
+        rear_left_light: Задний левый фонарь
+        rear_right_light: Задний правый фонарь
+        head-on-window: Лобовое стекло
+        front_right_window: Переднее правое стекли
+        rear_right_window: Заднее правое стекло
+        rear_right_ventilator: Задняя правая форточка
+        rear_window: Заднее стекло
+        rear_left_ventilator: Щадняя левая форточка
+        rear_left_window: Заднее левое стекло
+        front_left_window: Переднее левое стекло
+      powertrains:
+        knock: Стук
+        flow: Течь
+        tear: Надрыв
+        wear: Износ
+      chasis:
+        full_drive_connection: Полный привод (подключение)
+        air_suspension_all_levels: Пневмоподвеска (все уровни)
+        luft_knocking_in_steering_wheel:
+        revolutions_of_twentieth: Обороты ХХ
+        turns_gas_with_a_sharp:
+      wheels:
+        front_left_wheel: Переднее левое колесо
+        front_right_wheel: Переднее правое колесо
+        rear_right_wheel: Заднее правое колесо
+        rear_left_wheel: Заднее левое колесо
+        stepney:
+      electric:
+        low_lights: Ближний свет
+        distant_lights: Дальний свет
+        turning_lights: Поворотники
+        foglights: Противотуманки
+        dimensions_lights: Габаритные огни
+        brakes: Тормоза
+        automatic_windows: Стеклоподъемники
+        climate_control: Климат-контроль
+        air_conditioning: Кондиционер
+        radio: Радио
+        navigation: Навигация
+        control_lamps: Контрольные лампы
+        drive_down:  Привод сидений
+        heated_seats: Подогрев сидений
+        ventilation_seat: Вентиляция сидений
+        adjustment_heated_mirrors: Регулировка/подогрев зеркал
+        parktronic_rearview_camera: Парктроник/камера заднего хода
+        sunroof: Люк
+        seat_belts: Ремни безопасности
+        adjustable_steering_column: Регулировка рулевой колонки
+        janitors_rein_sensor: Дворники/датчик дождя
+      liquids:
+        oil_in_engine: Масло в двигателе
+        oil_in_gearbox: Масло в КПП
+        brake_fluid: Тормозная жидкость
+        fluid_power_steering: Жидкость ГУР
+
+

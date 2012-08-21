@@ -23,7 +23,7 @@
                     = v[0]
                   - elsif v.class == Hash
                     - v.each do |i,j|
-                      =t("#{key}.#{k}.#{i}") + " #{j}"
+                      =t("#{key}.#{k}.#{i}") + ": #{j}"
                       %br/
                   - else
                     =  v

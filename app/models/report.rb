@@ -143,7 +143,7 @@ class Report < ActiveRecord::Base
     for key in DEFECTS_CATEGORIES.keys
       result[key] = []
       for value in DEFECTS_CATEGORIES[key]
-        result[key].push :k => value, :v => I18n.t(value)
+        result[key].push :k => value, :v => I18n.t("defects.#{key}.#{value}")
       end
     end
     result

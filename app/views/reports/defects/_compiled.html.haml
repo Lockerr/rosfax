@@ -79,7 +79,7 @@
                   .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= (t(i).to_s)
           .btn-group
             %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
-               Тип дефекта
+              Тип дефекта
               %span.caret
             %ul.dropdown-menu
               - %w(dent scratch cleavage not_paont_cleaveage crack attrition rust traces_of_repair missing_part).each do |i|

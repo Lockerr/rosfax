@@ -47,7 +47,7 @@
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
           %label{:style => 'vertical-align: top; padding-top: 2px'} мм.  \
           .btn-group
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 146px'}
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 122px'}
               = report.wheels[place] ? report.wheels[place]['brand'] : '---'
               %span.caret
             %ul.dropdown-menu
@@ -56,19 +56,19 @@
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'brand', :brand => i}}=i
       .control-group
         .btn-toolbar
-          %label.control-label Колодки
-          %label.control-label Торм.диск.
-          %label.control-label Амортизатор
+          %label.control-label=t("wheel.#{place}.brake_pads")
+          %label.control-label=t("wheel.#{place}.brake_discs")
+          %label.control-label=t("wheel.#{place}.damper")
 
           .btn-group.pads.radio
-            %button.btn.btn-mini ok
-            %button.btn.btn-mini не ok
-          .btn-group.pads.radio
-            %button.btn.btn-mini ok
-            %button.btn.btn-mini не ok
-          .btn-group.pads.radio
-            %button.btn.btn-mini ok
-            %button.btn.btn-mini не ok
+            %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '1'}} ok
+            %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '0'}} не ok
+          .btn-group.discs.radio
+            %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '1'}} ok
+            %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '0'}} не ok
+          .btn-group.damper.radio
+            %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '1'}} ok
+            %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '0'}} не ok
 
 
 

@@ -1,25 +1,24 @@
-= cache 'electronic' do
-  .span6
-    %h5 Переднее освещение
-    .well
-      .form-horizontal
-        - %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch).each do |param|
-          .control-group
-            %label.control-label= t(param).to_s+ ':'
-            .controls
-              .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                .btn-group.pads.radio
-                  - 3.times do |i|
-                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :electronic, :change => param, param => i}}=i
-  .span6
-    %h5 Переднее освещение
-    .well
-      .form-horizontal
-        - %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt).each do |param|
-          .control-group
-            %label.control-label= t(param).to_s+ ':'
-            .controls
-              .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                .btn-group.pads.radio
-                  - 3.times do |i|
-                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :electronic, :change => param, param => i}}=i
+.span6
+  %h5 Переднее освещение
+  .well
+    .form-horizontal
+      - %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch).each do |param|
+        .control-group
+          %label.control-label= t(param).to_s+ ':'
+          .controls
+            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+              .btn-group.pads.radio
+                - 3.times do |i|
+                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :electronic, :change => param, param => i}}=i
+.span6
+  %h5 Переднее освещение
+  .well
+    .form-horizontal
+      - %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt).each do |param|
+        .control-group
+          %label.control-label= t(param).to_s+ ':'
+          .controls
+            .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+              .btn-group.pads.radio
+                - 3.times do |i|
+                  %button.checkbox.btn{:data => {:attribute => :checklist, :place => :electronic, :change => param, param => i}}=i

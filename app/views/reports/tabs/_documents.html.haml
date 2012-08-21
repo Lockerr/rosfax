@@ -1,35 +1,36 @@
 .span12.documents
-  .span4.well
+  .span4.well.well-small
     %h5 ПТС
     .form-horizontal
       .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Серия
-        .controls{:style => 'margin-left: 48px'}
-          = text_field "doc", 'series', :style => 'width: 175px', :value => @report.checklist['documents']['series'], :data => {:attribute => :checklist, :place => :documents, :change => :series}
+        %label.span3{:style => 'padding-top: 5px'} Серия
+        = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['series'] if @report.checklist['documents']),
+          :data => {:attribute => :checklist, :place => :documents, :change => :series}
       .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Выдан
-        .controls{:style => 'margin-left: 48px'}
-          .input-append
-            = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :data => {:attribute => :documents, :place => :pts, :change => :issued}
-            %span.add-on{:style => 'margin-left: -5px'}
-              %i.icon-calendar
+        %label.span3{:style => 'padding-top: 5px'} Выдан
+        .input-append{:style => 'display: block'}
+          = text_field 'pts', 'created_at', :class => 'pick_date', :style => 'float:left; width: 59%', :value => (@report.checklist['documents']['issued'] if @report.checklist['documents']),
+            :data => {:attribute => :checklist, :place => :documents, :change => :issued}
+          %span.add-on{:style => 'margin-left: -2px'}
+            %i.icon-calendar
       .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Кем
-        .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'dep', :style => 'width: 175px', :data => {:attribute => :documents, :place => :pts, :change => :whom}
+        %label.span3{:style => 'padding-top: 5px'} Кем
+        = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['whom'] if @report.checklist['documents']),
+          :data => {:attribute => :checklist, :place => :documents, :change => :whom}
       .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Страна
-        .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'country', :style => 'width: 175px', :data => {:attribute => :documents, :place => :pts, :change => :country}
+        %label.span3{:style => 'padding-top: 5px'} Страна
+        = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['country'] if @report.checklist['documents']),
+          :data => {:attribute => :checklist, :place => :documents, :change => :country}
       .control-group
         .controls{:style => 'margin-left: 43px'}
           .btn-group.pads.radio
             %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '1'}} Оригинал
             %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '0'}} Дубликат
       .control-group
-        %label.control-label{:for => 'pts_series', :style => 'width: 0px'} VIN
-        .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'vin', :style => 'width: 175px', :data => {:attribute => :documents, :place => :pts, :change => :country}
+      .control-group
+        %label.span3{:style => 'padding-top: 5px'} VIN
+        = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['vin'] if @report.checklist['documents']),
+          :data => {:attribute => :checklist, :place => :documents, :change => :vin}
 
   .span8.well
     %h5 Владельцы

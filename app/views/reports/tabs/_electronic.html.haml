@@ -4,7 +4,7 @@
     .form-horizontal
       - %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch).each do |param|
         .control-group
-          %label.control-label= t(param).to_s+ ':'
+          %label.control-label= t("checklist.electronic.#{param}").to_s+ ':'
           .controls
             .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
               .btn-group.pads.radio
@@ -16,7 +16,7 @@
     .form-horizontal
       - %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt).each do |param|
         .control-group
-          %label.control-label= t(param).to_s+ ':'
+          %label.control-label= t("checklist.electronic.#{param}").to_s+ ':'
           .controls
             .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
               .btn-group.pads.radio

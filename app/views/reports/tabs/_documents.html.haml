@@ -1,6 +1,6 @@
 .span12.documents
   .span4.well.well-small
-    %h5 ПТС
+    %legend ПТС
     .form-horizontal
       .control-group
         %label.span3{:style => 'padding-top: 5px'} Серия
@@ -21,33 +21,34 @@
         %label.span3{:style => 'padding-top: 5px'} Страна
         = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['country'] if @report.checklist['documents']),
           :data => {:attribute => :checklist, :place => :documents, :change => :country}
-      .control-group
-        .controls{:style => 'margin-left: 43px'}
-          .btn-group.pads.radio
-            %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '1'}} Оригинал
-            %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '0'}} Дубликат
+      .control-group{:style => 'margin-left: 10%'}
+        .btn-group.pads.radio
+          %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '1'}} Оригинал
+          %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '0'}} Дубликат
       .control-group
       .control-group
         %label.span3{:style => 'padding-top: 5px'} VIN
         = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['vin'] if @report.checklist['documents']),
           :data => {:attribute => :checklist, :place => :documents, :change => :vin}
 
-  .span8.well
-    %h5 Владельцы
+  .span8.well.well-small
+    %legend Владельцы
     .form-horizontal
       - (1..6).to_a.each do |i|
         .control-group.inline
           %label.control-label{:for => 'owners', :style => 'width: 0px'}=i.to_s + '.'
-          .controls{:style => 'margin-left: 9px'}
-            .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
-              .btn-group.pads.radio
-                %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis'}} физ
-                %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur'}} юр
-            .input-append
-              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :data => {:attribute => :documents, :place => :pts, :change => :"country"}
-              .add-on{:style => 'margin-left: -5px'}
-                %i.icon-calendar
-            .input-append
-              = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :id => "owner_#{i}_ends_owning", :data => {:attribute => :documents, :place => :pts, :change => :"country"}
-              %span.add-on{:style => 'margin-left: -5px'}
-                %i.icon-calendar
+
+          .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
+            .btn-group.pads.radio
+              %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis'}} физ
+              %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur'}} юр
+          .input-append{:style => 'display: block'}
+            = text_field 'pts', "start_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :checklist, :place => :documents, :change => "start_owning_#{i}"},
+              :value => (@report.checklist['documents']["start_owning_#{i}"] if @report.checklist['documents'])
+            %span.add-on{:style => 'margin-left: -2px'}
+              %i.icon-calendar
+          .input-append{:style => 'display: block'}
+            = text_field 'pts', "end_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :checklist, :place => :documents, :change => "end_owning_#{i}"},
+              :value => (@report.checklist['documents']["end_owning_#{i}"] if @report.checklist['documents'])
+            %span.add-on{:style => 'margin-left: -2px'}
+              %i.icon-calendar

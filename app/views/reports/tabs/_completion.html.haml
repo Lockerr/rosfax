@@ -5,7 +5,7 @@
       .form-horizontal
         - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
           .control-group
-            %label.control-label= t(param).to_s+ ':'
+            %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
@@ -17,7 +17,7 @@
       .form-horizontal
         - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
           .control-group
-            %label.control-label= t(param).to_s+ ':'
+            %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio

@@ -4,7 +4,7 @@
     .form-horizontal
       - %w(engine transmission antifreeze power_steering brake).each do |param|
         .control-group
-          %label.control-label= t(param).to_s+ ':'
+          %label.control-label= t("checklist.liquids.#{param}").to_s+ ':'
           .controls
             .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
               .btn-group.pads.radio

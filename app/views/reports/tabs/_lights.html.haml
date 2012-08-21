@@ -4,7 +4,7 @@
     .form-horizontal
       - %w( headlights distant_lights fog_lights marker_lights turn_signal).each do |param|
         .control-group
-          %label.control-label= t(param).to_s+ ':'
+          %label.control-label= t("checklist.lights.#{param}").to_s+ ':'
           .controls
             .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
               .btn-group.pads.radio
@@ -16,10 +16,10 @@
     .form-horizontal
       - %w(brake_lights repeater fog_lights marker_lights turn_signal).each do |param|
         .control-group
-          %label.control-label= t(param).to_s+ ':'
+          %label.control-label= t("checklist.lights.#{param}").to_s+ ':'
           .controls
             .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
               .btn-group.pads.radio
                 - 3.times do |i|
                   %button.checkbox.btn{:data => {:attribute => :checklist, :place => :lights, :change => param, param => i}}=i
-     
+

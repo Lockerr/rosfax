@@ -120,6 +120,3 @@ $(document).ready ->
       update_eye_fi()
       setTimeout((-> eye_fi_loop(5000)), 5000)
   setTimeout((-> eye_fi_loop(5000)), 5000)
-
-$(document). ready ->
-

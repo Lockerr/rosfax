@@ -14,7 +14,7 @@
           Под капотом
           %span{:style => 'color: #ddd'}= @report.counters[:photo][:under_the_hood][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#other_photos"}
+        %a{"data-toggle" => "tab", :href => "#photo_others"}
           Прочее
           %span{:style => 'color: #ddd'}= @report.counters[:photo][:photo_others][2]
       %li
@@ -22,7 +22,7 @@
           Колеса
           %span{:style => 'color: #ddd'}= @report.counters[:photo][:wheels][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#dumpers"}
+        %a{"data-toggle" => "tab", :href => "#video"}
           Видео
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       #exterior.tab-pane.active
@@ -31,8 +31,8 @@
         = render 'reports/tabs/interior'
       #under_the_hood.tab-pane
         = render 'reports/tabs/under_the_hood'
-      #other_photos.tab-pane
-        = render 'reports/tabs/other_photos'
+      #photo_others.tab-pane
+        = render 'reports/tabs/photo_others'
       #wheels.tab-pane
         = render 'reports/tabs/wheels'
       #brakes.tab-pane
@@ -55,7 +55,7 @@
                   %label.radio
                     %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false', :checked => true} требуют замены
           = form.submit
-      #dumpers.tab-pane
+      #video.tab-pane
         Видео
 
 

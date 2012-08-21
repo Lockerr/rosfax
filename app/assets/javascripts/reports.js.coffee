@@ -3,15 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 @appendUploader = (tab) ->
-  tabs = ['#exterior', '#interior', '#under_the_hood', '#other_photos', '#wheels']
-
+  tabs = ['#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels']
 
   if tab in tabs
     $("#{tab} #{tab}.row-fluid").append($('.uploader'))
-
-
-
-
 
 @store_defect = (defect) ->
   if defect.data().id
@@ -158,9 +153,6 @@ $ ->
       else if container.data(button.data('attribute'))[button.data('place')][button.data('change')] == button.data(button.data('change'))
         button.addClass('btn-primary')
 
-
-
-
   $(".upload").fileUploadUI
     uploadTable: $("..photos .tab-pane.uploading")
     downloadTable: $(".photos .tab-pane")
@@ -189,12 +181,9 @@ $ ->
           drop.find('img').attr('src', responce.images[place][0])
           drop.find('.btn').html(responce.images[place][1])
 
-
-
   $.each $('.photos img'), ->
     this.ondragstart = (event) ->
       window.dragged = event.target
-
 
   $(".thumb").live 'click', ->
 
@@ -218,10 +207,6 @@ $ ->
           $('#myCarousel').carousel('pause')
           $('#modal_carousel').modal('show')
 
-
-
-
-
   $('.add_defect').click ->
     defect = $('.defect_template').clone()
     defect.removeClass('defect_template')
@@ -236,17 +221,6 @@ $ ->
   $('.defect').live 'change', ->
     store_defect($(@))
     assing_drops()
-
-  $("#report.container input[type='text']").live 'change', ->
-    container = "#report.container"
-    inputs = $("#report.container input[type='text']")
-    for input in inputs
-      input = $(input)
-      container.data()[input.data().attribute] ||= {}
-      container.data()[input.data().attribute][input.data().place] = input.val()
-    console.log "container trigger change => #{container.data()}"
-
-    store_report()
 
   $('.btn#save_defect').click ->
 
@@ -274,8 +248,36 @@ $ ->
     console.log  $(@).find('a').attr('href')
 
     appendUploader($(@).find('a').attr('href'))
+################# DOCUMENTS #########################
+  $('#documents input').change ->
+    element = $(@)
+    console.log "=============================="
+
+    attr           = element.data('attribute')
+    change     = element.data('change')
+    place        = element.data('place')
+
+    console.log "attr => #{attr}"
+    console.log "place => #{place}"
+    console.log "change => #{change}"
+
+    container_data = container.data(attr) || new Object
+
+    console.log "container_data => #{container.data(attr)}"
 
 
+    container_data[place] ||= new Object
+    container_data[place][change] = element.val()
+    console.log "preivous data => #{container_data[place][change]}"
+    console.log "data(change) => #{element.val()}"
+
+    container.data(attr, container_data)
+
+    console.log "container.data(attr, container_data) => #{container.data(attr, container_data)}"
+
+    console.log 'container triggered'
+
+    store_report()
 
 
 

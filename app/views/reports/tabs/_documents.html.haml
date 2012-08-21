@@ -5,7 +5,7 @@
       .control-group
         %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Серия
         .controls{:style => 'margin-left: 48px'}
-          = text_field 'pts', 'series', :style => 'width: 175px', :data => {:attribute => :documents, :place => :pts, :change => :series}
+          = text_field "doc", 'series', :style => 'width: 175px', :value => @report.checklist['documents']['series'], :data => {:attribute => :checklist, :place => :documents, :change => :series}
       .control-group
         %label.control-label{:for => 'pts_series', :style => 'width: 0px'} Выдан
         .controls{:style => 'margin-left: 48px'}
@@ -24,8 +24,8 @@
       .control-group
         .controls{:style => 'margin-left: 43px'}
           .btn-group.pads.radio
-            %button.btn{:data => {:attribute => :document, :place => :pts, :change => :document_validity, :exist => true}} Оригинал
-            %button.btn{:data => {:attribute => :document, :place => :pts, :change => :document_calidity, :exist => false}} Дубликат
+            %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '1'}} Оригинал
+            %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '0'}} Дубликат
       .control-group
         %label.control-label{:for => 'pts_series', :style => 'width: 0px'} VIN
         .controls{:style => 'margin-left: 48px'}
@@ -40,8 +40,8 @@
           .controls{:style => 'margin-left: 9px'}
             .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
               .btn-group.pads.radio
-                %button.btn{:data => {:attribute => :document, :place => 'owner', :change => 'exist', :exist => true}}ok
-                %button.btn.btn-ptimary{:data => {:attribute => :document, :place => 'owner_number', :change => 'exist', :exist => false}} не ok
+                %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis'}} физ
+                %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur'}} юр
             .input-append
               = text_field 'pts', 'created_at', :style => 'width: 147px',:class => 'pick_date', :data => {:attribute => :documents, :place => :pts, :change => :"country"}
               .add-on{:style => 'margin-left: -5px'}

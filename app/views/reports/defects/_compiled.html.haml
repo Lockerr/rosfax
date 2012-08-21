@@ -14,7 +14,7 @@
                     .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
             .btn-group
               %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
-                =t(defect.sub_category)
+                =t("#{defect.category}.#{defect.sub_category}")
                 %span.caret
               %ul.dropdown-menu
                 - Report::DEFECTS_CATEGORIES[defect.category.to_sym].each do |i|
@@ -23,7 +23,7 @@
 
             .btn-group
               %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
-                =t(defect.defect_type)
+                =t("defect_type.#{defect.defect_type}")
                 %span.caret
               %ul.dropdown-menu
                 - %w(dent scratch cleavage not_paont_cleaveage crack attrition rust traces_of_repair missing_part).each do |i|
@@ -42,6 +42,7 @@
                   .dropdown-element{'data-change' => 'size', 'size' => '15-30 см'} 15-30 см
                 %li
                   .dropdown-element{'data-change' => 'size', 'size' => '30+ см'} 30+ см
+
             = render :partial => 'drop', :locals => {:object => defect, :place => :one, :attribute => 'defects'}
 
     %br/

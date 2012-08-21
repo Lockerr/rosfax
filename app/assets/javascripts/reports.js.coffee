@@ -11,15 +11,7 @@
 
 
 
-@store_report = ->
-  data = $('#report.container').data()
 
-  report = new Object
-
-  $.ajax
-    type: 'PUT'
-    data: {report: data}
-    url: '/reports/' + $('#report.container').attr('report')
 
 @store_defect = (defect) ->
   if defect.data().id
@@ -167,19 +159,7 @@ $ ->
         button.addClass('btn-primary')
 
 
-  $('.checkbox').click ->
-    element      = $(@)
-    change       = element.data('change')
-    attribute    = element.data('attribute')
-    place        = element.data('place')
-    data         = container.data(attribute) || {}
-    data[place] ||= {}
-    data[place][change] = element.data(change)
 
-    container.data(attribute, data)
-    console.log "checkbox container =>"
-    console.log container.data()
-    store_report()
 
   $(".upload").fileUploadUI
     uploadTable: $("..photos .tab-pane.uploading")

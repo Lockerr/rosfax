@@ -83,6 +83,16 @@ refresh_image = (refresh_rate, src, id) ->
               window.dragged = event.target
         ), 115000)
 
+@store_report = ->
+  data = $('#report.container').data()
+
+  report = new Object
+
+  $.ajax
+    type: 'PUT'
+    data: {report: data}
+    url: '/reports/' + $('#report.container').attr('report')
+
 $(document).ready ->
   $.each $('.tab-content.second'), ->
     $(this).children().first().addClass('active')
@@ -111,4 +121,5 @@ $(document).ready ->
       setTimeout((-> eye_fi_loop(5000)), 5000)
   setTimeout((-> eye_fi_loop(5000)), 5000)
 
+$(document). ready ->
 

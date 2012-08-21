@@ -18,6 +18,7 @@ ru:
       brake_lights: Сигнал тормоза
       repeater: Повторитель
       marker_lights: Габариты
+      brake_lightsfog_lights: Тормозные огни
 
     completion:
       title: Комплектация

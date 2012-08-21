@@ -1,7 +1,7 @@
 = cache 'completion' do
   .span6
-    %h5 Переднее освещение
     .well
+      %legend Заголовок 1
       .form-horizontal
         - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
           .control-group
@@ -9,11 +9,11 @@
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
-                  - 3.times do |i|
+                  - %w(есть нет н/п).each do |i|
                     %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completion, :change => param, param => i}}=i
   .span6
-    %h5 Переднее освещение
     .well
+      %legend Заголовок 2
       .form-horizontal
         - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
           .control-group
@@ -21,6 +21,6 @@
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
-                  - 3.times do |i|
+                  - %w(есть нет н/п).each do |i|
                     %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completion, :change => param, param => i}}=i
 

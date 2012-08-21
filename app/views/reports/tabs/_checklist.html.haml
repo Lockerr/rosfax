@@ -11,5 +11,9 @@
 
     .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       - for tab in %w(documents coating lights electronic liquids completion)
-        .tab-pane{:id => tab}
-          = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report}
+        - if tab == 'coating'
+          .tab-pane{:id => tab, :style => "background-image: url('https://s3-eu-west-1.amazonaws.com/rosfax/coating.jpg'); background-repeat: no-repeat; height: 1000px"}
+            = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report}
+        - else
+          .tab-pane{:id => tab}
+            = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report}

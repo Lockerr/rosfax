@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 @appendUploader = (tab) ->
-  tabs = ['#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels']
+  tabs = ['#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels', '#compiled']
 
   if tab in tabs
     $("#{tab} #{tab}.row-fluid").append($('.uploader'))

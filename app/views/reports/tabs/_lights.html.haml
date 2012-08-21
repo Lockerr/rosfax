@@ -8,18 +8,18 @@
           .controls
             .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
               .btn-group.pads.radio
-                - 3.times do |i|
+                - %w(ок левая правая обе).each do |i|
                   %button.checkbox.btn{:data => {:attribute => :checklist, :place => :lights, :change => param, param => i}}=i
 .span6
-  %h5 Переднее освещение
+  %h5 Заднее освещение
   .well
     .form-horizontal
-      - %w(brake_lights repeater fog_lights marker_lights turn_signal).each do |param|
+      - %w(brake_lightsfog_lights marker_lights turn_signal).each do |param|
         .control-group
           %label.control-label= t("checklist.lights.#{param}").to_s+ ':'
           .controls
             .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
               .btn-group.pads.radio
-                - 3.times do |i|
+                - %w(ок левая правая обе).each do |i|
                   %button.checkbox.btn{:data => {:attribute => :checklist, :place => :lights, :change => param, param => i}}=i
 

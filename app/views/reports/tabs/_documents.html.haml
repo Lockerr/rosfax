@@ -25,11 +25,10 @@
         .btn-group.pads.radio
           %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '1'}} Оригинал
           %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => :document_validity, :document_validity => '0'}} Дубликат
-      .control-group
-      .control-group
-        %label.span3{:style => 'padding-top: 5px'} VIN
-        = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['vin'] if @report.checklist['documents']),
-          :data => {:attribute => :checklist, :place => :documents, :change => :vin}
+
+        / %label.span3{:style => 'padding-top: 5px'} VIN
+        / = text_field "doc", 'series', :class => 'span9', :value => (@report.checklist['documents']['vin'] if @report.checklist['documents']),
+        /   :data => {:attribute => :checklist, :place => :documents, :change => :vin}
 
   .span8.well.well-small
     %legend Владельцы

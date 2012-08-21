@@ -1,6 +1,11 @@
 ru:
   tab:
     documents: Документы
+    coating: Краска
+    lights: Лампы
+    electronic: Электрика
+    liquids: Жидкости
+    completion: Комплектность
   coating: Покраска
   checklist:
     title: Чеклист
@@ -8,10 +13,12 @@ ru:
       title: Огни
       headlights: Ближний свет
       distant_lights: Дальний свет
-      fog_lights: Противотуманные фары
-      tirn_signal: Указатель поворота
+      fog_lights: Противотуманки
+      turn_signal: Указатель поворота
       brake_lights: Сигнал тормоза
-      repeater: повторитель
+      repeater: Повторитель
+      marker_lights: Габариты
+
     completion:
       title: Комплектация
       spare_wheel: Запасное колесо
@@ -20,7 +27,7 @@ ru:
       sealant: герметик
       compressor: Компрессор
       key_lock_gear: Ключ замка КПП
-      theft_of_the_wheel: Секретка от колес
+      theft_of_the_wheels: Секретка от колес
       keychain_alarm: Брелок сигнализации
       keychain_webasto: Брелок WEBASTO
       key_to_the_locker: Ключ от блокиратора
@@ -30,7 +37,7 @@ ru:
       transmission: Трансмиссия
       antifreeze: Антифриз
       power_steering: ГУР
-      brakes: Тормозная жидкость
+      brake: Тормозная
     testdrive:
       title: Тест-драйв
 
@@ -44,19 +51,23 @@ ru:
       mirrors: Зеркала
       hatch: Багажник
       climat: Климат контроль
-      radio: Радио?
+      radio: Радио/NAVI
       adjustable_wheel: Регулировка руля
-      closer_rain_sensor: Датчик дождя
+      closer_rain_sensor: Дворники/Датчик дождя
       seat_belt: Ремень безопасности
+      parktronic: Парктроник/Камера
 
   hello: Hello world
   interior:
     title: Интерьер
   under_the_roof:
     title: Под капотом
-  wheels: Колеса
-  other: Другое
-  video: Видео
+  wheels:
+    title: Колеса
+  other:
+    title: Другое
+  video:
+    title: Видео
   front_left_headlight: Передняя левая фара
   glass_elevators: Стеклоподъемники
   central_locking: Центральный замок

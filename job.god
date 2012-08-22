@@ -5,7 +5,7 @@ rails_root = '/home/perekup/rosfax/current'
     w.name     = "dj-#{num}"
     w.group    = 'dj'
     w.interval = 30.seconds
-    w.start    = "cd #{rails_root} && rake jobs:work RAILS_ENV=production"
+    w.start    = "cd #{rails_root} && rvm r328 do rake jobs:work RAILS_ENV=production"
     w.log      = '/home/perekup/rosfax/shared/log/god_jobs.log'
 
 #    w.uid = 'rosfax'

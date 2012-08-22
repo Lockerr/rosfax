@@ -73,12 +73,12 @@ class Report < ActiveRecord::Base
           :video => %w()
   }
 
-  STRUCTURE => {
+  STRUCTURE = {
     :groups => {
-      :names => {%w(info photo checklist defects testdrive)}
+      :names => %w(info photo checklist defects testdrive),
       :photo => {
         :groups => {
-          :names => {%w(exterior interior under_the_hood photo_others whee)}
+          :names => %w(exterior interior under_the_hood photo_others whee)
         }
       }
 

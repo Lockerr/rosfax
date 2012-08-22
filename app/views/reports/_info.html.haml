@@ -36,5 +36,33 @@
           vin
         %td#vin
           = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :vin, :change => :vin}
+      %tr
+        %td
+          Покупатель
+      %tr
+        %td
+          ФИО
+        %td#seller_fio
+          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :seller, :change => :fio}
+      %tr
+        %td
+          Телефон
+        %td#seller_phone
+          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :seller, :change => :phone}
+      %tr
+        %td
+          Продавец
+      %tr
+        %td
+          ФИО
+        %td#seller_fio
+          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :buyer, :change => :fio}
+      %tr
+        %td
+          Телефон
+        %td#seller_phone
+          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :buyer, :change => :phone}
+
+
 
 

@@ -17,6 +17,7 @@ gem "symbolize"
 gem 'rufus-scheduler'
 gem 'sass'
 gem 'hirb'
+gem "devise-async"
 
 group :assets do
   gem 'sass-rails'

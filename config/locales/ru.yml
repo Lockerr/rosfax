@@ -9,8 +9,23 @@ ru:
   coating: Покраска
   checklist:
     title: Чеклист
+    coating:
+      title: Краска
+      front_left_wing: Переднее левое крыло
+      front_right_door: Передняя правая дверь
+      roof: Крыша
+      rear_left_door: Задняя левая дверь
+      front_left_door: Передняя левая дверь
+      rear_left_wing: Заднее левое крыло
+      rear: Зад
+      rear_right_wing: Заднее правое крыло
+      front: Перед
+
     documents:
       title: Документы
+      series: ПТС, Серия
+      whow: ПТС, Кем выдана
+
     lights:
       title: Огни
       headlights: Ближний свет
@@ -142,8 +157,8 @@ ru:
       sound_signal: Звуковой сигнал
 
   activerecord:
-    attributes: {}
-    models: {}
+    attributes:
+    models:
   helpers:
     label:
       user:
@@ -151,11 +166,6 @@ ru:
         password: Пароль
         remember_me: Запомни меня
         password_confirmation: ''
-    submit:
-      report:
-        submit: Submit Report
-  report:
-    Марка-модель: ''
   user:
     signed_in: Вход в систему выполнен.
   brakes: Тормоза
@@ -278,5 +288,3 @@ ru:
         oil_in_gearbox: Масло в КПП
         brake_fluid: Тормозная жидкость
         fluid_power_steering: Жидкость ГУР
-
-

@@ -1,4 +1,5 @@
 .container.well
+
   - @report.attributes.except!('id', 'created_at', 'car_id', 'model_id', 'updated_at', 'user_id').each do |key, value|
     - if value
       - unless value.empty?
@@ -13,7 +14,8 @@
               - Asset.where(:id => @report.send(key).values.flatten.uniq).each  do |asset|
                 = image_tag asset.url(:thumb)
         - else
-          - if value.class == Hash
+
+          - if value.class == HashWithIndifferentAccess
             - value.each do |k,v|
               .row
                 .span2
@@ -21,7 +23,7 @@
                 .span4
                   - if v.class == Array
                     = v[0]
-                  - elsif v.class == Hash
+                  - elsif v.class == HashWithIndifferentAccess
                     - v.each do |i,j|
                       =t("#{key}.#{k}.#{i}") + ": #{j}"
                       %br/

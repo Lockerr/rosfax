@@ -2,12 +2,12 @@
 #require 'rvm/capistrano'
 #require 'bundler/capistrano'
 # Add RVM's lib directory to the load path.
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+# $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 
 # Load RVM's capistrano plugin.
 require "rvm/capistrano"
 
-set :rvm_ruby_string, '1.9.2'
+set :rvm_ruby_string, '1.9.2-p290'
 set :rvm_type, :user # Don't use system-wide RVM
 set :application, "rosfax"
 set :rails_env, "production"
@@ -17,7 +17,7 @@ set :use_sudo, false
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
 set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
-set :rvm_ruby_string, '1.9.2'
+set :rvm_ruby_string, '1.9.2-p290'
 set :rvm_type, :user
 set :password, '12345trewq'
 set :scm, :git

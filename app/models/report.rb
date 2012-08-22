@@ -73,6 +73,18 @@ class Report < ActiveRecord::Base
           :video => %w()
   }
 
+  STRUCTURE => {
+    :groups => {
+      :names => {%w(info photo checklist defects testdrive)}
+      :photo => {
+        :groups => {
+          :names => {%w(exterior interior under_the_hood photo_others whee)}
+        }
+      }
+
+    }
+  }
+
   def model_name
     "#{model.brand.name} #{model.name}"
   end

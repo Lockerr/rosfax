@@ -21,18 +21,14 @@
           %td= report.created_at.strftime('%d.%m.%y')
           %td
             - if current_user.reports.include?(report) or current_user.admin?
-              .btn.btn-primary{:onclick => "window.location.href = '#{report_path(report)}'"}
-                Просмотреть
-              .btn.btn-primary{:onclick => "window.location.href = '#{edit_report_path(report)}'"}
-                Изменить
+              = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'
+              = link_to 'Изменить', edit_report_path(report), :class => 'btn btn-primary'
               .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}
                 Уничтожить
 
             - else
-              .btn.btn-primary{:onclick => "window.location.href = '#{report_path(report)}'"}
-                Просмотреть
-
+              = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'
   %br
 
-  .btn.btn-primary{:onclick => "window.location.href = '#{new_report_path}'"}
-    Новый отчет
+
+  = link_to 'Новый отчет', new_report_path, :class => 'btn btn-primary'

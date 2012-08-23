@@ -18,18 +18,28 @@
 
           - if value.class == HashWithIndifferentAccess
             - value.each do |k,v|
-              .row
+              %hr/
+              .row{:style => 'margin-top: 10px'}
                 .span2
                   = t("#{key}.#{k}.title")
-                .span4
-                  - if v.class == Array
-                    = v[0]
-                  - elsif v.class == HashWithIndifferentAccess
-                    - v.each do |i,j|
-                      =t("#{key}.#{k}.#{i}") + ": #{j}"
-                      %br/
-                  - else
-                    =  v
+
+                - if v.class == Array
+                  = v[0]
+                - elsif v.class == HashWithIndifferentAccess
+                  - span1 = []
+                  - span2 = []
+                  - v.each do |i,j|
+                    - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? j
+                      - span1.push t("#{key}.#{k}.#{i}") + ": #{j}" + "<br/>"
+                    - else
+                      - span2.push t("#{key}.#{k}.#{i}") + ": #{j}" + "<br/>"
+                  .span4
+                    = span1.join.to_s.html_safe
+                  .span4
+                    = span2.join.to_s.html_safe
+
+                - else
+                  =  v
   %br/
   %legend Непрочеканные
   - Hash[Report::ETHALON.to_a - Report.last.checklist.to_a].each do |group, section|

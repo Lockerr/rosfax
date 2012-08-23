@@ -5,7 +5,20 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
+  %body{:style => 'padding-top: 55px'}
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to 'rosfax.ru', root_path, :class => 'brand'
+          .nav-collapse.collapse
+            %ul.nav
+              %li.active= link_to 'rosfax.ru', root_path, :class => 'btn btn-navbar'
+              %li= link_to 'Домой', root_path
+              %li= link_to 'Отчеты', reports_path
+              %li= link_to 'Новый отчет', new_report_path
+
+
+
     - if @report and !@report.new_record?
       .container#report{'report' => @report.id, :source => @report.attributes.to_json}
         = yield

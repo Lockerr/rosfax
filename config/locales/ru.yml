@@ -13,6 +13,8 @@ ru:
       title: Краска
       front_left_wing: Переднее левое крыло
       front_right_door: Передняя правая дверь
+      front_right_wing: Переднее правое крыло
+      rear_right_door: Заднее правое крыло
       roof: Крыша
       rear_left_door: Задняя левая дверь
       front_left_door: Передняя левая дверь
@@ -24,7 +26,7 @@ ru:
     documents:
       title: Документы
       series: ПТС, Серия
-      whow: ПТС, Кем выдана
+      whom: ПТС, Кем выдана
 
     lights:
       title: Огни

@@ -6,7 +6,8 @@ gem 'mysql2'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'paperclip'
-gem 'twitter-bootstrap-rails'
+
+gem 'twitter-bootstrap-rails', :git => 'https://github.com/renius/twitter-bootstrap-rails.git'
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 gem 'devise'
@@ -18,6 +19,7 @@ gem 'rufus-scheduler'
 gem 'sass'
 gem 'hirb'
 gem "devise-async"
+
 
 group :assets do
   gem 'sass-rails'

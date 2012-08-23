@@ -32,18 +32,19 @@
                     =  v
   %br/
   %legend Непрочеканные
-  .row
-    .span2.offset4
-      %h4
-        = t("checklist.title")
-  - Hash[Report::ETHALON.to_a - Report.last.checklist.to_a].each do |key, value|
+  - Hash[Report::ETHALON.to_a - Report.last.checklist.to_a].each do |group, section|
     .row
-      .span2
-        = t("checklist.#{key}.title")
-      .span8
-        - value.each do |k,v|
-          =t("checklist.#{key}.#{k}")
-          %br/
+      .span2.offset4
+        %h4
+          = t("#{group}.title")
+    - section.each do |key, value|
+      .row
+        .span2
+          = t("#{group}.#{key}.title")
+        .span8
+          - value.each do |k,v|
+            =t("#{group}.#{key}.#{k}")
+            %br/
 
 
 

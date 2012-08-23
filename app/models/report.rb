@@ -73,6 +73,10 @@ class Report < ActiveRecord::Base
           :video => %w()
   }
 
+  ETHALON = {
+
+  }
+
   def model_name
     "#{model.brand.name} #{model.name}"
   end

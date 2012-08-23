@@ -133,4 +133,13 @@ class ReportsController < ApplicationController
     render :json => {:status => :ok, :images => images, :places => images.keys}
   end
 
+  def normal_attributes
+  end
+
+  def bad_attributes
+  end
+
+  def unchecked_attributes
+
+  end
 end

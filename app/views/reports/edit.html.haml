@@ -25,8 +25,6 @@
           %a{"data-toggle" => "tab", :href => "#testdrive"}
             Тест-драйв
             %span{:style => 'color: #ddd'}= @report.counters[:testdrive][:summ][2]
-        %li
-          %a{"data-toggle" => "tab", :href => "#lE"} Комплектация
       .tab-content.first
         - for symbol in %w(photo checklist defects testdrive)
           = render "reports/tabs/#{symbol}"

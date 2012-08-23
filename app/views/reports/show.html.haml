@@ -1,4 +1,5 @@
 .container.well
+  %legend Прочеканные
 
   - @report.attributes.except!('id', 'created_at', 'car_id', 'model_id', 'updated_at', 'user_id').each do |key, value|
     - if value
@@ -29,4 +30,22 @@
                       %br/
                   - else
                     =  v
+  %br/
+  %legend Непрочеканные
+  .row
+    .span2.offset4
+      %h4
+        = t("checklist.title")
+  - Hash[Report::ETHALON.to_a - Report.last.checklist.to_a].each do |key, value|
+    .row
+      .span2
+        = t("checklist.#{key}.title")
+      .span8
+        - value.each do |k,v|
+          =t("checklist.#{key}.#{k}")
+          %br/
+
+
+
+
 

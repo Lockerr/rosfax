@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'paperclip'
 
-gem 'twitter-bootstrap-rails', :git => 'https://github.com/renius/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 gem 'devise'

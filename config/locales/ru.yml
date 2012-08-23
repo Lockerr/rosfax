@@ -82,6 +82,9 @@ ru:
     title: Под капотом
   wheels:
     title: Колеса
+    brake_pads: Колодки
+    brake_discs: Диски
+    damper: Амортизатор
   other:
     title: Другое
   video:

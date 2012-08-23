@@ -1,10 +1,10 @@
-.well{:style => 'padding: 18px'}
+.well.well-small
   .form-inline.wheel{:data => {:attribute => 'wheel', :place => place}}
     %fieldset
       .control-group
-        %label.control-label Ширина
-        %label.control-label Профиль
-        %label.control-label Диаметр
+        %label.control-label.span3{:style => 'min-height:0'} Ширина
+        %label.control-label.span3{:style => 'min-height:0'} Профиль
+        %label.control-label.span4{:style => 'min-height:0'} Диаметр
         .btn-toolbar
           .btn-group
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 56px'}
@@ -34,8 +34,8 @@
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'diameter', :diameter => i}}=i
 
       .control-group
-        %label.control-label Протектор
-        %label.control-label Производитель
+        %label.control-label.span4{:style => 'text-align: center'} Протектор
+        %label.control-label.span7{:style => 'text-align: center'} Производитель
         .btn-toolbar
           .btn-group
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 58px'}
@@ -56,17 +56,18 @@
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'brand', :brand => i}}=i
       .control-group
         .btn-toolbar
-          %label.control-label=t("wheel.#{place}.brake_pads")
-          %label.control-label=t("wheel.#{place}.brake_discs")
-          %label.control-label=t("wheel.#{place}.damper")
+          %label.span4.control-label{:style => 'text-align: center'}=t("wheels.brake_pads")
+          %label.span4.control-label{:style => 'text-align: center'}=t("wheels.brake_discs")
+          %label.span4.control-label{:style => 'text-align: center'}=t("wheels.damper")
 
-          .btn-group.pads.radio
+        .row-fluid
+          .btn-group.pads.radio.span4{:style => 'padding-left: 5px'}
             %button.checkbox.btn.btn-mini{:style => 'padding-left: 4px', :data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '1'}} ok
             %button.checkbox.btn.btn-mini{:style => 'padding-left: 4px', :data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '0'}} не ok
-          .btn-group.discs.radio
+          .btn-group.discs.radio.span4{:style => 'padding-left: 5px'}
             %button.checkbox.btn.btn-mini{:style => 'padding-left: 4px', :data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '1'}} ok
             %button.checkbox.btn.btn-mini{:style => 'padding-left: 4px', :data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '0'}} не ok
-          .btn-group.damper.radio
+          .btn-group.damper.radio.span4{:style => 'padding-left: 5px'}
             %button.checkbox.btn.btn-mini{:style => 'padding-left: 4px', :data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '1'}} ok
             %button.checkbox.btn.btn-mini{:style => 'padding-left: 4px', :data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '0'}} не ok
 

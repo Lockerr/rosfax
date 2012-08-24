@@ -6,7 +6,7 @@
           .control-group{:style => 'margin: 0; padding: 0'}
             .btn-toolbar{:style => 'margin: 0; padding: 0'}
               .btn-group
-                %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+                %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px'}
                   = t("#{defect.category}.title")
                   %span.caret
                 %ul.dropdown-menu
@@ -14,7 +14,7 @@
                     %li
                       .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
               .btn-group
-                %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+                %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
                   - if defect.sub_category
                     =t("defects.#{defect.category}.#{defect.sub_category}")
                   - else
@@ -26,7 +26,7 @@
                       .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= t("defects.#{defect.category}.#{i}")
 
               .btn-group
-                %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+                %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
                   - if defect.defect_type
                     = t("defect_type.#{defect.defect_type}")
                   - else
@@ -37,7 +37,7 @@
                     %li
                       .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t("defect_type.#{i}").to_s)
               .btn-group
-                %button.btn.defect_size.dropdown-toggle{'data-attribute' => 'defect', "data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+                %button.btn.defect_size.dropdown-toggle{'data-attribute' => 'defect', "data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
                   - if defect.size
                     =t(defect.size)
                   - else
@@ -60,7 +60,7 @@
       .control-group
         .btn-toolbar
           .btn-group
-            %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+            %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
               Категория
               %span.caret
             %ul.dropdown-menu
@@ -70,7 +70,7 @@
 
 
           .btn-group{:style => 'display: none'}
-            %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+            %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
               Подкатегория
               %span.caret
             %ul.dropdown-menu
@@ -78,7 +78,7 @@
                 %li
                   .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= (t(i).to_s)
           .btn-group
-            %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+            %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
               Тип дефекта
               %span.caret
             %ul.dropdown-menu
@@ -86,7 +86,7 @@
                 %li
                   .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t("defect_type.#{i}").to_s)
           .btn-group.btn-group{:style => 'display: none'}
-            %button.btn.defect_size.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px'}
+            %button.btn.defect_size.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
               Размер дефекта
               %span.caret
             %ul.dropdown-menu.pull-right

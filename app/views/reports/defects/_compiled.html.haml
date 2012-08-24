@@ -1,56 +1,62 @@
 .row-fluid#compiled
   .span8.defects
     - for defect in @report.defects
-      .form-inline.defect{:data => {:report_id => @report.id, :id => defect.id}, :style => 'margin-bottom: -20px'}
+      .form-inline.defect{:data => {:report_id => @report.id, :id => defect.id}}
         %fieldset
-          .control-group{:style => 'margin: 0; padding: 0'}
-            .btn-toolbar{:style => 'margin: 0; padding: 0'}
-              .btn-group
-                %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px'}
-                  = t("#{defect.category}.title")
-                  %span.caret
-                %ul.dropdown-menu
-                  - Report::DEFECTS_CATEGORIES.keys.each do |i|
-                    %li
-                      .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
-              .btn-group
-                %button.btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
-                  - if defect.sub_category
-                    =t("defects.#{defect.category}.#{defect.sub_category}")
-                  - else
-                    Категория
-                  %span.caret
-                %ul.dropdown-menu
-                  - Report::DEFECTS_CATEGORIES[defect.category.to_sym].each do |i|
-                    %li
-                      .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= t("defects.#{defect.category}.#{i}")
+          .span5
+            .btn-group{:style => 'width: 94%; margin-bottom: 11px; margin-top: 5px'}
+              .btn{:style => 'width: 80%'}
+                = t("#{defect.category}.title")
+              .btn.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu
+                - Report::DEFECTS_CATEGORIES.keys.each do |i|
+                  %li
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
+            %br/
+            .btn-group{:style => 'width: 94%'}
+              .btn{:style => 'width: 80%; margin-top: -10px'}
+                - if defect.sub_category
+                  =t("defects.#{defect.category}.#{defect.sub_category}")
+                - else
+                  Категория
+              .btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'margin-top: -10px'}
+                %span.caret
+              %ul.dropdown-menu
+                - Report::DEFECTS_CATEGORIES[defect.category.to_sym].each do |i|
+                  %li
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= t("defects.#{defect.category}.#{i}")
 
-              .btn-group
-                %button.btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 95px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
-                  - if defect.defect_type
-                    = t("defect_type.#{defect.defect_type}")
-                  - else
-                    Тип дефекта
-                  %span.caret
-                %ul.dropdown-menu
-                  - %w(dent scratch cleavage not_paont_cleaveage crack attrition rust traces_of_repair missing_part).each do |i|
-                    %li
-                      .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t("defect_type.#{i}").to_s)
-              .btn-group
-                %button.btn.defect_size.dropdown-toggle{'data-attribute' => 'defect', "data-toggle" => "dropdown", :style => 'width: 100px;height: 46px; margin-bottom: 15px;margin-left:-5px'}
-                  - if defect.size
-                    =t(defect.size)
-                  - else
-                    Размер
-                  %span.caret
-                %ul.dropdown-menu.pull-right
-                  - ['0-5 см', "5-15 см", "15-30 см", "30+ см"].each do |i|
-                    %li
-                      .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => :size,  :size => i}}= i
+          .span5
+            .btn-group{:style => 'width: 94%; margin-bottom: 11px; margin-top: 5px'}
+              .btn{:style => 'width: 80%'}
+                - if defect.defect_type
+                  = t("defect_type.#{defect.defect_type}")
+                - else
+                  Тип дефекта
+              .btn.defect_type.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu
+                - %w(dent scratch cleavage not_paont_cleaveage crack attrition rust traces_of_repair missing_part).each do |i|
+                  %li
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'defect_type', "defect_type" => i}}= (t("defect_type.#{i}").to_s)
+            %br/
+            .btn-group{:style => 'width: 94%'}
+              .btn{:style => 'width: 80%; margin-top: -10px'}
+                - if defect.size
+                  =t(defect.size)
+                - else
+                  Размер
+              .btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'margin-top: -10px'}
+                %span.caret
+              %ul.dropdown-menu.pull-right
+                - ['0-5 см', "5-15 см", "15-30 см", "30+ см"].each do |i|
+                  %li
+                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => :size,  :size => i}}= i
+          .span2
+            = render :partial => 'drop', :locals => {:object => defect, :place => :one, :attribute => 'defects'}
 
-              = render :partial => 'drop', :locals => {:object => defect, :place => :one, :attribute => 'defects'}
-
-      %br/
+      %hr/
     .btn.btn-primary.btn-large.add_defect
       Новый дефект
 

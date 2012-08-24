@@ -154,7 +154,7 @@ $ ->
         button.addClass('btn-primary')
 
   $(".upload").fileUploadUI
-    uploadTable: $("..photos .tab-pane.uploading")
+    uploadTable: $(".photos .tab-pane.uploading")
     downloadTable: $(".photos .tab-pane")
     buildUploadRow: (files, index) ->
       console.log "file: #{file} index: #{index}"

@@ -8,13 +8,13 @@
 
   to_hide.hide "slide",
     direction: "right"
-  , 500
+  , 1500
 
   setTimeout(( ->
     to_show.show "slide",
       direction: 'left'
-    , 500)
-  , 600)
+    , 1500)
+  , 1600)
 
 $(document).ready ->
   scroll_forever = ->

@@ -7,6 +7,8 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'paperclip'
 
+gem "rails_indexes", :git => "https://github.com/warpc/rails_indexes"
+
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'

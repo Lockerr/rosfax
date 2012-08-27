@@ -7,7 +7,7 @@
 
   if tab in tabs
     $("#{tab} #{tab}.row-fluid").append($('.uploader'))
-
+    $('.uploader').show()
 @store_defect = (defect) ->
   if defect.data().id
     update_defect(defect)
@@ -238,10 +238,10 @@ $ ->
 
     # console.log $(@).find('a').attr('href')
 
-    console.log 'first'
-    console.log $("##{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href')
+    #console.log 'first'
+    #console.log $("#{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href')
 
-    appendUploader($("##{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href'))
+    appendUploader($("#{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href'))
 
   $(' .nav-tabs.second li').click ->
     console.log 'second'

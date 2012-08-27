@@ -75,8 +75,8 @@ get_images = ->
         else
           for i in data.keys
             setTimeout(( -> refresh_image(5000, data.assets[i], i)), 5000)
-    else
-      refreshing = false
+  else
+    refreshing = false
 
 refresh_image = (refresh_rate, src, id) ->
   setTimeout(( ->

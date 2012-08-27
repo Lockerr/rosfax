@@ -185,7 +185,7 @@ $ ->
       $ "<tr><td>" + file.name + "</td>" + "<td class=\"file_upload_progress\"><div></div></td>" + "<td class=\"file_upload_cancel\">" + "</td></tr>"
         # "<span class=\"ui-icon ui-icon-cancel\">Cancel</span>" + "<button class=\"ui-state-default ui-corner-all\" title=\"Cancel\">" + "</button>
     buildDownloadRow: (file) ->
-      $('.photos').trigger ('change')
+      $('.photos').trigger ('custom_change')
       $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{file.id}' processing='#{file.id}' src='/assets/loading.gif' style='cursor: move;' width='96'>"
 
   assing_drops()

@@ -102,12 +102,13 @@
     element = $(@)
 
     element.parents('.btn-group').find('.btn').first().text(@textContent)
-    element.parents('.form-inline').data('category', @textContent)
+
 
     console.log "=============================="
 
     attr           = element.data('attribute')
     change         = element.data('change')
+
 
 
     console.log "attr => #{attr}"
@@ -134,22 +135,24 @@
       defect = $(@).parents('.defect')
       data = defect.data()
       if change == 'category'
-        console.log "defect => #{defect}"
+        console.log "change => #{change}"
         defect.find('.btn-group').show()
         defect.find('.drop').show()
         defect.data('category',element.data('category'))
+
+        console.log "incat change => #{change}, data_change => #{element.data(change)}"
+
         cat_list = defect.find('.undercat').parent().find('ul')
         cat_list.empty()
         for category in $.parseJSON($('.categories').text())[element.data(change)]
           cat_list.append("<li><div class='dropdown-element' data-defect='' data-attribute='defect' data-change='sub_category' data-sub_category=#{category.k}>#{category.v}</div></li>") # :TODO remove this error
         assign_click_for_dropdown($('#report.container'))
-        cat_list.find('.dropdown-element').click ->
-          element = $(@)
-          change         = element.data('change')
-          $(@).parents('div.btn-group').find('button.dropdown-toggle').text(@textContent)
-          defect.data(change, element.data(change))
+
       else
         defect.data(change, element.data(change))
+        console.log "notincat change => #{change}, data_change => #{element.data(change)}"
+
+      console.log "end change => #{change}, data_change => #{element.data(change)}"
       defect.trigger('change')
 
 
@@ -245,8 +248,6 @@ $ ->
     store_defect($(@))
     assing_drops()
 
-  $('.btn#save_defect').click ->
-
   $('.destroy_report').click ->
     confirmation = confirm('Точно?')
     if confirmation
@@ -304,48 +305,3 @@ $ ->
   $('.hide_unchecked').click ->
     $('.unchecked').toggle(500)
 
-
-
-
-
-#  $('.defect').find('.dropdown-element').live 'click', ->
-#    change = change
-#    $(@).parent().parent().parent().find('.dropdown-toggle').text(this.textContent)
-#    $(@).parents('.defect').data(change, $(@).attr(change) )
-#    $(@).parents('.defect').trigger('change')
-#    $(@).parent().parent().parent().parent().find('.undercat').show()
-#    $('.defect_type').show()
-#    $('.defect_size').show()
-#    $('#defect_form').find('.drop').show() # :TODO refactor this shit(many forms with same id, this is unnaceptable !!!1111oneone)
-#    cat_list = $(@).parent().parent().parent().parent().find('.undercat').parent().find('ul')
-#    cat_list.empty()
-#    for category in $.parseJSON($('.categories').text())[$(@).attr(change)]
-#      cat_list.append("<li><div class='dropdown-element' data-change= 'sub_category' sub_category=#{category.k}>#{category.v}</div></li>") # :TODO remove this error
-#    cat_list.find('.dropdown-element').click ->
-#      $(@).parent().parent().parent().find('.dropdown-toggle').text(this.textContent)
-#      $(@).parent().parent().parent().attr('category-selected', change)
-
-
-  # dropdown common
-#
-#  $('.dropdown-toggle').parent().find('.dropdown-element').click ->
-#    $(this).parents('.btn-group').find('.dropdown-toggle').text(this.textContent)
-#    if $('.container').data($(this).data('attribute')) == undefined
-#      console.log 'undef'
-#      $('.container').data($(this).data('attribute'), new Object)
-#
-#    if $(this).data('place')
-#      if $('.container').data($(this).data('attribute'))[$(this).data('place')] == undefined
-#        $('.container').data($(this).data('attribute'))[$(this).data('place')] = new Object
-#      $('.container').data($(this).data('attribute'))[$(this).data('place')][$(this).data('change')] = $(this).data($(this).data('change'))
-#    else
-#      $('.container').data($(this).data('attribute'))[$(this).data('change')] = $(this).data($(this).data('change'))
-#
-#    $('.container').trigger('change')
-
-  #-- end of dropdown
-
-  # checkbox common
-
-
-  #-- end of checkbox common

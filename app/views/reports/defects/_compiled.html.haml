@@ -82,9 +82,7 @@
           .btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'margin-top: -10px'}
             %span.caret
           %ul.dropdown-menu
-            - Report::DEFECTS_CATEGORIES.first.each do |i|
-              %li
-                .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= t("defects.#{defect.category}.#{i}")
+
 
       .span5
         .btn-group{:style => 'width: 94%; margin-bottom: 11px; margin-top: 5px'}

@@ -11,3 +11,5 @@
         = render 'reports/defects/compiled'
       - Report::DEFECTS_CATEGORIES.keys.each do |i|
         .tab-pane{:id => "defects-#{i}"}
+          .row-fluid{:id => "defects-#{i}"}
+            .span8.defects

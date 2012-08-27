@@ -13,17 +13,21 @@
   if tab in ["#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
     $('.defect').hide()
     $(".defect[data-category='#{tab.slice(9)}']").show()
-    $(".tab-pane#{tab}").append $(".defect[data-category='#{tab.slice(9)}']")
+    $(".row-fluid#{tab} .defects").append $(".defect[data-category='#{tab.slice(9)}']")
     $('#defects hr').remove()
     $('.defect').after('<hr/>')
-    $(".tab-pane#{tab}").append $('.add_defect')
+    $(".row-fluid#{tab} .defects").append $('.add_defect')
+    $(".row-fluid#{tab}").append($('.uploader'))
+    $('.uploader').show()
   else if tab == '#defects-compiled'
     $('.defect').show()
     $(".defect[data-category='#{tab.slice(9)}']").show()
-    $(".tab-pane#{tab}").append $(".defect[data-category='#{tab.slice(9)}']")
+    $(".row-fluid#{tab} .defects").append $(".defect[data-category='#{tab.slice(9)}']")
     $('#defects hr').remove()
     $('.defect').after('<hr/>')
-    $(".tab-pane#{tab}").append $('.add_defect')
+    $(".row-fluid#{tab} .defects").append $('.add_defect')
+    $(".row-fluid#{tab}").append($('.uploader'))
+    $('.uploader').show()
 
 
 

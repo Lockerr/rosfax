@@ -52,6 +52,7 @@ update_eye_fi = ->
 
 
 get_images = ->
+  console.log 'refreshing is set to true'
   refreshing = true
   ids = $.map($(".processing"), (n, i) -> n.id ).unique()
   if ids.length > 0
@@ -62,6 +63,7 @@ get_images = ->
       data: {assets: ids, size: 'thumb'}
       complete: (data) ->
         data = $.parseJSON(data.responseText)
+        console.log 'refreshing is set to false'
         setTimeout(( -> refreshing = false), 1000)
 
         if data.keys.length == 0
@@ -81,7 +83,7 @@ refresh_image = (refresh_rate, src, id) ->
           $.each $('.photos img'), ->
             this.ondragstart = (event) ->
               window.dragged = event.target
-        ), 115000)
+        ), 5000)
 
 @store_report = ->
   data = $('#report.container').data()
@@ -101,7 +103,7 @@ $(document).ready ->
 
 
 
-  $('.photos').live 'custom_change', ->
+  $('.photos').custom_change ->
     console.log "refreshing: #{refreshing}"
     unless refreshing
       refresh_loop = (refresh_rate) ->

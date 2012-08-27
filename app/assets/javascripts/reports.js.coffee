@@ -277,7 +277,8 @@ $ ->
     console.log 'container triggered'
 
     store_report()
-
+  $('.hide_unchecked').click ->
+    $('.unchecked').toggle(500)
 
 
 

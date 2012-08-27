@@ -24,7 +24,7 @@
               = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'
               = link_to 'Изменить', edit_report_path(report), :class => 'btn btn-primary'
               .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}
-                Уничтожить
+                Удалить
 
             - else
               = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'

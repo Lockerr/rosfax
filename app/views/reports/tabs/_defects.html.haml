@@ -3,13 +3,13 @@
     %ul.nav.nav-tabs.second
       %li
         %a{"data-toggle" => "tab", :href => "#defects-compiled"} Все
-      - Report::DEFECTS_CATEGORIES.keys.each do |i|
-        %li
-          %a{"data-toggle" => "tab", :href => "#defects-#{i}"}=t("#{i}.title") +'  ' +@report.defects.where(:category => i).count('id').to_s
+      / - Report::DEFECTS_CATEGORIES.keys.each do |i|
+      /   %li
+      /     %a{"data-toggle" => "tab", :href => "#defects-#{i}"}=t("#{i}.title") +'  ' +@report.defects.where(:category => i).count('id').to_s
     .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd"}
       #defects-compiled.tab-pane
         = render 'reports/defects/compiled'
-      - Report::DEFECTS_CATEGORIES.keys.each do |i|
-        .tab-pane{:id => "defects-#{i}"}
-          .row-fluid{:id => "defects-#{i}"}
-            .span8.defects
+      / - Report::DEFECTS_CATEGORIES.keys.each do |i|
+      /   .tab-pane{:id => "defects-#{i}"}
+      /     .row-fluid{:id => "defects-#{i}"}
+      /       .span8.defects

@@ -3,11 +3,30 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 @appendUploader = (tab) ->
-  tabs = ['#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels', '#compiled']
+  tabs = ['#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
 
+  console.log tabs
   if tab in tabs
     $("#{tab} #{tab}.row-fluid").append($('.uploader'))
     $('.uploader').show()
+
+  if tab in ["#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
+    $('.defect').hide()
+    $(".defect[data-category='#{tab.slice(9)}']").show()
+    $(".tab-pane#{tab}").append $(".defect[data-category='#{tab.slice(9)}']")
+    $('#defects hr').remove()
+    $('.defect').after('<hr/>')
+    $(".tab-pane#{tab}").append $('.add_defect')
+  else if tab == '#defects-compiled'
+    $('.defect').show()
+    $(".defect[data-category='#{tab.slice(9)}']").show()
+    $(".tab-pane#{tab}").append $(".defect[data-category='#{tab.slice(9)}']")
+    $('#defects hr').remove()
+    $('.defect').after('<hr/>')
+    $(".tab-pane#{tab}").append $('.add_defect')
+
+
+
 @store_defect = (defect) ->
   if defect.data().id
     update_defect(defect)
@@ -79,6 +98,7 @@
     element = $(@)
 
     element.parents('.btn-group').find('.btn').first().text(@textContent)
+    element.parents('.form-inline').data('category', @textContent)
 
     console.log "=============================="
 

@@ -1,20 +1,13 @@
 #defects.tab-pane.left
   .tabbable{:style => "margin-bottom: 18px;"}
-    %ul.nav.nav-tabs
-      %li.active
-        %a{"data-toggle" => "tab", :href => "#compiled"} Все дефекты
+    %ul.nav.nav-tabs.second
       %li
-        %a{"data-toggle" => "tab", :href => "#exterior"} Экстерьер
-      %li
-        %a{"data-toggle" => "tab", :href => "#interior"} Интерьер
-      %li
-        %a{"data-toggle" => "tab", :href => "#under_the_hood"} Под капотом
-      %li
-        %a{"data-toggle" => "tab", :href => "#other_photos"} Прочее
-      %li
-        %a{"data-toggle" => "tab", :href => "#wheels"} Колеса
-      %li
-        %a{"data-toggle" => "tab", :href => "#dumpers"} Видео
+        %a{"data-toggle" => "tab", :href => "#defects-compiled"} Все
+      - Report::DEFECTS_CATEGORIES.keys.each do |i|
+        %li
+          %a{"data-toggle" => "tab", :href => "#defects-#{i}"}=t("#{i}.title") +'  ' +@report.defects.where(:category => i).count('id').to_s
     .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd"}
-      #compiled.tab-pane
+      #defects-compiled.tab-pane
         = render 'reports/defects/compiled'
+      - Report::DEFECTS_CATEGORIES.keys.each do |i|
+        .tab-pane{:id => "defects-#{i}"}

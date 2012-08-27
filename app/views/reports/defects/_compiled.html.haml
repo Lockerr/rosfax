@@ -1,7 +1,7 @@
-.row-fluid#compiled
+.row-fluid#defects-compiled
   .span8.defects
     - for defect in @report.defects.reverse
-      .form-inline.defect{:data => {:report_id => @report.id, :id => defect.id}}
+      .form-inline.defect{:data => {:report_id => @report.id, :id => defect.id, :category => defect.category}}
         %fieldset
           .span5
             .btn-group{:style => 'width: 94%; margin-bottom: 11px; margin-top: 5px'}

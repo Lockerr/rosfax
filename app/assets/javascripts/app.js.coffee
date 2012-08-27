@@ -103,7 +103,7 @@ $(document).ready ->
 
 
 
-  $('.photos').custom_change ->
+  $('.photos').bind 'custom_change', ->
     console.log "refreshing: #{refreshing}"
     unless refreshing
       refresh_loop = (refresh_rate) ->

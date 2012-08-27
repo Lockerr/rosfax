@@ -16,7 +16,7 @@
     $(".row-fluid#{tab} .defects").append $(".defect[data-category='#{tab.slice(9)}']")
     $('#defects hr').remove()
     $('.defect').after('<hr/>')
-    $(".row-fluid#{tab} .defects").append $('.add_defect')
+    $(".row-fluid#{tab} .defects").prepend $('.add_defect')
     $(".row-fluid#{tab}").append($('.uploader'))
     $('.uploader').show()
   else if tab == '#defects-compiled'
@@ -25,7 +25,7 @@
     $(".row-fluid#{tab} .defects").append $(".defect[data-category='#{tab.slice(9)}']")
     $('#defects hr').remove()
     $('.defect').after('<hr/>')
-    $(".row-fluid#{tab} .defects").append $('.add_defect')
+    $(".row-fluid#{tab} .defects").prepend $('.add_defect')
     $(".row-fluid#{tab}").append($('.uploader'))
     $('.uploader').show()
 
@@ -240,6 +240,7 @@ $ ->
     window.scrollTo(0,0)
     $(@).parent().prepend('<hr/>')
     $(@).parent().prepend(defect)
+    $(@).parent().prepend $('.add_defect')
     $('.defect').show()
     assign_click_for_dropdown(defect)
 

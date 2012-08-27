@@ -1,4 +1,6 @@
 .row-fluid#defects-compiled
+  .btn.btn-primary.btn-large.add_defect
+    Новый дефект
   .span8.defects
     - for defect in @report.defects.reverse
       .form-inline.defect{:data => {:report_id => @report.id, :id => defect.id, :category => defect.category}}
@@ -58,8 +60,7 @@
             = render :partial => 'drop', :locals => {:object => defect, :place => :one, :attribute => 'defects'}
 
       %hr/
-    .btn.btn-primary.btn-large.add_defect
-      Новый дефект
+
 
 
   .form-inline.defect_template.hide{:data => {:report_id => @report.id}}

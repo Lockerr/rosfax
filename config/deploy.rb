@@ -17,7 +17,6 @@ set :use_sudo, false
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
 set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
-
 set :rvm_type, :user
 set :password, '12345trewq'
 set :scm, :git

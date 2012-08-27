@@ -75,10 +75,10 @@
             type: 'post'
 
 @assign_click_for_dropdown = (container) ->
-  $('button.dropdown-toggle').parent().find('div.dropdown-element').click ->
+  $('.dropdown-toggle').parent().find('.dropdown-element').click ->
     element = $(@)
 
-    element.parents('div.btn-group').find('button.dropdown-toggle').text(@textContent)
+    element.parents('.btn-group').find('.btn').first().text(@textContent)
 
     console.log "=============================="
 
@@ -103,8 +103,6 @@
         container_data[change] = element.data(change)
 
       container.data(attr, container_data)
-      console.log "container.data(attr, container_data) => #{container.data(attr, container_data)}"
-      console.log 'container triggered'
       store_report()
 
 
@@ -119,8 +117,8 @@
         cat_list = defect.find('.undercat').parent().find('ul')
         cat_list.empty()
         for category in $.parseJSON($('.categories').text())[element.data(change)]
-          cat_list.append("<li><div class='dropdown-element' data-defect data-attribute='defect' data-change='sub_category' data-sub_category=#{category.k}>#{category.v}</div></li>") # :TODO remove this error
-
+          cat_list.append("<li><div class='dropdown-element' data-defect='' data-attribute='defect' data-change='sub_category' data-sub_category=#{category.k}>#{category.v}</div></li>") # :TODO remove this error
+        assign_click_for_dropdown($('#report.container'))
         cat_list.find('.dropdown-element').click ->
           element = $(@)
           change         = element.data('change')
@@ -213,6 +211,7 @@ $ ->
     defect.addClass('defect')
     defect.find('.drop').hide()
     window.scrollTo(0,0)
+    $('#compiled .defects').prepend('<hr/>')
     $('#compiled .defects').prepend(defect)
     $('.defect').show()
     assign_click_for_dropdown(defect)

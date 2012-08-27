@@ -235,8 +235,8 @@ $ ->
     defect.addClass('defect')
     defect.find('.drop').hide()
     window.scrollTo(0,0)
-    $('#compiled .defects').prepend('<hr/>')
-    $('#compiled .defects').prepend(defect)
+    $(@).parent().prepend('<hr/>')
+    $(@).parent().prepend(defect)
     $('.defect').show()
     assign_click_for_dropdown(defect)
 

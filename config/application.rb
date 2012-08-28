@@ -46,6 +46,6 @@ module Tradein
     config.assets.version = '1.1'
     config.action_mailer.default_url_options = { :host => "rosfax.ru" }
     config.action_mailer.delivery_method   = :postmark
-    config.action_mailer.postmark_settings = { :api_key => "2b727ff3-8e0e-452b-b0bb-d1f85aad8fdb" }
+    config.action_mailer.postmark_settings = { :api_key => "6095ac2c-94a4-4e2c-b8b7-afd8ffbd3d7d" }
   end
 end

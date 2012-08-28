@@ -131,7 +131,7 @@
 
       container.data(attr, container_data)
       store_report()
-
+      $('.all_wheels').trigger('change')
 
     else
       defect = $(@).parents('.defect')
@@ -308,3 +308,21 @@ $ ->
   $('.hide_unchecked').click ->
     $('.unchecked').toggle(500)
 
+  $('.all_wheels').change ->
+    if $(@).prop('checked')
+      data = container.data().wheels.front_left
+      for wheel in $('.wheel')
+        unless $('.wheel').index(wheel) == 0
+          params = ['width', 'diameter', 'profile', 'brand', 'protector']
+          for param in params
+            span_caret = "<span class='caret'></span>"
+            $(wheel).find('.' + param).empty()
+            $(wheel).find('.' + param).append(data[param])
+            $(wheel).find('.' + param).append(span_caret)
+          for param in ['pads', 'discs', 'damper']
+            $(wheel).find('.' + param).find('.btn').removeClass('btn-primary')
+            $("."+ param).find(".btn[data-#{param}=#{data[param]}]").addClass('btn-primary')
+      container.data().wheels.front_right = data
+      container.data().wheels.rear_left = data
+      container.data().wheels.rear_right = data
+      store_report()

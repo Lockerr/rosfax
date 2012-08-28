@@ -14,3 +14,4 @@ $(document).ready ->
     console.log "checkbox container =>"
     console.log container.data()
     store_report()
+    $('.all_wheels').trigger 'change'

@@ -8,7 +8,7 @@
 
         .btn-toolbar
           .btn-group
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 56px'}
+            %button.btn.btn-mini.dropdown-toggle.width{"data-toggle" => "dropdown", :style => 'width: 56px'}
               = report.wheels[place] ? report.wheels[place]['width'] : '---'
               %span.caret
             %ul.dropdown-menu
@@ -17,7 +17,7 @@
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'width', :width => i}}=i
           %label{:style => 'vertical-align: top; padding-top: 2px'} \
           .btn-group
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 58px'}
+            %button.btn.btn-mini.dropdown-toggle.profile{"data-toggle" => "dropdown", :style => 'width: 58px'}
               = report.wheels[place] ? report.wheels[place]['profile'] : '---'
               %span.caret
             %ul.dropdown-menu{:data => {:attribute => 'wheel'}}
@@ -26,7 +26,7 @@
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'profile', :profile => i}}=i
           %label{:style => 'vertical-align: top; padding-top: 2px'} R
           .btn-group
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 58px'}
+            %button.btn.btn-mini.dropdown-toggle.diameter{"data-toggle" => "dropdown", :style => 'width: 58px'}
               = report.wheels[place] ? report.wheels[place]['diameter'] : '---'
               %span.caret
             %ul.dropdown-menu.pull-right
@@ -39,7 +39,7 @@
         %label.control-label.span7{:style => 'text-align: center'} Производитель
         .btn-toolbar
           .btn-group
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 58px'}
+            %button.btn.btn-mini.dropdown-toggle.protector{"data-toggle" => "dropdown", :style => 'width: 58px'}
               = report.wheels[place] ? report.wheels[place]['protector'] : '---'
               %span.caret
             %ul.dropdown-menu.pull-left
@@ -48,7 +48,7 @@
                   .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
           %label{:style => 'vertical-align: top; padding-top: 2px'} мм.  \
           .btn-group
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 122px'}
+            %button.btn.btn-mini.dropdown-toggle.brand{"data-toggle" => "dropdown", :style => 'width: 122px'}
               = report.wheels[place] ? report.wheels[place]['brand'] : '---'
               %span.caret
             %ul.dropdown-menu

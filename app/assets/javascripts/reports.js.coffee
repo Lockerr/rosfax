@@ -102,6 +102,8 @@
     element = $(@)
 
     element.parents('.btn-group').find('.btn').first().text(@textContent)
+    element.parents('.btn-group').find('.btn').first().addClass('btn-primary')
+    element.parents('.btn-group').find('.btn').last().addClass('btn-primary')
 
 
     console.log "=============================="
@@ -139,7 +141,7 @@
         defect.find('.btn-group').show()
         defect.find('.drop').show()
         defect.data('category',element.data('category'))
-
+        defect.find('.undercat').parent().find('.btn').removeClass('btn-primary')
         console.log "incat change => #{change}, data_change => #{element.data(change)}"
 
         cat_list = defect.find('.undercat').parent().find('ul')

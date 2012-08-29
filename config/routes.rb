@@ -19,6 +19,7 @@ Tradein::Application.routes.draw do
 
   resources :reports do
     get 'images'
+    get 'all_images'
     resources :assets
     post 'place'
     delete 'remove_asset'

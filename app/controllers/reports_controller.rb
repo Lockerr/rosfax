@@ -101,6 +101,21 @@ class ReportsController < ApplicationController
     end
   end
 
+  def all_images
+    @report = Report.find(params[:report_id])
+    asset = Asset.find(params[:asset_id])
+    assets = @report.assets
+    assets.delete asset
+    assets.insert 0,asset
+
+    if assets
+      render :json => assets.map {|i| i.url(:carousel)}
+    else
+      render :json => nil
+    end
+
+  end
+
   def images
     @report = Report.find(params[:report_id])
     ids = @report.send(params[:attribute]).values.flatten.map { |i| i.to_i }

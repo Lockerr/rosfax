@@ -53,3 +53,6 @@
 
       #other_tests.tab-pane
         .span8.well
+          %label
+            Примечание
+          = text_area "doc", 'series', :class => 'span9', :value => (@report.testdrive['other_tests']['description'] if @report.testdrive['other_tests']), :data => {:attribute => :testdrive, :place => :other_tests, :change => :description}

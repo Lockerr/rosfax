@@ -30,12 +30,12 @@
         %td
           Гоc. номер
         %td#year
-          = text_field 'report[car]', 'gov_number', :value => @report.car['gov_number'],  :data => {:attribute => :car, :place => :gov_number, :change => :gov_number}
+          = text_field 'report[car]', 'gov_number', :value => @report.car['gov_number'],  :placeholder => 'A 999 AA 999', :data => {:attribute => :car, :place => :gov_number, :change => :gov_number}
       %tr
         %td
           vin
         %td#vin
-          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :vin, :change => :vin}
+          = text_field 'report[car]', 'vin', :value => (@report.car['attr']['vin'] if @report.car['attr']), :placeholder => '*** ****** ****9999',  :data => {:attribute => :car, :place => :attr, :change => 'vin'}
       %tr
         %td
           Покупатель
@@ -43,12 +43,12 @@
         %td
           ФИО
         %td#seller_fio
-          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :seller, :change => :fio}
+          = text_field 'report[car]', 'buyer_name', :value => (@report.car['buyer']['name'] if @report.car['buyer']),  :data => {:attribute => :car, :place => :buyer, :change => 'name'}
       %tr
         %td
           Телефон
         %td#seller_phone
-          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :seller, :change => :phone}
+          = text_field 'report[car]', 'buyer_phone', :value => (@report.car['buyer']['phone'] if @report.car['buyer']),  :data => {:attribute => :car, :place => :buyer, :change => 'phone'}
       %tr
         %td
           Продавец
@@ -56,12 +56,12 @@
         %td
           ФИО
         %td#seller_fio
-          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :buyer, :change => :fio}
+          = text_field 'report[car]', 'seller_name', :value => (@report.car['seller']['name'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'name'}
       %tr
         %td
           Телефон
         %td#seller_phone
-          = text_field 'report[car]', 'vin', :value => @report.car['vin'],  :data => {:attribute => :car, :place => :buyer, :change => :phone}
+          = text_field 'report[car]', 'seller_phone', :value => @report.car['seller']['phone'],  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
 
 
 

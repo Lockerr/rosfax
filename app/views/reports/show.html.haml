@@ -34,18 +34,21 @@
   .span12{:style => "background: url('/assets/coating-horizontal.png'); height: 500px; background-repeat: no-repeat;background-position:center"}
 
 .row
-  .span4
+  .span2.offset2
     = t('report.overal_exterior_condition')
   .span8
     .alert.alert-warning{:style => 'text-align: center'}
       %h4=t('report.fair')
 .row
-  .span4
+  .span2.offset2
     = t('report.overal_interior_condition')
   .span8
     .alert.alert-success{:style => 'text-align: center'}
       %h4=t('report.good')
+    %p=t 'lorem'
+
 %hr/
+/ ENGINE
 .row
   .span4.offset1
     %h4=t('report.engine')
@@ -57,6 +60,8 @@
   .span8
     .alert.alert-success{:style => 'text-align: center'}
       %h4=t('report.good')
+    %p=t 'lorem'
+
 .row
   .span2
     =image_tag asset_path '/assets/report/engine_oil_l.gif'
@@ -65,22 +70,331 @@
   .span8
     .alert.alert-error{:style => 'text-align: center'}
       %h4=t('report.bad')
+    %p=t 'lorem'
 
+%hr/
+/ TRANSMISSION
 .row
   .span4.offset1
     %h4=t('report.transmission')
 .row
-  .span4
-    =t('report.engine_condition')
+  .span2
+    =image_tag asset_path '/assets/report/transmission.gif'
+  .span2
+    =t('report.transmission_condition')
   .span8
     .alert.alert-success{:style => 'text-align: center'}
       %h4=t('report.good')
+    %p=t 'lorem'
 .row
-  .span4
-    =t('report.engine_oil_level')
+  .span2
+    =image_tag asset_path '/assets/report/trans_oil_f.gif'
+  .span2
+    =t('report.transmission_oil_level')
   .span8
     .alert.alert-error{:style => 'text-align: center'}
       %h4=t('report.bad')
+    %p=t 'lorem'
+%hr/
+/ CLUTCH
+.row
+  .span4.offset1
+    %h4=t('report.clutch')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/clutch.gif'
+  .span2
+    =t('report.clutch_condition')
+  .span8
+    .alert.alert-info{:style => 'text-align: center'}
+      %h4=t('report.not_reported')
+    %p=t 'lorem'
+%hr/
+/ COOLINg
+.row
+  .span4.offset1
+    %h4=t('report.cooling')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/cooling_f.gif'
+  .span2
+    =t('report.cooling_condition')
+  .span8
+    .alert.alert-success{:style => 'text-align: center'}
+      %h4=t('report.full')
+    %p=t 'lorem'
+%hr/
+/ FUEL
+.row
+  .span4.offset1
+    %h4=t('report.fuel')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/fuel.gif'
+  .span2
+    =t('report.fuel_condition')
+  .span8
+    .alert.alert-success{:style => 'text-align: center'}
+      %h4=t('report.good')
+    %p.small=t 'lorem'
+%hr/
+/ EXHAUST
+.row
+  .span4.offset1
+    %h4=t('report.exhaust')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/exhaust.gif'
+  .span2
+    =t('report.exhaust_condition')
+  .span8
+    .alert.alert-success{:style => 'text-align: center'}
+      %h4=t('report.good')
+    %p.small=t 'lorem'
+.row
+  .span2.offset2
+    =t('report.emission_status')
+  .span8
+    .alert.alert-success{:style => 'text-align: center'}
+      %h4=t('report.good')
+    %p.small=t 'lorem'
+%hr/
+/ Brakes
+.row
+  .span4.offset1
+    %h4=t('report.brakes')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/brakes.gif'
+  .span2
+    =t('report.brakes_condition')
+  .span8
+    .alert.alert-success{:style => 'text-align: center'}
+      %h4=t('report.good')
+    %p.small=t 'lorem'
+
+.row
+  .span2
+    =image_tag asset_path '/assets/report/brake_f.gif'
+  .span2
+    =t('report.brake_fluid_level')
+  .span8
+    .alert.alert-success{:style => 'text-align: center'}
+      %h4=t('report.good')
+    %p.small=t 'lorem'
+%hr/
+/ STEERING
+.row
+  .span4.offset1
+    %h4=t('report.steering')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/steering.gif'
+  .span10
+    .row
+      .span2
+        =t('report.steering_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+    .row
+      .span2
+        =t('report.steering_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+%hr/
+/ CHOCKS
+.row
+  .span4.offset1
+    %h4=t('report.shocks')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/shocks.gif'
+  .span10
+    .row
+      .span2
+        =t('report.shocks_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+    .row
+      .span2
+        =t('report.shocks_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+%hr/
+/ wheels
+.row
+  .span4.offset1
+    %h4=t('report.wheels')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/wheels.gif'
+  .span10
+    .row
+      .span2
+        =t('report.wheels_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+
+    .row
+      .span2
+        =t('report.wheels_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+%hr/
+/ windows
+.row
+  .span4.offset1
+    %h4=t('report.windows')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/windows.gif'
+  .span10
+    .row
+      .span2
+        =t('report.windows_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+    .row
+      .span2
+        =t('report.windows_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+    .row
+      .span2
+        =t('report.windows_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+    .row
+      .span2
+        =t('report.windows_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+%hr/
+/ rpm
+.row
+  .span4.offset1
+    %h4=t('report.rpm')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/rpm.gif'
+  .span10
+    .row
+      .span2
+        =t('report.rpm_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+%hr/
+/ rpm
+.row
+  .span4.offset1
+    %h4=t('report.additional_equipment')
+.row
+  .span2
+    &nbsp;
+  .span10
+    .row
+      .span2
+        =t('report.rpm_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+
+    .row
+      .span2
+        =t('report.rpm_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+
+    .row
+      .span2
+        =t('report.rpm_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+
+    .row
+      .span2
+        =t('report.rpm_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+
+    .row
+      .span2
+        =t('report.rpm_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+
+    .row
+      .span2
+        =t('report.rpm_condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+        %p.small=t 'lorem'
+%hr/
+/ ac_heating
+.row
+  .span4.offset1
+    %h4=t('report.ac_heating')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/ac_heat.gif'
+  .span10
+    .row
+      .span2
+        =t('report.condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+.row
+  .span2
+    =image_tag asset_path '/assets/report/ac_cold.gif'
+  .span10
+    .row
+      .span2
+        =t('report.condition')
+      .span8
+        .alert.alert-success{:style => 'text-align: center'}
+          %h4=t('report.good')
+%hr/
+/ Conclusion
+.row
+  .span4.offset1
+    %h4= t('report.conclusion')
+.row
+  .span12
+    %p= t 'lorem'
+
+
 
 #modal_carousel.modal.hide{:style => 'overflow: hidden'}
   %button.close{'data-dismiss'=>"modal"}
@@ -93,7 +407,7 @@
 
 
     / Carousel nav
-    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
-    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
-    %a.carousel-control.close.top-left{'data-dismiss' => 'modal', :href => "#myCarousel", :style => 'font-size: 34px; top: 6%; left: 91%'} x
+    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :style => 'top: 48%'} ‹
+    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel", :style => 'top: 48%'} ›
+    %a.carousel-control.close.top-left{'data-dismiss' => 'modal', :href => "#myCarousel", :style => 'width: 30px; height: 30px; font-size: 34px; top: 6%; left: 93%; line-height: 19px'} x
 

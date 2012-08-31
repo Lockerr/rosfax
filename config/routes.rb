@@ -1,4 +1,5 @@
 Tradein::Application.routes.draw do
+
   get "home/index"
 
   devise_for :users
@@ -96,6 +97,6 @@ Tradein::Application.routes.draw do
   match 'index.php/rest', :controller => 'galleries', :action => 'rest'
   match 'index.php/rest/item(/:id)', :controller => 'galleries', :action => 'test'
   match 'new_file', :controller => 'ftp', :action => 'file'
-  match 'google5bf74eb79251ba45.html',  :to => redirect('/google.html')
+  match 'google5bf74eb79251ba45.html',  :controller => 'static', :action => 'google_validation'
 end
 

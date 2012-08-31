@@ -61,7 +61,7 @@
         %td
           Телефон
         %td#seller_phone
-          = text_field 'report[car]', 'seller_phone', :value => @report.car['seller']['phone'],  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
+          = text_field 'report[car]', 'seller_phone', :value => (@report.car['seller']['phone'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
 
 
 

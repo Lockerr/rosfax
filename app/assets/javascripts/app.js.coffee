@@ -89,7 +89,6 @@ refresh_image = (refresh_rate, src, id) ->
 
 @store_report = ->
   data = $('#report.container').data()
-
   report = new Object
 
   $.ajax

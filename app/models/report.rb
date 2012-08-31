@@ -96,7 +96,7 @@ class Report < ActiveRecord::Base
     counters = {}
 
     tabs = {
-      :car => {:car => 4},
+      :car => {:car => 8},
       :photo => {
         :exterior => 9,
         :interior => 9,
@@ -132,6 +132,8 @@ class Report < ActiveRecord::Base
           if send(key)[node.to_s]
             counters[key][node] = [send(key)[node.to_s].size, tabs[key][node], "#{send(key)[node.to_s].size}/#{tabs[key][node]}"]
             counters[key][:summ][0] += send(key)[node.to_s].size
+          else
+            counters[key][node] = [0, tabs[key][node], "0/#{tabs[key][node]}"]
           end
         end
       end

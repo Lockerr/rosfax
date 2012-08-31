@@ -177,7 +177,7 @@ class Report < ActiveRecord::Base
   def assigned
     result = []
 
-    ["visual_interior", 'interior',"exterior", "windows_lights", "exterior_parts", "powertrains", "electric_parts", "liquid_levels", "chasis", "completion", "testdrtive", "windows", "dumpers", "brakes"].each do |i|
+    ["visual_interior", 'interior',"exterior", "windows_lights", "exterior_parts", "powertrains", "electric_parts", "liquid_levels", "chasis", "testdrtive", "windows", "dumpers", "brakes"].each do |i|
       result.push send(i).values
     end
 

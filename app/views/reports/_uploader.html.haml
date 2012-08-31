@@ -20,7 +20,7 @@
 
     .tab-content
       .tab-pane.active{:id => "#{attribute}_unassigned"}
-        - for asset in @report.assets
+        - for asset in @report.unassigned
           -if asset.data_processing
             = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
           - else

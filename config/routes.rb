@@ -96,6 +96,6 @@ Tradein::Application.routes.draw do
   match 'index.php/rest', :controller => 'galleries', :action => 'rest'
   match 'index.php/rest/item(/:id)', :controller => 'galleries', :action => 'test'
   match 'new_file', :controller => 'ftp', :action => 'file'
-  match 'google5bf74eb79251ba45.html', :redirect_to => '/google5bf74eb79251ba45.html'
+  match 'google5bf74eb79251ba45.html',  :to => redirect('/google5bf74eb79251ba45.html')
 end
 

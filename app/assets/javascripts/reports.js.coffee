@@ -326,7 +326,7 @@ $ ->
       container.data().wheels.rear_left = data
       container.data().wheels.rear_right = data
       store_report()
-
-  $('input#report_car_gov_number').mask("a 999 aa 99?9")
+  $.mask.definitions['~'] = "[AАBВСCEЕHНKКMМOОPРTТXХYУ]"
+  $('input#report_car_gov_number').mask("~ 999 ~~ 99?9")
   $('input#report_car_vin').mask("*** ****** ****9999")
   $('input#report_car_buyer_phone, input#report_car_seller_phone').mask("+7(999) 999 99 99")

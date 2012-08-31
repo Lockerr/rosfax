@@ -30,7 +30,7 @@
         %td
           Гоc. номер
         %td#year
-          = text_field 'report[car]', 'gov_number', :value => @report.car['gov_number'],  :placeholder => 'A 999 AA 999', :data => {:attribute => :car, :place => :gov_number, :change => :gov_number}
+          = text_field 'report[car]', 'gov_number', :value => (@report.car['attr']['gov_number'] if @report.car['attr']),  :placeholder => 'A 999 AA 999', :data => {:attribute => :car, :place => :attr, :change => :gov_number}
       %tr
         %td
           vin

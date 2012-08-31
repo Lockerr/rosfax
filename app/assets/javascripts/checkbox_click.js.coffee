@@ -14,4 +14,4 @@ $(document).ready ->
 
     container.data(attribute, data)
     store_report()
-    $('.all_wheels').trigger('change') if $('.all_wheels') $('.all_wheels').prop('checked')
+    $('.all_wheels').trigger('change') if $('.all_wheels').prop('checked')

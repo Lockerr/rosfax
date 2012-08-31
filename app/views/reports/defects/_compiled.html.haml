@@ -12,7 +12,7 @@
               .btn.dropdown-toggle{"data-toggle" => "dropdown"}
                 %span.caret
               %ul.dropdown-menu
-                - Report::DEFECTS_CATEGORIES.keys.each do |i|
+                - Report.sorted_defects_categories.keys.each do |i|
                   %li
                     .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
             %br/
@@ -26,9 +26,10 @@
               .btn.undercat.dropdown-toggle{"data-toggle" => "dropdown", :style => 'margin-top: -10px'}
                 %span.caret
               %ul.dropdown-menu
-                - Report::DEFECTS_CATEGORIES[defect.category.to_sym].each do |i|
-                  %li
-                    .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= t("defects.#{defect.category}.#{i}")
+                - if defect.sub_category
+                  - Report.sorted_defects_categories[defect.category.to_sym].each do |i|
+                    %li
+                      .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'sub_category', 'sub_category' => i}}= t("defects.#{defect.category}.#{i}")
 
           .span5
             .btn-group{:style => 'width: 94%; margin-bottom: 11px; margin-top: 5px'}
@@ -72,7 +73,7 @@
           .btn.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
           %ul.dropdown-menu
-            - Report::DEFECTS_CATEGORIES.keys.each do |i|
+            - Report.sorted_defects_categories.keys.each do |i|
               %li
                 .dropdown-element{:data => {:attribute => 'defect', :defect => '', :change => 'category', :category => i}}= t("#{i}.title").to_s
         %br/

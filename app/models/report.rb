@@ -61,11 +61,12 @@ class Report < ActiveRecord::Base
   INTERIOR = %w(:one :two :three :four :five :six :seven :eight :nine)
 
 
+
   DEFECTS_CATEGORIES ={
           :exterior => %w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold),
           :interior => %w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest),
           :windows_and_lights => %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window),
-          :powertrains => %w(knock flow tear wear),
+          # :powertrains => %w(knock flow tear wear),
           :chasis => %w(full_drive_connection air_suspension_all_levels luft_knocking_in_steering_wheel revolutions_of_twentieth turns_gas_with_a_sharp),
           :wheels => %w(front_left_wheel front_right_wheel rear_right_wheel rear_left_wheel stepney),
           :electric => ELECTRONIC_PARTS,
@@ -81,6 +82,14 @@ class Report < ActiveRecord::Base
   }
   def model_name
     "#{model.brand.name} #{model.name}"
+  end
+
+  def self.sorted_defects_categories
+    result = {}
+    DEFECTS_CATEGORIES.each do |key, value|
+      result[key] = value.sort_by{|i| I18n.t("defects.#{key}.#{i}")}
+    end
+    result
   end
 
   def counters
@@ -146,9 +155,9 @@ class Report < ActiveRecord::Base
 
   def self.defects_categories
     result = {}
-    for key in DEFECTS_CATEGORIES.keys
+    for key in sorted_defects_categories.keys
       result[key] = []
-      for value in DEFECTS_CATEGORIES[key]
+      for value in sorted_defects_categories[key]
         result[key].push :k => value, :v => I18n.t("defects.#{key}.#{value}")
       end
     end

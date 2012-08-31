@@ -99,6 +99,7 @@ ru:
     title: Окна и свет
   powertrains:
     title: ДВС/КПП/Навесное
+
   chasis:
     title: Подвеска и Тормоза
     full_drive_connection: Поключение (полный привод)
@@ -135,6 +136,7 @@ ru:
     not_paont_cleaveage: Скол не по краске
     crack: Трещина
     attrition: Потертость
+    tear: Разрыв
     rust: Ржавчина
     traces_of_repair: Следы ремонта
     missing_parts: Отсутствующие детали
@@ -207,6 +209,7 @@ ru:
   defects:
       exterior:
         title: Экстерьер
+
         hood: Крыша
         front_right_wing: Крыло переднее правое
         right_front_door: Дверь передняя правая

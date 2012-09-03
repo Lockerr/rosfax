@@ -62,7 +62,7 @@
 
       this.ondrop  = (event) ->
         obj = window.dragged
-
+        console.log obj.id
         event.preventDefault()
         event.dataTransfer.dropEffect = "copy"
         attribute = $(this).data('attribute')
@@ -79,13 +79,14 @@
         target.find('.thumb').html(window.dragged)
         target.find('.btn').text(parseInt(target.find('.btn').text())+1)
         target.find('img').attr('style', '')
-
+        target.find('img').prop('draggable', false)
         imgbox = $(".imgbox##{attribute}")
-
-        imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
-        imgbox.width(imgbox.width()+ 116)
-        new_image = $.clone(target.find('.thumb')[0])
-        imgbox.find('.thumbnail').last().prepend(new_image)
+        console.log imgbox.find("##{obj.id}")
+        if imgbox.find("##{obj.id}").size() == 0
+          imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
+          imgbox.width(imgbox.width()+ 116)
+          new_image = $.clone(target.find('.thumb')[0])
+          imgbox.find('.thumbnail').last().prepend(new_image)
 
 
         if target.attr('object') == 'Report'
@@ -99,6 +100,7 @@
 
 
 $ ->
+  $("img[alt=Thumb]").prop('draggable', true)
   container = $('#report.container')
   if container.attr('source')
     container.data(JSON.parse($('#report.container').attr('source')))
@@ -150,6 +152,7 @@ $ ->
   $.each $('.photos img'), ->
     this.ondragstart = (event) ->
       window.dragged = event.target
+    $(".thumbnail img").prop('draggable', false)
 
   $(".thumb").live 'click', ->
 

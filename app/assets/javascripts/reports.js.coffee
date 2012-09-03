@@ -1,11 +1,7 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 @appendUploader = (tab) ->
   tabs = ['#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
 
-  console.log tabs
   if tab in tabs
     $("#{tab} #{tab}.row-fluid").append($('.uploader'))
     $('.uploader').show()
@@ -100,26 +96,12 @@
 
 
 $ ->
-  $("img[alt=Thumb]").prop('draggable', true)
   container = $('#report.container')
+
   if container.attr('source')
     container.data(JSON.parse($('#report.container').attr('source')))
 
-
   report_id = $('#report.container').data('id')
-
-  $( ".pick_date" ).datepicker({showOn: ".add-on",changeMonth: true,changeYear: true})
-  $('.add-on').click ->
-    $(@).parent().find('input').datepicker('show')
-
-  for checkbox in $('button.checkbox')
-    button = $(checkbox)
-    boxlist = container.data(button.data('attribute'))
-    if boxlist[button.data('place')]
-      if parseInt(container.data(button.data('attribute'))[button.data('place')][button.data('change')]) == button.data(button.data('change'))
-        button.addClass('btn-primary')
-      else if container.data(button.data('attribute'))[button.data('place')][button.data('change')] == button.data(button.data('change'))
-        button.addClass('btn-primary')
 
   $(".upload").fileUploadUI
     uploadTable: $(".photos .tab-pane.uploading")
@@ -129,7 +111,6 @@ $ ->
       file = files[index]
 
       $ "<tr><td>" + file.name + "</td>" + "<td class=\"file_upload_progress\"><div></div></td>" + "<td class=\"file_upload_cancel\">" + "</td></tr>"
-        # "<span class=\"ui-icon ui-icon-cancel\">Cancel</span>" + "<button class=\"ui-state-default ui-corner-all\" title=\"Cancel\">" + "</button>
     buildDownloadRow: (file) ->
       $('.photos').trigger ('custom_change')
       $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{file.id}' processing='#{file.id}' src='/assets/loading.gif' style='cursor: move;' width='96'>"
@@ -187,8 +168,6 @@ $ ->
     $(@).parent().prepend $('.add_defect')
     $('.defect').show()
 
-
-
   $('.defect').live 'change', ->
     store_defect($(@))
     assing_drops()
@@ -203,54 +182,12 @@ $ ->
         complete: ->
           window.location.href = '/reports/'
 
-  $(' .nav-tabs.first li').click ->
-
-    # console.log $(@).find('a').attr('href')
-
-    #console.log 'first'
-    #console.log $("#{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href')
-
-    appendUploader($("#{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href'))
-
-  $(' .nav-tabs.second li').click ->
-    console.log 'second'
-    console.log  $(@).find('a').attr('href')
-
-    appendUploader($(@).find('a').attr('href'))
-################# DOCUMENTS #########################
   $('input, textarea').change ->
     element = $(@)
-    console.log "input textarea =============================="
-    console.log element
-    attr           = element.data('attribute')
-    change     = element.data('change')
-    place        = element.data('place')
-
-    console.log "attr => #{attr}"
-    console.log "place => #{place}"
-    console.log "change => #{change}"
-
-    container_data = container.data(attr) || new Object
-
-    console.log "container_data => #{container.data(attr)}"
-
-
-    container_data[place] ||= new Object
-    container_data[place][change] = element.val()
-    console.log "preivous data => #{container_data[place][change]}"
-    console.log "data(change) => #{element.val()}"
-
-    container.data(attr, container_data)
-
-    console.log "container.data(attr, container_data) => #{container.data(attr, container_data)}"
-
-    console.log 'container triggered'
-
+    element.data(element.data('change'), element.val())
+    update_object(@)
+    $('.all_whells').trigger('change') if $('.all_wheels').prop('checked')
     store_report()
-
-  $('.hide_unchecked').click ->
-    $('.unchecked').toggle(500)
-
 
   $('.all_wheels').change ->
     if $(@).prop('checked')
@@ -266,11 +203,12 @@ $ ->
           for param in ['pads', 'discs', 'damper']
             $(wheel).find('.' + param).find('.btn').removeClass('btn-primary')
             $("."+ param).find(".btn[data-#{param}=#{data[param]}]").addClass('btn-primary')
+          console.log data.brand
+          $(wheel).find('input').val(data.brand)
+
       container.data().wheels.front_right = data
       container.data().wheels.rear_left = data
       container.data().wheels.rear_right = data
       store_report()
-  $.mask.definitions['~'] = "[AАBВСCEЕHНKКMМOОPРTТXХYУ]"
-  $('input#report_car_gov_number').mask("~ 999 ~~ 99?9")
-  $('input#report_car_vin').mask("*** ****** ****9999")
-  $('input#report_car_buyer_phone, input#report_car_seller_phone').mask("+7(999) 999 99 99")
+
+

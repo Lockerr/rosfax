@@ -87,6 +87,21 @@ refresh_image = (refresh_rate, src, id) ->
               window.dragged = event.target
         ), 5000)
 
+@update_object = (object) ->
+  container = $('#report.container')
+
+  element       = $(object)
+  change        = element.data('change')
+  attribute      = element.data('attribute')
+  place           = element.data('place')
+  data             = container.data(attribute) || {}
+  data[place] ||= {}
+  data[place][change] = element.data(change)
+  console.log "Changing #{attribute}[#{place}][#{change}] = #{data[place][change]} to"
+  container.data(attribute, data)
+  console.log container.data(attribute, data)
+
+
 @store_report = ->
   data = $('#report.container').data()
   report = new Object
@@ -97,11 +112,6 @@ refresh_image = (refresh_rate, src, id) ->
     url: '/reports/' + $('#report.container').attr('report')
 
 $(document).ready ->
-  $.each $('.tab-content.second'), ->
-    $(this).children().first().addClass('active')
-  $.each $('.nav-tabs'), ->
-    $(this).children().first().addClass('active')
-
 
 
   $('.photos').bind 'custom_change', ->

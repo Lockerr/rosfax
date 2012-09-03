@@ -101,6 +101,8 @@ $ ->
   if container.attr('source')
     container.data(JSON.parse($('#report.container').attr('source')))
 
+  window.datas = container.data()
+
   report_id = $('#report.container').data('id')
 
   $(".upload").fileUploadUI

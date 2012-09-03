@@ -36,6 +36,7 @@ class Report < ActiveRecord::Base
   serialize :documents, Hash
 
   default_scope includes(:assets)
+  scope :public, where(:publish => true)
 
   EXTERIOR = %w( :front_left :front :front_right :left  :roof :right :rear_left :rear :rear_right)
 

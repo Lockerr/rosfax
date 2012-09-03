@@ -5,12 +5,20 @@ $(document).ready ->
     button = $(checkbox)
     boxlist = data[button.data('attribute')]
 
-    if boxlist[button.data('place')]
+    attribute = button.data('attribute')
+    place = button.data('place')
+    change = button.data('change')
 
-      if parseInt(data[button.data('attribute')][button.data('place')][button.data('change')]) == button.data(button.data('change'))
+    if attribute && data[attribute]
+      if place && data[attribute][place]
+        if parseInt(data[attribute][place][change]) == button.data(change)
+          button.addClass('btn-primary')
+        else if data[attribute][place][change] == button.data(change)
+          button.addClass('btn-primary')
+      else if data[attribute][change] == button.data(change)
         button.addClass('btn-primary')
-      else if data[button.data('attribute')][button.data('place')][button.data('change')] == button.data(button.data('change'))
-        button.addClass('btn-primary')
+    else if data[attribute] == button.data(attribute)
+      button.addClass('btn-primary')
 
   $('.checkbox').click ->
     update_object(@)

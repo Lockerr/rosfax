@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   layout 'report'
   def models
-    @reports = Report.where(:model_id => params[:ids].split(','))
+    @reports = Report.public.where(:model_id => params[:ids].split(','))
     render :index
   end
 

@@ -94,13 +94,28 @@ refresh_image = (refresh_rate, src, id) ->
   change        = element.data('change')
   attribute      = element.data('attribute')
   place           = element.data('place')
-  data             = container.data(attribute) || {}
-  data[place] ||= {}
-  data[place][change] = element.data(change)
-  console.log "Changing #{attribute}[#{place}][#{change}] = #{data[place][change]} to"
+
+  if attribute && place && change
+    data             = container.data(attribute) || {}
+
+    data[place] ||= {}
+    data[place][change] = element.data(change)
+
+    console.log "Changing #{attribute}[#{place}][#{change}] = #{data[place][change]} to"
+
+
+  else if attribute && change
+    data = container.data(attribute) || {}
+    data[change] = element.data(change)
+
+    console.log "Changing #{attribute}[#{change}] = #{data[change]} to"
+  else if attribute
+    data = element.data(attribute)
+
+    console.log "Changing #{attribute}= #{element.data(attribute)} to"
+
   container.data(attribute, data)
   console.log container.data(attribute, data)
-
 
 @store_report = ->
   data = $('#report.container').data()

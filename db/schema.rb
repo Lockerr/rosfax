@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817102840) do
+ActiveRecord::Schema.define(:version => 20120903081918) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20120817102840) do
     t.text     "documents"
     t.integer  "user_id"
     t.integer  "model_id"
+    t.boolean  "publish",         :default => false
   end
 
   create_table "users", :force => true do |t|

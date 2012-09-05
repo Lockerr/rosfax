@@ -213,4 +213,10 @@ $ ->
       container.data().wheels.rear_right = data
       store_report()
 
+  $('.all_ok').click ->
+    pads = $(@).parent().parent().siblings().find('.pads')
+
+    for pad in pads
+      $(pad).find('.btn').first().trigger('click')
+
 

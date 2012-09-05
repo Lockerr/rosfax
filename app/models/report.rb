@@ -68,12 +68,12 @@ class Report < ActiveRecord::Base
           :interior => %w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest),
           :windows_and_lights => %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window),
           # :powertrains => %w(knock flow tear wear),
-          :chasis => %w(full_drive_connection air_suspension_all_levels luft_knocking_in_steering_wheel revolutions_of_twentieth turns_gas_with_a_sharp),
-          :wheels => %w(front_left_wheel front_right_wheel rear_right_wheel rear_left_wheel stepney),
-          :electric => ELECTRONIC_PARTS,
-          :liquids => LIQUID_LEVELS,
-          :other => %w(teleporter hovering_drive plasma_gun gravizapa black_hole_generator tractor_beam higgs`s_boson arrow_in_the_knee),
-          :video => %w()
+          # :chasis => %w(full_drive_connection air_suspension_all_levels luft_knocking_in_steering_wheel revolutions_of_twentieth turns_gas_with_a_sharp),
+          # :wheels => %w(front_left_wheel front_right_wheel rear_right_wheel rear_left_wheel stepney),
+          # :electric => ELECTRONIC_PARTS,
+          # :liquids => LIQUID_LEVELS,
+          # :other => %w(teleporter hovering_drive plasma_gun gravizapa black_hole_generator tractor_beam higgs`s_boson arrow_in_the_knee),
+          # :video => %w()
   }
 
 
@@ -178,7 +178,24 @@ class Report < ActiveRecord::Base
     collection = {}
 
     if attrs[:group]
-      Asset.where(:id => send(attrs[:group]).values.flatten.map { |i| i.to_i }).map { |i| collection[i.id] = i.url(attrs[:size]) }
+      if attrs[:group] == 'wheels'
+        ids = []
+
+        %w(:one :two :three :four).each do |i|
+          ids.push send(attrs[:group])[i] if send(attrs[:group])[i]
+        end
+
+        ids.flatten!
+        # raise ids.flatten.inspect
+
+      else
+        ids = send(attrs[:group]).values.flatten
+      end
+
+      if ids.any?
+        Asset.where(:id => ids.map(&:to_i)).map { |i| collection[i.id] = i.url(attrs[:size]) }
+      end
+
     else
       assets.map { |i| collection[i.id] = i.url(attrs[:size]) }
     end
@@ -186,7 +203,7 @@ class Report < ActiveRecord::Base
     collection
   end
 
-  def assigned
+  def assigned(attrs={})
     result = []
 
     ["visual_interior", 'interior',"exterior", "windows_lights", "exterior_parts", "powertrains", "electric_parts", "liquid_levels", "chasis", "testdrtive", "windows", "dumpers", "brakes"].each do |i|

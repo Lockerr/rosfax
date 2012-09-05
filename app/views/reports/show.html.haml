@@ -1,413 +1,155 @@
-.row
-  .span4.offset1
-    %h4= t('vehicle_description')
+.container
+  .row
+    .span12
+      %h2
+        Отчет #
+        = @report.id
+        от
+        =@report.created_at.strftime('%d.%m.%y')
+  .row
+    .span2
+      = image_tag @report.assets.first.url(:thumb), :width => '120px'
+    .span10
+      %table.table.table-striped
+        %tr
+          %td= @report.car['mark_model']
+          %td= @report.car['mark_model']
+          %td= @report.car['year']
+        %tr
+          %td= @report.car['vin']
+          %td Regnum
+          %td Mileage
+        %tr
+          %td Engine Cylinders
+          %td Engine Displacement
+          %td Engine Type
+  .row#row
+    .span12
 
-.row
-  .span4
-    =t('report.make')
-    %br/
-    =t('report.vehicle_style')
-    %br/
-    =t('report.year')
-  .span4
-    =t('report.model')
-    %br/
-    =t('report.transmission')
-    %br/
-    =t('report.color')
-  .span4
-    =t('report.vin')
-    %br/
-    =t('report.engine_type')
-    %br/
-    =t('report.mileage')
-%hr/
-.row
-  -@report.assets.each do |asset|
-    .image_at_show{:style => 'float: left', :id => asset.id}
-      =image_tag asset.url(:thumb)
-%hr/
-.row
-  .span4.offset1
-    %h4= t('report.body')
-.row
-  .span12{:style => "background: url('/assets/coating-horizontal.png'); height: 500px; background-repeat: no-repeat;background-position:center"}
+      %table.table
+        / ###################### PHOTOS ######################################
+        %tr
+          %td
+            %a{:data => {:toggle => 'collapse', :target => '#photo'}}
+              %h3{:style => 'margin: 0'} Фото
+          %td= @report.assigned.size
+          %td &nbsp;
+        %tr
+          %td{:colspan => 3}
+            #photo.collapse.in
+              - Asset.where(:id => @report.assigned).each do |image|
+                = image_tag image.url(:thumb)
+        / ######################## EXTERIOR ####################################
+        %tr
+          %td
+            %a{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}}
+              %h3{:style => 'margin: 0'}= t('exterior.title')
+          %td= @report.assigned.size
+          %td &nbsp;
+        %tr
+          %td{:colspan => 3}
+            #checklist_exterior.collapse.in
+              %table.table.table-striped
+                %tr
+                  %td
+                    %a{:data => {:toggle => 'collapse', :target => "#checklist_exterior_lights"}}
+                      %h4{:style => 'margin: 0'}=t("checklist.lights.title")
+                  %td= @report.checklist['lights'].size()
+                  %td &nbsp;
+                - if @report.checklist['lights'].size() > 0
+                  %tr
+                    %td{:colspan => 3}
+                      .collapse.in{:id => "checklist_exterior_lights"}
+                        %ul.thumbnails
+                          - @report.checklist['lights'].each do |key, value|
+                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
+                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? value
+                                .alert.alert-success{:style => 'margin-bottom: 0px'}
+                                  .span6= t("checklist.#{'lights'}.#{key}")
+                                  .span6{:style => 'text-align:right'}= value
+                              - else
+                                .alert.alert-error{:style => 'margin-bottom: 0px'}
+                                  .span6= t("checklist.#{'lights'}.#{key}")
+                                  .span6{:style => 'text-align:right'}= value
+                %tr
+                  %td
+                    %a{:data => {:toggle => 'collapse', :target => "#checklist_exterior_lights"}}
+                      %h4{:style => 'margin: 0'}=t("checklist.lights.title")
+                  %td= @report.checklist['lights'].size()
+                  %td &nbsp;
+                - if @report.checklist['lights'].size() > 0
+                  %tr
+                    %td{:colspan => 3}
+                      .collapse.in{:id => "checklist_exterior_lights"}
+                        %ul.thumbnails
+                          - @report.checklist['lights'].each do |key, value|
+                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
+                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? value
+                                .alert.alert-success{:style => 'margin-bottom: 0px'}
+                                  .span6= t("checklist.#{'lights'}.#{key}")
+                                  .span6{:style => 'text-align:right'}= value
+                              - else
+                                .alert.alert-error{:style => 'margin-bottom: 0px'}
+                                  .span6= t("checklist.#{'lights'}.#{key}")
+                                  .span6{:style => 'text-align:right'}= value
 
-.row
-  .span2.offset2
-    = t('report.overal_exterior_condition')
-  .span8
-    .alert.alert-warning{:style => 'text-align: center'}
-      %h4=t('report.fair')
-.row
-  .span2.offset2
-    = t('report.overal_interior_condition')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p=t 'lorem'
+                %tr
+                  %td{:colspan => 3}
+                    Description:
+                    = t('lorem')
+        / ######################## INTERIOR ####################################
+        %tr
+          %td
+            %a{:data => {:toggle => 'collapse', :target => '#checklist_interior'}}
+              %h3{:style => 'margin: 0'}= t('interior.title')
+          %td= @report.assigned.size
+          %td &nbsp;
+        %tr
+          %td{:colspan => 3}
+            #checklist_interior.collapse.in
+              %table.table.table-striped
+                %tr
+                  %td
+                    %a{:data => {:toggle => 'collapse', :target => "#checklist_interior_electronic"}}
+                      %h4{:style => 'margin: 0'}=t("checklist.electronic.title")
+                  %td= @report.checklist['electronic'].size()
+                  %td &nbsp;
+                - if @report.checklist['electronic'].size() > 0
+                  %tr
+                    %td{:colspan => 3}
+                      .collapse.in{:id => "checklist_interior_electronic"}
+                        %ul.thumbnails
+                          - @report.checklist['electronic'].each do |key, value|
+                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
+                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1, 'н/п'].include? value
+                                .alert.alert-success{:style => 'margin-bottom: 0px'}
+                                  .span6= t("checklist.#{'electronic'}.#{key}")
+                                  .span6{:style => 'text-align:right'}= value
+                              - else
+                                .alert.alert-error{:style => 'margin-bottom: 0px'}
+                                  .span6= t("checklist.#{'electronic'}.#{key}")
+                                  .span6{:style => 'text-align:right'}= value
+                %tr
+                  %td
+                    %a{:data => {:toggle => 'collapse', :target => "#defects_interior"}}
+                      %h4{:style => 'margin: 0'}=t("defects.interior.title")
+                  %td= @report.defects.where(:category => 'interior').count
+                  %td &nbsp;
+                - if @report.defects.where(:category => 'interior').count > 0
+                  %tr
+                    %td{:colspan => 3}
+                      .collapse.in{:id => "checklist_exterior_lights"}
+                        %ul.thumbnails
+                          - @report.defects.where(:category => 'interior').each do |defect|
+                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
+                              .alert.alert-error{:style => 'margin-bottom: 0px'}
+                                .span6= t("defects.interior.#{defect.sub_category}")
+                                .span6{:style => 'text-align:right'}
+                                  = t("defect_type.#{defect.defect_type}")
+                                  &nbsp;
+                                  = defect.size
 
-%hr/
-/ ENGINE
-.row
-  .span4.offset1
-    %h4=t('report.engine')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/engine.gif'
-  .span2
-    =t('report.engine_condition')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p=t 'lorem'
-
-.row
-  .span2
-    =image_tag asset_path '/assets/report/engine_oil_l.gif'
-  .span2
-    =t('report.engine_oil_level')
-  .span8
-    .alert.alert-error{:style => 'text-align: center'}
-      %h4=t('report.bad')
-    %p=t 'lorem'
-
-%hr/
-/ TRANSMISSION
-.row
-  .span4.offset1
-    %h4=t('report.transmission')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/transmission.gif'
-  .span2
-    =t('report.transmission_condition')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p=t 'lorem'
-.row
-  .span2
-    =image_tag asset_path '/assets/report/trans_oil_f.gif'
-  .span2
-    =t('report.transmission_oil_level')
-  .span8
-    .alert.alert-error{:style => 'text-align: center'}
-      %h4=t('report.bad')
-    %p=t 'lorem'
-%hr/
-/ CLUTCH
-.row
-  .span4.offset1
-    %h4=t('report.clutch')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/clutch.gif'
-  .span2
-    =t('report.clutch_condition')
-  .span8
-    .alert.alert-info{:style => 'text-align: center'}
-      %h4=t('report.not_reported')
-    %p=t 'lorem'
-%hr/
-/ COOLINg
-.row
-  .span4.offset1
-    %h4=t('report.cooling')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/cooling_f.gif'
-  .span2
-    =t('report.cooling_condition')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.full')
-    %p=t 'lorem'
-%hr/
-/ FUEL
-.row
-  .span4.offset1
-    %h4=t('report.fuel')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/fuel.gif'
-  .span2
-    =t('report.fuel_condition')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p.small=t 'lorem'
-%hr/
-/ EXHAUST
-.row
-  .span4.offset1
-    %h4=t('report.exhaust')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/exhaust.gif'
-  .span2
-    =t('report.exhaust_condition')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p.small=t 'lorem'
-.row
-  .span2.offset2
-    =t('report.emission_status')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p.small=t 'lorem'
-%hr/
-/ Brakes
-.row
-  .span4.offset1
-    %h4=t('report.brakes')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/brakes.gif'
-  .span2
-    =t('report.brakes_condition')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p.small=t 'lorem'
-
-.row
-  .span2
-    =image_tag asset_path '/assets/report/brake_f.gif'
-  .span2
-    =t('report.brake_fluid_level')
-  .span8
-    .alert.alert-success{:style => 'text-align: center'}
-      %h4=t('report.good')
-    %p.small=t 'lorem'
-%hr/
-/ STEERING
-.row
-  .span4.offset1
-    %h4=t('report.steering')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/steering.gif'
-  .span10
-    .row
-      .span2
-        =t('report.steering_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-    .row
-      .span2
-        =t('report.steering_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-%hr/
-/ CHOCKS
-.row
-  .span4.offset1
-    %h4=t('report.shocks')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/shocks.gif'
-  .span10
-    .row
-      .span2
-        =t('report.shocks_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-    .row
-      .span2
-        =t('report.shocks_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-%hr/
-/ wheels
-.row
-  .span4.offset1
-    %h4=t('report.wheels')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/wheels.gif'
-  .span10
-    .row
-      .span2
-        =t('report.wheels_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-
-    .row
-      .span2
-        =t('report.wheels_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-%hr/
-/ windows
-.row
-  .span4.offset1
-    %h4=t('report.windows')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/windows.gif'
-  .span10
-    .row
-      .span2
-        =t('report.windows_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-    .row
-      .span2
-        =t('report.windows_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-    .row
-      .span2
-        =t('report.windows_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-    .row
-      .span2
-        =t('report.windows_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-%hr/
-/ rpm
-.row
-  .span4.offset1
-    %h4=t('report.rpm')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/rpm.gif'
-  .span10
-    .row
-      .span2
-        =t('report.rpm_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-%hr/
-/ rpm
-.row
-  .span4.offset1
-    %h4=t('report.additional_equipment')
-.row
-  .span2
-    &nbsp;
-  .span10
-    .row
-      .span2
-        =t('report.rpm_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-
-    .row
-      .span2
-        =t('report.rpm_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-
-    .row
-      .span2
-        =t('report.rpm_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-
-    .row
-      .span2
-        =t('report.rpm_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-
-    .row
-      .span2
-        =t('report.rpm_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-
-    .row
-      .span2
-        =t('report.rpm_condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-        %p.small=t 'lorem'
-%hr/
-/ ac_heating
-.row
-  .span4.offset1
-    %h4=t('report.ac_heating')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/ac_heat.gif'
-  .span10
-    .row
-      .span2
-        =t('report.condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-.row
-  .span2
-    =image_tag asset_path '/assets/report/ac_cold.gif'
-  .span10
-    .row
-      .span2
-        =t('report.condition')
-      .span8
-        .alert.alert-success{:style => 'text-align: center'}
-          %h4=t('report.good')
-%hr/
-/ Conclusion
-.row
-  .span4.offset1
-    %h4= t('report.conclusion')
-.row
-  .span12
-    %p= t 'lorem'
-
-
-
-#modal_carousel.modal.hide{:style => 'overflow: hidden'}
-  %button.close{'data-dismiss'=>"modal"}
-  #myCarousel.carousel.slide{:style => 'padding: 5px'}
-    / Carousel items
-    .carousel-inner
-      - for image in @report.images :group => 'visual_interior', :size => 'carousel'
-        .item{:id => "active_#{image[0]}"}
-          = image_tag(image[1])
-
-
-    / Carousel nav
-    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :style => 'top: 48%'} ‹
-    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel", :style => 'top: 48%'} ›
-    %a.carousel-control.close.top-left{'data-dismiss' => 'modal', :href => "#myCarousel", :style => 'width: 30px; height: 30px; font-size: 34px; top: 6%; left: 93%; line-height: 19px'} x
-
+                %tr
+                  %td{:colspan => 3}
+                    Description:
+                    = t('lorem')

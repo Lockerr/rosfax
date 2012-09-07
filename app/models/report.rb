@@ -1,7 +1,12 @@
 #encoding: utf-8
 class Report < ActiveRecord::Base
+  has_many :points
   has_many :assets, :as => :attachable
-  has_many :defects
+  # has_many :defects
+
+  has_many :elements, :class_name => 'Point', :conditions => ['object = ?', :element]
+  has_many :defects, :class_name => 'Point', :conditions => ['object = ?', :defect]
+  has_many :cheks, :class_name => 'Point', :conditions => ['object =?', :check]
 
   belongs_to :user
   belongs_to :model
@@ -35,7 +40,7 @@ class Report < ActiveRecord::Base
   serialize :car, Hash
   serialize :documents, Hash
 
-  default_scope includes(:assets)
+  default_scope includes([:assets, :points])
   scope :public, where(:publish => true)
 
   EXTERIOR = %w( :front_left :front :front_right :left  :roof :right :rear_left :rear :rear_right)

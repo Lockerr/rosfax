@@ -12,8 +12,13 @@
             .controls
               .btn-toolbar{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio{:style => 'padding-left: 0px'}
+                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
+                  = parameters
+                  - if check = @points.where(parameters).first()
+                    - parameters[:id] = check.id
                   - %w(ок левая правая обе).each do |i|
-                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :lights, :change => param, param => i}}=i
+                    - parameters[:condition] = i
+                    %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
   .span6
     .well.well-small
       %legend Заднее освещение
@@ -24,6 +29,11 @@
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio{:style => 'padding-left: 0px'}
+                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
+                  = parameters
+                  - if check = @points.where(parameters).first()
+                    - parameters[:id] = check.id
                   - %w(ок левая правая обе).each do |i|
-                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :lights, :change => param, param => i}}=i
+                    - parameters[:condition] = i
+                    %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
 

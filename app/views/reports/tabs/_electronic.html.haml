@@ -12,8 +12,14 @@
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
+                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'electronic', :place => param}
+                  = parameters
+                  - if check = @points.where(parameters).first()
+                    - parameters[:id] = check.id
                   -%w(ок проблемы н/п).each do |i|
-                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :electronic, :change => param, param => i}}=i
+                    - parameters[:condition] = i
+                    %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+
   .span6
     .well.well-small
       %legend Заголовок 2
@@ -24,5 +30,9 @@
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
+                  - parameters = {:report_id => @report.id, :object => :check, :section => :electronic, :place => param}
+                  - if check = @points.where(parameters).first()
+                    - parameters[:id] = check.id
                   -%w(ок проблемы н/п).each do |i|
-                    %button.checkbox.btn{:data => {:attribute => :checklist, :place => :electronic, :change => param, param => i}}=i
+                    - parameters[:condition] = i
+                    %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

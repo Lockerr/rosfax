@@ -1,4 +1,3 @@
-/ = image_tag 'https://s3-eu-west-1.amazonaws.com/rosfax/coating.jpg'
 .controls{:style => 'margin-left: 9px'}
   -{1 => [158,133, 'front_left_wing'],
      2 => [356,133, 'front_left_door'],
@@ -13,6 +12,10 @@
      11 => [436,351, 'roof']}.each do |key, value|
     .btn-toolbar.pull-left{:style => "width: 200px; margin-top: 0px; position: absolute; margin-top: #{value[0]-87}px;margin-left: #{value[1]-156}px"}
       .btn-group.pads.radio
+        - parameters = {:report_id => @report.id, :object => 'check', :section => 'coating', :place => value[2]}
+        = parameters
+        - if check = @points.where(parameters).first()
+          - parameters[:id] = check.id
         - ['100', '200', '300', '400+'].each do |i|
-          %button.checkbox.btn.btn-mini{:data => {:attribute =>:checklist,:place => :coating, :change => value[2], value[2] => i}, :class => ('btn-primary' if report.checklist['coating'][value[2]] == i if report.checklist['coating'])}=i
-
+          - parameters[:condition] = i
+          %button.check.btn.btn-mini{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

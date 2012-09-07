@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Object:
+  = @point.object
+%p
+  %b Report:
+  = @point.report_id
+%p
+  %b Section:
+  = @point.section
+%p
+  %b Place:
+  = @point.place
+%p
+  %b Condition:
+  = @point.condition
+%p
+  %b State:
+  = @point.state
+
+= link_to 'Edit', edit_point_path(@point)
+\|
+= link_to 'Back', points_path

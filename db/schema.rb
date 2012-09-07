@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903081918) do
+ActiveRecord::Schema.define(:version => 20120906094411) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -72,6 +72,18 @@ ActiveRecord::Schema.define(:version => 20120903081918) do
     t.integer "brand_id"
     t.string  "name",     :null => false
     t.boolean "popular"
+  end
+
+  create_table "points", :force => true do |t|
+    t.string   "object"
+    t.integer  "report_id"
+    t.string   "section"
+    t.string   "place"
+    t.string   "condition"
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "images"
   end
 
   create_table "reports", :force => true do |t|

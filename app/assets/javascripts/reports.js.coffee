@@ -1,9 +1,9 @@
 
 @appendUploader = (tab) ->
-  tabs = ['#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
+  tabs = ['#wwindows_and_lights', '#eexterior','#iinterior', '#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
 
   if tab in tabs
-    $("#{tab} #{tab}.row-fluid").append($('.uploader'))
+    $("#{tab}.row-fluid").append($('.uploader'))
     $('.uploader').show()
 
   if tab in ["#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
@@ -38,8 +38,8 @@
   window.defect = defect
   $.ajax
     type: 'POST'
-    data: {defect: defect.data()}
-    url: '/reports/' + defect.data('report_id') + '/defects.json'
+    data: {point: defect.data()}
+    url: "/points.json"
     async: false
     success: (data) ->
       defect.data('id', data.id)

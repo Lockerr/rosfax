@@ -18,15 +18,15 @@
             Чеклист
             %span{:style => 'color: #ddd'}= @report.counters[:checklist][:summ][2]
         %li
-          %a{"data-toggle" => "tab", :href => "#defects"}
-            Дефекты
-            %span{:style => 'color: #ddd'}= @report.defects.size
-        %li
           %a{"data-toggle" => "tab", :href => "#testdrive"}
             Тест-драйв
             %span{:style => 'color: #ddd'}= @report.counters[:testdrive][:summ][2]
+        %li
+          %a{"data-toggle" => "tab", :href => "#elements"}
+            Элементы
+            %span{:style => 'color: #ddd'}= "#{@report.elements.count}/#{Report::DEFECTS_CATEGORIES.values.flatten.size}"
       .tab-content.first
-        - for symbol in %w(photo checklist defects testdrive)
+        - for symbol in %w(photo checklist defects testdrive elements)
           = render "reports/tabs/#{symbol}"
         .tab-pane#info.active
           = render 'reports/info'

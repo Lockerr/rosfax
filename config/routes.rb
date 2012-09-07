@@ -1,5 +1,7 @@
 Tradein::Application.routes.draw do
 
+  resources :points
+
   get "home/index"
 
   devise_for :users
@@ -19,6 +21,7 @@ Tradein::Application.routes.draw do
 
 
   resources :reports do
+    resources :points
     get 'images'
     get 'all_images'
     resources :assets

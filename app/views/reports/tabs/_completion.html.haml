@@ -1,30 +1,39 @@
-= cache 'completion' do
-  .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
-    .span12
-      .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
-  .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
-    .span6
-      .well.well-small
-        %legend Заголовок 1
-        .form-horizontal
-          - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
-            .control-group
-              %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
-              .controls
-                .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                  .btn-group.pads.radio
-                    - %w(есть нет н/п).each do |i|
-                      %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completion, :change => param, param => i}}=i
-    .span6
-      .well.well-small
-        %legend Заголовок 2
-        .form-horizontal
-          - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
-            .control-group
-              %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
-              .controls
-                .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                  .btn-group.pads.radio
-                    - %w(есть нет н/п).each do |i|
-                      %button.checkbox.btn{:data => {:attribute => :checklist, :place => :completion, :change => param, param => i}}=i
+.row{:style => 'margin-left: 0px; margin-bottom: 10px'}
+  .span12
+    .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
+.row{:style => 'margin-left: 0px; margin-bottom: 10px'}
+  .span6
+    .well.well-small
+      %legend Заголовок 1
+      .form-horizontal
+        - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
+          .control-group
+            %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
+            .controls
+              .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                .btn-group.pads.radio
+                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
+                  = parameters
+                  - if check = @points.where(parameters).first()
+                    - parameters[:id] = check.id
+                  -%w(есть нет н/п).each do |i|
+                    - parameters[:condition] = i
+                    %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+  .span6
+    .well.well-small
+      %legend Заголовок 2
+      .form-horizontal
+        - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
+          .control-group
+            %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
+            .controls
+              .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                .btn-group.pads.radio
+                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
+                  = parameters
+                  - if check = @points.where(parameters).first()
+                    - parameters[:id] = check.id
+                  -%w(есть нет н/п).each do |i|
+                    - parameters[:condition] = i
+                    %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
 

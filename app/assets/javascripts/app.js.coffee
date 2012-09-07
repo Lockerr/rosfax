@@ -48,6 +48,26 @@ update_eye_fi = ->
 
       $('.photos').trigger 'change'
 
+@store_point = (element) ->
+  data = element.data()
+
+  if data.id
+    $.ajax
+      url: "/points/#{data.id}.json"
+      type: 'PUT'
+      data: {point: data}
+  else
+    $.ajax
+      url: '/points.json'
+      type: 'POST'
+      data: {point: data}
+      success: (response) =>
+        $(element).data('id', response.id)
+        $(element).siblings().data('id', response.id)
+        if elements = $(element).find('.btn')
+          for element in elements
+            $(element).data('id', response.id)
+
 
 
 
@@ -132,19 +152,21 @@ $(document).ready ->
   $('.photos').bind 'custom_change', ->
     console.log "refreshing: #{refreshing}"
     unless refreshing
-      refresh_loop = (refresh_rate) ->
-          console.log("inside photos refresh loop #{refresh_rate}")
-          get_images()
+      unless window.location.hostname == '0.0.0.0'
+        refresh_loop = (refresh_rate) ->
+            console.log("inside photos refresh loop #{refresh_rate}")
+            get_images()
 
-          setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
+            setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
 
 
-      refresh_rate = 5000
-      setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
+        refresh_rate = 5000
+        setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
 
   $('.photos').trigger 'custom_change'
-
-  eye_fi_loop = ->
-      update_eye_fi()
-      setTimeout((-> eye_fi_loop(5000)), 5000)
-  setTimeout((-> eye_fi_loop(5000)), 5000)
+  console.log window.location.hostname == '0.0.0.0'
+  unless window.location.hostname == '0.0.0.0'
+    eye_fi_loop = ->
+        update_eye_fi()
+        setTimeout((-> eye_fi_loop(5000)), 5000)
+    setTimeout((-> eye_fi_loop(5000)), 5000)

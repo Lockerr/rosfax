@@ -27,8 +27,14 @@
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      - %w(ок слабо сильно).each do |i|
-                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :suspension, :change => param, param => i}}=i
+                      - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}
+                      = parameters
+                      - if check = @points.where(parameters).first()
+                        - parameters[:id] = check.id
+                      -%w(ок слабо сильно).each do |i|
+                        - parameters[:condition] = i
+                        %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+
       #engine.tab-pane
         .span5.well
           .form-horizontal
@@ -38,8 +44,13 @@
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      - %w(1 2 3).each do |i|
-                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :engine, :change => param, param => i}}=i
+                      - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
+                      = parameters
+                      - if check = @points.where(parameters).first()
+                        - parameters[:id] = check.id
+                      -%w(1 2 3).each do |i|
+                        - parameters[:condition] = i
+                        %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
         .span5.well
           .form-horizontal
             - %w(shifting_down shifting_up parking_brake sound_signal).each do |param|
@@ -48,8 +59,14 @@
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      - %w(1 2 3).each do |i|
-                        %button.checkbox.btn{:data => {:attribute => :testdrive, :place => :engine, :change => param, param => i}}=i
+                      - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
+                      = parameters
+                      - if check = @points.where(parameters).first()
+                        - parameters[:id] = check.id
+                      -%w(1 2 3).each do |i|
+                        - parameters[:condition] = i
+                        %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+
 
       #other_tests.tab-pane
         .span8.well

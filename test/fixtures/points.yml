@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  object: MyString
+  report_id: 1
+  section: MyString
+  place: MyString
+  condition: MyString
+  state: MyString
+
+two:
+  object: MyString
+  report_id: 1
+  section: MyString
+  place: MyString
+  condition: MyString
+  state: MyString

@@ -193,10 +193,23 @@ $ ->
       container.data().wheels.rear_right = data
       store_report()
 
-  $('.all_ok').click ->
+  $('.all_ok').live 'click', ->
     pads = $(@).parent().parent().siblings().find('.pads')
 
     for pad in pads
       $(pad).find('.btn').first().trigger('click')
+    $(@).removeClass('all_ok')
+    $(@).addClass('clear_ok')
+    $(@).text('Очистить')
+
+  $('.clear_ok').live 'click', ->
+    console.log 'click'
+    pads = $(@).parent().parent().siblings().find('.object')
+    for pad in pads
+      if $(pad).data('object')
+        $.ajax
+          type: 'DELETE'
+          url: "/points/#{$(pad).data().id}.json"
+
 
 

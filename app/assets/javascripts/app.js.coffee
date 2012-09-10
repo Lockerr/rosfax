@@ -61,7 +61,8 @@ update_eye_fi = ->
       url: '/points.json'
       type: 'POST'
       data: {point: data}
-      success: (response) =>
+      success: (response) ->
+        $(element).parents('.object').data('id', response.id)
         $(element).data('id', response.id)
         $(element).siblings().data('id', response.id)
         if elements = $(element).find('.btn')

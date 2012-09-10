@@ -4,13 +4,15 @@ $(document).ready ->
     $(@).parent().find('*').removeClass('btn-primary')
     $(@).toggleClass('btn-primary')
     place = $(@).data('place')
-    a = $("a[href='##{place}']")
-    unless a == []
-        a = $("a[href='##{$(@).data('section')}']")
-    tab = a.text().split(/\s/).unique()
-    unless $.inArray('',tab) == -1
-        tab.splice($.inArray('', tab),1)
+    
+    section = $(@).data('section')    
+    span = $("a[href='##{section[0]}#{section}'] span")
+    span = $("a[href='##{place}'] span") if span.length == 0
 
-    diggits = tab[1].split(/\D/)
-    value = $(".tab-pane##{place}").find('.btn-primary').size()
-    a.text("#{tab[0]} #{value}/#{diggits[1]}")
+    diggits = span.text().replace(/\s/g, '').split(/\D/)
+    
+    tab = $(".tab-pane##{section[0]}#{section}")
+    tab = $(".tab-pane##{place}") if tab.length == 0
+
+    value = tab.find('.btn-primary').size()
+    span.text("#{value}/#{diggits[1]}")

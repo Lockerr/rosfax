@@ -19,6 +19,10 @@
 
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden"}
       #eexterior.tab-pane.active.row-fluid
+        .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
+          .span12
+            .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
+
         .span7.well.well-small
           .form-horizontal
             %ul.thumbnails
@@ -54,6 +58,9 @@
 
 
       #iinterior.row-fluid.tab-pane
+        .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
+          .span12
+            .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
         .span7.well.well-small
           .form-horizontal
             %ul.thumbnails
@@ -88,6 +95,10 @@
                               %button.check.btn.btn-mini{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
 
       #wwindows_and_lights.row-fluid.tab-pane
+        .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
+          .span12
+            .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
+
         .span7.well.well-small
           .form-horizontal
             %ul.thumbnails

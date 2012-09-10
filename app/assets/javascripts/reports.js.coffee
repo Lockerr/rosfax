@@ -137,27 +137,7 @@ $ ->
       window.dragged = event.target
     $(".thumbnail img").prop('draggable', false)
 
-  $(".thumb").live 'click', ->
 
-    $('#modal_carousel .item').remove()
-    data = $(@).data()
-
-    if object = 'Report'
-      url = '/reports/'+report_id+'/images'
-
-      $.ajax
-        url: url
-        data: {attribute: data.attribute, place: data.place}
-        success: (data) ->
-          console.log data
-
-          for image_src in data
-
-            $('.carousel-inner').append("<div class='item'><img src='" + image_src + "'></div>")
-
-          $($('.carousel-inner .item')[0]).addClass('active')
-          $('#myCarousel').carousel('pause')
-          $('#modal_carousel').modal('show')
 
   $('.add_defect').click ->
     defect = $('.defect_template').clone()

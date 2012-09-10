@@ -1,6 +1,8 @@
 Tradein::Application.routes.draw do
 
-  resources :points
+  resources :points do
+    resources :image
+  end
 
   get "home/index"
 

@@ -54,7 +54,9 @@ class PointsController < ApplicationController
       end
     end
   end
-
+  def remove_image
+    raise params.inspect
+  end
   # PUT /points/1
   # PUT /points/1.json
   def update

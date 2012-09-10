@@ -119,12 +119,30 @@ class ReportsController < ApplicationController
 
   def images
     @report = Report.find(params[:report_id])
-    ids = @report.send(params[:attribute]).values.flatten.map { |i| i.to_i }
+    assets = {}
+    if params[:place]
+      ids = @report.send(params[:attribute]).values.flatten.map { |i| i.to_i }
 
-    assets = Asset.where(:id => ids).map { |i| i.url(:carousel) }
-    assets.push Asset.where(:id => @report.send( params[:attribute] )[ params[:place] ].first).first.url(:carousel) if  @report.send( params[:attribute] )[ params[:place] ]
+      assets = Asset.where(:id => ids).map { |i| i.url(:carousel) }
+      
+      assets.push Asset.where(:id => @report.send( params[:attribute] )[ params[:place] ].first).first.url(:carousel) if  @report.send( params[:attribute] )[ params[:place] ]
+      render :json => assets.reverse.uniq
+    elsif params[:element_id]
+      points = @report.points.where(:object => :element)
+      point = Point.find(params[:element_id])
 
-    render :json => assets.reverse.uniq
+      assets[:points] = {}
+      assets[:point] = {}
+
+      Asset.where(:id => point.images).map{|i| assets[:point][i.id] = i.url(:carousel)}
+      Asset.where(:id => points.map(&:images).flatten.uniq).map{|i| assets[:points][i.id] = i.url(:carousel)}
+
+      render :json => assets
+    else
+      render json: 'nothing', status: :unprocessable_entity
+    end
+
+    
   end
 
   def image

@@ -30,7 +30,7 @@ ru:
       whom: ПТС, Кем выдана
 
     lights:
-      title: Огни
+      title: Фары
       headlights: Ближний свет
       distant_lights: Дальний свет
       fog_lights: Противотуманки
@@ -96,7 +96,7 @@ ru:
   glass_elevators: Стеклоподъемники
   central_locking: Центральный замок
   windows_and_lights:
-    title: Окна и свет
+    title: Стекла и фары
   powertrains:
     title: ДВС/КПП/Навесное
 

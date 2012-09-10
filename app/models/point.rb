@@ -8,7 +8,7 @@ class Point < ActiveRecord::Base
   scope :defects, where(:object => :defect)
   scope :checks, where(:object => :check)
 
-
+  validates_presence_of :object
   serialize :images, Array
 
   def asset_id=(id)
@@ -17,6 +17,11 @@ class Point < ActiveRecord::Base
 
   def image
     Asset.find(images.last.to_i) if images.any?
+  end
+
+  def remove!(image_id)
+    images.delete(image_id.to_s)
+    save
   end
 
 end

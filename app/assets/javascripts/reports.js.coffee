@@ -58,7 +58,7 @@
 
       this.ondrop  = (event) ->
         obj = window.dragged
-        console.log obj.id
+        console.log "Dragged object id is #{obj.id}"
         event.preventDefault()
         event.dataTransfer.dropEffect = "copy"
         attribute = $(this).data('attribute')
@@ -195,7 +195,6 @@ $ ->
 
   $('.all_ok').live 'click', ->
     pads = $(@).parent().parent().siblings().find('.pads')
-
     for pad in pads
       $(pad).find('.btn').first().trigger('click')
     $(@).removeClass('all_ok')
@@ -203,13 +202,13 @@ $ ->
     $(@).text('Очистить')
 
   $('.clear_ok').live 'click', ->
-    console.log 'click'
     pads = $(@).parent().parent().siblings().find('.object')
     for pad in pads
       if $(pad).data('object')
         $.ajax
           type: 'DELETE'
           url: "/points/#{$(pad).data().id}.json"
-
+          complete: ->
+        $(pad).find('.btn-primary').removeClass('btn-primary')
 
 

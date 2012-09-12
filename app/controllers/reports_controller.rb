@@ -52,6 +52,8 @@ class ReportsController < ApplicationController
   def edit
     @report = Report.find(params[:id])
     @points = @report.points
+    @models = {}
+    Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort
   end
 
   # POST /reports

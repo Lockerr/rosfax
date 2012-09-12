@@ -29,44 +29,5 @@
         = render 'reports/tabs/under_the_hood'
       #photo_others.tab-pane
         = render 'reports/tabs/photo_others'
-      
-      #brakes.tab-pane
-        = form_for 'report', :html => {:class => 'form-horizontal'},:method => :put do |form|
-          - for element in Report::BRAKES
-            .control-group
-              %label.control-label
-                =element
-              .controls
-                - if @report.brakes[element] == 'true'
-                  %label.radio
-                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'true', :checked => ''}
-                      ок
-                  %label.radio
-                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false'}
-                      требуют замены
-                - else
-                  %label.radio
-                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'true'} ок
-                  %label.radio
-                    %input{:id => "report_brakes[#{element}]", :name => "report[brakes[#{element}]]", :type => "radio", :value => 'false', :checked => true} требуют замены
-          = form.submit
       #video.tab-pane
         Видео
-
-
-
-#modal_carousel.modal.hide{:style => 'overflow: hidden'}
-  %button.close{'data-dismiss'=>"modal"}
-  #myCarousel.carousel.slide{:style => 'padding: 5px'}
-    / Carousel items
-    .carousel-inner
-      - for image in @report.images :group => 'visual_interior', :size => 'carousel'
-        .item{:id => "active_#{image[0]}"}
-          = image_tag(image[1])
-
-
-    / Carousel nav
-    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
-    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
-    %a.carousel-control.close.top-left{'data-dismiss' => 'modal', :href => "#myCarousel", :style => 'width: 30px, height: 30px; font-size: 34px; top: 6%; left: 91%'} x
-

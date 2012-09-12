@@ -1,7 +1,7 @@
 #checklist.tab-pane.left
   .tabbable{:style => "margin-bottom: 18px;"}
     %ul.nav.nav-tabs
-      - for tab in %w(documents coating lights electronic liquids completion)
+      - for tab in %w(coating lights electronic liquids completion)
         %li
           %a{"data-toggle" => "tab", :href => "##{tab}"}
             = t("tab.#{tab}")
@@ -10,7 +10,7 @@
               = @report.counters[:checklist][tab.to_sym][2]
 
     .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden"}
-      - for tab in %w(documents coating lights electronic liquids completion)
+      - for tab in %w(coating lights electronic liquids completion)
         - if tab == 'coating'
           .tab-pane{:id => tab, :style => "background-image: url('https://s3-eu-west-1.amazonaws.com/rosfax/coating.jpg'); background-repeat: no-repeat; height: 1000px"}
             = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report}

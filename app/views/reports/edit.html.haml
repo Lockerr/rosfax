@@ -7,8 +7,6 @@
           %a{"data-toggle" => "tab", :href => "#info"}
             Информация
             %span{:style => 'color: #ddd'}= @report.counters[:car][:summ][2]
-
-
         %li
           %a{"data-toggle" => "tab", :href => "#photo"}
             Фото
@@ -26,13 +24,20 @@
             Элементы
             %span{:style => 'color: #ddd'}= "#{@report.elements.count}/#{Report::DEFECTS_CATEGORIES.values.flatten.size}"
       .tab-content.first
-        - for symbol in %w(photo checklist defects testdrive elements)
+        - for symbol in %w(photo checklist defects testdrive elements info)
           = render "reports/tabs/#{symbol}"
-        .tab-pane#info.active
-          = render 'reports/info'
-
-
-
 .span4.uploader.hide
   = render :partial => 'uploader', :locals => {:attribute => ''}
+
+#modal_carousel.modal.hide{:style => 'overflow: hidden'}
+  %button.close{'data-dismiss'=>"modal"}
+  #myCarousel.carousel.slide{:style => 'padding: 5px'}
+    .carousel-inner
+      - for image in @report.images :group => 'visual_interior', :size => 'carousel'
+        .item{:id => "active_#{image[0]}"}
+          = image_tag(image[1])
+
+    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
+    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
+    %a.carousel-control.close.top-left{'data-dismiss' => 'modal', :href => "#myCarousel", :style => 'width: 30px, height: 30px; font-size: 34px; top: 6%; left: 91%'} x
 

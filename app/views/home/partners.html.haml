@@ -1,0 +1,107 @@
+:javascript
+  document.models = #{@models.to_json};
+
+.container-fluid
+  .row
+    .span4.offset2
+      .function-frame
+        .logotype
+          rosfax.ru
+        .links
+          - unless current_user
+            .link.pull-left
+              =link_to 'войти', new_user_session_path
+            .link.pull-left{:style => 'margin-left: 28px'}
+              =link_to 'зарегистрироваться', new_user_registration_path
+          - else
+            .link.pull-left
+              = current_user.email
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            .link.pull-left
+              = link_to 'Мои отчеты', reports_path
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            .link.pull-left
+              = link_to 'Выйти', destroy_user_session_path
+
+          .main-search
+            = text_field 'search', 'queue', :class => 'main-input', :data => {:provide => 'typeahead', :source => @models.keys}
+            = image_tag asset_path('search.png')
+    .span4
+      .selected-models
+
+  .row
+    .main-unit
+      .main-frame
+        .subframe
+          .main-car
+          .main-lines
+            .main-lines-1
+              .line
+                .speach2.pull-left
+                  Машина без фото
+                  %br/
+                  %bigger{:style => 'font-size: 26px'}
+                    продается
+                  %bigger-black{:style => 'font-size: 24px; color: black'}
+                    за
+                .main-diggit.pull-left
+                  6
+                  %smaller
+                    недель
+
+              .line
+                .speach2.pull-left{:style => 'color: #a28e31'}
+                  Машина с фото
+                  %br/
+                  %bigger{:style => 'font-size: 26px'}
+                    продается
+                  %bigger-black{:style => 'font-size: 24px; color: black'}
+                    за
+                .main-diggit.pull-left
+                  3
+                  %smaller
+                    недели
+              .line
+                .percentage
+                .speach2.pull-left{:style => 'color: #42702f'}
+                  Машина с rosfax.ru
+                  %br/
+                  %bigger{:style => 'font-size: 26px'}
+                    продается
+                  %bigger-black{:style => 'font-size: 24px; color: black'}
+                    за
+                .main-diggit.pull-left{:style => 'margin-left: 2px'}
+                  1
+                  %smaller
+                    неделю
+
+            .main-lines-2
+              .line
+                .percentage
+                  80%
+                .speach
+                  машин
+                  %br/
+                  без фотографий
+                  .epilogue{:style => 'font-size: 16px'}
+                    имеют серьезные дефекты
+              .line
+                .percentage
+                  40%
+                .speach{:style => 'color: #a28e31'}
+                  машин
+                  %br/
+                  с фотографиями
+                  .epilogue{:style => 'font-size: 14px'}
+                    сняты с выгодных ракурсов
+              .line
+                .percentage
+                  100%
+                .speach{:style => 'color: #42702f'}
+                  машин
+                  %br/
+                  на rosfax.ru
+                  .epilogue{:style => 'font-size: 13px'}
+                    с проверенной информацией
+
+

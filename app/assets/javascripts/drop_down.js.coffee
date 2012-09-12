@@ -33,13 +33,13 @@ $(document).ready ->
     unless attr == 'defect'
       container_data = container.data(attr) || new Object
 
-      console.log "container_data => #{container.data(attr)}"
+      console.log "dropdown-element: container_data => #{container.data(attr)}"
 
       if (place = element.data('place'))
         container_data[place] ||= new Object
         container_data[place][change] = element.data(change)
-        console.log "preivous data => #{container_data[place][change]}"
-        console.log "data(change) => #{element.data(change)}"
+        console.log "dropdown-element: preivous data => #{container_data[place][change]}"
+        console.log "dropdown-element: data(change) => #{element.data(change)}"
       else
         container_data[change] = element.data(change)
 
@@ -48,6 +48,7 @@ $(document).ready ->
       $('.all_wheels').trigger('change') if $('.all_wheels').prop('checked')
 
     else
+
       defect = $(@).parents('.defect')
       data = defect.data()
       if change == 'category'
@@ -56,15 +57,11 @@ $(document).ready ->
         defect.find('.drop').show()
         defect.data('category',element.data('category'))
         defect.find('.undercat').parent().find('.btn').css('color', '#333')
-        console.log "incat change => #{change}, data_change => #{element.data(change)}"
-
-
-
-
+        console.log "dropdown-element: incat change => #{change}, data_change => #{element.data(change)}"
       else
         defect.data(change, element.data(change))
-        console.log "notincat change => #{change}, data_change => #{element.data(change)}"
+        console.log "dropdown-element: notincat change => #{change}, data_change => #{element.data(change)}"
 
-      console.log "end change => #{change}, data_change => #{element.data(change)}"
+      console.log "dropdown-element:  end change => #{change}, data_change => #{element.data(change)}"
       defect.trigger('change')
 

@@ -16,8 +16,14 @@
           Стекла и фары
           %span{:style => 'color: #ddd'}
             = "#{@report.elements.where(:section => :windows_and_lights).count}/#{Report::DEFECTS_CATEGORIES[:windows_and_lights].count}"
+      %li
+        %a{"data-toggle" => "tab", :href => "#wheels"}
+          Колеса
+          %span{:style => 'color: #ddd'}
+            = "#{@report.wheels.keys.count}/4"
 
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden"}
+      
       #eexterior.tab-pane.active.row-fluid
         .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
           .span12
@@ -68,6 +74,7 @@
                 - parameters = {:report_id => @report.id, :object => 'element', :section => 'interior', :place => param}
                 - if check = @points.where(parameters).first()
                   - parameters[:id] = check.id
+
                 %li.pull-left{:style => 'width: 49%; margin-left: 0px'}
                   .object{:data => parameters, :style => 'height: 50px; margin-bottom: 0px'}
                     .span5
@@ -131,4 +138,5 @@
                             -%w(ок мелкие крупные).each do |i|
                               - parameters[:condition] = i
                               %button.check.btn.btn-mini{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
-
+      #wheels.tab-pane
+        = render 'reports/tabs/wheels'

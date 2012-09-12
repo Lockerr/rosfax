@@ -18,10 +18,6 @@
           Прочее
           %span{:style => 'color: #ddd'}= @report.counters[:photo][:photo_others][2]
       %li
-        %a{"data-toggle" => "tab", :href => "#wheels"}
-          Колеса
-          %span{:style => 'color: #ddd'}= @report.counters[:photo][:wheels][2]
-      %li
         %a{"data-toggle" => "tab", :href => "#video"}
           Видео
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
@@ -33,8 +29,7 @@
         = render 'reports/tabs/under_the_hood'
       #photo_others.tab-pane
         = render 'reports/tabs/photo_others'
-      #wheels.tab-pane
-        = render 'reports/tabs/wheels'
+      
       #brakes.tab-pane
         = form_for 'report', :html => {:class => 'form-horizontal'},:method => :put do |form|
           - for element in Report::BRAKES

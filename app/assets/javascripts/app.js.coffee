@@ -153,7 +153,7 @@ $(document).ready ->
   $('.photos').bind 'custom_change', ->
     console.log "refreshing: #{refreshing}"
     unless refreshing
-      unless window.location.hostname == '0.0.0.0'
+      unless window.location.hostname == '0.0.0.0' || window.location.hostname == "partners.lvh.me"
         refresh_loop = (refresh_rate) ->
             console.log("inside photos refresh loop #{refresh_rate}")
             get_images()
@@ -165,8 +165,7 @@ $(document).ready ->
         setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
 
   $('.photos').trigger 'custom_change'
-  console.log window.location.hostname == '0.0.0.0'
-  unless window.location.hostname == '0.0.0.0'
+  unless window.location.hostname == '0.0.0.0' || window.location.hostname == "partners.lvh.me"
     eye_fi_loop = ->
         update_eye_fi()
         setTimeout((-> eye_fi_loop(5000)), 5000)

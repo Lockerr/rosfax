@@ -1,8 +1,8 @@
 
 .span6.well
   %li.btn-group.radio
-    .btn.checkbox.btn{:data => {:attribute => :publish, :publish => 'false'}} Не показывать всем
-    .btn.checkbox.btn{:data => {:attribute => :publish, :publish => 'true'}} Публичный
+    .btn.checkbox.btn{:data => {:section => 'info', :attribute => :publish, :publish => 'false'}} Не показывать всем
+    .btn.checkbox.btn{:data => {:section => 'info',:attribute => :publish, :publish => 'true'}} Публичный
 
   %table.table#car
     %thead

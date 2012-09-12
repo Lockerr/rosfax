@@ -8,6 +8,8 @@ Tradein::Application.routes.draw do
 
   get "home/index"
 
+  devise_for :user
+
   resources :user, :except => [:index, :edit, :new, :show, :create, :update, :destroy] do
     resource :profile
   end

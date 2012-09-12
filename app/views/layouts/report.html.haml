@@ -22,7 +22,8 @@
               %li= link_to 'Домой', root_path
               %li= link_to 'Отчеты', reports_path
               %li= link_to 'Новый отчет', new_report_path
-              %li= link_to 'Профиль', edit_user_profile_path(current_user)
+              - if current_user
+                %li= link_to 'Профиль', edit_user_profile_path(current_user)
 
 
 

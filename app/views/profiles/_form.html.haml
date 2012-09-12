@@ -1,0 +1,49 @@
+.row
+  .span3
+    = form_for @profile do |f|
+      -if @profile.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@profile.errors.count, "error")} prohibited this profile from being saved:"
+          %ul
+            - @profile.errors.full_messages.each do |msg|
+              %li= msg
+      .field
+        = f.label 'Имя'
+        = f.text_field :name
+      .field
+        = f.label 'Организация'
+        = f.text_field :org
+      .field
+        = f.label 'Телефон'
+        = f.text_field :phone
+      .actions
+        = f.submit 'Сохранить'
+  .span7
+    .alert.alert-info
+      %h3
+        Информация для пользователей Eye-Fi
+      %ol
+        %li
+          %p Мы не помним как регистрироваться
+          %p
+            Скорее всего при помощи софтины. или
+            %a.label.label-warning{:href => 'https://center.eye.fi/login.php', :target => '_blank'} https://center.eye.fi/login.php
+
+          %p
+            Введите для отправки информации адрес ..
+            %span.label.label-info картинки и информация
+        %li
+          %p
+            %span.label.label-success
+              Многа букв
+            .row
+              %ul.thumbnails
+                %li.span3
+                  %a.thumbnail{:href => '#'}Картинок
+              
+                %li.span3
+                  %a.thumbnail{:href => '#'}Картинок
+              
+                %li.span3
+                  %a.thumbnail{:href => '#'}Картинок
+

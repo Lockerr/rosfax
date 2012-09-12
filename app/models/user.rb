@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   include Devise::Async::Model
-
+  has_one :profile
   has_many :reports
   has_many :assets, :as => :attachable
   def admin?

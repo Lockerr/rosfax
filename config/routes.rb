@@ -1,12 +1,17 @@
 Tradein::Application.routes.draw do
 
+  resources :profiles
+
   resources :points do
     resources :image
   end
 
   get "home/index"
 
-  devise_for :users
+  resources :user, :except => [:index, :edit, :new, :show, :create, :update, :destroy] do
+    resource :profile
+  end
+
 
   resources :defects do
     get 'images'

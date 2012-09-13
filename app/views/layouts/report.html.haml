@@ -9,13 +9,14 @@
     .navbar.navbar-static-top
       .navbar-inner
         .container
-          .row
-            .span2
-              = image_tag 'car.png', :style => 'width: 90xp; height: 90px; margin-top: 12px'
-            .span7{:style => 'margin-top: 20px'}
-              %h1 Rosfax.ru - проверенные авто
-            .span3.pull-right
-              .btn.btn-large.pull-right Запись на осмотр
+          - unless Rails.root.to_s.split('/')[2] == 'user'
+            .row
+              .span2
+                = image_tag 'car.png', :style => 'width: 90xp; height: 90px; margin-top: 12px'
+              .span7{:style => 'margin-top: 20px'}
+                %h1 Rosfax.ru - проверенные авто
+              .span3.pull-right
+                .btn.btn-large.pull-right Запись на осмотр
           .nav-collapse.collapse
             %ul.nav
               %li.active= link_to 'rosfax.ru', root_path, :class => 'btn btn-navbar'

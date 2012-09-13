@@ -16,10 +16,10 @@ $(document).ready ->
       if parent.data().section
         for category in $.parseJSON($('.categories').text())[parent.data().section]
           cat_list.append("<li><div class='dropdown-element' data-object='defect' data-change='place' data-value=#{category.k}>#{category.v}</div></li>")
-    console.log parent
+    
     store_point(parent)
   
-  $('.dropdown-element').live 'click', ->
+  $(".dropdown-element:not('.alone')").live 'click', ->
 
     element = $(@)
     attr           = element.data('attribute')

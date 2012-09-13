@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120912084805) do
+ActiveRecord::Schema.define(:version => 20120913060314) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -89,10 +89,10 @@ ActiveRecord::Schema.define(:version => 20120912084805) do
   create_table "profiles", :force => true do |t|
     t.string   "name"
     t.string   "org"
-    t.integer  "phone"
+    t.integer  "phone",      :limit => 8
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "reports", :force => true do |t|

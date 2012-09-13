@@ -25,7 +25,7 @@
                 %td
                   Марка/модель
                 %td#mark
-                  = text_field 'report[car]', 'mark_model', :value => @report.car['mark_model'], :data => {:provide => 'typeahead', :source => @models, :attribute => :car, :place => :mark_model}
+                  = text_field 'report[car]', 'mark_model', :value => (@report.car['attr']['mark_model'] if @report.car['attr']), :data => {:provide => 'typeahead', :source => @models, :attribute => :car, :place => :attr, :change => :mark_model}
               %tr
                 %td Год выпуска
                 %td#year

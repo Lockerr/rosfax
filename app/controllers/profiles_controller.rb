@@ -57,6 +57,8 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1
   # PUT /profiles/1.json
   def update
+    params[:profile][:phone] = params[:profile][:phone].gsub(/\D/, '')[1..-1] if params[:profile][:phone]
+    
     @profile = Profile.find(params[:id])
 
     respond_to do |format|

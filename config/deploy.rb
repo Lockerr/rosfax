@@ -1,33 +1,50 @@
-#$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-#require 'rvm/capistrano'
-#require 'bundler/capistrano'
-# Add RVM's lib directory to the load path.
-# $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+desc 'Таски для продакшына'
+task :production do
+  set :domain, "perekup@perekup.net"
+  set :deploy_to, "/home/perekup/rosfax"
+  set :rails_env, "production"
+  set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
+  set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
+  set :application, "rosfax"
+  set :password, '12345trewq'
 
-# Load RVM's capistrano plugin.
+  puts "\n\e[0;31m   ######################################################################" 
+  puts "   #\n   #       Are you REALLY sure you want to deploy to production?"
+  puts "   #\n   #               Enter y/N + enter to continue\n   #"
+  puts "   ######################################################################\e[0m\n" 
+  proceed = STDIN.gets[0..0] rescue nil 
+  exit unless proceed == 'y' || proceed == 'Y' 
+
+  
+end
+
+desc 'staging tasks'
+
+task :staging do
+  set :domain, ''
+end
+
 require "rvm/capistrano"
+
+role :web, domain
+role :app, domain
+role :db, domain, :primary => true
 
 set :rvm_ruby_string, 'r328'
 set :rvm_type, :user # Don't use system-wide RVM
-set :application, "rosfax"
-set :rails_env, "production"
-set :domain, "perekup@perekup.net"
-set :deploy_to, "/home/perekup/rosfax"
-set :use_sudo, false
-set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
-set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
+
+
+set :use_sudo, false
 set :rvm_type, :user
-set :password, '12345trewq'
+
 set :scm, :git
 set :repository, "git@github.com:Lockerr/tradein.git"
 set :branch, "r328"
 set :deploy_via, :remote_cache
 set :backup_dir, "#{deploy_to}/shared"
 
-role :web, domain
-role :app, domain
-role :db, domain, :primary => true
+
 
 after 'deploy:update_code', :roles => :app do
   run "cd #{current_release} ; bundle install"

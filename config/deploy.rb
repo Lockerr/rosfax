@@ -1,40 +1,13 @@
-desc 'Таски для продакшына'
-task :production do
-  set :domain, "perekup@perekup.net"
-  set :deploy_to, "/home/perekup/rosfax"
-  set :rails_env, "production"
-  set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
-  set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
-  set :application, "rosfax"
-  set :password, '12345trewq'
-
-  puts "\n\e[0;31m   ######################################################################" 
-  puts "   #\n   #       Are you REALLY sure you want to deploy to production?"
-  puts "   #\n   #               Enter y/N + enter to continue\n   #"
-  puts "   ######################################################################\e[0m\n" 
-  proceed = STDIN.gets[0..0] rescue nil 
-  exit unless proceed == 'y' || proceed == 'Y' 
-
-  
-end
-
-desc 'staging tasks'
-
-task :staging do
-  set :domain, ''
-end
-
+require 'capistrano/ext/multistage'
 require "rvm/capistrano"
 
-role :web, domain
-role :app, domain
-role :db, domain, :primary => true
+set :default_stage, 'staging'
+
+set :application, "rosfax"
+set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
+set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
 set :rvm_ruby_string, 'r328'
-set :rvm_type, :user # Don't use system-wide RVM
-
-
-
 set :use_sudo, false
 set :rvm_type, :user
 
@@ -42,9 +15,8 @@ set :scm, :git
 set :repository, "git@github.com:Lockerr/tradein.git"
 set :branch, "r328"
 set :deploy_via, :remote_cache
+
 set :backup_dir, "#{deploy_to}/shared"
-
-
 
 after 'deploy:update_code', :roles => :app do
   run "cd #{current_release} ; bundle install"
@@ -52,7 +24,7 @@ after 'deploy:update_code', :roles => :app do
     run "rm -f #{current_release}/config/#{yaml_name}.yml"
     run "ln -s #{deploy_to}/shared/config/#{yaml_name}.yml #{current_release}/config/#{yaml_name}.yml"
   end
-  #run "cd #{current_release} ; rake db:migrate"
+
 
 end
 
@@ -68,7 +40,6 @@ task :backup, :roles => :db, :only => {:primary => true} do
 end
 
 namespace :deploy do
-
   task :restart do
     run "if [ -f #{unicorn_pid} ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && rvm r328 do bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D ; fi"
   end
@@ -82,7 +53,5 @@ namespace :deploy do
   task :migrate do
     run "cd #{deploy_to}/current && bundle exec rake db:migrate"
   end
-
-
 end
 

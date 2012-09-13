@@ -1,17 +1,6 @@
-puts "\n\e[0;31m"
-puts "######################################################################" 
-puts "#                                                                    #"
-puts "#        Are you REALLY sure you want to deploy to production?       #"
-puts "#                     Enter y/N + enter to continue                  #"
-puts "#                                                                    #"
-puts "######################################################################\e[0m\n" 
-
-proceed = STDIN.gets[0..0] rescue nil 
-exit unless proceed == 'y' || proceed == 'Y' 
-
-set :domain, "perekup@perekup.net"
+set :domain, "user@192.168.1.98"
 set :deploy_to, "/home/perekup/rosfax"
-set :rails_env, "production"
+set :rails_env, "development"
 set :password, '12345trewq'
 
 role :web, domain

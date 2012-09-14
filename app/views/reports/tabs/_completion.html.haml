@@ -7,15 +7,14 @@
       %legend Заголовок 1
       .form-horizontal
         - %w(spare_wheel jack tools sealant compressor key_lock_gear).each do |param|
-          .control-group
+          - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
+          - if check = @points.where(parameters).first()
+            - parameters[:id] = check.id
+          .control-group.object{:data => parameters}
             %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
-                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
-                  = parameters
-                  - if check = @points.where(parameters).first()
-                    - parameters[:id] = check.id
                   -%w(есть нет н/п).each do |i|
                     - parameters[:condition] = i
                     %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
@@ -24,15 +23,14 @@
       %legend Заголовок 2
       .form-horizontal
         - %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker).each do |param|
-          .control-group
+          - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
+          - if check = @points.where(parameters).first()
+            - parameters[:id] = check.id
+          .control-group.object{:data => parameters}
             %label.control-label= t("checklist.completion.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
-                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
-                  = parameters
-                  - if check = @points.where(parameters).first()
-                    - parameters[:id] = check.id
                   -%w(есть нет н/п).each do |i|
                     - parameters[:condition] = i
                     %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

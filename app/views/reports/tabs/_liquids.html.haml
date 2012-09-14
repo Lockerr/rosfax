@@ -7,15 +7,14 @@
       %legend Уровни технических жидкостей
       .form-horizontal
         - %w(engine transmission antifreeze power_steering brake).each do |param|
-          .control-group
+          - parameters = {:report_id => @report.id, :object => 'check', :section => 'liquids', :place => param}
+          - if check = @points.where(parameters).first()
+            - parameters[:id] = check.id
+          .control-group.object{:data => parameters}
             %label.control-label= t("checklist.liquids.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
-                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'liquids', :place => param}
-                  = parameters
-                  - if check = @points.where(parameters).first()
-                    - parameters[:id] = check.id
                   - %w(OK -min min max max+).each do |i|
                     - parameters[:condition] = i
                     %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

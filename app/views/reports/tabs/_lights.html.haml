@@ -7,15 +7,14 @@
       %legend Переднее освещение
       .form-horizontal
         - %w( headlights distant_lights fog_lights marker_lights turn_signal).each do |param|
-          .control-group
+          - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
+          - if check = @points.where(parameters).first()
+            - parameters[:id] = check.id
+          .control-group.object{:data => parameters}
             %label.control-label= t("checklist.lights.#{param}").to_s+ ':'
             .controls
               .btn-toolbar{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio{:style => 'padding-left: 0px'}
-                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
-                  = parameters
-                  - if check = @points.where(parameters).first()
-                    - parameters[:id] = check.id
                   - %w(ок левая правая обе).each do |i|
                     - parameters[:condition] = i
                     %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
@@ -24,15 +23,14 @@
       %legend Заднее освещение
       .form-horizontal
         - %w(brake_lightsfog_lights marker_lights turn_signal).each do |param|
-          .control-group
+          - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
+          - if check = @points.where(parameters).first()
+            - parameters[:id] = check.id
+              .control-group.object{:data => parameters}
             %label.control-label= t("checklist.lights.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio{:style => 'padding-left: 0px'}
-                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
-                  = parameters
-                  - if check = @points.where(parameters).first()
-                    - parameters[:id] = check.id
                   - %w(ок левая правая обе).each do |i|
                     - parameters[:condition] = i
                     %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

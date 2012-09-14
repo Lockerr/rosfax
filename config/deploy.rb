@@ -4,8 +4,6 @@ require "rvm/capistrano"
 set :default_stage, 'staging'
 
 set :application, "rosfax"
-set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
-set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
 set :rvm_ruby_string, 'r328'
 set :use_sudo, false

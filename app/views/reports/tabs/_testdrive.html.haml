@@ -19,50 +19,54 @@
 
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       #suspension.tab-pane.active
+        .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
+          .span12
+            .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
+
         .span8.well
           .form-horizontal
             - %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking).each do |param|
-              .control-group
+              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}
+              - if check = @points.where(parameters).first()
+                - parameters[:id] = check.id
+              .control-group.object{:data => parameters}
                 %label.control-label= t("testdrive.suspension.#{param}").to_s+ ':'
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}
-                      = parameters
-                      - if check = @points.where(parameters).first()
-                        - parameters[:id] = check.id
                       -%w(ок слабо сильно).each do |i|
                         - parameters[:condition] = i
                         %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
 
       #engine.tab-pane
+        .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
+          .span12
+            .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
         .span5.well
           .form-horizontal
             - %w(all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise ).each do |param|
-              .control-group
+              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
+              - if check = @points.where(parameters).first()
+                - parameters[:id] = check.id
+              .control-group.object{:data => parameters}
                 %label.control-label= t("testdrive.engine.#{param}").to_s+ ':'
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
-                      = parameters
-                      - if check = @points.where(parameters).first()
-                        - parameters[:id] = check.id
                       -%w(1 2 3).each do |i|
                         - parameters[:condition] = i
                         %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
         .span5.well
           .form-horizontal
             - %w(shifting_down shifting_up parking_brake sound_signal).each do |param|
-              .control-group
+              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
+              - if check = @points.where(parameters).first()
+                - parameters[:id] = check.id
+              .control-group.object{:data => parameters}
                 %label.control-label= t("testdrive.engine.#{param}").to_s+ ':'
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
-                      = parameters
-                      - if check = @points.where(parameters).first()
-                        - parameters[:id] = check.id
                       -%w(1 2 3).each do |i|
                         - parameters[:condition] = i
                         %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

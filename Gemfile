@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'paperclip'
 gem 'capistrano_colors'
-gem "rails_indexes", :git => "https://github.com/warpc/rails_indexes"
+# gem "rails_indexes", :git => "https://github.com/warpc/rails_indexes"
 
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
 gem 'delayed_job_active_record'
@@ -37,6 +37,5 @@ end
 
 
 group :test do
-  # Pretty printed test output
   gem 'turn', :require => false
 end

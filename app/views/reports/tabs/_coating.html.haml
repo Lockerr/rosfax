@@ -14,7 +14,7 @@
       .btn-group.pads.radio
         - parameters = {:report_id => @report.id, :object => 'check', :section => 'coating', :place => value[2]}
         = parameters
-        - if check = @points.where(parameters).first()
+        - if check = @points.select{|i| i.place == value[2]}.first
           - parameters[:id] = check.id
         - ['100', '200', '300', '400+'].each do |i|
           - parameters[:condition] = i

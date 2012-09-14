@@ -26,8 +26,8 @@
         .span8.well
           .form-horizontal
             - %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking).each do |param|
-              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}
-              - if check = @points.where(parameters).first()
+              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}  
+              - if check = @points.select{|i| i.place == param}.first
                 - parameters[:id] = check.id
               .control-group.object{:data => parameters}
                 %label.control-label= t("testdrive.suspension.#{param}").to_s+ ':'
@@ -46,7 +46,7 @@
           .form-horizontal
             - %w(all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise ).each do |param|
               - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
-              - if check = @points.where(parameters).first()
+              - if check = @points.select{|i| i.place == param}.first
                 - parameters[:id] = check.id
               .control-group.object{:data => parameters}
                 %label.control-label= t("testdrive.engine.#{param}").to_s+ ':'
@@ -60,7 +60,7 @@
           .form-horizontal
             - %w(shifting_down shifting_up parking_brake sound_signal).each do |param|
               - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
-              - if check = @points.where(parameters).first()
+              - if check = @points.select{|i| i.place == param}.first
                 - parameters[:id] = check.id
               .control-group.object{:data => parameters}
                 %label.control-label= t("testdrive.engine.#{param}").to_s+ ':'

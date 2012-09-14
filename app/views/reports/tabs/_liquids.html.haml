@@ -8,7 +8,7 @@
       .form-horizontal
         - %w(engine transmission antifreeze power_steering brake).each do |param|
           - parameters = {:report_id => @report.id, :object => 'check', :section => 'liquids', :place => param}
-          - if check = @points.where(parameters).first()
+          - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
           .control-group.object{:data => parameters}
             %label.control-label= t("checklist.liquids.#{param}").to_s+ ':'

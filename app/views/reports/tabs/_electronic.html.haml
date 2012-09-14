@@ -7,15 +7,14 @@
       %legend Заголовок 1
       .form-horizontal
         - %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch).each do |param|
-          .control-group
+          - parameters = {:report_id => @report.id, :object => 'check', :section => 'electronic', :place => param}
+          - if check = @points.select{|i| i.place == param}.first
+            - parameters[:id] = check.id
+          .control-group.object{:data => parameters}
             %label.control-label= t("checklist.electronic.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
-                  - parameters = {:report_id => @report.id, :object => 'check', :section => 'electronic', :place => param}
-                  = parameters
-                  - if check = @points.where(parameters).first()
-                    - parameters[:id] = check.id
                   -%w(ок проблемы н/п).each do |i|
                     - parameters[:condition] = i
                     %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
@@ -25,14 +24,14 @@
       %legend Заголовок 2
       .form-horizontal
         - %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt).each do |param|
-          .control-group
+          - parameters = {:report_id => @report.id, :object => :check, :section => :electronic, :place => param}
+          - if check = @points.select{|i| i.place == param}.first
+            - parameters[:id] = check.id
+          .control-group.object{:data => parameters}
             %label.control-label= t("checklist.electronic.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                 .btn-group.pads.radio
-                  - parameters = {:report_id => @report.id, :object => :check, :section => :electronic, :place => param}
-                  - if check = @points.where(parameters).first()
-                    - parameters[:id] = check.id
                   -%w(ок проблемы н/п).each do |i|
                     - parameters[:condition] = i
                     %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

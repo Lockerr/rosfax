@@ -8,7 +8,7 @@
       .form-horizontal
         - %w( headlights distant_lights fog_lights marker_lights turn_signal).each do |param|
           - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
-          - if check = @points.where(parameters).first()
+          - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
           .control-group.object{:data => parameters}
             %label.control-label= t("checklist.lights.#{param}").to_s+ ':'
@@ -24,9 +24,9 @@
       .form-horizontal
         - %w(brake_lightsfog_lights marker_lights turn_signal).each do |param|
           - parameters = {:report_id => @report.id, :object => 'check', :section => 'lights', :place => param}
-          - if check = @points.where(parameters).first()
+          - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
-              .control-group.object{:data => parameters}
+          .control-group.object{:data => parameters}
             %label.control-label= t("checklist.lights.#{param}").to_s+ ':'
             .controls
               .btn-toolbar.pull-left{:style => 'margin-top: 0px'}

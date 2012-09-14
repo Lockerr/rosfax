@@ -37,7 +37,7 @@
             %ul.thumbnails
               - Report::DEFECTS_CATEGORIES[:exterior].each do |param|
                 - parameters = {:report_id => @report.id, :object => 'element', :section => 'exterior', :place => param}
-                - if check = @points.where(parameters).first()
+                - if check = @points.select{|i| i.place == param}.first
                   - parameters[:id] = check.id
                 %li.pull-left{:style => 'width: 49%; margin-left: 0px'}
                   .object{:data => parameters, :style => 'height: 50px; margin-bottom: 0px'}
@@ -75,7 +75,7 @@
             %ul.thumbnails
               - Report::DEFECTS_CATEGORIES[:interior].each do |param|
                 - parameters = {:report_id => @report.id, :object => 'element', :section => 'interior', :place => param}
-                - if check = @points.where(parameters).first()
+                - if check = @points.select{|i| i.place == param}.first
                   - parameters[:id] = check.id
 
                 %li.pull-left{:style => 'width: 49%; margin-left: 0px'}
@@ -114,7 +114,7 @@
             %ul.thumbnails
               - Report::DEFECTS_CATEGORIES[:windows_and_lights].each do |param|
                 - parameters = {:report_id => @report.id, :object => 'element', :section => 'windows_and_lights', :place => param}
-                - if check = @points.where(parameters).first()
+                - if check = @points.select{|i| i.place == param}.first
                   - parameters[:id] = check.id
                 %li.pull-left{:style => 'width: 49%; margin-left: 0px'}
                   .object{:data => parameters, :style => 'height: 50px; margin-bottom: 0px'}

@@ -136,7 +136,7 @@ refresh_image = (refresh_rate, src, id) ->
     console.log "Changing #{attribute}= #{element.data(attribute)} to"
 
   container.data(attribute, data)
-  console.log container.data(attribute, data)
+  
 
 # @store_attribute(element) = ->
 #   data = $('#report.container').data()

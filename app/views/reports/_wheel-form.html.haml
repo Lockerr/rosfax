@@ -1,61 +1,63 @@
 .well.well-small
-  .form-inline.wheel{:data => {:attribute => 'wheel', :place => place}}
-    %fieldset
-      .control-group
-        %label.control-label.span3{:style => 'min-height:0'} Ширина
-        %label.control-label.span3{:style => 'min-height:0'} Профиль
-        %label.control-label.span4{:style => 'min-height:0'} Диаметр
+  .form-inline.wheel.wheel-small{:data => {:attribute => 'wheel', :place => place}}
+    .row-fluid
+      %label.control-label.span3{:style => 'min-height:0'} Ширина
+      %label.control-label.span3.offset1{:style => 'min-height:0'} Профиль
+      %label.control-label.span3.offset1{:style => 'min-height:0'} Диаметр
 
+    .row-fluid
+      .btn-group.span3
+        %button.btn.btn-mini.dropdown-toggle.width{"data-toggle" => "dropdown", :style => 'width: 56px'}
+          = report.wheels[place] ? report.wheels[place]['width'] : '---'
+          %span.caret
+        %ul.dropdown-menu
+          - [135,145,155,165,175,185,195,205,215,225,235,245,255,265,275,285,295,305,315,325,335,345].each do |i|
+            %li
+              .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'width', :width => i}}=i
+      .span1
+        %label{:style => 'vertical-align: top; padding-top: 2px'} \
+      .btn-group.span3
+        %button.btn.btn-mini.dropdown-toggle.profile{"data-toggle" => "dropdown", :style => 'width: 58px'}
+          = report.wheels[place] ? report.wheels[place]['profile'] : '---'
+          %span.caret
+        %ul.dropdown-menu{:data => {:attribute => 'wheel'}}
+          - [25,30,35,40,45,50,55,60,65,70,75,80,85,95,100].each do |i|
+            %li
+              .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'profile', :profile => i}}=i
+      .span1
+        %label{:style => 'vertical-align: top; padding-top: 2px'} R
+      .btn-group.span3
+        %button.btn.btn-mini.dropdown-toggle.diameter{"data-toggle" => "dropdown", :style => 'width: 58px'}
+          = report.wheels[place] ? report.wheels[place]['diameter'] : '---'
+          %span.caret
+        %ul.dropdown-menu.pull-right
+          - (12..24).to_a.each do |i|
+            %li
+              .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'diameter', :diameter => i}}=i
+
+      .row-fluid
+        %label.control-label.span3{:style => 'text-align: center;min-height:0'} Протектор
+        %label.control-label.span7.offset1{:style => 'text-align: center;min-height:0'} Производитель
+      .row-fluid
+        
+        .btn-group
+          %button.btn.btn-mini.dropdown-toggle.protector{"data-toggle" => "dropdown", :style => 'width: 58px'}
+            = report.wheels[place] ? report.wheels[place]['protector'] : '---'
+            %span.caret
+          %ul.dropdown-menu.pull-left
+            - [1,2,3,4,5,6,7,8].each do |i|
+              %li
+                .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
+        %label{:style => 'vertical-align: top; padding-top: 2px'} мм.  \
+        .btn-group
+          = text_field 'wheel', 'brand', :data => {:provide => 'typeahead', :source => "#{%w(Amtel Barum BFGoodrich Bridgestone Continental Cordiant Dunlop Dunlop JP Fulda Gislaved Goodyear Kelly Kleber Michelin Nokian Nordman Pirelli Sava Tigar Tunga Yokohama)}", :attribute => 'wheels',:place => place, :change => 'brand'}, :value => (report.wheels[place]['brand'] if report.wheels[place]), :style => 'margin-left: 10px; width: 180px'
+
+
+      .row-fluid
         .btn-toolbar
-          .btn-group
-            %button.btn.btn-mini.dropdown-toggle.width{"data-toggle" => "dropdown", :style => 'width: 56px'}
-              = report.wheels[place] ? report.wheels[place]['width'] : '---'
-              %span.caret
-            %ul.dropdown-menu
-              - [135,145,155,165,175,185,195,205,215,225,235,245,255,265,275,285,295,305,315,325,335,345].each do |i|
-                %li
-                  .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'width', :width => i}}=i
-          %label{:style => 'vertical-align: top; padding-top: 2px'} \
-          .btn-group
-            %button.btn.btn-mini.dropdown-toggle.profile{"data-toggle" => "dropdown", :style => 'width: 58px'}
-              = report.wheels[place] ? report.wheels[place]['profile'] : '---'
-              %span.caret
-            %ul.dropdown-menu{:data => {:attribute => 'wheel'}}
-              - [25,30,35,40,45,50,55,60,65,70,75,80,85,95,100].each do |i|
-                %li
-                  .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'profile', :profile => i}}=i
-          %label{:style => 'vertical-align: top; padding-top: 2px'} R
-          .btn-group
-            %button.btn.btn-mini.dropdown-toggle.diameter{"data-toggle" => "dropdown", :style => 'width: 58px'}
-              = report.wheels[place] ? report.wheels[place]['diameter'] : '---'
-              %span.caret
-            %ul.dropdown-menu.pull-right
-              - (12..24).to_a.each do |i|
-                %li
-                  .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'diameter', :diameter => i}}=i
-
-      .control-group
-        %label.control-label.span4{:style => 'text-align: center'} Протектор
-        %label.control-label.span7{:style => 'text-align: center'} Производитель
-        .btn-toolbar
-          .btn-group
-            %button.btn.btn-mini.dropdown-toggle.protector{"data-toggle" => "dropdown", :style => 'width: 58px'}
-              = report.wheels[place] ? report.wheels[place]['protector'] : '---'
-              %span.caret
-            %ul.dropdown-menu.pull-left
-              - [1,2,3,4,5,6,7,8].each do |i|
-                %li
-                  .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
-          %label{:style => 'vertical-align: top; padding-top: 2px'} мм.  \
-          .btn-group
-            = text_field 'wheel', 'brand', :data => {:provide => 'typeahead', :source => "#{%w(Amtel Barum BFGoodrich Bridgestone Continental Cordiant Dunlop Dunlop JP Fulda Gislaved Goodyear Kelly Kleber Michelin Nokian Nordman Pirelli Sava Tigar Tunga Yokohama)}", :attribute => 'wheels',:place => place, :change => 'brand'}, :value => (report.wheels[place]['brand'] if report.wheels[place]), :style => 'margin-left: 10px; width: 180px'
-
-
-      .control-group
-        .btn-toolbar
-          %label.span4.control-label{:style => 'text-align: center'}=t("wheels.brake_pads")
-          %label.span4.control-label{:style => 'text-align: center'}=t("wheels.brake_discs")
-          %label.span4.control-label{:style => 'text-align: center'}=t("wheels.damper")
+          %label.span3.control-label{:style => 'text-align: center;min-height:0'}=t("wheels.brake_pads")
+          %label.span3.offset1.control-label{:style => 'text-align: center;min-height:0'}=t("wheels.brake_discs")
+          %label.span3.offset1.control-label{:style => 'text-align: center;min-height:0'}=t("wheels.damper")
 
         .row-fluid
           .btn-group.pads.radio.span4{:style => 'padding-left: 5px'}

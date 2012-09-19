@@ -184,8 +184,7 @@ $ ->
             $(wheel).find('.' + param).append(span_caret)
           for param in ['pads', 'discs', 'damper']
             $(wheel).find('.' + param).find('.btn').removeClass('btn-primary')
-            $("."+ param).find(".btn[data-#{param}=#{data[param]}]").addClass('btn-primary')
-          console.log data.brand
+            $("."+ param).find(".btn[data-#{param}=#{data[param]}]").addClass('btn-primary')          
           $(wheel).find('input').val(data.brand)
 
       container.data().wheels.front_right = data

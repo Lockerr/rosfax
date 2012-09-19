@@ -13,8 +13,8 @@
       #general.tab-pane.active
         .span6.well
           %li.btn-group.radio
-            .btn.checkbox.btn{:data => {:section => 'info', :attribute => :publish, :publish => 'false'}} Не показывать всем
-            .btn.checkbox.btn{:data => {:section => 'info',:attribute => :publish, :publish => 'true'}} Публичный
+            .btn.checkbox.btn{:data => {:section => 'info', :attribute => :publish, :publish => 'false'}, :class => ('btn-primary' unless @report.publish)} Не показывать всем
+            .btn.checkbox.btn{:data => {:section => 'info',:attribute => :publish, :publish => 'true'}, :class => ('btn-primary' if @report.publish)} Публичный
 
           %table.table#car
             %thead

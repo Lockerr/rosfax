@@ -21,9 +21,9 @@ $(document).ready ->
       else if data[attribute] == button.data(attribute)
         button.addClass('btn-primary')
 
-  # $('.checkbox').click ->
-  #   update_object(@)
-  #   store_report()
+  $('.checkbox').click ->
+    update_object(@)
+    store_report()
 
     $('.all_wheels').trigger('change') if $('.all_wheels').prop('checked')
 

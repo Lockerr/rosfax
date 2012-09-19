@@ -34,7 +34,7 @@
     create_defect(defect)
 
 @create_defect = (defect) ->
-  console.log defect.data('report_id')
+  # console.log defect.data('report_id')
   window.defect = defect
   $.ajax
     type: 'POST'

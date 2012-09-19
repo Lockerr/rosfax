@@ -34,7 +34,7 @@
 
           .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
             .btn-group.pads.radio
-              %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis'}} физ
+              %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis', :section => 'documents'}} физ
               %button.checkbox.btn{:data => {:attribute => :checklist, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur'}} юр
           .input-append{:style => 'display: block'}
             = text_field 'pts', "start_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :checklist, :place => :documents, :change => "start_owning_#{i}"},

@@ -18,8 +18,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  # GET /reports/1
-  # GET /reports/1.json
   def show
     @report = Report.find(params[:id])
     
@@ -29,7 +27,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.user == current_user or current_user.admin?
-        format.html # show.html.erb
+        format.html 
         format.json { render json: @report }
       else
         format.html { render :inline => 'Нет доступа'}
@@ -75,8 +73,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  # POST /reports
-  # POST /reports.json
   def create
 
     @report = current_user.reports.new(params[:report])
@@ -97,8 +93,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  # PUT /reports/1
-  # PUT /reports/1.json
   def update
     @report = Report.find(params[:id])
     
@@ -124,8 +118,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  # DELETE /reports/1
-  # DELETE /reports/1.jsonsdfsdf
   def destroy
     @report = Report.find(params[:id])
     @report.destroy
@@ -201,13 +193,4 @@ class ReportsController < ApplicationController
     render :json => {:status => :ok, :images => images, :places => images.keys}
   end
 
-  def normal_attributes
-  end
-
-  def bad_attributes
-  end
-
-  def unchecked_attributes
-
-  end
 end

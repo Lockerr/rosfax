@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ReportsController < ApplicationController
 
   before_filter :authenticate_user!
@@ -21,11 +22,19 @@ class ReportsController < ApplicationController
   # GET /reports/1.json
   def show
     @report = Report.find(params[:id])
-    @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
+    
+    if @report.user == current_user or current_user.admin?
+      @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
+    end
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @report }
+      if @report.user == current_user or current_user.admin?
+        format.html # show.html.erb
+        format.json { render json: @report }
+      else
+        format.html { render :inline => 'Нет доступа'}
+        format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}
+      end
     end
   end
 
@@ -38,8 +47,6 @@ class ReportsController < ApplicationController
   # GET /reports/new.json
   def new
     @report = Report.new
-
-
     @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
 
     respond_to do |format|
@@ -51,10 +58,21 @@ class ReportsController < ApplicationController
   # GET /reports/1/edit
   def edit
     @report = Report.find(params[:id])
-    @points = @report.points
-    @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
-    # @models = {}
-    # Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort
+    
+    if @report.user == current_user or current_user.admin?
+      @points = @report.points
+      @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
+    end
+    
+    respond_to do |format|
+      if @report.user == current_user or current_user.admin?
+        format.html # show.html.erb
+        format.json { render json: @report }
+      else
+        format.html { render :inline => 'Нет доступа'}
+        format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}
+      end
+    end
   end
 
   # POST /reports
@@ -83,6 +101,19 @@ class ReportsController < ApplicationController
   # PUT /reports/1.json
   def update
     @report = Report.find(params[:id])
+    
+    respond_to do |format|
+      if @report.user == current_user or current_user.admin?
+        if @report.update_attributes(params[:report].except!(:id))
+          format.json { head :ok }
+        else
+          format.json { render json: @report.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { render :inline => 'Нет доступа'}
+        format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}
+      end
+    end
 
     respond_to do |format|
       if @report.update_attributes(params[:report].except!(:id))

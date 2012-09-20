@@ -6,7 +6,7 @@
       %label.control-label.span3.offset1{:style => 'min-height:0'} Диаметр
 
     .row-fluid
-      .btn-group.span3
+      .btn-group.span3{:class => ('dropup' if (place == 'rear_left' || place == 'rear_right'))}
         %button.btn.btn-mini.dropdown-toggle.width{"data-toggle" => "dropdown", :style => 'width: 56px'}
           = report.wheels[place] ? report.wheels[place]['width'] : '---'
           %span.caret
@@ -16,7 +16,7 @@
               .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'width', :width => i}}=i
       .span1
         %label{:style => 'vertical-align: top; padding-top: 2px'} \
-      .btn-group.span3
+      .btn-group.span3{:class => ('dropup' if (place == 'rear_left' || place == 'rear_right'))}
         %button.btn.btn-mini.dropdown-toggle.profile{"data-toggle" => "dropdown", :style => 'width: 58px'}
           = report.wheels[place] ? report.wheels[place]['profile'] : '---'
           %span.caret
@@ -26,7 +26,7 @@
               .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'profile', :profile => i}}=i
       .span1
         %label{:style => 'vertical-align: top; padding-top: 2px'} R
-      .btn-group.span3
+      .btn-group.span3{:class => ('dropup' if (place == 'rear_left' || place == 'rear_right'))}
         %button.btn.btn-mini.dropdown-toggle.diameter{"data-toggle" => "dropdown", :style => 'width: 58px'}
           = report.wheels[place] ? report.wheels[place]['diameter'] : '---'
           %span.caret
@@ -40,7 +40,7 @@
         %label.control-label.span7.offset1{:style => 'text-align: center;min-height:0'} Производитель
       .row-fluid
         
-        .btn-group
+        .btn-group{:class => ('dropup' if (place == 'rear_left' || place == 'rear_right'))}
           %button.btn.btn-mini.dropdown-toggle.protector{"data-toggle" => "dropdown", :style => 'width: 58px'}
             = report.wheels[place] ? report.wheels[place]['protector'] : '---'
             %span.caret

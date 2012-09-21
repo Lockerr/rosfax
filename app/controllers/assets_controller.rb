@@ -1,4 +1,10 @@
 class AssetsController < ApplicationController
+
+  def index
+    @assets = Report.find(params[:report_id]).assets
+    render :json => @assets
+  end
+
   def create
     if params[:asset]
       if report = Report.find(params[:report_id])

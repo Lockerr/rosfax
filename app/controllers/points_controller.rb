@@ -54,11 +54,11 @@ class PointsController < ApplicationController
       end
     end
   end
+  
   def remove_image
     raise params.inspect
   end
-  # PUT /points/1
-  # PUT /points/1.json
+
   def update
     @point = Point.find(params[:id])
 
@@ -84,4 +84,6 @@ class PointsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 end

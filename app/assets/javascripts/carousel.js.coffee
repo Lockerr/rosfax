@@ -1,17 +1,16 @@
 $(document).ready ->
   $(".thumb").live 'click', ->
-    console.log $(@).parent().siblings()
     if $(@).parent().siblings().html() > 0
 
       $('#modal_carousel .item').remove()
       data = $(@).data()
       report_id = $('#report.container').data('id')
 
-      url = "/reports/#{report_id}/images"
+      url = "/reports/#{report_id}/assets"
       object_id = $(@).parents('.object').data('id')
 
       if data.place
-        console.log 'place'
+        
         ajax_data = {attribute: data.attribute, place: data.place}
         $.ajax
           url: url
@@ -31,12 +30,10 @@ $(document).ready ->
               $('.carousel-control.right').hide()
 
       else if $(@).parents('.object').data('object') == 'element'
-        console.log 'element'
-        ajax_data = {element_id: $(@).parents('.object').data('id')}
-        console.log ajax_data
+        point_id = $(@).parents('.object').data('id')
+        
         $.ajax
-          url: url
-          data: ajax_data
+          url: "/points/#{point_id}/assets"
           success: (resp) ->
             console.log resp
 

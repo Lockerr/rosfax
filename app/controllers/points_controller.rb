@@ -1,7 +1,4 @@
 class PointsController < ApplicationController
-  # GET /points
-  # GET /points.json
-
 
   def index
     @points = Point.all
@@ -12,8 +9,6 @@ class PointsController < ApplicationController
     end
   end
 
-  # GET /points/1
-  # GET /points/1.json
   def show
     @point = Point.find(params[:id])
 
@@ -23,8 +18,6 @@ class PointsController < ApplicationController
     end
   end
 
-  # GET /points/new
-  # GET /points/new.json
   def new
     @point = Point.new
 
@@ -34,13 +27,10 @@ class PointsController < ApplicationController
     end
   end
 
-  # GET /points/1/edit
   def edit
     @point = Point.find(params[:id])
   end
 
-  # POST /points
-  # POST /points.json
   def create
     @point = Point.new(params[:point])
 
@@ -73,8 +63,7 @@ class PointsController < ApplicationController
     end
   end
 
-  # DELETE /points/1
-  # DELETE /points/1.json
+
   def destroy
     @point = Point.find(params[:id])
     @point.destroy

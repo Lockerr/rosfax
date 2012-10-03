@@ -133,14 +133,14 @@
                   %td
                     %a{:data => {:toggle => 'collapse', :target => "#defects_interior"}}
                       %h4{:style => 'margin: 0'}=t("defects.interior.title")
-                  %td= @report.defects.where(:category => 'interior').count
+                  %td= @report.defects.where(:section => 'interior').count
                   %td &nbsp;
-                - if @report.defects.where(:category => 'interior').count > 0
+                - if @report.defects.where(:section => 'interior').count > 0
                   %tr
                     %td{:colspan => 3}
                       .collapse.in{:id => "checklist_exterior_lights"}
                         %ul.thumbnails
-                          - @report.defects.where(:category => 'interior').each do |defect|
+                          - @report.defects.where(:section => 'interior').each do |defect|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
                               .alert.alert-error{:style => 'margin-bottom: 0px'}
                                 .span6= t("defects.interior.#{defect.sub_category}")

@@ -28,4 +28,3 @@ $(document).ready ->
         target.parents('.object').data().asset_id = obj.id
 
         store_point(target.parents('.object'))
-

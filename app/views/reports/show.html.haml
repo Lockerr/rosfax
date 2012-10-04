@@ -63,7 +63,7 @@
                 
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "defects_exterior"}
+                      .collapse.in{:id => "points_#{block}"}
                         %ul.thumbnails
                           - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
@@ -103,7 +103,7 @@
                 
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "defects_exterior"}
+                      .collapse.in{:id => "points_#{block}"}
                         %ul.thumbnails
                           - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
@@ -144,7 +144,7 @@
                 
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "defects_exterior"}
+                      .collapse.in{:id => "points_#{block}"}
                         %ul.thumbnails
                           - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}

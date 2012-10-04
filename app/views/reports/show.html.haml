@@ -32,12 +32,13 @@
         %tr
           %td
             %a{:data => {:toggle => 'collapse', :target => '#photo'}}
-              %h3{:style => 'margin: 0'} Фото
-          %td= @report.assigned.size
+              %h3{:style => 'margin: 0'}
+                Фото
+                = @report.assigned.size
           %td &nbsp;
         %tr
           %td{:colspan => 3}
-            #photo.collapse.in
+            #photo.collapse
               - Asset.where(:id => @report.assigned).each do |image|
                 = image_tag image.url(:thumb)
         / ######################## CHECKLIST ####################################
@@ -46,12 +47,13 @@
             %a.pull-left{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}}
               %h3{:style => 'margin: 0'}
                 Чеклист
-                = "( " + @report.points.where(:object => :check).size.to_s + "/ 49)"
+                = "( " + (@report.points.where(:object => :check).size*100.0/74).round(0).to_i.to_s + "% )"
+
                 
           
         %tr
           %td{:colspan => 3}
-            #checklist_exterior.collapse.in
+            #checklist_exterior.collapse
               %table.table
                 - for block in @report.points.where(:object => :check).group(:section).map(&:section)
                   %tr
@@ -59,7 +61,8 @@
                       %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
                         %h4{:style => 'margin: 0'}
                           = t("checklist.#{block}.title")
-                          = "(" + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + ")"
+                          - size =  @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
+                          = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                     %td
                     %td &nbsp;
                 
@@ -77,17 +80,19 @@
                                 .alert.alert-error{:style => 'margin-bottom: 0px'}
                                   .span6= t("checklist.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
-        %tr
-          %td{:colspan => 3}
-            Description:
-            = t('lorem')
+        / %tr
+        /   %td{:colspan => 3}
+        /     Description:
+        /     = t('lorem')
 
         / ######################## Testdrive ####################################
         %tr
           %td
             %a{:data => {:toggle => 'collapse', :target => '#testdrive'}}
-              %h3{:style => 'margin: 0'} Тестдрайв
-          %td="( " + @report.points.where(:object => :testdrive).size.to_s + "/ 49)"
+              %h3{:style => 'margin: 0'}
+                Тестдрайв
+                = "( " + (@report.points.where(:object => :testdrive).size*100.0/74).round(0).to_i.to_s + "% )"
+              
           %td &nbsp;
         %tr
           %td{:colspan => 3}
@@ -99,7 +104,7 @@
                       %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
                         %h4{:style => 'margin: 0'}
                           = t("testdrive.#{block}.title")
-                          = "(" + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + ")"
+                          = "( " + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + " дефекта )"
                     %td
                     %td &nbsp;
                 
@@ -127,8 +132,9 @@
         %tr
           %td
             %a{:data => {:toggle => 'collapse', :target => '#element'}}
-              %h3{:style => 'margin: 0'} Элементы
-          %td="( " + @report.points.where(:object => :testdrive).size.to_s + "/ 42)"
+              %h3{:style => 'margin: 0'}
+                Элементы
+                = "( " + (@report.points.where(:object => :element).size*100.0/74).round(0).to_i.to_s + "% )"
           %td &nbsp;
         %tr
           %td{:colspan => 3}
@@ -140,7 +146,8 @@
                       %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
                         %h4{:style => 'margin: 0'}
                           = t("defects.#{block}.title")
-                          = "(" + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + ")"
+                          - size = @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_i
+                          = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                     %td
                     %td &nbsp;
                 
@@ -159,7 +166,7 @@
                                   .span6= t("defects.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
               
-        %tr
-          %td{:colspan => 3}
-            Description:
-            = t('lorem')
+        / %tr
+        /   %td{:colspan => 3}
+        /     Description:
+        /     = t('lorem')

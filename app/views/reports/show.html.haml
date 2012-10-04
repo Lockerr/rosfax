@@ -7,8 +7,9 @@
         от
         =@report.created_at.strftime('%d.%m.%y')
   .row
-    .span2
-      = image_tag @report.assets.first.url(:thumb), :width => '120px'
+    .span2    
+      = image_tag( @report.assets.first.url(:thumb), :width => '120px' ) if @report.assets.any?
+
     .span10
       %table.table.table-striped
         %tr
@@ -39,194 +40,124 @@
             #photo.collapse.in
               - Asset.where(:id => @report.assigned).each do |image|
                 = image_tag image.url(:thumb)
-        / ######################## EXTERIOR ####################################
+        / ######################## CHECKLIST ####################################
         %tr
           %td
             %a{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}}
-              %h3{:style => 'margin: 0'}= t('exterior.title')
+              %h3{:style => 'margin: 0'} Чеклист
           %td= @report.assigned.size
           %td &nbsp;
         %tr
           %td{:colspan => 3}
             #checklist_exterior.collapse.in
-              %table.table.table-striped
-                / ############################## BLOCK  CASE #######################
-                %tr
-                  %td
-                    %a{:data => {:toggle => 'collapse', :target => "#defects_exterior"}}
-                      %h4{:style => 'margin: 0'}
-                        =t("Кузов")
-                        = @report.points.where(:section => :exterior).size()
-                  %td
-                  %td &nbsp;
-                - if @report.points.where(:section => :exterior).any?
+              %table.table
+                - for block in @report.points.where(:object => :check).group(:section).map(&:section)
+                  %tr
+                    %td
+                      %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
+                        %h4{:style => 'margin: 0'}
+                          = t("checklist.#{block}.title")
+                          = @report.points.where(:section => block.to_sym).size()
+                    %td
+                    %td &nbsp;
+                
                   %tr
                     %td{:colspan => 3}
                       .collapse.in{:id => "defects_exterior"}
                         %ul.thumbnails
-                          - @report.points.where(:section => :exterior).each do |point|
+                          - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
                               - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
                                 .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                  .span6= t("defects.#{'exterior'}.#{point.place}")
+                                  .span6= t("checklist.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
                               - else
                                 .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                  .span6= t("defects.#{'lights'}.#{key}")
+                                  .span6= t("checklist.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
-                / ############################## BLOCK  CASE #######################
-                %tr
-                  %td
-                    %a{:data => {:toggle => 'collapse', :target => "#defects_lights_widows"}}
-                      %h4{:style => 'margin: 0'}
-                        Стекла и фары
-                        = @report.points.where(:section => :windows_and_lights).size()
-                  %td
-                  %td &nbsp;
-                - if @report.points.where(:section => :windows_and_lights).any?
-                  %tr
-                    %td{:colspan => 3}
-                      .collapse.in{:id => "defects_lights_windows"}
-                        %ul.thumbnails
-                          - @report.points.where(:section => :windows_and_lights).each do |point|
-                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
-                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
-                                .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                  .span6= t("defects.#{'windows_and_lights'}.#{point.place}")
-                                  .span6{:style => 'text-align:right'}= point.condition
-                              - else
-                                .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                  .span6= t("defects.#{'lights'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= point.condition
-                / ############################## BLOCK #######################
-                %tr
-                  %td
-                    %a{:data => {:toggle => 'collapse', :target => "#checklist_exterior_lights"}}
-                      %h4{:style => 'margin: 0'}=t("checklist.lights.title")
-                  %td= @report.checklist['lights'].size()
-                  %td &nbsp;
-                - if @report.checklist['lights'].size() > 0
-                  %tr
-                    %td{:colspan => 3}
-                      .collapse.in{:id => "checklist_exterior_lights"}
-                        %ul.thumbnails
-                          - @report.checklist['lights'].each do |key, value|
-                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
-                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? value
-                                .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'lights'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
-                              - else
-                                .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'lights'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
-                / ############################## BLOCK #######################
-                %tr
-                  %td
-                    %a{:data => {:toggle => 'collapse', :target => "#checklist_exterior_lights"}}
-                      %h4{:style => 'margin: 0'}=t("checklist.lights.title")
-                  %td= @report.checklist['lights'].size()
-                  %td &nbsp;
-                - if @report.checklist['lights'].size() > 0
-                  %tr
-                    %td{:colspan => 3}
-                      .collapse.in{:id => "checklist_exterior_lights"}
-                        %ul.thumbnails
-                          - @report.checklist['lights'].each do |key, value|
-                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
-                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? value
-                                .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'lights'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
-                              - else
-                                .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'lights'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
+        %tr
+          %td{:colspan => 3}
+            Description:
+            = t('lorem')
 
-                %tr
-                  %td{:colspan => 3}
-                    Description:
-                    = t('lorem')
-        / ######################## INTERIOR ####################################
+        / ######################## Testdrive ####################################
         %tr
           %td
-            %a{:data => {:toggle => 'collapse', :target => '#checklist_interior'}}
-              %h3{:style => 'margin: 0'}= t('interior.title')
+            %a{:data => {:toggle => 'collapse', :target => '#testdrive'}}
+              %h3{:style => 'margin: 0'} Тестдрайв
           %td= @report.assigned.size
           %td &nbsp;
         %tr
           %td{:colspan => 3}
-            #checklist_interior.collapse.in
-              %table.table.table-striped
-                %tr
-                  %td
-                    %a{:data => {:toggle => 'collapse', :target => "#defects_interior"}}
-                      %h4{:style => 'margin: 0'}
-                        Салон
-                        = @report.points.where(:section => :interior).size()
-                  %td
-                  %td &nbsp;
-                - if @report.points.where(:section => :interior).any?
+            .collapse.in{:id => 'testdrive'}
+              %table.table
+                - for block in @report.points.where(:object => :testdrive).group(:section).map(&:section)
+                  %tr
+                    %td
+                      %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
+                        %h4{:style => 'margin: 0'}
+                          = t("testdrive.#{block}.title")
+                          = @report.points.where(:section => block.to_sym).size()
+                    %td
+                    %td &nbsp;
+                
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "defects_interior"}
+                      .collapse.in{:id => "defects_exterior"}
                         %ul.thumbnails
-                          - @report.points.where(:section => :interior).each do |point|
+                          - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
                               - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
                                 .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                  .span6= t("defects.#{'interior'}.#{point.place}")
+                                  .span6= t("testdrive.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
                               - else
                                 .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                  .span6= t("defects.#{'lights'}.#{key}")
+                                  .span6= t("testdrive.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
+        %tr
+          %td{:colspan => 3}
+            Description:
+            = t('lorem')
+
                 
-                %tr
-                  %td
-                    %a{:data => {:toggle => 'collapse', :target => "#checklist_exterior_lights"}}
-                      %h4{:style => 'margin: 0'}=t("checklist.lights.title")
-                  %td= @report.checklist['lights'].size()
-                  %td &nbsp;
-                - if @report.checklist['lights'].size() > 0
+        / ######################## Elements ####################################
+        %tr
+          %td
+            %a{:data => {:toggle => 'collapse', :target => '#element'}}
+              %h3{:style => 'margin: 0'} Элементы
+          %td= @report.assigned.size
+          %td &nbsp;
+        %tr
+          %td{:colspan => 3}
+            .collapse.in{:id => 'element'}
+              %table.table
+                - for block in @report.points.where(:object => :element).group(:section).map(&:section)
+                  %tr
+                    %td
+                      %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
+                        %h4{:style => 'margin: 0'}
+                          = t("defects.#{block}.title")
+                          = @report.points.where(:section => block.to_sym).size()
+                    %td
+                    %td &nbsp;
+                
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "checklist_exterior_lights"}
+                      .collapse.in{:id => "defects_exterior"}
                         %ul.thumbnails
-                          - @report.checklist['lights'].each do |key, value|
+                          - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
-                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? value
+                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
                                 .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'lights'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
+                                  .span6= t("defects.#{block}.#{point.place}")
+                                  .span6{:style => 'text-align:right'}= point.condition
                               - else
                                 .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'lights'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
-
-                %tr
-                  %td
-                    %a{:data => {:toggle => 'collapse', :target => "#checklist_electronic"}}
-                      %h4{:style => 'margin: 0'}=t("checklist.electronic.title")
-                  %td= @report.checklist['electronic'].size()
-                  %td &nbsp;
-                - if @report.checklist['electronic'].size() > 0
-                  %tr
-                    %td{:colspan => 3}
-                      .collapse.in{:id => "checklist_electronic"}
-                        %ul.thumbnails
-                          - @report.checklist['electronic'].each do |key, value|
-                            %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
-                              - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? value
-                                .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'electronic'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
-                              - else
-                                .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                  .span6= t("checklist.#{'electronic'}.#{key}")
-                                  .span6{:style => 'text-align:right'}= value
-
-                %tr
-                  %td{:colspan => 3}
-                    Description:
-                    = t('lorem')
+                                  .span6= t("defects.#{block}.#{point.place}")
+                                  .span6{:style => 'text-align:right'}= point.condition
+              
+        %tr
+          %td{:colspan => 3}
+            Description:
+            = t('lorem')

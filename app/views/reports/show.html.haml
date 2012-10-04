@@ -34,7 +34,8 @@
             %a{:data => {:toggle => 'collapse', :target => '#photo'}}
               %h3{:style => 'margin: 0'}
                 Фото
-                = @report.assigned.size
+                %span{:style => 'font-size: 70%; color: #ddd'}
+                  ='(' + @report.assigned.size.to_s + ')'
           %td &nbsp;
         %tr
           %td{:colspan => 3}
@@ -47,7 +48,8 @@
             %a.pull-left{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}}
               %h3{:style => 'margin: 0'}
                 Чеклист
-                = "( " + (@report.points.where(:object => :check).size*100.0/74).round(0).to_i.to_s + "% )"
+                %span{:style => 'font-size: 70%; color: #ddd'}
+                  = "(" + (@report.points.where(:object => :check).size*100.0/46).round(0).to_i.to_s + "%)"
 
                 
           
@@ -62,13 +64,14 @@
                         %h4{:style => 'margin: 0'}
                           = t("checklist.#{block}.title")
                           - size =  @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
-                          = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
+                          %span{:style => 'font-size: 70%; color: #ddd'}
+                            = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                     %td
                     %td &nbsp;
                 
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "points_#{block}"}
+                      .collapse{:id => "points_#{block}"}
                         %ul.thumbnails
                           - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
@@ -91,12 +94,13 @@
             %a{:data => {:toggle => 'collapse', :target => '#testdrive'}}
               %h3{:style => 'margin: 0'}
                 Тестдрайв
-                = "( " + (@report.points.where(:object => :testdrive).size*100.0/74).round(0).to_i.to_s + "% )"
+                %span{:style => 'font-size: 70%; color: #ddd'}
+                  = "(" + (@report.points.where(:object => :testdrive).size*100.0/16).round(0).to_i.to_s + "%)"
               
           %td &nbsp;
         %tr
           %td{:colspan => 3}
-            .collapse.in{:id => 'testdrive'}
+            .collapse{:id => 'testdrive'}
               %table.table
                 - for block in @report.points.where(:object => :testdrive).group(:section).map(&:section)
                   %tr
@@ -104,13 +108,14 @@
                       %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
                         %h4{:style => 'margin: 0'}
                           = t("testdrive.#{block}.title")
-                          = "( " + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + " дефекта )"
+                          %span{:style => 'font-size: 70%; color: #ddd'}
+                            = "( " + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + " дефекта )"
                     %td
                     %td &nbsp;
                 
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "points_#{block}"}
+                      .collapse{:id => "points_#{block}"}
                         %ul.thumbnails
                           - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
@@ -122,10 +127,10 @@
                                 .alert.alert-error{:style => 'margin-bottom: 0px'}
                                   .span6= t("testdrive.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
-        %tr
-          %td{:colspan => 3}
-            Description:
-            = t('lorem')
+        / %tr
+        /   %td{:colspan => 3}
+        /     Description:
+        /     = t('lorem')
 
                 
         / ######################## Elements ####################################
@@ -134,11 +139,12 @@
             %a{:data => {:toggle => 'collapse', :target => '#element'}}
               %h3{:style => 'margin: 0'}
                 Элементы
-                = "( " + (@report.points.where(:object => :element).size*100.0/74).round(0).to_i.to_s + "% )"
+                %span{:style => 'font-size: 70%; color: #ddd'}
+                  = "(" + (@report.points.where(:object => :element).size*100.0/42).round(0).to_i.to_s + "%)"
           %td &nbsp;
         %tr
           %td{:colspan => 3}
-            .collapse.in{:id => 'element'}
+            .collapse{:id => 'element'}
               %table.table
                 - for block in @report.points.where(:object => :element).group(:section).map(&:section)
                   %tr
@@ -147,13 +153,14 @@
                         %h4{:style => 'margin: 0'}
                           = t("defects.#{block}.title")
                           - size = @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_i
-                          = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
+                          %span{:style => 'font-size: 70%; color: #ddd'}
+                            = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                     %td
                     %td &nbsp;
                 
                   %tr
                     %td{:colspan => 3}
-                      .collapse.in{:id => "points_#{block}"}
+                      .collapse{:id => "points_#{block}"}
                         %ul.thumbnails
                           - @report.points.where(:section => block.to_sym).each do |point|
                             %li.span7{:style => 'width: 554px; margin-bottom: 5px'}

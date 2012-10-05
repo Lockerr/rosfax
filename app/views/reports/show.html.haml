@@ -155,7 +155,7 @@
                 %span
                   Элементы
                 %span{:style => 'font-size: 70%; color: #ddd'}
-                  = "(" + (@report.points.where(:object => :element).size*100.0/42).round(0).to_i.to_s + "%)"
+                  = "(" + (@report.points.where(:object => :elements).size*100.0/42).round(0).to_i.to_s + "%)"
                 %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.elements'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
                   Развернуть
                 %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.elements.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
@@ -165,7 +165,7 @@
           %td{:colspan => 3}
             .collapse.elements{:id => 'elements'}
               %table.table
-                - for block in @report.points.where(:object => :element).group(:section).map(&:section)
+                - for block in @report.points.where(:object => :elements).group(:section).map(&:section)
                   %tr
                     %td
                       %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}

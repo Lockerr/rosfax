@@ -31,16 +31,15 @@
         / ###################### PHOTOS ######################################
         %tr
           %td
-            %a{:data => {:toggle => 'collapse', :target => '#photo'}}
+            %a{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle()"}
               %h3{:style => 'margin: 0'}
                 Фото
                 %span{:style => 'font-size: 70%; color: #ddd'}
                   ='(' + @report.assigned.size.to_s + ')'
-                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).find('span').toggle()"}
-                  %span.show
-                    Развернуть
-                  %span.hide
-                    Свернуть
+                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Развернуть
+                %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Свернуть
                 
           %td &nbsp;
         %tr
@@ -51,16 +50,15 @@
         / ######################## CHECKLIST ####################################
         %tr
           %td
-            %a.pull-left{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}}
+            %a.pull-left{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}, :onclick => "$(this).siblings('a.btn').toggle()"}
               %h3{:style => 'margin: 0'}
                 Чеклист
                 %span{:style => 'font-size: 70%; color: #ddd'}
                   = "(" + (@report.points.where(:object => :check).size*100.0/46).round(0).to_i.to_s + "%)"
-                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.checklists'}, :onclick => "$(this).find('span').toggle()"}
-                  %span.show
-                    Развернуть
-                  %span.hide
-                    Свернуть
+                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.checklists'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Развернуть
+                %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.checklists.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Свернуть
                 
           
         %tr
@@ -101,17 +99,16 @@
         / ######################## Testdrive ####################################
         %tr
           %td
-            %a{:data => {:toggle => 'collapse', :target => '#testdrive'}}
+            %a{:data => {:toggle => 'collapse', :target => '#testdrive'}, :onclick => "$(this).siblings('a.btn').toggle()"}
               %h3{:style => 'margin: 0'}
                 %span
                   Тестдрайв
                 %span{:style => 'font-size: 70%; color: #ddd'}
                   = "(" + (@report.points.where(:object => :testdrive).size*100.0/16).round(0).to_i.to_s + "%)"
-                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.testdrive'}, :onclick => "$(this).find('span').toggle()"}
-                  %span.show
-                    Развернуть
-                  %span.hide
-                    Свернуть
+                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.testdrive'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Развернуть
+                %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.testdrive.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Свернуть
 
               
           %td &nbsp;
@@ -153,17 +150,16 @@
         / ######################## Elements ####################################
         %tr
           %td
-            %a{:data => {:toggle => 'collapse', :target => '#element'}}
+            %a{:data => {:toggle => 'collapse', :target => '#element'}, :onclick => "$(this).siblings('a.btn').toggle()"}
               %h3{:style => 'margin: 0'}
                 %span
                   Элементы
                 %span{:style => 'font-size: 70%; color: #ddd'}
                   = "(" + (@report.points.where(:object => :element).size*100.0/42).round(0).to_i.to_s + "%)"
-                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.elements'}, :onclick => "$(this).find('span').toggle()"}
-                  %span.show
-                    Развернуть
-                  %span.hide
-                    Свернуть
+                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.elements'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Развернуть
+                %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.elements.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                  Свернуть
           %td &nbsp;
         %tr
           %td{:colspan => 3}

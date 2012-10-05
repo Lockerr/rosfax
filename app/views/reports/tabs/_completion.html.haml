@@ -6,8 +6,7 @@
     .well.well-small
       %legend Заголовок 1
       .form-horizontal
-        - params = %w(spare_wheel jack tools sealant compressor key_lock_gear)
-        - params.each do |param|
+        - Report::COMPLETION[0..5].each do |param|
           - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
@@ -23,8 +22,7 @@
     .well.well-small
       %legend Заголовок 2
       .form-horizontal
-        - params = %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker)
-        - params.each do |param|
+        - Report::COMPLETION[5..-1].each do |param|
           - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id

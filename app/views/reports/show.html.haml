@@ -65,7 +65,7 @@
           %td{:colspan => 3}
             #checklist_exterior.collapse.checklists
               %table.table
-                - for block in @report.points.where(:object => :check).group(:section).map(&:section)
+                - for block in @report.points.where(:object => :checklist).group(:section).map(&:section)
                   %tr
                     %td
                       %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
@@ -150,7 +150,7 @@
         / ######################## Elements ####################################
         %tr
           %td
-            %a{:data => {:toggle => 'collapse', :target => '#element'}, :onclick => "$(this).siblings('a.btn').toggle()"}
+            %a{:data => {:toggle => 'collapse', :target => '#elements'}, :onclick => "$(this).siblings('a.btn').toggle()"}
               %h3{:style => 'margin: 0'}
                 %span
                   Элементы
@@ -163,7 +163,7 @@
           %td &nbsp;
         %tr
           %td{:colspan => 3}
-            .collapse.elements{:id => 'element'}
+            .collapse.elements{:id => 'elements'}
               %table.table
                 - for block in @report.points.where(:object => :element).group(:section).map(&:section)
                   %tr
@@ -191,11 +191,23 @@
                                 .alert.alert-error{:style => 'margin-bottom: 0px'}
                                   .span6= t("defects.#{block}.#{point.place}")
                                   .span6{:style => 'text-align:right'}= point.condition
-              
-        / %tr
-        /   %td{:colspan => 3}
-        /     Description:
-        /     = t('lorem')
+  
+  .row
+    .span12
+      - unless @report.diff.empty?
+        - for object in @report.diff.keys
+          %label
+            %h3= t("#{object}.title")
+          %table.table.table-striped
+            - for section in @report.diff[object].keys
+              %tr
+                %td{:style => 'width: 100px'}
+                  = t("#{object}.#{section}.title")
+                  %td
+                    - for place in @report.diff[object][section]
+                      %span.badge= t("#{object}.#{section}.#{place}")
+
+
 #modal_carousel.modal.hide{:style => 'overflow: hidden'}
   %button.close{'data-dismiss'=>"modal"}
   #myCarousel.carousel.slide{:style => 'padding: 5px'}

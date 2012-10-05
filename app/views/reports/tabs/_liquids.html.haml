@@ -6,7 +6,7 @@
     .well.well-small
       %legend Уровни технических жидкостей
       .form-horizontal
-        - %w(engine transmission antifreeze power_steering brake).each do |param|
+        - Report::LIQUIDS.each do |param|
           - parameters = {:report_id => @report.id, :object => 'check', :section => 'liquids', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id

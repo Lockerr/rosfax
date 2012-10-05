@@ -6,7 +6,7 @@
     .well.well-small
       %legend Заголовок 1
       .form-horizontal
-        - %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch).each do |param|
+        - Report::ELECTRONIC[0..5].each do |param|
           - parameters = {:report_id => @report.id, :object => 'check', :section => 'electronic', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
@@ -23,7 +23,7 @@
     .well.well-small
       %legend Заголовок 2
       .form-horizontal
-        - %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt).each do |param|
+        - Report::ELECTRONIC[6..-1].each do |param|
           - parameters = {:report_id => @report.id, :object => :check, :section => :electronic, :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id

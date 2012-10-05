@@ -43,29 +43,32 @@ class Report < ActiveRecord::Base
   default_scope includes([:assets, :points])
   scope :public, where(:publish => true)
 
-  EXTERIOR = %w( :front_left :front :front_right :left  :roof :right :rear_left :rear :rear_right)
+  PHOTO_EXTERIOR = %w( :front_left :front :front_right :left  :roof :right :rear_left :rear :rear_right)
 
   WHEEL = %w(:front_left_wheel :front_right_wheel :rear_right_wheel :rear_left_wheel :stepney)
+  
   EXTERIOR_PARTS = %w(:hood :front_right_wing :right_front_door :rear_right_door :rear_right_wing :boot_lid :rear_left_wing :rear_left_door :front_left_door :front_left_wing_of_the :roof :front_bumper :skirt_front_bumper :rear_bumper :rear_apron :right_threshold :left_threshold)
-  WINDOWS_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window),
+  # WINDOWS_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window),
   INTERIOR_PARTS =%w(:front_left_seat :front_right_seat :back_sofa :third_row_seats :covering_left_front_door :covering_right_front_door :covering_left_rear_door :covering_rear_right_door :covering_trunk :ceiling :torpedo :central_console :armrest)
-  POWERTRAINS = %w(knock flow tear wear),
+  POWERTRAINS = %w(knock flow tear wear)
 
-  ELECTRONIC_PARTS = %w(low_lights distant_lights turning_lights foglights dimensions_lights brakes automatic_windows climate_control air_conditioning radio navigation control_lamps drive_down heated_seats ventilation_seat adjustment_heated_mirrors parktronic_rearview_camera sunroof seat_belts adjustable_steering_column janitors_rein_sensor ),
+  ELECTRONIC_PARTS = %w(low_lights distant_lights turning_lights foglights dimensions_lights brakes automatic_windows climate_control air_conditioning radio navigation control_lamps drive_down heated_seats ventilation_seat adjustment_heated_mirrors parktronic_rearview_camera sunroof seat_belts adjustable_steering_column janitors_rein_sensor )
   LIQUID_LEVELS = %w( oil_in_engine oil_in_gearbox brake_fluid fluid_power_steering )
   CHASIS = %w(:full_drive_connection :air_suspension_all_levels :luft_knocking_in_steering_wheel :revolutions_of_twentieth :turns_gas_with_a_sharp)
 
-  COMPLETION = %w(:spare_wheel :jack :tools :sealant)
-  TESTDRIVE = %w(:disposed_steering :wheel_direct :luft_steering :heartbeat_vibration_when_accelerating :heartbeat_vibration_on_braking :knocks_squeak_on_uneven :switching_gears_all_up :switching_gears_all_down :acceleration_to_100_km_h_full_throttle :parking_brake :engine_noise :klaxon)
+  
+  # TESTDRIVE = %w(:disposed_steering :wheel_direct :luft_steering :heartbeat_vibration_when_accelerating :heartbeat_vibration_on_braking :knocks_squeak_on_uneven :switching_gears_all_up :switching_gears_all_down :acceleration_to_100_km_h_full_throttle :parking_brake :engine_noise :klaxon)
 
-  COATING = %w(:hood :front_right_wing :right_front_door :rear_right_door :rear_right_wing :boot_lid :rear_left_wing :rear_left_door :front_left_door :front_left_wing_of_the :roof_coating)
+  
   WINDOWS = %w( :head-on_window :front_right_window :rear_right_window :rear_right_ventilator :rear_window :rear_left_ventilator :the_rear_left_window :front_left_window )
-
-  BRAKES = %w(:front_pads :front_brake_discs :rear_pads :rear_brake_discs)
+  
   DUMPERS = %w(:right_front_bumper :left_front_bumper :right_rear_bumper :left_rear_bumper)
 
-  INTERIOR = %w(:one :two :three :four :five :six :seven :eight :nine)
+  PHOTO_INTERIOR = %w(:one :two :three :four :five :six :seven :eight :nine)
+  
 
+  
+  
 
 
   DEFECTS_CATEGORIES ={
@@ -86,6 +89,53 @@ class Report < ActiveRecord::Base
     'checklist' => {"lights"=>{"headlights"=>"ок", "distant_lights"=>"ок", "fog_lights"=>"ок", "marker_lights"=>"ок", "turn_signal"=>"ок", "brake_lights"=>"0", "repeater"=>"1", "brake_lightsfog_lights"=>"ок"}, "electronic"=>{"glass_elevators"=>"ок", "central_locking"=>"ок", "seat_drive"=>"ок", "seat_heat"=>"ок", "mirrors"=>"ок", "hatch"=>"ок", "climat"=>"ок", "radio"=>"ок", "adjustable_wheel"=>"ок", "closer_rain_sensor"=>"ок", "parktronic"=>"ок", "seat_belt"=>"2"}, "liquids"=>{"engine"=>"OK", "transmission"=>"OK", "antifreeze"=>"OK", "power_steering"=>"OK", "brake"=>"OK"}, "completion"=>{"spare_wheel"=>"есть", "jack"=>"есть", "tools"=>"есть", "sealant"=>"есть", "compressor"=>"есть", "key_lock_gear"=>"есть", "theft_of_the_wheels"=>"есть", "keychain_alarm"=>"есть", "keychain_webasto"=>"есть", "key_to_the_locker"=>"есть"}, "documents"=>{"series"=>"1111333", "whom"=>"123", "issued"=>"17.08.2012", "document_validity"=>"0", "country"=>"Россия", "vin"=>"балабалабла", "owner_1_jur"=>"jur", "owner_2_jur"=>"fis", "owner_3_jur"=>"jur", "owner_4_jur"=>"fis", "owner_5_jur"=>"jur", "owner_6_jur"=>"fis", "start_owning_1"=>"01.08.2012", "end_owning_1"=>"02.08.2012", "start_owning_2"=>"03.08.2012", "end_owning_2"=>"04.08.2012", "start_owning_3"=>"05.08.2012", "end_owning_3"=>"06.08.2012", "start_owning_4"=>"07.08.2012", "end_owning_4"=>"08.08.2012", "start_owning_5"=>"09.08.2012", "end_owning_5"=>"10.08.2012", "start_owning_6"=>"11.08.2012", "end_owning_6"=>"12.08.2012"}, "coating"=>{"front_left_wing"=>"200", "front_left_door"=>"300", "rear_left_door"=>"200", "rear_left_wing"=>"300", "front"=>"400+", "roof"=>"400+", "rear"=>"400+", "front_right_wing"=>"100", "front_right_door"=>"200", "rear_right_door"=>"100", "rear_right_wing"=>"200"}},
     'testdrive' => {"suspension"=>{"divestment_steering"=>"ок", "steering_wheel_is_straight"=>"ок", "luft_knock_on_the_handlebars"=>"ок", "air_suspension"=>"ок", "heartbeat_vibration_on_acseletation"=>"ок", "creaks_knocks_on_the_irregularities"=>"ок", "heartbeat_vibration_on_braking"=>"ок"}, "engine"=>{"all_wheel_drive"=>"1", "routes"=>"1", "routes_during_heavy_gas"=>"1", "smoke_from_exhaust"=>"1", "engine_noise"=>"1", "shifting_down"=>"1", "shifting_up"=>"1", "parking_brake"=>"1", "sound_signal"=>"1"}}
   }
+
+  
+  
+  CHECKLIST = %w(coating lights electronic liquids completion)
+    COATING = ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door", "rear_right_door", "rear_right_wing", "front", "rear", "roof"]
+    LIGHTS =  %w( headlights distant_lights fog_lights marker_lights turn_signal) + %w(brake_lightsfog_lights rear_marker_lights rear_turn_signal)
+    ELECTRONIC =  %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch) +  %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt)
+    LIQUIDS = %w(engine transmission antifreeze power_steering brake)
+    COMPLETION = %w(spare_wheel jack tools sealant compressor key_lock_gear) + %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker)
+  
+  ELEMENTS = %w(exterior interior windows_and_lights)
+    WINDOWS_AND_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)
+    EXTERIOR = %w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold)
+    INTERIOR = %w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest)
+
+  TESTDRIVE = %w(suspension engine)
+    SUSPENSION = %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking)
+    ENGINE = %w(all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise )
+
+  def diff
+    result = {}
+    for object in %w( checklist testdrive elements )
+      
+      sections = Report.const_get(object.split(//).map(&:capitalize).join)
+      places = []
+      sections.map{|i| places.push Report.const_get(i.split(//).map(&:capitalize).join)}
+      places.flatten
+    
+
+      if Point.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
+        for section in Report.const_get(object.split(//).map(&:capitalize).join)
+          if Point.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
+            for place in Report.const_get(section.split(//).map(&:capitalize).join)
+              unless Point.where(:object => object, :section => section, :place => place).any?
+                result[object] ||= {}
+                result[object][section] ||= []
+                result[object][section].push place                
+              end
+            end
+          end
+        end
+      end
+  
+    end
+    result.any? ? result : false
+  end
+  
   def model_name
     "#{model.brand.name} #{model.name}"
   end
@@ -211,7 +261,7 @@ class Report < ActiveRecord::Base
   def assigned(attrs={})
     result = []
 
-    ["visual_interior", 'interior',"exterior", "windows_lights", "exterior_parts", "powertrains", "electric_parts", "liquid_levels", "chasis", "testdrtive", "windows", "dumpers", "brakes"].each do |i|
+    ["visual_interior", 'interior',"exterior"].each do |i|
       result.push send(i).values
     end
 
@@ -244,9 +294,6 @@ class Report < ActiveRecord::Base
       end
     end
 
-    # ["visual_interior", "interior", "exterior", "windows_lights", "exterior_parts", "powertrains", "electric_parts", "liquid_levels", "chasis", "completion", "testdrtive", "windows", "dumpers", "brakes"].each do |i|
-    #   send(i).each { |k, v| v.delete_if { |i| i == asset.to_s } }
-    # end
     save
     images
   end

@@ -23,7 +23,9 @@ class AssetsController < ApplicationController
 
       render :json => assets
     else
-      render json: 'nothing', status: :unprocessable_entity
+      assets = {}
+      Asset.where(:id => @parent.assigned).map{|i| assets[i.id] = i.url(:carousel)}
+      render json: assets
     end
     
   end

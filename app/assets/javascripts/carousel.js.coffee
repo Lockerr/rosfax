@@ -1,4 +1,6 @@
 $(document).ready ->
+  $(document).keyup (e) ->
+    $('#modal_carousel').modal('hide')  if e.keyCode is 27
   $(".thumb").live 'click', ->
     if $(@).parent().siblings().html() > 0
 
@@ -53,6 +55,10 @@ $(document).ready ->
             $($('.carousel-inner .item')[0]).addClass('active')
             $('#myCarousel').carousel('pause')
             $('#modal_carousel').modal('show')
+            
+            $(document).keydown (e) ->
+              $('#modal_carousel').modal('hide')  if e.keyCode is 27
+            
             if $('.carousel-inner .item').size() > 1
               $('.carousel-control.left').show()
               $('.carousel-control.right').show()
@@ -60,8 +66,37 @@ $(document).ready ->
               $('.carousel-control.left').hide()
               $('.carousel-control.right').hide()
 
+
       else 
         console.log 'nothing'
+    else
+      element = $(@)
+      report_id = $('#report.container').attr('report')
+      $.ajax
+        url: "/reports/#{report_id}/assets"
+        success: (resp) ->
+          console.log resp
+          first_image = resp[element.attr('id')]
+          console.log element.attr('id')
+          console.log resp[element.attr('id')]
+          $('.carousel-inner').empty()
+          delete resp[element.attr('id')]
+          $('.carousel-inner').append("<div class='item active'><img src='#{first_image}'>")
+          
+          for image of resp
+            $('.carousel-inner').append("<div class='item'><img src='#{resp[image]}'>")
+          
+          
+          $('#myCarousel').carousel('pause')
+          $('#modal_carousel').modal('show')
+          
+          if $('.carousel-inner .item').size() > 1
+            $('.carousel-control.left').show()
+            $('.carousel-control.right').show()
+          else
+            $('.carousel-control.left').hide()
+            $('.carousel-control.right').hide()      
+
 
   $('.carousel-delete').live 'click', ->
     data = $(@).data()

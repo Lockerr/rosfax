@@ -7,7 +7,7 @@
       %legend Уровни технических жидкостей
       .form-horizontal
         - Report::LIQUIDS.each do |param|
-          - parameters = {:report_id => @report.id, :object => 'check', :section => 'liquids', :place => param}
+          - parameters = {:report_id => @report.id, :object => object, :section => 'liquids', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
           .control-group.object{:data => parameters}

@@ -7,7 +7,7 @@
       %legend Заголовок 1
       .form-horizontal
         - Report::COMPLETION[0..5].each do |param|
-          - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
+          - parameters = {:report_id => @report.id, :object => object, :section => 'completion', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
           .control-group.object{:data => parameters}
@@ -23,7 +23,7 @@
       %legend Заголовок 2
       .form-horizontal
         - Report::COMPLETION[5..-1].each do |param|
-          - parameters = {:report_id => @report.id, :object => 'check', :section => 'completion', :place => param}
+          - parameters = {:report_id => @report.id, :object => object, :section => 'completion', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
           .control-group.object{:data => parameters}

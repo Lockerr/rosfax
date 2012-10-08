@@ -48,7 +48,7 @@ class Report < ActiveRecord::Base
   WHEEL = %w(:front_left_wheel :front_right_wheel :rear_right_wheel :rear_left_wheel :stepney)
   
   EXTERIOR_PARTS = %w(:hood :front_right_wing :right_front_door :rear_right_door :rear_right_wing :boot_lid :rear_left_wing :rear_left_door :front_left_door :front_left_wing_of_the :roof :front_bumper :skirt_front_bumper :rear_bumper :rear_apron :right_threshold :left_threshold)
-  # WINDOWS_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window),
+  
   INTERIOR_PARTS =%w(:front_left_seat :front_right_seat :back_sofa :third_row_seats :covering_left_front_door :covering_right_front_door :covering_left_rear_door :covering_rear_right_door :covering_trunk :ceiling :torpedo :central_console :armrest)
   POWERTRAINS = %w(knock flow tear wear)
 
@@ -56,32 +56,14 @@ class Report < ActiveRecord::Base
   LIQUID_LEVELS = %w( oil_in_engine oil_in_gearbox brake_fluid fluid_power_steering )
   CHASIS = %w(:full_drive_connection :air_suspension_all_levels :luft_knocking_in_steering_wheel :revolutions_of_twentieth :turns_gas_with_a_sharp)
 
-  
-  # TESTDRIVE = %w(:disposed_steering :wheel_direct :luft_steering :heartbeat_vibration_when_accelerating :heartbeat_vibration_on_braking :knocks_squeak_on_uneven :switching_gears_all_up :switching_gears_all_down :acceleration_to_100_km_h_full_throttle :parking_brake :engine_noise :klaxon)
-
-  
   WINDOWS = %w( :head-on_window :front_right_window :rear_right_window :rear_right_ventilator :rear_window :rear_left_ventilator :the_rear_left_window :front_left_window )
-  
   DUMPERS = %w(:right_front_bumper :left_front_bumper :right_rear_bumper :left_rear_bumper)
-
   PHOTO_INTERIOR = %w(:one :two :three :four :five :six :seven :eight :nine)
-  
-
-  
-  
-
-
+ 
   DEFECTS_CATEGORIES ={
           :exterior => %w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold),
           :interior => %w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest),
-          :windows_and_lights => %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window),
-          # :powertrains => %w(knock flow tear wear),
-          # :chasis => %w(full_drive_connection air_suspension_all_levels luft_knocking_in_steering_wheel revolutions_of_twentieth turns_gas_with_a_sharp),
-          # :wheels => %w(front_left_wheel front_right_wheel rear_right_wheel rear_left_wheel stepney),
-          # :electric => ELECTRONIC_PARTS,
-          # :liquids => LIQUID_LEVELS,
-          # :other => %w(teleporter hovering_drive plasma_gun gravizapa black_hole_generator tractor_beam higgs`s_boson arrow_in_the_knee),
-          # :video => %w()
+          :windows_and_lights => %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window) 
   }
 
 
@@ -107,22 +89,35 @@ class Report < ActiveRecord::Base
   TESTDRIVE = %w(suspension engine)
     SUSPENSION = %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking)
     ENGINE = %w(all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise )
-
+    ENGINE += %w(shifting_down shifting_up parking_brake sound_signal)
   def diff
     result = {}
-    for object in %w( checklist testdrive elements )
+    objects = %w( checklist testdrive elements )
+    # objects = ['testdrive']
+    
+    for object in objects
       
       sections = Report.const_get(object.split(//).map(&:capitalize).join)
       places = []
       sections.map{|i| places.push Report.const_get(i.split(//).map(&:capitalize).join)}
       places.flatten
     
-
+      puts object.inspect
+      puts sections.inspect
+      puts places.inspect
       if Point.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
+        puts "points #{{:object => object, :place => places.flatten}} less then #{places.flatten.count}"
+
         for section in Report.const_get(object.split(//).map(&:capitalize).join)
+          puts "Проверка сеции ============================== #{section}"
+          
           if Point.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
+            puts Point.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
+            puts Report.const_get(section.split(//).map(&:capitalize).join).size            
             for place in Report.const_get(section.split(//).map(&:capitalize).join)
+              puts place
               unless Point.where(:object => object, :section => section, :place => place).any?
+                puts Point.where(:object => object, :section => section, :place => place).inspect
                 result[object] ||= {}
                 result[object][section] ||= []
                 result[object][section].push place                

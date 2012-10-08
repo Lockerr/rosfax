@@ -54,7 +54,7 @@
               %h3{:style => 'margin: 0'}
                 Чеклист
                 %span{:style => 'font-size: 70%; color: #ddd'}
-                  = "(" + (@report.points.where(:object => :check).size*100.0/46).round(0).to_i.to_s + "%)"
+                  = "(" + (@report.points.where(:object => :checklist).size*100.0/46).round(0).to_i.to_s + "%)"
                 %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.checklists'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
                   Развернуть
                 %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.checklists.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
@@ -193,6 +193,16 @@
                                   .span6{:style => 'text-align:right'}= point.condition
   
   .row
+    %a.pull-left{:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
+      %h3.pull-left Не проверенные    
+    %a.pull-left{:style => 'margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
+      %span
+        %b
+          Развернуть
+      %span.hide
+        %b
+          Свернуть
+  .row.collapse{:id => 'unchecked'}
     .span12
       - unless @report.diff.empty?
         - for object in @report.diff.keys

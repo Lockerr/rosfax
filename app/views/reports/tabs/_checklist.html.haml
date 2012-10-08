@@ -13,7 +13,7 @@
       - for tab in Report::CHECKLIST
         - if tab == 'coating'
           .tab-pane{:id => tab, :style => "background-image: url('https://s3-eu-west-1.amazonaws.com/rosfax/coating.jpg'); background-repeat: no-repeat; height: 1000px"}
-            = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report}
+            = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report, :object => 'checklist'}
         - else
           .tab-pane{:id => tab}
-            = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report}
+            = render :partial => "reports/tabs/#{tab}", :locals => {:report => @report, :object => 'checklist'}

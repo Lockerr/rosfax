@@ -105,19 +105,19 @@ class Report < ActiveRecord::Base
       puts object.inspect
       puts sections.inspect
       puts places.inspect
-      if Point.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
+      if points.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
         puts "points #{{:object => object, :place => places.flatten}} less then #{places.flatten.count}"
 
         for section in Report.const_get(object.split(//).map(&:capitalize).join)
           puts "Проверка сеции ============================== #{section}"
           
-          if Point.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
-            puts Point.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
+          if points.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
+            puts points.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
             puts Report.const_get(section.split(//).map(&:capitalize).join).size            
             for place in Report.const_get(section.split(//).map(&:capitalize).join)
               puts place
-              unless Point.where(:object => object, :section => section, :place => place).any?
-                puts Point.where(:object => object, :section => section, :place => place).inspect
+              unless points.where(:object => object, :section => section, :place => place).any?
+                puts points.where(:object => object, :section => section, :place => place).inspect
                 result[object] ||= {}
                 result[object][section] ||= []
                 result[object][section].push place                

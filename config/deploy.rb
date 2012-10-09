@@ -24,7 +24,7 @@ set :rvm_type, :user
 
 set :scm, :git
 set :repository, "git@github.com:Lockerr/tradein.git"
-set :branch, "r328"
+set :branch, "master"
 set :deploy_via, :remote_cache
 
 set :backup_dir, "#{deploy_to}/shared"

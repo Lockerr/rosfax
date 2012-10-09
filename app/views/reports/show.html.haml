@@ -231,9 +231,7 @@
   %button.close{'data-dismiss'=>"modal"}
   #myCarousel.carousel.slide{:style => 'padding: 5px'}
     .carousel-inner
-      - for image in @report.images :group => 'visual_interior', :size => 'carousel'
-        .item{:id => "active_#{image[0]}"}
-          = image_tag(image[1])
+      
 
     %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
     %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›

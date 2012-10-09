@@ -6,8 +6,9 @@
           %a{"data-toggle" => "tab", :href => "##{tab}"}
             = t("tab.#{tab}")
             %span{:style => 'color: #ddd'}
-            - if @report.counters[:checklist][tab.to_sym]
-              = @report.counters[:checklist][tab.to_sym][2]
+              = @report.points.where(:object => :checklist, :section => tab).count
+              \/
+              = Report.const_get(tab.split(//).map(&:capitalize).join).count
 
     .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden"}
       - for tab in Report::CHECKLIST

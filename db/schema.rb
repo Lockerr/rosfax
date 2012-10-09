@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913060314) do
+ActiveRecord::Schema.define(:version => 20121009103237) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -99,31 +99,18 @@ ActiveRecord::Schema.define(:version => 20120913060314) do
     t.integer  "car_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "visual_interior"
     t.text     "exterior"
-    t.text     "windows_lights"
-    t.text     "exterior_parts"
-    t.text     "powertrains"
-    t.text     "electric_parts"
-    t.text     "liquid_levels"
-    t.text     "chasis"
     t.text     "testdrtive"
-    t.text     "windows"
-    t.text     "dumpers"
-    t.text     "brakes"
     t.text     "wheels"
     t.text     "interior"
     t.text     "under_the_hood"
     t.text     "photo_others"
-    t.text     "defects"
-    t.text     "coating"
     t.text     "checklist"
-    t.text     "testdrive"
     t.text     "car"
     t.text     "documents"
     t.integer  "user_id"
     t.integer  "model_id"
-    t.boolean  "publish",         :default => false
+    t.boolean  "publish",        :default => false
   end
 
   create_table "users", :force => true do |t|

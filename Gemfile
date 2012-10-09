@@ -5,6 +5,7 @@ gem 'thin'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'haml-rails'
+gem 'ruby-haml-js'
 gem 'paperclip'
 gem 'capistrano_colors'
 gem 'ru_propisju'
@@ -22,6 +23,8 @@ gem 'rufus-scheduler'
 gem 'sass'
 gem 'hirb'
 gem "devise-async"
+
+gem 'spine-rails'
 
 
 group :assets do

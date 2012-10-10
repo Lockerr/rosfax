@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009103237) do
+ActiveRecord::Schema.define(:version => 20121010090424) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20121009103237) do
     t.string   "images"
   end
 
+  add_index "points", ["report_id"], :name => "index_points_on_report_id"
+
   create_table "profiles", :force => true do |t|
     t.string   "name"
     t.string   "org"
@@ -100,12 +102,10 @@ ActiveRecord::Schema.define(:version => 20121009103237) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "exterior"
-    t.text     "testdrtive"
     t.text     "wheels"
     t.text     "interior"
     t.text     "under_the_hood"
     t.text     "photo_others"
-    t.text     "checklist"
     t.text     "car"
     t.text     "documents"
     t.integer  "user_id"

@@ -134,6 +134,8 @@ $ ->
 
   $.each $('.photos img'), ->
     this.ondragstart = (event) ->
+
+
       window.dragged = event.target
     $(".thumbnail img").prop('draggable', false)
 

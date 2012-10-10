@@ -5,14 +5,17 @@
         %a{"data-toggle" => "tab", :href => "#suspension"}
           Подвеска
           %span{:style => 'color: #ddd'}
-            - if @report.counters[:testdrive][:suspension]
-              = @report.counters[:testdrive][:suspension][2]
+            = @report.points.where(:object => :testdrive, :section => :suspension).count
+            \/
+            = Report::SUSPENSION.count
       %li
         %a{"data-toggle" => "tab", :href => "#engine"}
           КПП и ДВС
           %span{:style => 'color: #ddd'}
-            - if @report.counters[:testdrive][:engine]
-              = @report.counters[:testdrive][:engine][2]
+            = @report.points.where(:object => :testdrive, :section => :engine).count
+            \/
+            = Report::ENGINE.count
+              
 
       %li
         %a{"data-toggle" => "tab", :href => "#other_tests"} Прочее
@@ -44,7 +47,7 @@
             .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
         .span5.well
           .form-horizontal
-            - Report::ENGINE.each do |param|
+            - Report::ENGINE[0..5].each do |param|
               - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
               - if check = @points.select{|i| i.place == param}.first
                 - parameters[:id] = check.id
@@ -58,7 +61,7 @@
                         %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
         .span5.well
           .form-horizontal
-            - %w(shifting_down shifting_up parking_brake sound_signal).each do |param|
+            - Report::ENGINE[5..-1].each do |param|
               - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
               - if check = @points.select{|i| i.place == param}.first
                 - parameters[:id] = check.id
@@ -76,4 +79,4 @@
         .span8.well
           %label
             Примечание
-          = text_area "doc", 'series', :class => 'span9', :value => (@report.testdrive['other_tests']['description'] if @report.testdrive['other_tests']), :data => {:attribute => :testdrive, :place => :other_tests, :change => :description}
+          / = text_area "doc", 'series', :class => 'span9', :value => (@report.testdrive['other_tests']['description'] if @report.testdrive['other_tests']), :data => {:attribute => :testdrive, :place => :other_tests, :change => :description}

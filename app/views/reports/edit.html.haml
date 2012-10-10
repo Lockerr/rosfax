@@ -6,23 +6,32 @@
         %li.active
           %a{"data-toggle" => "tab", :href => "#info"}
             Информация
-            %span{:style => 'color: #ddd'}= @report.counters[:car][:summ][2]
+            %span{:style => 'color: #ddd'}= 1
         %li
           %a{"data-toggle" => "tab", :href => "#photo"}
             Фото
-            %span{:style => 'color: #ddd'}= @report.counters[:photo][:summ][2]
+            %span{:style => 'color: #ddd'}= 1
         %li
           %a{"data-toggle" => "tab", :href => "#checklist"}
             Чеклист
-            %span{:style => 'color: #ddd'}= @report.counters[:checklist][:summ][2]
+            %span{:style => 'color: #ddd'}
+              = @report.points.where(:object => :checklist).count
+              \/
+              = Report::COATING.count + Report::LIGHTS.count + Report::ELECTRONIC.count + Report::LIQUIDS.count + Report::COMPLETION.count
         %li
           %a{"data-toggle" => "tab", :href => "#testdrive"}
             Тест-драйв
-            %span{:style => 'color: #ddd'}= @report.counters[:testdrive][:summ][2]
+            %span{:style => 'color: #ddd'}
+              = @report.points.where(:object => :testdrive).count
+              \/
+              = Report::ENGINE.count + Report::SUSPENSION.count
         %li
           %a{"data-toggle" => "tab", :href => "#elements"}
             Элементы
-            %span{:style => 'color: #ddd'}= "#{@report.elements.count}/#{Report::DEFECTS_CATEGORIES.values.flatten.size}"
+            %span{:style => 'color: #ddd'}
+              = @report.points.where(:object => :elements).count
+              \/
+              = Report::WINDOWS_AND_LIGHTS.count + Report::EXTERIOR.count + Report::INTERIOR.count
       .tab-content.first
         - for symbol in %w(photo checklist defects testdrive elements info)
           = render "reports/tabs/#{symbol}"
@@ -33,9 +42,7 @@
   %button.close{'data-dismiss'=>"modal"}
   #myCarousel.carousel.slide{:style => 'padding: 5px'}
     .carousel-inner
-      - for image in @report.images :group => 'visual_interior', :size => 'carousel'
-        .item{:id => "active_#{image[0]}"}
-          = image_tag(image[1])
+      
 
     %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
     %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›

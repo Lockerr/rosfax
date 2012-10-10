@@ -256,7 +256,7 @@ class Report < ActiveRecord::Base
   def assigned(attrs={})
     result = []
 
-    ["visual_interior", 'interior',"exterior"].each do |i|
+    ['interior',"exterior"].each do |i|
       result.push send(i).values
     end
 

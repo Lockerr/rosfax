@@ -19,7 +19,14 @@ $(document).ready ->
           data: ajax_data
           success: (resp) ->
             for image_src in resp
-              $('.carousel-inner').append("<div class='item'><img src='" + image_src + "'></div>")
+              $('.carousel-inner').append("<div class='magnify'")
+
+              mag = $('.carousel-inner .magnify').last()
+
+              mag.append("<div class='item'><img src='" + image_src + "'></div>")
+              mag.append("<div class='large'><img src='" + image_src.replace('carousel', 'original') + "'></div>")
+
+              
 
             $($('.carousel-inner .item')[0]).addClass('active')
             $('#myCarousel').carousel('pause')

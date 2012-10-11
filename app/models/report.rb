@@ -102,26 +102,28 @@ class Report < ActiveRecord::Base
       sections.map{|i| places.push Report.const_get(i.split(//).map(&:capitalize).join)}
       places.flatten
     
-      puts object.inspect
-      puts sections.inspect
-      puts places.inspect
+      # puts object.inspect
+      # puts sections.inspect
+      # puts places.inspect
       if points.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
-        puts "points #{{:object => object, :place => places.flatten}} less then #{places.flatten.count}"
+        # puts "points #{{:object => object, :place => places.flatten}} less then #{places.flatten.count}"
 
-        for section in Report.const_get(object.split(//).map(&:capitalize).join)
-          puts "Проверка сеции ============================== #{section}"
-          
-          if points.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
-            puts points.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
-            puts Report.const_get(section.split(//).map(&:capitalize).join).size            
-            for place in Report.const_get(section.split(//).map(&:capitalize).join)
-              puts place
-              unless points.where(:object => object, :section => section, :place => place).any?
-                puts points.where(:object => object, :section => section, :place => place).inspect
+        for section in Report.const_get(object.upcase)
+          # puts "Проверка сеции ============================== #{section}"
+          in_section =  points.where(:object => object, :section => section, :place => Report.const_get(section.upcase))
+          if in_section.count('id') < Report.const_get(section.upcase).size
+            # puts points.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
+            # puts Report.const_get(section.split(//).map(&:capitalize).join).size            
+            dif = Report.const_get(section.upcase) - in_section.group(:place).select(:place).map(&:place)
+            # raise dif.inspect
+            for place in dif
+              # puts place
+              # unless points.where(:object => object, :section => section, :place => place).any?
+                # puts points.where(:object => object, :section => section, :place => place).inspect
                 result[object] ||= {}
                 result[object][section] ||= []
                 result[object][section].push place                
-              end
+              # end
             end
           end
         end

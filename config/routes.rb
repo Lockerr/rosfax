@@ -9,7 +9,9 @@ Tradein::Application.routes.draw do
 
   get "home/index"
   get 'home/demo'
+  
   match 'view/22', :controller => :home, :action => :demo
+  
   devise_for :user
 
   resources :user, :except => [:index, :edit, :new, :show, :create, :update, :destroy] do

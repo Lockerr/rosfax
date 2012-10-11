@@ -228,12 +228,4 @@
                               %span.badge= t("#{object}.#{section}.#{place}")
 
 
-#modal_carousel.modal.hide{:style => 'overflow: hidden'}
-  %button.close{'data-dismiss'=>"modal"}
-  #myCarousel.carousel.slide{:style => 'padding: 5px'}
-    .carousel-inner
-      
-
-    %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
-    %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
-    %a.carousel-control.close.top-left{'data-dismiss' => 'modal', :href => "#myCarousel", :style => 'width: 30px, height: 30px; font-size: 34px; top: 6%; left: 91%'} x
+= render 'carousel'

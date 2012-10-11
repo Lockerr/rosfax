@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010090424) do
+ActiveRecord::Schema.define(:version => 20121011034021) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20121010090424) do
     t.boolean  "data_processing"
     t.datetime "data_updated_at"
     t.string   "position"
+    t.string   "section"
+    t.string   "place"
   end
 
   add_index "assets", ["attachable_id", "attachable_type"], :name => "index_assets_on_attachable_id_and_attachable_type"

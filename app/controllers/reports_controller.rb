@@ -13,7 +13,10 @@ class ReportsController < ApplicationController
     current_user.admin? ? @reports = Report.all : @reports = current_user.reports
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {
+        @reports.includes(:points)
+        @reports.includes(:assets)
+      }
       format.json { render json: @reports }
     end
   end

@@ -6,7 +6,7 @@ class Report < ActiveRecord::Base
 
   has_many :elements, :class_name => 'Point', :conditions => ['object = ?', :element]
   has_many :defects, :class_name => 'Point', :conditions => ['object = ?', :defect]
-  has_many :cheks, :class_name => 'Point', :conditions => ['object =?', :check]
+  has_many :checks, :class_name => 'Point', :conditions => ['object =?', :check]
 
   belongs_to :user
   belongs_to :model

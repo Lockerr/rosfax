@@ -19,14 +19,19 @@ $(document).ready ->
           data: ajax_data
           success: (resp) ->
             for image_src in resp
-              $('.carousel-inner').append("<div class='magnify'")
-
-              mag = $('.carousel-inner .magnify').last()
-
-              mag.append("<div class='item'><img src='" + image_src + "'></div>")
-              mag.append("<div class='large'><img src='" + image_src.replace('carousel', 'original') + "'></div>")
-
+              mag = $('.carousel-inner')
+              item = $(document.createElement('div')).addClass('item')
               
+              small = new Image
+              small.src = image_src
+              small.width = 900
+              
+              large = $(document.createElement('div')).addClass('large')
+              large.css('background', "url('#{image_src.replace('carousel','original')}') no-repeat")
+              
+              item.append small
+              item.append large
+              mag.append item
 
             $($('.carousel-inner .item')[0]).addClass('active')
             $('#myCarousel').carousel('pause')
@@ -38,7 +43,7 @@ $(document).ready ->
               $('.carousel-control.left').hide()
               $('.carousel-control.right').hide()
 
-      else if $(@).parents('.object').data('object') == 'element'
+      else if $(@).parents('.object').data('object') == 'elements'
         point_id = $(@).parents('.object').data('id')
         
         $.ajax
@@ -47,19 +52,27 @@ $(document).ready ->
             console.log resp
 
             for image of resp.point
-              console.log image
+              mag = $('.carousel-inner')              
               id = image
+              item = $(document.createElement('div')).addClass('item')
+              
               image_src = resp.point[image]
-              delete resp.points[image]
 
-              $('.carousel-inner').append("<div class='item'><img src='#{image_src}'><button class='btn btn-alert carousel-delete' data-point=#{object_id} data-id=#{id}>Удалить</div>")
-            for image of resp.points
-              id = image
-              image_src = resp.points[image]
-              $('.carousel-inner').append("<div class='item'><img src='#{image_src}'><button class='btn btn-alert carousel-delete' data-point=#{object_id} data-id=#{id}>Удалить</div>")
+              small = new Image
+              small.src = image_src
+              large = $(document.createElement('div')).addClass('large')
+              large.css('background', "url('#{image_src.replace('carousel','original')}') no-repeat")
+                 
+              item.append small
+              item.append large
+              mag.append item
 
+              
 
-            $($('.carousel-inner .item')[0]).addClass('active')
+              # $('.carousel-inner').append("<div class='item'><img src='#{image_src}'><button class='btn btn-alert carousel-delete' data-point=#{object_id} data-id=#{id}>Удалить</div>")
+              $('')
+
+              mag.find('.item').first().addClass('active')
             $('#myCarousel').carousel('pause')
             $('#modal_carousel').modal('show')
             
@@ -82,18 +95,30 @@ $(document).ready ->
       $.ajax
         url: "/reports/#{report_id}/assets"
         success: (resp) ->
-          console.log resp
+          
           first_image = resp[element.attr('id')]
-          console.log element.attr('id')
-          console.log resp[element.attr('id')]
           $('.carousel-inner').empty()
           delete resp[element.attr('id')]
-          $('.carousel-inner').append("<div class='item active'><img src='#{first_image}'>")
+          
+          mag = $('.carousel-inner')          
+          mag.append("<div class='item active'><img width='900' src='" + first_image + "'><div class='large'></div></div>")
+          large = first_image.replace('carousel', 'original')
+          mag.find('.item.active .large').css('background', "url('#{large}') no-repeat")
           
           for image of resp
-            $('.carousel-inner').append("<div class='item'><img src='#{resp[image]}'>")
-          
-          
+            item = $(document.createElement('div')).addClass('item')
+            
+            small = new Image
+            small.src = resp[image]
+            small.width = 900
+            
+            large = $(document.createElement('div')).addClass('large')
+            large.css('background', "url('#{resp[image].replace('carousel','original')}') no-repeat")
+            
+            item.append small
+            item.append large
+            mag.append item
+
           $('#myCarousel').carousel('pause')
           $('#modal_carousel').modal('show')
           
@@ -132,4 +157,26 @@ $(document).ready ->
         else
           $('.carousel-control.left').hide()
           $('.carousel-control.right').hide()
-     
+
+  $('#magnify').live 'click', ->
+    el = $('#magnify')
+    if el.data('magnify') == true
+      $('.magnify').off('mousemove')
+      $('.large').hide
+      el.data('magnify', false)
+      el.css('border-color', 'white')
+    else
+      magnify()
+      el.data('magnify', true)
+      el.css('border-color', 'gold')
+
+  
+  $('.carousel-control.left, .carousel-control.right').click ->
+      el = $('#magnify')
+      $('.magnify').off('mousemove')
+      $('.large').hide
+      el.data('magnify', false)
+      el.css('border-color', 'white')
+
+
+       

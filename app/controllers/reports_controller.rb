@@ -10,12 +10,12 @@ class ReportsController < ApplicationController
   end
 
   def index
-    current_user.admin? ? @reports = Report.all : @reports = current_user.reports
+    current_user.admin? ? @reports = Report.scoped : @reports = current_user.reports.scoped
 
     respond_to do |format|
       format.html {
-        @reports.includes(:points)
-        @reports.includes(:assets)
+        @reports = @reports.includes(:points)
+        @reports = @reports.includes(:assets)
       }
       format.json { render json: @reports }
     end

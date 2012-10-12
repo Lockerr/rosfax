@@ -1,9 +1,11 @@
-#modal_carousel.modal.hide{:style => 'overflow: hidden; width: 910px; margin: 0 auto; left: 14%; top: 14%'}
+#modal_carousel.modal.hide{:style => 'overflow: hidden; width: 910px'}
   %button.close{'data-dismiss'=>"modal"}
   #myCarousel.carousel.slide{:style => 'padding: 5px'}
-    .carousel-inner
+    .carousel-inner.magnify
       
 
     %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :style => 'top: 48%'} ‹
     %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel", :style => 'top: 48%'} ›
     %a.carousel-control.close.top-left{'data-dismiss' => 'modal', :href => "#myCarousel", :style => 'width: 30px; height: 29px; font-size: 24px; top: 21px; left: 96%; line-height: 24px'} x
+    %a.carousel-control#magnify{:style => 'top: 23px; left: 824px;'}
+      %img{:src => '/assets/car.png', :style => 'width: 79px;margin-left: -25px;margin-top: -9px;max-width: 100px'}

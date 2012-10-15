@@ -8,7 +8,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-ui
-//= require app
+
 //= require_tree .
 
 $('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); e.preventDefault(); })

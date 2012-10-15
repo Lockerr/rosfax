@@ -1,6 +1,8 @@
 $(document).ready ->
+  
   $(document).keyup (e) ->
     $('#modal_carousel').modal('hide')  if e.keyCode is 27
+  
   $(".thumb").live 'click', ->
     if $(@).parent().siblings().html() > 0
 
@@ -27,7 +29,7 @@ $(document).ready ->
               small.width = 900
               
               large = $(document.createElement('div')).addClass('large')
-              large.css('background', "url('#{image_src.replace('carousel','original')}') no-repeat")
+              # large.css('background', "url('#{image_src.replace('carousel','magnify')}') no-repeat")
               
               item.append small
               item.append large
@@ -55,13 +57,13 @@ $(document).ready ->
               mag = $('.carousel-inner')              
               id = image
               item = $(document.createElement('div')).addClass('item')
-              
+
               image_src = resp.point[image]
 
               small = new Image
               small.src = image_src
               large = $(document.createElement('div')).addClass('large')
-              large.css('background', "url('#{image_src.replace('carousel','original')}') no-repeat")
+              # large.css('background', "url('#{image_src.replace('carousel','magnify')}') no-repeat")
                  
               item.append small
               item.append large
@@ -102,8 +104,10 @@ $(document).ready ->
           
           mag = $('.carousel-inner')          
           mag.append("<div class='item active'><img width='900' src='" + first_image + "'><div class='large'></div></div>")
-          large = first_image.replace('carousel', 'original')
-          mag.find('.item.active .large').css('background', "url('#{large}') no-repeat")
+          mag.find('.item.active .large').css('background', "url('/assets/loading.gif') no-repeat")
+          
+          
+
           
           for image of resp
             item = $(document.createElement('div')).addClass('item')
@@ -113,7 +117,7 @@ $(document).ready ->
             small.width = 900
             
             large = $(document.createElement('div')).addClass('large')
-            large.css('background', "url('#{resp[image].replace('carousel','original')}') no-repeat")
+            large.css('background', "url('/assets/loading.gif') no-repeat")
             
             item.append small
             item.append large
@@ -177,6 +181,6 @@ $(document).ready ->
       $('.large').hide
       el.data('magnify', false)
       el.css('border-color', 'white')
-
-
+      window.native_width = 0
+      window.native_height = 0
        

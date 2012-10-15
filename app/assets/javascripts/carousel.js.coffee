@@ -104,7 +104,7 @@ $(document).ready ->
           
           mag = $('.carousel-inner')          
           mag.append("<div class='item active'><img width='900' src='" + first_image + "'><div class='large'></div></div>")
-          mag.find('.item.active .large').css('background', "url('/assets/loading.gif') no-repeat")
+          mag.find('.item.active .large').attr('loading', 'true')
           
           
 
@@ -117,7 +117,7 @@ $(document).ready ->
             small.width = 900
             
             large = $(document.createElement('div')).addClass('large')
-            large.css('background', "url('/assets/loading.gif') no-repeat")
+            large.attr('loading', 'true')
             
             item.append small
             item.append large

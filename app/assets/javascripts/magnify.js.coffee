@@ -3,7 +3,9 @@ loader = (image_object) ->
     window.native_width = image_object.width
     window.native_height = image_object.height
     $('.item.active .large').css('background', "url('#{image_object.src}') no-repeat")
+    $('.item.active .large').attr('loading', 'false')
     $('.item.active .large').activity(false)
+
 
   $(image_object).onload = ->
     window.native_width = 0
@@ -18,7 +20,7 @@ loader = (image_object) ->
     small = $('.item.active img')
     large = $('.item.active .large')
    
-    if large.css('background-image').split(/\W/).reverse()[2] == "loading"
+    if large.attr('loading') == 'true'
         
       image_object = new Image()
       src = small.attr('src')

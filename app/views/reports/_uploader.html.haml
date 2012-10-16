@@ -26,21 +26,25 @@
               = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
           - else
             .image
-            = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
+              = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
 
       .tab-pane{:id => "#{attribute}_all_photos"}
         - for asset in @report.assets
           -if asset.data_processing
-            = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
+            .pricessing_image
+              = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
           - else
-            = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
+            .image
+              = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
       .tab-pane.uploading{:id => "#{attribute}_uploading"}
       .tab-pane#eye-fi
         - for asset in current_user.assets
           -if asset.data_processing
-            = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
+            .processing_image
+              = image_tag asset.url(:thumb), :size => '96x66', :draggable => 'true',:id => asset.id, :style => 'cursor: move;', :processing => asset.id, :class => 'processing'
           - else
-            = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
+            .image
+              = image_tag asset.url(:thumb), :draggable => 'true',:id => asset.id, :style => 'cursor: move;'
 
 
 

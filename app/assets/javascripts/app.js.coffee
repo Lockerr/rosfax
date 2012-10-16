@@ -73,7 +73,7 @@ update_eye_fi = ->
 
 
 get_images = ->
-  $('.processed_image').activity()
+  $('.processing_image').activity()
   console.log 'refreshing is set to true'
   refreshing = true
   ids = $.map($(".processing"), (n, i) -> n.id ).unique()
@@ -102,10 +102,12 @@ get_images = ->
 
 refresh_image = (refresh_rate, src, id) ->
   setTimeout(( ->
-          $(".processing[id=#{id}]").attr('src', src)
-          $(".processing[id=#{id}]").removeClass('processing')
-          $(".processing[id=#{id}]").parent().removeClass('processed_image')
-          $(".processing[id=#{id}]").parent().activity('false')
+          image = $(".processing[id=#{id}]")
+          image.attr('src', src)
+          image.removeClass('processing')
+          image.parent().removeClass('processing_image')
+          image.parent().activity(false)
+          image.parent().addClass('image')
 
           $.each $('.photos img'), ->
             this.ondragstart = (event) ->

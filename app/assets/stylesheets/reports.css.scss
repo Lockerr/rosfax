@@ -47,3 +47,10 @@ body {
 .add-on {
   cursor: pointer;
 }
+
+.image, .processing_image {
+  float: left;
+  margin: 0.5px;
+  width: 100px;
+  height: 67px;
+}

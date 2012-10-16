@@ -31,7 +31,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.user == current_user or current_user.admin?
-        format.html 
+        format.html { render :layout => 'report_show'}
         format.json { render json: @report }
       else
         format.html { render :inline => 'Нет доступа'}

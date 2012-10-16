@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title Tradein
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "jquery", 'twitter/bootstrap', 'bootstrap', 'index','loading', 'magnify', 'carousel'
+    = csrf_meta_tags
+  %body
+    = render 'navbar'
+    = yield

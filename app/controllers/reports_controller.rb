@@ -3,7 +3,8 @@ class ReportsController < ApplicationController
 
   before_filter :authenticate_user!
 
-  layout 'report'
+  layout 'clean'
+
   def models
     @reports = Report.public.where(:model_id => params[:ids].split(','))
     render :index
@@ -67,7 +68,7 @@ class ReportsController < ApplicationController
     
     respond_to do |format|
       if @report.user == current_user or current_user.admin?
-        format.html # show.html.erb
+        format.html { render :layout => 'report'}
         format.json { render json: @report }
       else
         format.html { render :inline => 'Нет доступа'}

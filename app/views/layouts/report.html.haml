@@ -9,7 +9,7 @@
     .navbar.navbar-static-top
       .navbar-inner
         .container
-          - unless Rails.root.to_s.split('/')[2] == 'user'
+          - unless Rails.env == 'development'
             .row
               .span2
                 = image_tag 'car.png', :style => 'width: 90xp; height: 90px; margin-top: 12px'

@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Report < ActiveRecord::Base
-  has_many :points
-  has_many :assets, :as => :attachable
+  has_many :points, :dependent => :destroy
+  has_many :assets, :as => :attachable, :dependent => :destroy
   # has_many :defects
 
   has_many :elements, :class_name => 'Point', :conditions => ['object = ?', :element]
@@ -14,33 +14,15 @@ class Report < ActiveRecord::Base
   attr_accessor :car_mark_model, :counters
 
   validates_presence_of :model
-  serialize :visual_interior, Hash
-  serialize :windows, Hash
-
+  
   serialize :exterior, Hash
-  serialize :windows_lights, Hash
-  serialize :exterior_parts, Hash
-  serialize :powertrains, Hash
-  serialize :electric_parts, Hash
-  serialize :liquid_levels, Hash
-  serialize :chasis, Hash
-  serialize :completion, Hash
-  serialize :testdrtive, Hash
-  serialize :windows, Hash
-  serialize :dumpers, Hash
-  serialize :brakes, Hash
   serialize :wheels, Hash
   serialize :interior, Hash
-  serialize :defects, Hash
   serialize :under_the_hood, Hash
   serialize :photo_others, Hash
-  serialize :coating, Hash
-  serialize :checklist, Hash
-  serialize :testdrive, Hash
   serialize :car, Hash
   serialize :documents, Hash
 
-  default_scope includes([:assets, :points])
   scope :public, where(:publish => true)
 
   PHOTO_EXTERIOR = %w( :front_left :front :front_right :left  :roof :right :rear_left :rear :rear_right)
@@ -93,8 +75,7 @@ class Report < ActiveRecord::Base
   def diff
     result = {}
     objects = %w( checklist testdrive elements )
-    # objects = ['testdrive']
-    
+   
     for object in objects
       
       sections = Report.const_get(object.split(//).map(&:capitalize).join)
@@ -102,28 +83,20 @@ class Report < ActiveRecord::Base
       sections.map{|i| places.push Report.const_get(i.split(//).map(&:capitalize).join)}
       places.flatten
     
-      # puts object.inspect
-      # puts sections.inspect
-      # puts places.inspect
       if points.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
-        # puts "points #{{:object => object, :place => places.flatten}} less then #{places.flatten.count}"
+
 
         for section in Report.const_get(object.upcase)
           # puts "Проверка сеции ============================== #{section}"
           in_section =  points.where(:object => object, :section => section, :place => Report.const_get(section.upcase))
           if in_section.count('id') < Report.const_get(section.upcase).size
-            # puts points.where(:object => object, :section => section, :place => Report.const_get(section.split(//).map(&:capitalize).join)).count('id') < Report.const_get(section.split(//).map(&:capitalize).join).size
-            # puts Report.const_get(section.split(//).map(&:capitalize).join).size            
             dif = Report.const_get(section.upcase) - in_section.group(:place).select(:place).map(&:place)
-            # raise dif.inspect
+
             for place in dif
-              # puts place
-              # unless points.where(:object => object, :section => section, :place => place).any?
-                # puts points.where(:object => object, :section => section, :place => place).inspect
                 result[object] ||= {}
                 result[object][section] ||= []
                 result[object][section].push place                
-              # end
+
             end
           end
         end
@@ -135,14 +108,6 @@ class Report < ActiveRecord::Base
   
   def model_name
     "#{model.brand.name} #{model.name}"
-  end
-
-  def self.sorted_defects_categories
-    result = {}
-    DEFECTS_CATEGORIES.each do |key, value|
-      result[key] = value.sort_by{|i| I18n.t("defects.#{key}.#{i}")}
-    end
-    result
   end
 
   def counters

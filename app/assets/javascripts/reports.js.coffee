@@ -115,7 +115,9 @@ $ ->
       $ "<tr><td>" + file.name + "</td>" + "<td class=\"file_upload_progress\"><div></div></td>" + "<td class=\"file_upload_cancel\">" + "</td></tr>"
     buildDownloadRow: (file) ->
       $('.photos').trigger ('custom_change')
-      $ "<img alt='Missing' class='processing' draggable='true' height='66' id='#{file.id}' processing='#{file.id}' src='/assets/loading.gif' style='cursor: move;' width='96'>"
+      $ "<div class='processed_image' style='float: left'><img alt='Missing' class='processing' draggable='true' height='66' id='#{file.id}' processing='#{file.id}' src='/assets/loading.gif' style='cursor: move;' width='96'></div>"
+
+
 
   assing_drops()
 

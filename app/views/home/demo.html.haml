@@ -84,9 +84,9 @@
                     %tr
                       %td{:colspan => 3}
                         .collapse.checklists{:id => "points_#{block}"}
-                          %ul.thumbnails
+                          .row
                             - @report.points.where(:section => block.to_sym).each do |point|
-                              %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
+                              .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
                                 - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
                                   .alert.alert-success{:style => 'margin-bottom: 0px'}
                                     .span6= t("checklist.#{block}.#{point.place}")
@@ -136,9 +136,9 @@
                     %tr
                       %td{:colspan => 3}
                         .collapse.testdrive{:id => "points_#{block}"}
-                          %ul.thumbnails
+                          .row
                             - @report.points.where(:section => block.to_sym).each do |point|
-                              %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
+                              .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
                                 - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
                                   .alert.alert-success{:style => 'margin-bottom: 0px'}
                                     .span6= t("testdrive.#{block}.#{point.place}")
@@ -188,9 +188,9 @@
                     %tr
                       %td{:colspan => 3}
                         .collapse.elements{:id => "points_#{block}"}
-                          %ul.thumbnails
+                          .row
                             - @report.points.where(:section => block.to_sym).each do |point|
-                              %li.span7{:style => 'width: 554px; margin-bottom: 5px'}
+                              .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
                                 - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
                                   .alert.alert-success{:style => 'margin-bottom: 0px'}
                                     .span6= t("defects.#{block}.#{point.place}")

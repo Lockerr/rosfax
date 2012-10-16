@@ -6,29 +6,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    .navbar.navbar-static-top
-      .navbar-inner
-        .container
-          - unless Rails.env == 'development'
-            .row
-              .span2
-                = image_tag 'car.png', :style => 'width: 90xp; height: 90px; margin-top: 12px'
-              .span7{:style => 'margin-top: 20px'}
-                %h1 Rosfax.ru - проверенные авто
-              .span3.pull-right
-                .btn.btn-large.pull-right Запись на осмотр
-          .nav-collapse.collapse
-            %ul.nav
-              %li.active= link_to 'rosfax.ru', root_path, :class => 'btn btn-navbar'
-              %li= link_to 'Домой', root_path
-              %li= link_to 'Отчеты', reports_path
-              %li= link_to 'Новый отчет', new_report_path
-              - if current_user
-                - unless Rails.root.to_s.split('/')[2] == 'user'
-                  %li= link_to 'Профиль', edit_user_profile_path(current_user)
-
-
-
+    = render 'navbar'
     - if @report and !@report.new_record?
       .container#report{'report' => @report.id, :source => @report.attributes.to_json}
         = yield

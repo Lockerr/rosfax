@@ -18,14 +18,9 @@ set :default_stage, 'staging'
 
 set :application, "rosfax"
 
-set :rvm_ruby_string, 'r328'
+
 set :use_sudo, false
 set :rvm_type, :user
-
-set :scm, :git
-set :repository, "git@github.com:Lockerr/tradein.git"
-set :branch, "master"
-set :deploy_via, :remote_cache
 
 set :backup_dir, "#{deploy_to}/shared"
 

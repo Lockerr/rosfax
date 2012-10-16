@@ -13,6 +13,11 @@ set :domain, "perekup@perekup.net"
 set :deploy_to, "/home/perekup/rosfax"
 set :rails_env, "production"
 set :password, '12345trewq'
+set :rvm_ruby_string, 'r328'
+set :deploy_via, :remote_cache
+set :scm, :git
+set :repository, "git@github.com:Lockerr/tradein.git"
+set :branch, "master"
 
 role :web, domain
 role :app, domain

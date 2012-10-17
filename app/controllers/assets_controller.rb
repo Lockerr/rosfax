@@ -47,8 +47,19 @@ class AssetsController < ApplicationController
       end
       render :json => { :pic_path => asset.url.to_s , :name => asset.name, :id => asset.id }, :content_type => 'text/html'
     end
-
   end
+
+  def update
+    respond_to do |format|
+      @asset = Asset.find(params[:id])
+      if @asset.update_attributes(params[:asset])
+        format.json { render json: :ok, status: :ok }
+      else
+        format.json { render json: @asset.errors, status: 422 }
+      end
+    end
+  end
+
 
   def processed
     result = {}

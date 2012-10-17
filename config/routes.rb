@@ -1,6 +1,7 @@
 Tradein::Application.routes.draw do
 
   resources :profiles
+  resources :assets
 
   resources :points do
     resources :image
@@ -19,19 +20,11 @@ Tradein::Application.routes.draw do
   end
 
 
-  resources :defects do
-    get 'images'
-    resources :assets
-    post 'place'
-  end
-
   resources :models do
     get 'index_block'
   end
 
-  get "asset/create"
-  get 'assets/processed'
-
+ 
 
   resources :reports do
     resources :points

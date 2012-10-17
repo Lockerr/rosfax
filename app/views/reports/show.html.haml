@@ -1,230 +1,231 @@
-.container#report{:report => @report.id}
-  .row
-    .span12
-      %h2
-        Отчет #
-        = @report.id
-        от
-        =@report.created_at.strftime('%d.%m.%y')
-  .row
-    .span2    
-      = image_tag( @report.assets.first.url(:thumb), :width => '120px', :class => 'thumb', :id => @report.assets.first.id ) if @report.assets.any?
+= cache ['show', @report] do 
+  .container#report{:report => @report.id}
+    .row
+      .span12
+        %h2
+          Отчет #!!!
+          = @report.id
+          от
+          =@report.created_at.strftime('%d.%m.%y')
+    .row
+      .span2    
+        = image_tag( @report.assets.first.url(:thumb), :width => '120px', :class => 'thumb', :id => @report.assets.first.id ) if @report.assets.any?
 
-    .span10
-      %table.table.table-striped
-        %tr
-          %td= @report.car['mark_model']
-          %td= @report.car['mark_model']
-          %td= @report.car['year']
-        %tr
-          %td= @report.car['vin']
-          %td Regnum
-          %td Mileage
-        %tr
-          %td Engine Cylinders
-          %td Engine Displacement
-          %td Engine Type
-  .row#row
-    .span12
+      .span10
+        %table.table.table-striped
+          %tr
+            %td= @report.car['mark_model']
+            %td= @report.car['mark_model']
+            %td= @report.car['year']
+          %tr
+            %td= @report.car['vin']
+            %td Regnum
+            %td Mileage
+          %tr
+            %td Engine Cylinders
+            %td Engine Displacement
+            %td Engine Type
+    .row#row
+      .span12
 
-      %table.table
-        / ###################### PHOTOS ######################################
-        %tr
-          %td
-            %a{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle()"}
-              %h3{:style => 'margin: 0'}
-                Фото
-                %span{:style => 'font-size: 70%; color: #ddd'}
-                  ='(' + @report.assigned.size.to_s + ')'
-                - if @report.assigned.any?
-                  %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Развернуть
-                  %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Свернуть
-                
-          %td &nbsp;
-        - if @report.assigned.any?
+        %table.table
+          / ###################### PHOTOS ######################################
           %tr
-            %td{:colspan => 3}
-              #photo.collapse
-                - Asset.where(:id => @report.assigned).each do |image|
-                  = image_tag image.url(:thumb), :class => 'thumb', :id => image.id
-        / ######################## CHECKLIST ####################################
-        %tr
-          %td
-            %a.pull-left{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}, :onclick => "$(this).siblings('a.btn').toggle()"}
-              %h3{:style => 'margin: 0'}
-                Чеклист
-                %span{:style => 'font-size: 70%; color: #ddd'}
-                  = "(" + (@report.points.where(:object => :checklist).size*100.0/46).round(0).to_i.to_s + "%)"
-                - if @report.points.where(:object => :checklist).any?
-                  %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.checklists'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Развернуть
-                  %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.checklists.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Свернуть
-                
-        - if @report.points.where(:object => :checklist).any?
-          %tr
-            %td{:colspan => 3}
-              #checklist_exterior.collapse.checklists
-                %table.table
-                  - for block in @report.points.where(:object => :checklist).group(:section).map(&:section)
-                    %tr
-                      %td
-                        %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
-                          %h4{:style => 'margin: 0'}
-                            = t("checklist.#{block}.title")
-                            - size =  @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
-                            %span{:style => 'font-size: 70%; color: #ddd'}
-                              = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
-                      %td
-                      %td &nbsp;
+            %td
+              %a{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle()"}
+                %h3{:style => 'margin: 0'}
+                  Фото
+                  %span{:style => 'font-size: 70%; color: #ddd'}
+                    ='(' + @report.assigned.size.to_s + ')'
+                  - if @report.assigned.any?
+                    %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Развернуть
+                    %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Свернуть
                   
-                    %tr
-                      %td{:colspan => 3}
-                        .collapse.checklists{:id => "points_#{block}"}
-                          .row
-                            - @report.points.where(:section => block.to_sym).each do |point|
-                              .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
-                                - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
-                                  .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                    .span6= t("checklist.#{block}.#{point.place}")
-                                    .span6{:style => 'text-align:right'}= point.condition
-                                - else
-                                  .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                    .span6= t("checklist.#{block}.#{point.place}")
-                                    .span6{:style => 'text-align:right'}= point.condition
-        / %tr
-        /   %td{:colspan => 3}
-        /     Description:
-        /     = t('lorem')
-
-        / ######################## Testdrive ####################################
-        %tr
-          %td
-            %a{:data => {:toggle => 'collapse', :target => '#testdrive'}, :onclick => "$(this).siblings('a.btn').toggle()"}
-              %h3{:style => 'margin: 0'}
-                %span
-                  Тестдрайв
-                %span{:style => 'font-size: 70%; color: #ddd'}
-                  = "(" + (@report.points.where(:object => :testdrive).size*100.0/16).round(0).to_i.to_s + "%)"
-                - if @report.points.where(:object => :testdrive).any?
-                  %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.testdrive'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Развернуть
-                  %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.testdrive.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Свернуть
-
-              
-          %td &nbsp;
-        - if @report.points.where(:object => :testdrive).any?
+            %td &nbsp;
+          - if @report.assigned.any?
+            %tr
+              %td{:colspan => 3}
+                #photo.collapse
+                  - Asset.where(:id => @report.assigned).each do |image|
+                    = image_tag image.url(:thumb), :class => 'thumb', :id => image.id
+          / ######################## CHECKLIST ####################################
           %tr
-            %td{:colspan => 3}
-              .collapse.testdrive{:id => 'testdrive'}
-                %table.table
-                  - for block in @report.points.where(:object => :testdrive).group(:section).map(&:section)
-                    %tr
-                      %td
-                        %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
-                          %h4{:style => 'margin: 0'}
-                            = t("testdrive.#{block}.title")
-                            %span{:style => 'font-size: 70%; color: #ddd'}
-                              = "( " + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + " дефекта )"
-                      %td
-                      %td &nbsp;
+            %td
+              %a.pull-left{:data => {:toggle => 'collapse', :target => '#checklist_exterior'}, :onclick => "$(this).siblings('a.btn').toggle()"}
+                %h3{:style => 'margin: 0'}
+                  Чеклист
+                  %span{:style => 'font-size: 70%; color: #ddd'}
+                    = "(" + (@report.points.where(:object => :checklist).size*100.0/46).round(0).to_i.to_s + "%)"
+                  - if @report.points.where(:object => :checklist).any?
+                    %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.checklists'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Развернуть
+                    %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.checklists.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Свернуть
                   
-                    %tr
-                      %td{:colspan => 3}
-                        .collapse.testdrive{:id => "points_#{block}"}
-                          .row
-                            - @report.points.where(:section => block.to_sym).each do |point|
-                              .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
-                                - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
-                                  .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                    .span6= t("testdrive.#{block}.#{point.place}")
-                                    .span6{:style => 'text-align:right'}= point.condition
-                                - else
-                                  .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                    .span6= t("testdrive.#{block}.#{point.place}")
-                                    .span6{:style => 'text-align:right'}= point.condition
-        / %tr
-        /   %td{:colspan => 3}
-        /     Description:
-        /     = t('lorem')
-
-                
-        / ######################## Elements ####################################
-        %tr
-          %td
-            %a{:data => {:toggle => 'collapse', :target => '#elements'}, :onclick => "$(this).siblings('a.btn').toggle()"}
-              %h3{:style => 'margin: 0'}
-                %span
-                  Элементы
-                %span{:style => 'font-size: 70%; color: #ddd'}
-                  = "(" + (@report.points.where(:object => :elements).size*100.0/42).round(0).to_i.to_s + "%)"
-                - if @report.points.where(:object => :elements).any?
-                  %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.elements'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Развернуть
-                  %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.elements.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                    Свернуть
-          %td &nbsp;
-        - if @report.points.where(:object => :elements).any?
-          %tr
-            %td{:colspan => 3}
-              .collapse.elements{:id => 'elements'}
-                %table.table
-                  - for block in @report.points.where(:object => :elements).group(:section).map(&:section)
-                    %tr
-                      %td
-                        %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
-                          %h4{:style => 'margin: 0'}
-                            = t("defects.#{block}.title")
-                            - size = @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_i
-                            %span{:style => 'font-size: 70%; color: #ddd'}
-                              = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
-                      %td
-                      %td &nbsp;
-                  
-                    %tr
-                      %td{:colspan => 3}
-                        .collapse.elements{:id => "points_#{block}"}
-                          .row
-                            - @report.points.where(:section => block.to_sym).each do |point|
-                              .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
-                                - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
-                                  .alert.alert-success{:style => 'margin-bottom: 0px'}
-                                    .span6= t("defects.#{block}.#{point.place}")
-                                    .span6{:style => 'text-align:right'}= point.condition
-                                - else
-                                  .alert.alert-error{:style => 'margin-bottom: 0px'}
-                                    .span6= t("defects.#{block}.#{point.place}")
-                                    .span6{:style => 'text-align:right'}= point.condition
-    
-        %tr
-          %td
-            %a.pull-left{:style => 'color: #ddd',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
-              %h3.pull-left Не проверенные    
-            %a.pull-left{:style => 'color: #ddd;margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
-              %span
-                %b
-                  Развернуть
-              %span.hide
-                %b
-                  Свернуть
-        %tr
-          %td{:colspan => 3}
-            .collapse{:id => 'unchecked'}
-              - unless @report.diff.empty?
-                - for object in @report.diff.keys
-                  %label
-                    %h3= t("#{object}.title")
-                  %table.table.table-striped
-                    - for section in @report.diff[object].keys
+          - if @report.points.where(:object => :checklist).any?
+            %tr
+              %td{:colspan => 3}
+                #checklist_exterior.collapse.checklists
+                  %table.table
+                    - for block in @report.points.where(:object => :checklist).group(:section).map(&:section)
                       %tr
-                        %td{:style => 'width: 100px'}
-                          = t("#{object}.#{section}.title")
-                          %td
-                            - for place in @report.diff[object][section]
-                              %span.badge= t("#{object}.#{section}.#{place}")
+                        %td
+                          %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
+                            %h4{:style => 'margin: 0'}
+                              = t("checklist.#{block}.title")
+                              - size =  @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
+                              %span{:style => 'font-size: 70%; color: #ddd'}
+                                = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
+                        %td
+                        %td &nbsp;
+                    
+                      %tr
+                        %td{:colspan => 3}
+                          .collapse.checklists{:id => "points_#{block}"}
+                            .row
+                              - @report.points.where(:section => block.to_sym).each do |point|
+                                .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
+                                  - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
+                                    .alert.alert-success{:style => 'margin-bottom: 0px'}
+                                      .span6= t("checklist.#{block}.#{point.place}")
+                                      .span6{:style => 'text-align:right'}= point.condition
+                                  - else
+                                    .alert.alert-error{:style => 'margin-bottom: 0px'}
+                                      .span6= t("checklist.#{block}.#{point.place}")
+                                      .span6{:style => 'text-align:right'}= point.condition
+          / %tr
+          /   %td{:colspan => 3}
+          /     Description:
+          /     = t('lorem')
+
+          / ######################## Testdrive ####################################
+          %tr
+            %td
+              %a{:data => {:toggle => 'collapse', :target => '#testdrive'}, :onclick => "$(this).siblings('a.btn').toggle()"}
+                %h3{:style => 'margin: 0'}
+                  %span
+                    Тестдрайв
+                  %span{:style => 'font-size: 70%; color: #ddd'}
+                    = "(" + (@report.points.where(:object => :testdrive).size*100.0/16).round(0).to_i.to_s + "%)"
+                  - if @report.points.where(:object => :testdrive).any?
+                    %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.testdrive'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Развернуть
+                    %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.testdrive.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Свернуть
+
+                
+            %td &nbsp;
+          - if @report.points.where(:object => :testdrive).any?
+            %tr
+              %td{:colspan => 3}
+                .collapse.testdrive{:id => 'testdrive'}
+                  %table.table
+                    - for block in @report.points.where(:object => :testdrive).group(:section).map(&:section)
+                      %tr
+                        %td
+                          %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
+                            %h4{:style => 'margin: 0'}
+                              = t("testdrive.#{block}.title")
+                              %span{:style => 'font-size: 70%; color: #ddd'}
+                                = "( " + @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_s + " дефекта )"
+                        %td
+                        %td &nbsp;
+                    
+                      %tr
+                        %td{:colspan => 3}
+                          .collapse.testdrive{:id => "points_#{block}"}
+                            .row
+                              - @report.points.where(:section => block.to_sym).each do |point|
+                                .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
+                                  - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
+                                    .alert.alert-success{:style => 'margin-bottom: 0px'}
+                                      .span6= t("testdrive.#{block}.#{point.place}")
+                                      .span6{:style => 'text-align:right'}= point.condition
+                                  - else
+                                    .alert.alert-error{:style => 'margin-bottom: 0px'}
+                                      .span6= t("testdrive.#{block}.#{point.place}")
+                                      .span6{:style => 'text-align:right'}= point.condition
+          / %tr
+          /   %td{:colspan => 3}
+          /     Description:
+          /     = t('lorem')
+
+                  
+          / ######################## Elements ####################################
+          %tr
+            %td
+              %a{:data => {:toggle => 'collapse', :target => '#elements'}, :onclick => "$(this).siblings('a.btn').toggle()"}
+                %h3{:style => 'margin: 0'}
+                  %span
+                    Элементы
+                  %span{:style => 'font-size: 70%; color: #ddd'}
+                    = "(" + (@report.points.where(:object => :elements).size*100.0/42).round(0).to_i.to_s + "%)"
+                  - if @report.points.where(:object => :elements).any?
+                    %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '.elements'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Развернуть
+                    %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '.elements.in'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Свернуть
+            %td &nbsp;
+          - if @report.points.where(:object => :elements).any?
+            %tr
+              %td{:colspan => 3}
+                .collapse.elements{:id => 'elements'}
+                  %table.table
+                    - for block in @report.points.where(:object => :elements).group(:section).map(&:section)
+                      %tr
+                        %td
+                          %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
+                            %h4{:style => 'margin: 0'}
+                              = t("defects.#{block}.title")
+                              - size = @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size().to_i
+                              %span{:style => 'font-size: 70%; color: #ddd'}
+                                = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
+                        %td
+                        %td &nbsp;
+                    
+                      %tr
+                        %td{:colspan => 3}
+                          .collapse.elements{:id => "points_#{block}"}
+                            .row
+                              - @report.points.where(:section => block.to_sym).each do |point|
+                                .span7{:style => 'width: 554px; margin-bottom: 5px; float: left; margin-left: 30px'}
+                                  - if ['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition
+                                    .alert.alert-success{:style => 'margin-bottom: 0px'}
+                                      .span6= t("defects.#{block}.#{point.place}")
+                                      .span6{:style => 'text-align:right'}= point.condition
+                                  - else
+                                    .alert.alert-error{:style => 'margin-bottom: 0px'}
+                                      .span6= t("defects.#{block}.#{point.place}")
+                                      .span6{:style => 'text-align:right'}= point.condition
+      
+          %tr
+            %td
+              %a.pull-left{:style => 'color: #ddd',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
+                %h3.pull-left Не проверенные    
+              %a.pull-left{:style => 'color: #ddd;margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
+                %span
+                  %b
+                    Развернуть
+                %span.hide
+                  %b
+                    Свернуть
+          %tr
+            %td{:colspan => 3}
+              .collapse{:id => 'unchecked'}
+                - unless @report.diff.empty?
+                  - for object in @report.diff.keys
+                    %label
+                      %h3= t("#{object}.title")
+                    %table.table.table-striped
+                      - for section in @report.diff[object].keys
+                        %tr
+                          %td{:style => 'width: 100px'}
+                            = t("#{object}.#{section}.title")
+                            %td
+                              - for place in @report.diff[object][section]
+                                %span.badge= t("#{object}.#{section}.#{place}")
 
 
-= render 'carousel'
+  = render 'carousel'

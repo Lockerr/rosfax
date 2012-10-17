@@ -1,0 +1,18 @@
+-(0..8).to_a.each do |position|
+  - if asset = assets.select{|i| i.position == position.to_s}[0]
+    = assets.map(&:id)
+    .drop{:data => asset.attributes}
+      .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px; margin-bottom: 5px'}
+        %a{:href => '#', :style => 'height: 68px; width: 100px'}
+          .thumb{:data => asset.attributes}
+            = image_tag asset.url(:thumb)
+        .btn.btn-mini{:style => 'position: relative; top: -20px; left: 83px'}
+          = count[position.to_s] || 0
+  - else
+    .drop{:data => {:attachable_id => assets.first.attachable_id, :attachable_type => assets.first.attachable_type, :position => position, :section => section}}
+      .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px; margin-bottom: 5px'}
+        %a{:href => '#', :style => 'height: 68px; width: 100px'}
+          .thumb
+            = image_tag('http://s3-eu-west-1.amazonaws.com/rosfax/box.png')
+        .btn.btn-mini{:style => 'position: relative; top: -21px; left: 83px'}
+          = 0

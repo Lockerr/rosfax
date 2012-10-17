@@ -103,6 +103,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @report.user == current_user or current_user.admin?
         if @report.update_attributes(params[:report].except!(:id))
+          expire_fragment ['show', @report]
           format.json { head :ok }
         else
           format.json { render json: @report.errors, status: :unprocessable_entity }
@@ -110,14 +111,6 @@ class ReportsController < ApplicationController
       else
         format.html { render :inline => 'Нет доступа'}
         format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}
-      end
-    end
-
-    respond_to do |format|
-      if @report.update_attributes(params[:report].except!(:id))
-        format.json { head :ok }
-      else
-        format.json { render json: @report.errors, status: :unprocessable_entity }
       end
     end
   end

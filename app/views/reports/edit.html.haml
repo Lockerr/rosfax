@@ -1,42 +1,43 @@
-%p#notice= notice
-.row-fluid
-  .span12
-    .tabbable.tabs-left
-      %ul.nav.nav-tabs.first
-        %li.active
-          %a{"data-toggle" => "tab", :href => "#info"}
-            Информация
-            %span{:style => 'color: #ddd'}= 1
-        %li
-          %a{"data-toggle" => "tab", :href => "#photo"}
-            Фото
-            %span{:style => 'color: #ddd'}= 1
-        %li
-          %a{"data-toggle" => "tab", :href => "#checklist"}
-            Чеклист
-            %span{:style => 'color: #ddd'}
-              = @report.points.where(:object => :checklist).count
-              \/
-              = Report::COATING.count + Report::LIGHTS.count + Report::ELECTRONIC.count + Report::LIQUIDS.count + Report::COMPLETION.count
-        %li
-          %a{"data-toggle" => "tab", :href => "#testdrive"}
-            Тест-драйв
-            %span{:style => 'color: #ddd'}
-              = @report.points.where(:object => :testdrive).count
-              \/
-              = Report::ENGINE.count + Report::SUSPENSION.count
-        %li
-          %a{"data-toggle" => "tab", :href => "#elements"}
-            Элементы
-            %span{:style => 'color: #ddd'}
-              = @report.points.where(:object => :elements).count
-              \/
-              = Report::WINDOWS_AND_LIGHTS.count + Report::EXTERIOR.count + Report::INTERIOR.count
-      .tab-content.first
-        - for symbol in %w(photo checklist defects testdrive elements info)
-          = render "reports/tabs/#{symbol}"
-.span4.uploader.hide
-  = render :partial => 'uploader', :locals => {:attribute => ''}
+= cache ['edit', @report] do 
+  %p#notice= notice
+  .row-fluid
+    .span12
+      .tabbable.tabs-left
+        %ul.nav.nav-tabs.first
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#info"}
+              Информация
+              %span{:style => 'color: #ddd'}= 1
+          %li
+            %a{"data-toggle" => "tab", :href => "#photo"}
+              Фото
+              %span{:style => 'color: #ddd'}= 1
+          %li
+            %a{"data-toggle" => "tab", :href => "#checklist"}
+              Чеклист
+              %span{:style => 'color: #ddd'}
+                = @report.points.where(:object => :checklist).count
+                \/
+                = Report::COATING.count + Report::LIGHTS.count + Report::ELECTRONIC.count + Report::LIQUIDS.count + Report::COMPLETION.count
+          %li
+            %a{"data-toggle" => "tab", :href => "#testdrive"}
+              Тест-драйв
+              %span{:style => 'color: #ddd'}
+                = @report.points.where(:object => :testdrive).count
+                \/
+                = Report::ENGINE.count + Report::SUSPENSION.count
+          %li
+            %a{"data-toggle" => "tab", :href => "#elements"}
+              Элементы
+              %span{:style => 'color: #ddd'}
+                = @report.points.where(:object => :elements).count
+                \/
+                = Report::WINDOWS_AND_LIGHTS.count + Report::EXTERIOR.count + Report::INTERIOR.count
+        .tab-content.first
+          - for symbol in %w(photo checklist defects testdrive elements info)
+            = render "reports/tabs/#{symbol}"
+  .span4.uploader.hide
+    = render :partial => 'uploader', :locals => {:attribute => ''}
 
-= render 'carousel'
+  = render 'carousel'
 

@@ -34,7 +34,7 @@
                 \/
                 = Report::WINDOWS_AND_LIGHTS.count + Report::EXTERIOR.count + Report::INTERIOR.count
         .tab-content.first
-          - for symbol in %w(photo checklist defects testdrive elements info)
+          - for symbol in %w(photo checklist testdrive elements info)
             = render "reports/tabs/#{symbol}"
   .span4.uploader.hide
     = render :partial => 'uploader', :locals => {:attribute => ''}

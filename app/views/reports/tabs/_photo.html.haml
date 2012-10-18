@@ -22,23 +22,24 @@
           Видео
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       - for section in %w(exterior interior under_the_hood other_photos)
-        .tab-pane{:id => section, :class => ('active' if section == 'exterior')}
-          .row-fluid{:id => "photo_#{section}'"}
-            .span8.well
-              %ul.thumbnails.span7
-   
-                - assets = @report.assets(:section => section).group(:position)
-                - count = @report.assets(:section => section).group(:position).count
-   
-                = render :partial => 'new_drop', :locals => {:assets => assets, :count => count, :section => section}
-   
-              .span{:style => "height: 96px; overflow-x: scroll; width: 100%; overflow-y: hidden;border: 1px solid #08C; margin-left: 0"}
-                .imgbox{:id => section, :style => "height: 110px; width: #{@report.assets(:section => section).count*116}px", :data => {:attribute => section}}
-                  - for image in @report.assets.where(:section => section)
-                    .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px'}
-                      .thumb{:data => image.attributes}
-                        = image_tag image.url(:thumb)
-                      .btn.remove_asset.btn-danger.btn-mini{:style => 'position: relative; top: -20px; left: 80px',:id => image.id} x
+        .tab-pane.row-fluid{:id => section, :class => ('active' if section == 'exterior')}
+          
+          .span8.well
+            %ul.thumbnails.span7
+              
+              - assets = @report.assets.where(:section => section).group(:position)
+              - count = @report.assets.where(:section => section).group(:position).count
+              
+              = render :partial => 'new_drop', :locals => {:assets => assets, :count => count, :section => section, :object => @report}
+
+            .span{:style => "height: 96px; overflow-x: scroll; width: 100%; overflow-y: hidden;border: 1px solid #08C; margin-left: 0"}
+              .imgbox{:id => section, :style => "height: 110px; width: #{@report.assets(:section => section).count*116}px", :data => {:attribute => section}}
+                - for image in @report.assets.where(:section => section)
+                  .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px'}
+                    .thumb{:data => image.attributes}
+                      = image_tag image.url(:thumb)
+                    .btn.remove_asset.btn-danger.btn-mini{:style => 'position: relative; top: -20px; left: 80px',:id => image.id} x
+
 
 
 

@@ -1,37 +1,26 @@
 class AssetsController < ApplicationController
 
   def index
-    @parent = parent
+    if params[:attachable_type]
+      @parent = params[:attachable_type].constantize.find(params[:attachable_id])
+    else
+      @parent = parent
+    end
     @assets = @parent.assets
     
-    if params[:place]
-      ids = @parent.send(params[:attribute]).values.flatten.map { |i| i.to_i }
-
-      assets = Asset.where(:id => ids).map { |i| i.url(:carousel) }
-      
-      assets.push Asset.where(:id => @parent.send( params[:attribute] )[ params[:place] ].first).first.url(:carousel) if  @parent.send( params[:attribute] )[ params[:place] ]
-      render :json => assets.reverse.uniq
-    elsif parent.class == Point
-      points = parent.report.points.where(:object => :element)
-      point = parent
-      assets = {}
-      assets[:points] = {}
-      assets[:point] = {}
-
-      Asset.where(:id => point.images).map{|i| assets[:point][i.id] = i.url(:carousel)}
-      Asset.where(:id => points.map(&:images).flatten.uniq).map{|i| assets[:points][i.id] = i.url(:carousel)}
-
-      render :json => assets
+    if params[:section]
+      assets = @parent.assets.where(:section => params[:section])
+      render :json => assets.map{|i| i.attributes.merge(:src => i.url(:carousel))}
     else
-      assets = {}
-      Asset.where(:id => @parent.assigned).map{|i| assets[i.id] = i.url(:carousel)}
-      render json: assets
+      
+      render json: @parent.assets.map{|i| i.attributes.merge(:src => i.url(:carousel))}
     end
     
   end
     
-  def show
+  def show 
     @report = Report.find(params[:report_id])
+    
     if id = @report.send(params[:attribute])[params[:place]]
       image = Asset.find(id.first).url(:thumb)
     else

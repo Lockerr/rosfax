@@ -14,7 +14,7 @@
           Под капотом
           %span{:style => 'color: #ddd'}=1
       %li
-        %a{"data-toggle" => "tab", :href => "#photo_others"}
+        %a{"data-toggle" => "tab", :href => "#other_photos"}
           Прочее
           %span{:style => 'color: #ddd'}=1
       %li
@@ -23,7 +23,6 @@
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
       - for section in %w(exterior interior under_the_hood other_photos)
         .tab-pane.row-fluid{:id => section, :class => ('active' if section == 'exterior')}
-          
           .span8.well
             %ul.thumbnails.span7
               

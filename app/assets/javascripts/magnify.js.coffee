@@ -21,7 +21,7 @@ loader = (image_object) ->
     large = $('.item.active .large')
    
     if large.attr('loading') == 'true'
-        
+      console.log 'loading'
       image_object = new Image()
       src = small.attr('src')
       
@@ -32,6 +32,7 @@ loader = (image_object) ->
       loader(image_object)
       
       image_object.src = src.replace(/^url\(["']?/, '').replace(/["']?\)$/, '').replace('carousel','magnify')
+      
 
       magnify_offset = $(this).offset()
       mx = e.pageX - magnify_offset.left

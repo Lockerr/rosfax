@@ -4,135 +4,47 @@ $(document).ready ->
     $('#modal_carousel').modal('hide')  if e.keyCode is 27
   
   $(".thumb").live 'click', ->
-    if $(@).parent().siblings().html() > 0
-
-      $('#modal_carousel .item').remove()
-      data = $(@).data()
-      report_id = $('#report.container').data('id')
-
-      url = "/reports/#{report_id}/assets"
-      object_id = $(@).parents('.object').data('id')
-
-      if data.place
-        
-        ajax_data = {attribute: data.attribute, place: data.place}
-        $.ajax
-          url: url
-          data: ajax_data
-          success: (resp) ->
-            for image_src in resp
-              mag = $('.carousel-inner')
-              item = $(document.createElement('div')).addClass('item')
-              
-              small = new Image
-              small.src = image_src
-              small.width = 900
-              
-              large = $(document.createElement('div')).addClass('large')
-              # large.css('background', "url('#{image_src.replace('carousel','magnify')}') no-repeat")
-              
-              item.append small
-              item.append large
-              mag.append item
-
-            $($('.carousel-inner .item')[0]).addClass('active')
-            $('#myCarousel').carousel('pause')
-            $('#modal_carousel').modal('show')
-            if $('.carousel-inner .item').size() > 1
-              $('.carousel-control.left').show()
-              $('.carousel-control.right').show()
-            else
-              $('.carousel-control.left').hide()
-              $('.carousel-control.right').hide()
-
-      else if $(@).parents('.object').data('object') == 'elements'
-        point_id = $(@).parents('.object').data('id')
-        
-        $.ajax
-          url: "/points/#{point_id}/assets"
-          success: (resp) ->
-            console.log resp
-
-            for image of resp.point
-              mag = $('.carousel-inner')              
-              id = image
-              item = $(document.createElement('div')).addClass('item')
-
-              image_src = resp.point[image]
-
-              small = new Image
-              small.src = image_src
-              large = $(document.createElement('div')).addClass('large')
-              # large.css('background', "url('#{image_src.replace('carousel','magnify')}') no-repeat")
-                 
-              item.append small
-              item.append large
-              mag.append item
-
-              
-
-              # $('.carousel-inner').append("<div class='item'><img src='#{image_src}'><button class='btn btn-alert carousel-delete' data-point=#{object_id} data-id=#{id}>Удалить</div>")
-              $('')
-
-              mag.find('.item').first().addClass('active')
-            $('#myCarousel').carousel('pause')
-            $('#modal_carousel').modal('show')
-            
-            $(document).keydown (e) ->
-              $('#modal_carousel').modal('hide')  if e.keyCode is 27
-            
-            if $('.carousel-inner .item').size() > 1
-              $('.carousel-control.left').show()
-              $('.carousel-control.right').show()
-            else
-              $('.carousel-control.left').hide()
-              $('.carousel-control.right').hide()
-
-
-      else 
-        console.log 'nothing'
-    else
-      element = $(@)
-      report_id = $('#report.container').attr('report')
+    console.log 'thumb click'
+    element = $(@)
+    data = element.data()
+    window.element = element
+    if data.attachable_type
+      object = data.attachable_type.toLowerCase()      
       $.ajax
-        url: "/reports/#{report_id}/assets"
+        url: "/#{object}s/#{data.attachable_id}/assets"
+        data: data
         success: (resp) ->
           
-          first_image = resp[element.attr('id')]
-          $('.carousel-inner').empty()
-          delete resp[element.attr('id')]
-          
-          mag = $('.carousel-inner')          
-          mag.append("<div class='item active'><img width='900' src='" + first_image + "'><div class='large'></div></div>")
-          mag.find('.item.active .large').attr('loading', 'true')
-          
-          
-
-          
-          for image of resp
+          mag = $('.carousel-inner')
+          mag.empty()
+          for asset in resp
             item = $(document.createElement('div')).addClass('item')
-            
+            item.attr('id',"asset_id_#{asset.id}")
+
             small = new Image
-            small.src = resp[image]
+            small.src = asset.src
             small.width = 900
             
             large = $(document.createElement('div')).addClass('large')
             large.attr('loading', 'true')
-            
+                        
             item.append small
             item.append large
             mag.append item
-
+          
+          $($(".carousel-inner .item#asset_id_#{data.id}")).addClass('active')
           $('#myCarousel').carousel('pause')
           $('#modal_carousel').modal('show')
-          
           if $('.carousel-inner .item').size() > 1
             $('.carousel-control.left').show()
             $('.carousel-control.right').show()
           else
             $('.carousel-control.left').hide()
-            $('.carousel-control.right').hide()      
-
+            $('.carousel-control.right').hide()
+        
+        error: (resp) -> 
+          console.log resp
+  
 
   $('.carousel-delete').live 'click', ->
     data = $(@).data()

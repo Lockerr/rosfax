@@ -14,8 +14,11 @@
 
 
             %td{:style => 'width: 120px'}
+              
+              #vk_like
               :javascript
-                document.write(VK.Share.button(false,{type: "round", text: "Сохранить"}));
+                VK.Widgets.Like("vk_like", {type: "button", verb: 1});
+
             %td{:style => 'width: 128px'}
               .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
             %td{:style => 'width: 120px'}
@@ -116,9 +119,9 @@
                             - @report.points.where(:section => block.to_sym).each do |point|
                               %li.alert.span3.thumbnail{:style => 'float: left; margin-bottom: 4px;min-height: 20px; height: 20px', :class => ((['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
                                 .row-fluid
-                                  .span8
+                                  .span9
                                     = t("#{object}.#{block}.#{point.place}")
-                                  .span4{:style => 'text-align: right'}
+                                  .span3{:style => 'text-align: right'}
                                     = point.condition
         
         .row
@@ -149,7 +152,7 @@
         
         #vk_comments
           :javascript
-            VK.init({apiId: 3208632, onlyWidgets: true});
+            
             VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 
 

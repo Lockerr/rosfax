@@ -14,8 +14,9 @@
 
 
             %td{:style => 'width: 120px'}
+              #vk_like
               :javascript
-                document.write(VK.Share.button(false,{type: "round", text: "Сохранить"}));
+                VK.Widgets.Like("vk_like", {type: "button", verb: 1});
             %td{:style => 'width: 128px'}
               .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
             %td{:style => 'width: 120px'}

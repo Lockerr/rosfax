@@ -13,8 +13,9 @@ class HomeController < ApplicationController
   end
 
   def demo
-  	@report = Report.find(19)
- 	render :layout => 'report'
+  	@report = Report.find_by_id(19)
+    @report ||= Report.find(46)
+ 	render :layout => 'report_show'
   end
 
 

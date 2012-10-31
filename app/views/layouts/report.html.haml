@@ -17,6 +17,8 @@
         js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=189791341053526";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+    :javascript
+      VK.init({apiId: 3208632, onlyWidgets: true});
 
     = render 'navbar'
     - if @report and !@report.new_record?

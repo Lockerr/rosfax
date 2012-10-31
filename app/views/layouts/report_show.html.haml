@@ -3,12 +3,14 @@
   %head
     %title Tradein
     %script{:charset => "windows-1251", :src => "http://vk.com/js/api/share.js?11", :type => "text/javascript"}
+    %script{:src => "//vk.com/js/api/openapi.js?62", :type => "text/javascript"}/
+    :javascript
+      VK.init({apiId: 3208537, onlyWidgets: true});
+
     = stylesheet_link_tag    "application"
     = javascript_include_tag "jquery", 'twitter/bootstrap', 'bootstrap', 'index', 'loading', 'magnify', 'carousel'
     = csrf_meta_tags
-    %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
-      :javascript
-        stLight.options({publisher: "a580cedd-cd3d-47e2-9ae4-0e37f187bab3"});
+
   %body
     #fb-root
       :javascript

@@ -4,22 +4,13 @@
     %title Tradein
     %script{:charset => "windows-1251", :src => "http://vk.com/js/api/share.js?11", :type => "text/javascript"}
     %script{:src => "//vk.com/js/api/openapi.js?62", :type => "text/javascript"}/
-    :javascript
-      VK.init({apiId: 3208632, onlyWidgets: true});
+
 
     = stylesheet_link_tag    "application"
     = javascript_include_tag "jquery", 'twitter/bootstrap', 'bootstrap', 'index', 'loading', 'magnify', 'carousel'
     = csrf_meta_tags
 
   %body
-    #fb-root
-      :javascript
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=189791341053526";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+ 
     = render 'navbar'
     = yield

@@ -2,12 +2,13 @@
 %html
   %head
     %title Tradein
-    %script{:charset => "windows-1251", :src => "http://vk.com/js/api/share.js?11", :type => "text/javascript"}
-    %script{:src => "//vk.com/js/api/openapi.js?62", :type => "text/javascript"}/
+    
 
 
     = stylesheet_link_tag    "application"
     = javascript_include_tag "jquery", 'twitter/bootstrap', 'bootstrap', 'index', 'loading', 'magnify', 'carousel'
+    %script{:charset => "windows-1251", :src => "http://vk.com/js/api/share.js?11", :type => "text/javascript"}
+    %script{:src => "//vk.com/js/api/openapi.js?62", :type => "text/javascript"}/
     = csrf_meta_tags
 
   %body

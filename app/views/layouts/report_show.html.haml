@@ -6,6 +6,9 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "jquery", 'twitter/bootstrap', 'bootstrap', 'index', 'loading', 'magnify', 'carousel'
     = csrf_meta_tags
+    %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
+      :javascript
+        stLight.options({publisher: "a580cedd-cd3d-47e2-9ae4-0e37f187bab3"});
   %body
     #fb-root
       :javascript

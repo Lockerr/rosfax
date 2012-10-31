@@ -14,15 +14,17 @@
 
 
             %td{:style => 'width: 120px'}
+              
               #vk_like
               :javascript
                 VK.Widgets.Like("vk_like", {type: "button", verb: 1});
-            %td{:style => 'width: 128px'}
+
+            %td{:style => 'width: 166px'}
               .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
-            %td{:style => 'width: 120px'}
+            %td{:style => 'width: 170px'}
               %a.mrc__plugin_uber_like_button{"data-mrc-config" => "{'cm' : '3', 'ck' : '3', 'sz' : '20', 'st' : '1', 'tp' : 'ok'}", :href => "http://connect.mail.ru/share", :target => "_blank"}  Нравится
               %script{:charset => "UTF-8", :src => "http://cdn.connect.mail.ru/js/loader.js", :type => "text/javascript"}
-            %td{:style => 'width: 74px'}
+            %td{:style => 'width: 116px'}
               .g-plusone{:data => {:size => 'medium'}}
               :javascript
                 window.___gcfg = {lang: 'ru'};
@@ -32,7 +34,6 @@
                   po.src = 'https://apis.google.com/js/plusone.js';
                   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
                 })();
-            %td{:style => 'width: 75px'}
               %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
               :javascript
                 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

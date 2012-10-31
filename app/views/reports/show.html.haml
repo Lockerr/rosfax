@@ -118,4 +118,30 @@
                                 = t("#{object}.#{block}.#{point.place}")
                               .span4{:style => 'text-align: right'}
                                 = point.condition
+    
+    .row
+      .span12
+        %a.pull-left{:style => 'color: #ddd',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
+          %h3.pull-left Не проверенные    
+        %a.pull-left{:style => 'color: #ddd;margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
+          %span
+            %b
+              Развернуть
+          %span.hide
+            %b
+              Свернуть
+    .row.collapse{:id => 'unchecked'}
+      - unless @report.diff.empty?
+        - for object in @report.diff.keys
+          %label
+            %h3= t("#{object}.title")
+          %table.table.table-striped
+            - for section in @report.diff[object].keys
+              %tr
+                %td{:style => 'width: 100px'}
+                  = t("#{object}.#{section}.title")
+                  %td
+                    - for place in @report.diff[object][section]
+                      %span.badge= t("#{object}.#{section}.#{place}")
+
     = render 'carousel'

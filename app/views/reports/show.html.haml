@@ -61,11 +61,11 @@
             %td Engine Displacement
             %td Engine Type
     .row
-      .span12
+      .span8
         .row#row
-          .span12
+          .span8
             .row
-              .span12
+              .span8
                 %a{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle()"}
                   %h3{:style => 'margin: 0'}
                     Фото
@@ -78,7 +78,7 @@
                         Свернуть  
             - if @report.assigned.any?
               .row
-                .span12
+                .span8
                   #photo.collapse
                     - Asset.where(:id => @report.assigned).each do |image|
                       .thumb.pull-left{:data => image.attributes, :style => 'margin: 2px; border: 1px solid #ccc'}
@@ -105,7 +105,7 @@
                 .collapse{:id => object, :class => object}
                   - for block in @report.points.where(:object => object.to_sym).group(:section).map(&:section)
                     .row
-                      .span12
+                      .span8
                         %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
                           %h4{:style => 'margin: 0'}
                             = t("#{object}.#{block}.title")
@@ -115,7 +115,7 @@
                     .collapse{:id => "points_#{block}", :class => object}
                       
                       .row
-                        .span12
+                        .span8
                           %ul.thumbnails
                             - @report.points.where(:section => block.to_sym).each do |point|
                               %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => ((['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
@@ -149,12 +149,12 @@
                       %td
                         - for place in @report.diff[object][section]
                           %span.badge= t("#{object}.#{section}.#{place}")
-    .row{:style => 'border-top: 1px solid #ccc'}
-      .span12
+    
+      .span4
         #vk_comments
           :javascript
             
-            VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
+            VK.Widgets.Comments("vk_comments", {limit: 10, width: "370", attach: "*"});
 
 
 

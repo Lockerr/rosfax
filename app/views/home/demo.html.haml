@@ -34,6 +34,7 @@
                   po.src = 'https://apis.google.com/js/plusone.js';
                   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
                 })();
+            %td{:style => 'width: 75px'}
               %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
               :javascript
                 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
@@ -60,7 +61,7 @@
             %td Engine Displacement
             %td Engine Type
     .row
-      .span6
+      .span12
         .row#row
           .span12
             .row
@@ -112,15 +113,16 @@
                             %span{:style => 'font-size: 70%; color: #ddd'}
                               = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                     .collapse{:id => "points_#{block}", :class => object}
+                      
                       .row
-                        .span8
+                        .span12
                           %ul.thumbnails
                             - @report.points.where(:section => block.to_sym).each do |point|
-                              %li.alert.span3.thumbnail{:style => 'float: left; margin-bottom: 4px;min-height: 20px; height: 20px', :class => ((['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
+                              %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => ((['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
                                 .row-fluid
-                                  .span8
+                                  .span9{:style => 'padding: 4px'}
                                     = t("#{object}.#{block}.#{point.place}")
-                                  .span4{:style => 'text-align: right'}
+                                  .span3{:style => 'text-align: right;padding: 4px'}
                                     = point.condition
         
         .row
@@ -147,11 +149,11 @@
                       %td
                         - for place in @report.diff[object][section]
                           %span.badge= t("#{object}.#{section}.#{place}")
-      .span6
-        
+    .row{:style => 'border-top: 1px solid #ccc'}
+      .span12
         #vk_comments
           :javascript
-            VK.init({apiId: 3208632, onlyWidgets: true});
+            
             VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 
 

@@ -25,6 +25,9 @@
           %button.checkbox.btn{:data => {:attribute => :documents,  :change => :document_validity, :document_validity => 0, :section => 'documents'}, :class => ('btn-primary' if @report.documents['document_validity'] == 0)} Дубликат
   .span8.well.well-small
     %legend Владельцы
+    .row{:style => 'margin-left: -2%'}
+      .span3.offset4 Снятие с учета
+      .span3{:style => 'margin-left: 10%'} Принятие к учету
     .form-horizontal
       - (1..6).to_a.each do |i|
         .control-group.inline
@@ -34,11 +37,12 @@
             .btn-group.pads.radio
               %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis', :section => 'documents'}} физ
               %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur', :section => 'documents'}} юр
-          .input-append{:style => 'display: block'}
-            = text_field 'pts', "start_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :documents, :change => "start_owning_#{i}"}, :value => @report.documents["start_owning_#{i}"]
+          .input-append.pull-left.span4.offset1{:style => 'display: block'}
+            = text_field 'pts', "start_owning_#{i}", :class => 'span7 pick_date', :data => {:attribute => :documents, :change => "start_owning_#{i}"}, :value => @report.documents["start_owning_#{i}"]
             %span.add-on{:style => 'margin-left: -2px'}
               %i.icon-calendar
-          .input-append{:style => 'display: block'}
-            = text_field 'pts', "end_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
+          .input-append.pull-left.span4{:style => 'display: block'}
+            = text_field 'pts', "end_owning_#{i}", :class => 'span7 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
             %span.add-on{:style => 'margin-left: -2px'}
               %i.icon-calendar
+ 

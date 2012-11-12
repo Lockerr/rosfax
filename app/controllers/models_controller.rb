@@ -7,5 +7,4 @@ class ModelsController < ApplicationController
       render :json => {:status => :not_found}
     end
   end
-
 end

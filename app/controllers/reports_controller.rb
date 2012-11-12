@@ -50,7 +50,14 @@ class ReportsController < ApplicationController
   # GET /reports/new.json
   def new
     @report = Report.new
-    @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
+    @models = []
+    for model in Model.includes(:brand).select(['models.name', 'brands.name'])
+      @models.push [[model.brand.name, model.name].join(' '), [model.id, [model.brand.name, model.name].join(' ')]]
+      @models.push [[I18n.t(model.brand.name), model.name].join(' '), [model.id,[model.brand.name, model.name].join(' ')]]
+    end
+
+    @models = Hash[@models]
+    # @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
 
     respond_to do |format|
       format.html # new.html.erb

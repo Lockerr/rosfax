@@ -23,7 +23,7 @@ gem 'rufus-scheduler'
 gem 'sass'
 gem 'hirb'
 gem "devise-async"
-
+gem 'russian'
 gem 'spine-rails'
 
 

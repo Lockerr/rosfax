@@ -22,7 +22,10 @@ $(document).ready ->
     setTimeout(( -> scroll_forever()), 7000)
 
   setTimeout(( -> scroll_forever()), 7000)
-
+  
+  $('#report_car_mark_model').change ->
+    $(@).val($('#report_car_mark_model').data('models')[$(@).val()][1])
+  
   $('.main-input').change ->
     $.ajax
       url: "/models/#{document.models[$('.main-input').val()]}/index_block"

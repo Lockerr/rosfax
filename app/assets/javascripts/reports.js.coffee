@@ -174,7 +174,12 @@ $ ->
 
   $('input, textarea').change ->
     element = $(@)
-    element.data(element.data('change'), element.val())
+    if element.data('change') 
+      element.data(element.data('change'), element.val())
+    else
+      element.data(element.data('attribute'), element.val())
+    
+      
     update_object(@)
     console.log 'change'
     if $('.all_wheels').prop('checked')

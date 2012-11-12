@@ -243,7 +243,7 @@ ru:
         central_console: Центральная консоль
         armrest: Подлокотник
       windows_and_lights:
-        title: Окна и свет
+        title: Стекла и освещение
         front_left_headlight: Фара передняя левая
         front_right_headlight: Фара передняя правая
         rear_left_light: Фонарь задний левый
@@ -338,7 +338,7 @@ ru:
       central_console: Центральная консоль
       armrest: Подлокотник
     windows_and_lights:
-      title: Окна и свет
+      title: Стекла и освещение
       front_left_headlight: Фара передняя левая
       front_right_headlight: Фара передняя правая
       rear_left_light: Фонарь задний левый

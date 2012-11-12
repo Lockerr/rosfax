@@ -21,7 +21,7 @@
         %a{"data-toggle" => "tab", :href => "#video"}
           Видео
     .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
-      - for section in %w(exterior interior under_the_hood other_photos)
+      - for section in %w(exterior interior under_the_hood other_photos video)
         .tab-pane.row-fluid{:id => section, :class => ('active' if section == 'exterior')}
           .span8.well
             %ul.thumbnails.span7

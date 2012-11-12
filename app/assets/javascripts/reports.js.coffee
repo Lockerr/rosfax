@@ -1,6 +1,6 @@
 
 @appendUploader = (tab) ->
-  tabs = ['#wwindows_and_lights', '#eexterior','#iinterior', '#exterior', '#interior', '#under_the_hood', '#photo_others', '#wheels', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
+  tabs = ['#wwindows_and_lights', '#eexterior','#iinterior', '#exterior', '#interior', '#under_the_hood', '#other_photos', '#wheels', '#video', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
 
   if tab in tabs
     $("#{tab}.row-fluid").append($('.uploader'))
@@ -179,7 +179,7 @@ $ ->
     else
       element.data(element.data('attribute'), element.val())
     
-      
+
     update_object(@)
     console.log 'change'
     if $('.all_wheels').prop('checked')

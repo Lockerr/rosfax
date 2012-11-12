@@ -22,7 +22,7 @@ $(document).ready ->
         target.find('.btn').text(parseInt(target.find('.btn').text())+1)
         target.find('img').attr('style', '')
         target.find('img').prop('draggable', false)
-        target.data('attribute', 'elements')
+        # target.data('attribute', 'elements')
         console.log target.data().attribute
 
         target.parents('.object').data().asset_id = obj.id

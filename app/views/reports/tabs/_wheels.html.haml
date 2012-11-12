@@ -13,6 +13,11 @@
     .row-fluid
       .span12
         .well{:style => "height: 96px; overflow-x: scroll; width: 93%; overflow-y: hidden;"}
+          - section = 'wheels'
+          - assets = @report.assets.where(:section => section).group(:position)
+          - count = @report.assets.where(:section => section).group(:position).count
+              
+          = render :partial => 'wheels_drop', :locals => {:assets => assets, :count => count, :section => section, :object => @report}
           / = render :partial => 'drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
           / = render :partial => 'drop', :locals => {:object => @report, :place => ':two', :attribute => 'wheels'}
           / = render :partial => 'drop', :locals => {:object => @report, :place => ':three', :attribute => 'wheels'}

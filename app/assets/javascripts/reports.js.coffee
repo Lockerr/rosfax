@@ -150,21 +150,6 @@ $ ->
 
 
 
-  $('.add_defect').click ->
-    defect = $('.defect_template').clone()
-    defect.removeClass('defect_template')
-    defect.addClass('defect')
-    defect.find('.drop').hide()
-    window.scrollTo(0,0)
-    $(@).parent().prepend('<hr/>')
-    $(@).parent().prepend(defect)
-    $(@).parent().prepend $('.add_defect')
-    $('.defect').show()
-
-  $('.defect').live 'change', ->
-    store_defect($(@))
-    assing_drops()
-
   $('.destroy_report').click ->
     confirmation = confirm('Точно?')
     if confirmation
@@ -221,13 +206,18 @@ $ ->
     $(@).text('Очистить')
 
   $('.clear_ok').live 'click', ->
+    $(@).removeClass('clear_ok')
+    $(@).addClass('all_ok')
+    $(@).text('Все ОК')
     pads = $(@).parent().parent().siblings().find('.object')
     for pad in pads
       if $(pad).data('object')
         $.ajax
           type: 'DELETE'
-          url: "/points/#{$(pad).data().id}.json"
-          complete: ->
+          url: "/points/#{$(pad).data().id}.json"          
         $(pad).find('.btn-primary').removeClass('btn-primary')
+        delete $(pad).data()['id']
+        
+
 
 

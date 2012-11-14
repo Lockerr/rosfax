@@ -13,7 +13,7 @@
 
     .row
       .span2
-        .thumb{:data => @report.assets.first.attributes}
+        .thumb{:data => (@report.assets.first.attributes if @report.assets.any?)}
           = image_tag( @report.assets.first.url(:thumb), :width => '120px', :id => @report.assets.first.id ) if @report.assets.any?
 
       .span10

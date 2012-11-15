@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
 
   end
 
+  def company_name
+    company.name if company
+  end
+
 
 
 

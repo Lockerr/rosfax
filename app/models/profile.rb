@@ -3,5 +3,7 @@ class Profile < ActiveRecord::Base
 
   belongs_to :user
 
-  
+  def company_name
+    user.company_name
+  end
 end

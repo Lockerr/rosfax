@@ -2,7 +2,9 @@ Tradein::Application.routes.draw do
 
   resources :companies
 
+  put 'profiles/update_password'
   resources :profiles
+  
   resources :assets
 
   resources :points do

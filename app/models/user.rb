@@ -12,10 +12,11 @@ class User < ActiveRecord::Base
   include Devise::Async::Model
   has_one :profile
   has_many :reports
+  belongs_to :company
   has_many :assets, :as => :attachable
+  
   def admin?
     %w(antiqe@gmail.com lockerr@mail.ru).include?(email)
-
   end
 
 

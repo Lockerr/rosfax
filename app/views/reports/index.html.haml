@@ -20,7 +20,7 @@
           %td= report.car['gov_number']
           %td= report.created_at.strftime('%d.%m.%y')
           %td
-            - if current_user.reports.include?(report) or current_user.admin?
+            - if current_user.reports.include? report or current_user.admin? or current_user.company.reports.include? report
               = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'
               = link_to 'Изменить', edit_report_path(report), :class => 'btn btn-primary'
               .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}

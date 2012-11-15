@@ -1,5 +1,7 @@
 Tradein::Application.routes.draw do
 
+  resources :companies
+
   resources :profiles
   resources :assets
 

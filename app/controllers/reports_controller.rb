@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
   before_filter :authenticate_user!
 
 
+
   layout 'clean'
 
   def models
@@ -13,6 +14,14 @@ class ReportsController < ApplicationController
 
   def index
     current_user.admin? ? @reports = Report.scoped : @reports = current_user.reports.scoped
+
+    if current_user.admin?
+      @reports = Report.scoped
+    elsif current_user.company
+      @reports = current_user.company.reports.scoped
+    else
+      @reports = current_user.reports.scoped
+    end
 
     respond_to do |format|
       format.html {
@@ -26,12 +35,12 @@ class ReportsController < ApplicationController
   def show
     @report = Report.find(params[:id])
     
-    if @report.user == current_user or current_user.admin?
-      @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
-    end
+    # if current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin?    
+      # @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
+    # end
 
     respond_to do |format|
-      if @report.user == current_user or current_user.admin?
+      if can_manage?
         format.html { render :layout => 'report_show'}
         format.json { render json: @report }
       else
@@ -69,13 +78,13 @@ class ReportsController < ApplicationController
   def edit
     @report = Report.find(params[:id])
     
-    if @report.user == current_user or current_user.admin?
+    if can_manage?
       @points = @report.points
       @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
     end
     
     respond_to do |format|
-      if @report.user == current_user or current_user.admin?
+      if can_manage?
         format.html { render :layout => 'report'}
         format.json { render json: @report }
       else
@@ -88,6 +97,7 @@ class ReportsController < ApplicationController
   def create
 
     @report = current_user.reports.new(params[:report])
+    current_user.company ? current_user.company.reports << @report : nil
 
     @models = {}
     Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort
@@ -109,7 +119,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
     
     respond_to do |format|
-      if @report.user == current_user or current_user.admin?
+      if can_manage?
         if @report.update_attributes(params[:report].except!(:id))
           expire_fragment ['show', @report]
           format.json { head :ok }
@@ -158,6 +168,12 @@ class ReportsController < ApplicationController
     images = Report.find(params[:report_id]).remove_asset(params)
 
     render :json => {:status => :ok, :images => images, :places => images.keys}
+  end
+
+  private
+
+  def can_manage?
+    current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin? 
   end
 
 end

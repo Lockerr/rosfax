@@ -97,7 +97,7 @@ class ReportsController < ApplicationController
   def create
 
     @report = current_user.reports.new(params[:report])
-    current_user.company ? current_user.company.reports << @report : nil
+
 
     @models = {}
     Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort
@@ -106,6 +106,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
+        current_user.company ? current_user.company.reports << @report : nil
         format.html { redirect_to edit_report_path(@report)}
         format.json { render json: @report, status: :created, location: @report }
       else

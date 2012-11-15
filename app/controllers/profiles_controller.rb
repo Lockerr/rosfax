@@ -1,3 +1,4 @@
+#endcoding: utf-8
 class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
@@ -89,10 +90,12 @@ class ProfilesController < ApplicationController
     if @user.update_attributes(params[:user])
       # Sign in the user by passing validation in case his password changed
       sign_in @user, :bypass => true
-      redirect_to root_path
+      flash[:notice] = 'Пароль успешно изменен'
+      redirect_to :back
     else
-      render :inline => ''
+      flash[:error] = @user.errors.messages
+      redirect_to :back
     end
   end
-  
+
 end

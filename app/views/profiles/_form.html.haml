@@ -1,4 +1,9 @@
 .row
+  - if flash[:error]
+    .alert.alert-error= flash[:error]
+  - if flash[:notice]
+    .alert.alert-success= flash[:notice]
+.row
   .span5
     = form_for @profile, :html => {:class => 'form form-horizontal'} do |f|
       %legend
@@ -39,7 +44,7 @@
           = f.password_field :password_confirmation
       .control-group
         .controls
-          = f.submit "Change my password", :class => 'btn'
+          = f.submit "Сменить пароль", :class => 'btn'
   .span5
     .alert.alert-info
       %h3

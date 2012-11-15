@@ -21,6 +21,7 @@
       VK.init({apiId: 3208632, onlyWidgets: true});
 
     = render 'navbar'
+    = render 'feed_back'
     - if @report and !@report.new_record?
       .container#report{'report' => @report.id, :source => @report.attributes.to_json}
         = yield

@@ -18,5 +18,8 @@
           - if current_user
             - unless Rails.root.to_s.split('/')[2] == 'user'
               %li= link_to 'Профиль', edit_user_profile_path(current_user)
+          
+          - if current_user.admin?
+            %li= link_to 'Feedback', feedbacks_path
 
 

@@ -1,0 +1,23 @@
+.feedback{:style => '-moz-transform: rotate(270deg);-webkit-transform: rotate(270deg);-o-transform: rotate(270deg);position: fixed;top: 191px;float: right;right: -111px;font-size: large;'}
+  .alert.alert-success{:style => 'padding-left: 28px'}
+    %span
+      Оставить замечание
+.feedback-modal.modal.hide.fade
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Замечание по работе сервиса
+  = form_for Feedback.new, :remote => true, :html => { :class => '', :style => 'margin: 0px' } do |f|
+    .modal-body
+      .control-group
+        
+        .controls
+          = f.text_area :text, :rows => 10, :style => 'width: 517px'
+      
+    .modal-footer
+      / .form-actions
+      = f.submit nil, :class => 'btn btn-primary'
+      %a.btn{:href => "#","aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} Close
+
+
+    
+  

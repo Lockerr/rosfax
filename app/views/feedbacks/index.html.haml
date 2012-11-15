@@ -1,0 +1,23 @@
+- model_class = Feedback
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:text)
+      %th= model_class.human_attribute_name(:author)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @feedbacks.each do |feedback|
+      %tr
+        %td= link_to feedback.id, feedback_path(feedback)
+        %td= feedback.text
+        %td= feedback.author
+        %td=l feedback.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_feedback_path(feedback), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), feedback_path(feedback), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_feedback_path, :class => 'btn btn-primary'

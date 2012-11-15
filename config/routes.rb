@@ -1,5 +1,7 @@
 Tradein::Application.routes.draw do
 
+  resources :feedbacks
+
   resources :companies
 
   put 'profiles/update_password'

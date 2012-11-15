@@ -1,0 +1,12 @@
+= form_for @feedback, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :text, :class => 'control-label'
+    .controls
+      = f.text_area :text, :class => 'text_area'
+  .control-group
+    = f.label :author, :class => 'control-label'
+    .controls
+      = f.text_field :author, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), feedbacks_path, :class => 'btn'

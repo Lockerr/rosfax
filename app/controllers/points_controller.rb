@@ -33,6 +33,8 @@ class PointsController < ApplicationController
 
   def create
     @point = Point.new(params[:point])
+    expire_fragment ['show', @point.report]
+    expire_fragment ['edit', @point.report]
 
     respond_to do |format|
       if @point.save
@@ -51,6 +53,8 @@ class PointsController < ApplicationController
 
   def update
     @point = Point.find(params[:id])
+    expire_fragment ['show', @point.report]
+    expire_fragment ['edit', @point.report]
 
     respond_to do |format|
       if @point.update_attributes(params[:point].except(:id))

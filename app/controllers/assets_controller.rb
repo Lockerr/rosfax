@@ -32,6 +32,9 @@ class AssetsController < ApplicationController
   def create
     if params[:asset]
       if report = Report.find(params[:report_id])
+        expire_fragment ['show', report]
+        expire_fragment ['edit', report]
+
         asset = report.assets.create(params[:asset])
       end
       render :json => { :pic_path => asset.url.to_s , :name => asset.name, :id => asset.id }, :content_type => 'text/html'
@@ -41,6 +44,9 @@ class AssetsController < ApplicationController
   def update
     respond_to do |format|
       @asset = Asset.find(params[:id])
+      expire_fragment ['show', @asset.attachable]
+      expire_fragment ['edit', @asset.attachable]
+
       if @asset.update_attributes(params[:asset])
         format.json { render json: :ok, status: :ok }
       else

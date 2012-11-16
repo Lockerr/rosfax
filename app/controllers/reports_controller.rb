@@ -123,6 +123,7 @@ class ReportsController < ApplicationController
       if can_manage?
         if @report.update_attributes(params[:report].except!(:id))
           expire_fragment ['show', @report]
+          expire_fragment ['edit', @report]
           format.json { head :ok }
         else
           format.json { render json: @report.errors, status: :unprocessable_entity }

@@ -163,15 +163,15 @@ $(document).ready ->
       
     console.log "refreshing: #{refreshing}"
     unless refreshing
-      unless window.location.hostname == '0.0.0.0' || window.location.hostname == "partners.lvh.me"
-        refresh_loop = (refresh_rate) ->
-            console.log("inside photos refresh loop #{refresh_rate}")
-            get_images()
+    
+      refresh_loop = (refresh_rate) ->
+          console.log("inside photos refresh loop #{refresh_rate}")
+          get_images()
 
-            setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
+          setTimeout((-> refresh_loop(refresh_rate) if $('.processing').length > 0), refresh_rate)
 
-        refresh_rate = 5000
-        setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
+      refresh_rate = 5000
+      setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
 
   $('.photos').trigger 'custom_change'
   unless window.location.hostname == '0.0.0.0' || window.location.hostname == "partners.lvh.me"

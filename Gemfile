@@ -10,6 +10,7 @@ gem 'paperclip'
 gem 'capistrano_colors'
 gem 'ru_propisju'
 gem 'newrelic_rpm'
+gem "airbrake"
 
 
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"

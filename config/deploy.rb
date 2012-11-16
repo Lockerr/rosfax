@@ -46,3 +46,6 @@ task :backup, :roles => :db, :only => {:primary => true} do
 end
 
 
+
+        require './config/boot'
+        require 'airbrake/capistrano'

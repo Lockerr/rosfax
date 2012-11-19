@@ -121,34 +121,34 @@
                           %span.badge= t("#{object}.#{section}.#{place}")
     
       .span4
-        #vk_comments
-          :javascript
-            VK.Widgets.Comments("vk_comments", {limit: 10, width: "370", attach: "*"});
-        .span2
-          .like{:style => 'height: 30px'}
-            #vk_like
-            :javascript
-              VK.Widgets.Like("vk_like", {type: "button", verb: 1});
+        / #vk_comments
+        /   :javascript
+        /     VK.Widgets.Comments("vk_comments", {limit: 10, width: "370", attach: "*"});
+        / .span2
+        /   .like{:style => 'height: 30px'}
+        /     #vk_like
+        /     :javascript
+        /       VK.Widgets.Like("vk_like", {type: "button", verb: 1});
 
-          .like{:style => 'height: 30px'}
-            .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
-          .like{:style => 'height: 30px'}
-            %a.mrc__plugin_uber_like_button{"data-mrc-config" => "{'cm' : '3', 'ck' : '3', 'sz' : '20', 'st' : '1', 'tp' : 'ok'}", :href => "http://connect.mail.ru/share", :target => "_blank"}  Нравится
-            %script{:charset => "UTF-8", :src => "http://cdn.connect.mail.ru/js/loader.js", :type => "text/javascript"}
-          .like{:style => 'height: 30px'}
-            .g-plusone{:data => {:size => 'medium'}}
-            :javascript
-              window.___gcfg = {lang: 'ru'};
+        /   .like{:style => 'height: 30px'}
+        /     .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
+        /   .like{:style => 'height: 30px'}
+        /     %a.mrc__plugin_uber_like_button{"data-mrc-config" => "{'cm' : '3', 'ck' : '3', 'sz' : '20', 'st' : '1', 'tp' : 'ok'}", :href => "http://connect.mail.ru/share", :target => "_blank"}  Нравится
+        /     %script{:charset => "UTF-8", :src => "http://cdn.connect.mail.ru/js/loader.js", :type => "text/javascript"}
+        /   .like{:style => 'height: 30px'}
+        /     .g-plusone{:data => {:size => 'medium'}}
+        /     :javascript
+        /       window.___gcfg = {lang: 'ru'};
 
-              (function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-              })();
-          .like{:style => 'height: 30px'}
-            %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
-            :javascript
-              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        /       (function() {
+        /         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        /         po.src = 'https://apis.google.com/js/plusone.js';
+        /         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        /       })();
+        /   .like{:style => 'height: 30px'}
+        /     %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
+        /     :javascript
+        /       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
 
 

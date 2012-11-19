@@ -175,7 +175,12 @@ class ReportsController < ApplicationController
   private
 
   def can_manage?
-    current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin? 
+    current_user.admin? or
+    @report.company == current_user.company or
+    @report.user == current_user
+
+
+    # current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin? 
   end
 
 end

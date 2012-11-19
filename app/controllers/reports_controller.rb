@@ -1,7 +1,7 @@
 #encoding: utf-8
 class ReportsController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index]
 
 
 
@@ -13,15 +13,19 @@ class ReportsController < ApplicationController
   end
 
   def index
-    current_user.admin? ? @reports = Report.scoped : @reports = current_user.reports.scoped
-
-    if current_user.admin?
-      @reports = Report.scoped
-    elsif current_user.company
-      @reports = current_user.company.reports.scoped
+    if current_user
+      if current_user.admin?
+        @reports = Report.scoped
+      elsif current_user.company
+        @reports = current_user.company.reports.scoped
+      else current_user
+        @reports = current_user.reports.scoped      
+      end
     else
-      @reports = current_user.reports.scoped
+      @reports = Report.public
     end
+
+    
 
     respond_to do |format|
       format.html {

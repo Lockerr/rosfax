@@ -11,7 +11,8 @@ gem 'capistrano_colors'
 gem 'ru_propisju'
 gem 'newrelic_rpm'
 gem "airbrake"
-
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
 gem 'delayed_job_active_record'

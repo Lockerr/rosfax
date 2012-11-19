@@ -39,6 +39,8 @@ ru:
       repeater: Повторитель
       marker_lights: Габариты
       brake_lightsfog_lights: Тормозные огни
+      rear_marker_lights: Задние габаритные огни
+      rear_turn_signal: Задние указатели поворота
 
     completion:
       title: Комплектность
@@ -150,7 +152,7 @@ ru:
       luft_knock_on_the_handlebars: Люфт/стуки в руле
       air_suspension: Пневмоподвеска
       heartbeat_vibration_on_acseletation: Биение/вибрации (разгон)
-      creaks_knocks_on_the_irregularitie: Скрипы/стуки на неровностях
+      creaks_knocks_on_the_irregularities: Скрипы/стуки на неровностях
       heartbeat_vibration_on_braking: Биение/вибрации (торможение)
     engine:
       title: ДВС и КПП

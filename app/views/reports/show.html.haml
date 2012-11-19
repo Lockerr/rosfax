@@ -24,12 +24,12 @@
             %td= @report.car['year']
           %tr
             %td= @report.car['vin']
-            %td Regnum
-            %td Mileage
+            %td Регистрационный номер
+            %td Пробег
           %tr
-            %td Engine Cylinders
-            %td Engine Displacement
-            %td Engine Type
+            %td Количество цилиндров
+            %td Расположение двигателя
+            %td Тип двигателя
     .row
       .span8
         .row#row
@@ -152,5 +152,5 @@
 
 
 
-
-    = render 'carousel'
+    - unless params[:format] == 'pdf'
+      = render 'carousel'

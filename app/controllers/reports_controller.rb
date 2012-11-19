@@ -43,6 +43,8 @@ class ReportsController < ApplicationController
       if can_manage?
         format.html { render :layout => 'report_show'}
         format.json { render json: @report }
+        format.pdf {render :pdf => "report_#{@report_id}", :layout => 'report_show_pdf.html.haml'}
+        
       else
         format.html { render :inline => 'Нет доступа'}
         format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}

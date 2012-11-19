@@ -7,6 +7,8 @@
     = csrf_meta_tags
   %body
     .container-fluid
-      = render 'navbar'
+      
+      - unless request.path == '/'
+        = render 'navbar'
       = render 'feed_back'
       = yield

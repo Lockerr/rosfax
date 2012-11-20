@@ -11,6 +11,14 @@ ru:
   coating: Покраска
   checklist:
     title: Чеклист
+    devices:
+      title: Приборы
+      lamp_srs: Лампа SRS
+      check_engine: CheckEngine
+      speedometer: Спидометр
+      tachometer: Тахометр
+      indication_of_the_lever_automatic_transmission: Индикация рычага АКПП
+      backlight: Подсветка
     coating:
       title: Краска
       front_left_wing: Переднее левое крыло

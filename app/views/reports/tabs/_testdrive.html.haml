@@ -56,7 +56,7 @@
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      -%w(1 2 3).each do |i|
+                      -%w(ОК УД НЕУД).each do |i|
                         - parameters[:condition] = i
                         %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
         .span5.well
@@ -70,7 +70,7 @@
                 .controls
                   .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
                     .btn-group.pads.radio
-                      -%w(1 2 3).each do |i|
+                      -%w(ОК УД НЕУД).each do |i|
                         - parameters[:condition] = i
                         %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
 

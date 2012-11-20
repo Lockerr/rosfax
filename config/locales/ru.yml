@@ -89,6 +89,8 @@ ru:
       closer_rain_sensor: Дворники/Датчик дождя
       seat_belt: Ремень безопасности
       parktronic: Парктроник/Камера
+      sound_signal: Звуковой сигнал
+      battery_status: Состояние АКБ
 
   hello: Hello world
   interior:

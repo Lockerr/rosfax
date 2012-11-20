@@ -71,6 +71,9 @@ class Report < ActiveRecord::Base
     SUSPENSION = %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking)
     ENGINE = %w(all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise )
     ENGINE += %w(shifting_down shifting_up parking_brake sound_signal)
+
+  SERVICE_HISTORY = %w(service_history meets_car are_all_the_pages marks_of_all_maintenance instructions)
+  
   def diff
     result = {}
     objects = %w( checklist testdrive elements )

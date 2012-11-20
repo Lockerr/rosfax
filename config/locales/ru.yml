@@ -1,5 +1,15 @@
 ru:
   lorem: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec neque leo, vel mattis velit. Sed scelerisque, quam quis vestibulum vulputate, dui tellus viverra sem.
+  info:
+    service_history:
+      title: Сервисная история
+      service_history: Сервисная книга
+      meets_car: Соответствует авто
+      are_all_the_pages: Есть все страницы
+      marks_of_all_maintence: Отметки о всех то
+      instructions: Инструкция
+
+
   tab:
     documents: Документы
     coating: Краска

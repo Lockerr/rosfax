@@ -7,7 +7,11 @@
           %span{:style => 'color: #ddd'}= 1/1
       %li
         %a{"data-toggle" => "tab", :href => "#documents"}
-          Документы
+          ПТС
+          %span{:style => 'color: #ddd'}= 1/24
+      %li
+        %a{"data-toggle" => "tab", :href => "#service_history"}
+          Сервисная история
           %span{:style => 'color: #ddd'}= 1/24
     .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden"}
       #general.tab-pane.active
@@ -69,6 +73,8 @@
                   = text_field 'report[car]', 'seller_phone', :value => (@report.car['seller']['phone'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
       #documents.tab-pane
         = render :partial => "reports/tabs/documents", :locals => {:report => @report}  
+      #service_history.tab-pane
+        = render :partial => "reports/tabs/service_history", :locals => {:report => @report, :object => 'info', :section => 'service_history'}  
 
 
 

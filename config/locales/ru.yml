@@ -8,15 +8,6 @@ ru:
       are_all_the_pages: Есть все страницы
       marks_of_all_maintence: Отметки о всех то
       instructions: Инструкция
-
-
-  tab:
-    documents: Документы
-    coating: Краска
-    lights: Лампы
-    electronic: Электрика
-    liquids: Жидкости
-    completion: Комплектность
   coating: Покраска
   checklist:
     title: Чеклист
@@ -33,6 +24,12 @@ ru:
       rear: Зад
       rear_right_wing: Заднее правое крыло
       front: Перед
+    stickers:
+      title: Стикеры
+      tire_pressure_in_the_doorway: Давления шин в дрвеном проеме
+      information_in_the_doorway: Информационная в дверном проеме
+      under_the_hood: Под капотом
+      on_tank_hatches: На лючке бинзобака
 
     documents:
       title: Документы
@@ -40,7 +37,7 @@ ru:
       whom: ПТС, Кем выдана
 
     lights:
-      title: Фары
+      title: Лампы
       headlights: Ближний свет
       distant_lights: Дальний свет
       fog_lights: Противотуманки
@@ -65,7 +62,7 @@ ru:
       keychain_webasto: Брелок WEBASTO
       key_to_the_locker: Ключ от блокиратора
     liquids:
-      title: Уровни жидкостей
+      title: Жидкости
       engine: Двигатель
       transmission: Трансмиссия
       antifreeze: Антифриз

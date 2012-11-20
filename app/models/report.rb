@@ -55,12 +55,13 @@ class Report < ActiveRecord::Base
 
   
   
-  CHECKLIST = %w(coating lights electronic liquids completion)
+  CHECKLIST = %w(coating lights electronic liquids completion stickers)
     COATING = ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door", "rear_right_door", "rear_right_wing", "front", "rear", "roof"]
     LIGHTS =  %w( headlights distant_lights fog_lights marker_lights turn_signal) + %w(brake_lightsfog_lights rear_marker_lights rear_turn_signal)
     ELECTRONIC =  %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch) +  %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt)
     LIQUIDS = %w(engine transmission antifreeze power_steering brake)
     COMPLETION = %w(spare_wheel jack tools sealant compressor key_lock_gear) + %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker)
+    STICKERS = %w(tire_pressure_in_the_doorway information_in_the_doorway under_the_hood on_tank_hatches)
   
   ELEMENTS = %w(exterior interior windows_and_lights)
     WINDOWS_AND_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)
@@ -73,7 +74,7 @@ class Report < ActiveRecord::Base
     ENGINE += %w(shifting_down shifting_up parking_brake sound_signal)
 
   SERVICE_HISTORY = %w(service_history meets_car are_all_the_pages marks_of_all_maintenance instructions)
-  
+
   def diff
     result = {}
     objects = %w( checklist testdrive elements )

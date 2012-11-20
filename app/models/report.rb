@@ -57,8 +57,8 @@ class Report < ActiveRecord::Base
   
   CHECKLIST = %w(coating lights electronic liquids completion stickers)
     COATING = ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door", "rear_right_door", "rear_right_wing", "front", "rear", "roof"]
-    LIGHTS =  %w( headlights distant_lights fog_lights marker_lights turn_signal) + %w(brake_lightsfog_lights rear_marker_lights rear_turn_signal)
-    ELECTRONIC =  %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch) +  %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt)
+    LIGHTS =  %w( headlights distant_lights fog_lights marker_lights turn_signal headlights_corrector) + %w(brake_lights  rear_marker_lights rear_turn_signal rear_fog_lights reverse)
+    ELECTRONIC =  %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch) +  %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt )
     LIQUIDS = %w(engine transmission antifreeze power_steering brake)
     COMPLETION = %w(spare_wheel jack tools sealant compressor key_lock_gear) + %w( theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker)
     STICKERS = %w(tire_pressure_in_the_doorway information_in_the_doorway under_the_hood on_tank_hatches)

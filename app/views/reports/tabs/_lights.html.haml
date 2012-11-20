@@ -6,7 +6,7 @@
     .well.well-small
       %legend Переднее освещение
       .form-horizontal
-        - Report::LIGHTS[0..4].each do |param|
+        - Report::LIGHTS[0..5].each do |param|
           - parameters = {:report_id => @report.id, :object => object, :section => 'lights', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id
@@ -22,7 +22,7 @@
     .well.well-small
       %legend Заднее освещение
       .form-horizontal
-        - Report::LIGHTS[5..-1].each do |param|
+        - Report::LIGHTS[6..-1].each do |param|
           - parameters = {:report_id => @report.id, :object => object, :section => 'lights', :place => param}
           - if check = @points.select{|i| i.place == param}.first
             - parameters[:id] = check.id

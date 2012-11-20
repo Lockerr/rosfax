@@ -48,6 +48,9 @@ ru:
       brake_lightsfog_lights: Тормозные огни
       rear_marker_lights: Задние габаритные огни
       rear_turn_signal: Задние указатели поворота
+      headlights_corrector: Корректор света фар
+      rear_fog_lights: Противотуманки
+      reverse: Задний ход
 
     completion:
       title: Комплектность

@@ -17,6 +17,7 @@
   , 1600)
 
 $(document).ready ->
+  $('a[href="' + document.location.pathname + '"]').parent().addClass('active')
   scroll_forever = ->
     scroll_logo()
     setTimeout(( -> scroll_forever()), 7000)

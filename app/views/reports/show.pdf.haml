@@ -1,112 +1,139 @@
-= cache ['show', @report] do 
-  .container-fluid
-    .row-fluid
-      .span1
-        %h4
-          logo
-      .span2
-        %h4
-          Отчет #
-          = @report.id
-          от
-          =@report.created_at.strftime('%d.%m.%y')
-      
+= cache ['pdf', @report] do
+  .row
+    .span50{:style => 'background-color: #59306a'}
 
-
-
-    .row
-      .span2
-        .thumb{:data => (@report.assets.first.attributes if @report.assets.any?)}
-          = image_tag( @report.assets.first.url(:thumb), :width => '120px', :id => @report.assets.first.id ) if @report.assets.any?
-
-      .span10
-        %table.table.table-striped
-          %tr
-            %td= @report.car['mark_model']
-            %td= @report.car['mark_model']
-            %td= @report.car['year']
-          %tr
-            %td= @report.car['vin']
-            %td Regnum
-            %td Mileage
-          %tr
-            %td Engine Cylinders
-            %td Engine Displacement
-            %td Engine Type
-    .row
-      .span1.offset1
-        %h4 Фото
-      
-      %img.rg_i{"data-sz" => "f", :name => "4KRZ5ivPaCb7qM:", :onload => "google.stb.csi.onTbn(1, this)", :src => "http://www.netupd8.com/w8img/xo0ihh.jpg", :style => "width: 219px; height: 160px; margin-left: 0px; margin-top: 0px; "}/
-
-        
-      
-                    
-        
-    - %w( checklist testdrive elements ).each do |object|
-      %hr{:style => 'margin: 0'}/
-      .row
-        .span12
-          %a.pull-left{:data => {:toggle => 'collapse', :target => "##{object}"}, :onclick => "$(this).siblings('a.btn').toggle()"}
-            %h3{:style => 'margin: 0'}
-              =t("#{object}.title")
-              %span{:style => 'font-size: 70%; color: #ddd'}
-                = "(" + (@report.points.where(:object => object).size*100.0/46).round(0).to_i.to_s + "%)"
-              - if @report.points.where(:object => object).any?
-                %a.btn.btn-link{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                  Развернуть
-                %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                  Свернуть
-                  
-      - if @report.points.where(:object => object.to_sym).any?
-        .row
-          .span12
-            .collapse{:id => object, :class => object}
-              - for block in @report.points.where(:object => object.to_sym).group(:section).map(&:section)
-                .row
-                  .span8
-                    %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
-                      %h4{:style => 'margin: 0'}
-                        = t("#{object}.#{block}.title")
-                        - size =  @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
-                        %span{:style => 'font-size: 70%; color: #ddd'}
-                          = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
-                .collapse{:id => "points_#{block}", :class => object}
-                  
-                  .row
-                    .span8
-                      %ul.thumbnails
-                        - @report.points.where(:section => block.to_sym).each do |point|
-                          %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => ((['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
-                            .row-fluid
-                              .span9{:style => 'padding: 4px'}
-                                = t("#{object}.#{block}.#{point.place}")
-                              .span3{:style => 'text-align: right;padding: 4px'}
-                                = point.condition
+  .row
+    .span7.offset4
+      %h3
+        logo
+    .span12.offset18
+      %h3.text-right
+        Отчет #
+        = @report.id
+    .span8.offset1
+      %h3.text-right
+        от
+        =@report.created_at.strftime('%d.%m.%y')
     
+  .bddd
+    .row{:style => 'padding: 10px 0 0 0'}
+      .offset4
+        .span17
+          %input{:class => 'span16', :style => 'text-align: start', :value => "  #{@report.car['mark_model']}"}
+        .span5.offset1
+          Рег. номер
+        .span6.offset1
+          %input{:class => 'span6'}
+        .span3.offset1
+          Пробег
+        .span6.offset1
+          %input{:class => 'span8'}
+    .row{:style => 'padding: 10px 0 10px 0'}
+      .offset4
+        .span10
+          Положение двигателя
+        .span5.offset1
+          %input{:class => 'span5'}
+        .span7.offset1
+          Тип двигателя
+        .span6
+          %input{:class => 'span6'}
+        .span10.offset1
+          Число цилиндров
+        .span2
+          %input{:class => 'span2'}
+  .row
+    .span5.offset5
+      %h2 Фото
+    .span40{:style => 'margin-top: 19px'}
+      Остальные фото доступны по адресу
+      = link_to report_url(@report)
+  .row{:style => 'margin-top: 25px;'}
+    .span8.offset4
+      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
+    .span8.offset1
+      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
+    .span8.offset1
+      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
+    .span8.offset1
+      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
+    .span8.offset1
+      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
+
+
+      
+    
+                  
+      
+  - %w( checklist testdrive elements ).each do |object|
     .row
-      .span12
-        %a.pull-left{:style => 'color: #ddd',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
-          %h3.pull-left Не проверенные    
-        %a.pull-left{:style => 'color: #ddd;margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
-          %span
-            %b
-              Развернуть
-          %span.hide
-            %b
-              Свернуть
-    .row.collapse{:id => 'unchecked'}
-      - unless @report.diff.empty?
-        - for object in @report.diff.keys
-          %label
-            %h3= t("#{object}.title")
-          %table.table.table-striped
-            - for section in @report.diff[object].keys
-              %tr
-                %td{:style => 'width: 100px'}
-                  = t("#{object}.#{section}.title")
-                  %td
-                    - for place in @report.diff[object][section]
-                      %span.badge= t("#{object}.#{section}.#{place}")
-
-
+      .span40.offset5
+        %h2= t("#{object}.title")
+    - if @report.points.where(:object => object.to_sym).any?
+      -for block in @report.points.where(:object => object.to_sym).group(:section).map(&:section)
+        .row{:style => 'padding-top: 20px'}
+          .span50.bddd
+            .offset4
+              .block-title
+                = t("#{object}.#{block}.title")
+        .row
+          .span50
+            .row.offset1
+              - @report.points.where(:section => block.to_sym).each do |point|
+                .span19.offset4.left
+                  .div
+                    .div.left= t("#{object}.#{block}.#{point.place}")
+                    .div.right{:class => ((['ок', 'ok', 0, 'OK', 'ОК', 'есть', 100, '100', '1', 1].include? point.condition) ? 'green' : 'red')}
+                      = point.condition
+  .row
+    - unless @report.diff.empty?
+      %h3.offset6 Не проверенные
+      - for object in @report.diff.keys
+        .row.bddd
+          .offset4.block-title= t("#{object}.title")
+        %table.table.table-striped
+          - for section in @report.diff[object].keys
+            %tr
+              %td{:style => 'width: 120px'}
+                .block-title= t("#{object}.#{section}.title")
+                %td
+                  - for place in @report.diff[object][section]
+                    %span.badge
+                      = t("#{object}.#{section}.#{place}")
+                      %span.red
+                        - unless @report.diff[object][section][-1] == place
+                          = " / "
+  %br/
+  %br/
+  .bddd{:style => 'padding-top: 15px; padding-bottom: 15px'}
+    .row{:style => 'padding: 10px 0 10px 0'}
+      .span7.offset4
+        Отчет выдан:
+      .span13.offset1
+        %input{:class => 'span13'}
+      .span7.offset2
+        Эксперт:
+      .span13
+        %input{:class => 'span13'}
+    .row{:style => 'padding: 10px 0 10px 0'}
+      .span7.offset4
+        Адрес:
+      .span13.offset1
+        %input{:class => 'span13'}
+      .span7.offset2
+        Подпись:
+      .span13
+        %input{:class => 'span13'}
+    .row{:style => 'padding: 10px 0 10px 0'}
+      .span7.offset4
+        Телефон:
+      .span13.offset1
+        %input{:class => 'span13'}    
+    .row{:style => 'padding: 10px 0 10px 0'}
+      .span7.offset4
+        Сайт:
+      .span13.offset1
+        %input{:class => 'span13'}
+      .span7.offset2
+        Печать:
+      

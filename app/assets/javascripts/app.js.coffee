@@ -158,7 +158,8 @@ refresh_image = (refresh_rate, src, id) ->
 
 $(document).ready ->
 
-
+  
+ 
   $('.photos').bind 'custom_change', ->
       
     console.log "refreshing: #{refreshing}"

@@ -1,5 +1,7 @@
 Tradein::Application.routes.draw do
-
+  
+  match ':id.pdf' => 'reports#show',:constraints => { :id => /\d.+/ }, :format => 'pdf'
+  match ':id' => 'reports#show',:constraints => { :id => /\d.+/ }
   resources :feedbacks
 
   resources :companies

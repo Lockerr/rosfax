@@ -49,17 +49,13 @@
       Остальные фото доступны по адресу
       = link_to report_url(@report)
   .row{:style => 'margin-top: 25px;'}
-    .span8.offset4
-      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
-    .span8.offset1
-      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
-    .span8.offset1
-      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
-    .span8.offset1
-      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
-    .span8.offset1
-      %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/237/thumb.jpg?1350286231"}/
-
+    - unless Rails.env == 'development'
+      - for asset in @report.assets[0..4]
+        .span8.offset4
+          %img.rg_i{ :src => asset.url(:thumb) }/
+    - else
+      .span8.offset4
+        %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/311/thumb.jpg?1350286273"}/
 
       
     

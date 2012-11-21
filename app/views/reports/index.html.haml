@@ -8,7 +8,8 @@
         %th Машина
         %th Год выпуска
         %th VIN
-        %th Год выпуска
+        %th Продавец
+        %th Покупатель
         %th Дата создания
 
     %tbody
@@ -23,6 +24,7 @@
             - if current_user
               - if current_user.reports.include? report or current_user.admin? or current_user.company.reports.include? report
                 = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'
+                = link_to 'Печать', report_path(report, :format => :pdf), :class => 'btn btn-primary'
                 = link_to 'Изменить', edit_report_path(report), :class => 'btn btn-primary'
                 - if current_user.admin?
                   .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id, :disabled => :disabled}

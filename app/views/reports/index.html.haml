@@ -2,7 +2,7 @@
 .hero-unit
   %h2 Список отчетов
 
-  %table.table-bordered.table-striped
+  %table.table.table-bordered.table-striped.table-condensed
     %thead
       %tr
         %th Машина
@@ -18,7 +18,8 @@
           %td= report.model_name
           %td= report.car[:car][:year] if report.car[:car]
           %td= report.car['vin']
-          %td= report.car['gov_number']
+          %td= report.car['seller']['name'].split(/\s/)[0] if report.car['seller']['name'] if report.car['seller']
+          %td= report.car['buyer']['name'].split(/\s/)[0] if report.car['buyer']['name'] if report.car['seller']
           %td= report.created_at.strftime('%d.%m.%y')
           %td
             - if current_user

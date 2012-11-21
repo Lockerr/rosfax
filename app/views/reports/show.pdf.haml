@@ -21,33 +21,33 @@
         .span17
           %input{:class => 'span16', :style => 'text-align: start', :value => "  #{@report.car['mark_model']}"}
         .span5.offset1
-          Рег. номер
+          Гос. номер
         .span6.offset1
-          %input{:class => 'span6', :value => "  #{@report.car['engine_placement']}"}
+          %input{:class => 'span6', :value => @report.car['gov_number']}
         .span3.offset1
           Пробег
         .span6.offset1
-          %input{:class => 'span8', :value => "  #{@report.car['mileage']}"}
+          %input{:class => 'span8', :value => @report.car['mileage']}
     .row{:style => 'padding: 10px 0 10px 0'}
       .offset4
         .span10
           Положение двигателя
         .span5.offset1
-          %input{:class => 'span5', :value => "  #{@report.car['engine']}"}
+          %input{:class => 'span5', :value => @report.car['engine_placement']}
         .span7.offset1
           Тип двигателя
         .span6
-          %input{:class => 'span6', :value => "  #{@report.car['engine_type']}"}
+          %input{:class => 'span6', :value => @report.car['engine_type']}
         .span10.offset1
           Число цилиндров
         .span2
-          %input{:class => 'span2', :value => "  #{@report.car['cylinder_amount']}"}
+          %input{:class => 'span2', :value => @report.car['cylinder_amount']}
   .row
     .span5.offset5
       %h2 Фото
     .span40{:style => 'margin-top: 19px'}
       Остальные фото доступны по адресу
-      = link_to report_url(@report).gsub('/reports','')
+      = link_to report_url(@report).gsub('/reports',''),report_url(@report).gsub('/reports','')
   .row{:style => 'margin-top: 25px;'}
     - unless Rails.env == 'development'
       - for asset in @report.assets[0..4]

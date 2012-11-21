@@ -45,12 +45,12 @@
               %tr
                 %td Гоc. номер
                 %td#year
-                  = text_field 'report[car]', 'gov_number', :value => (@report.car['attr']['gov_number'] if @report.car['attr']),  :placeholder => 'A 999 AA 999', :data => {:attribute => :car, :place => :attr, :change => :gov_number}
+                  = text_field 'report[car]', 'gov_number', :value => @report.car['gov_number'],  :placeholder => 'A 999 AA 999', :data => {:attribute => :car,:change => :gov_number}
               %tr
                 %td
                   VIN
                 %td#vin
-                  = text_field 'report[car]', 'vin', :value => (@report.car['attr']['vin'] if @report.car['attr']), :placeholder => '*** ****** ****9999',  :data => {:attribute => :car, :place => :attr, :change => 'vin'}
+                  = text_field 'report[car]', 'vin', :value => @report.car['vin'], :placeholder => '*** ****** ****9999',  :data => {:attribute => :car, :change => 'vin'}
               %tr
                 %td Покупатель
               %tr
@@ -71,6 +71,36 @@
                 %td Телефон
                 %td#seller_phone
                   = text_field 'report[car]', 'seller_phone', :value => (@report.car['seller']['phone'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
+        .span6.well
+          %li.btn-group.radio
+            .btn.checkbox.btn{:data => {:section => 'info', :attribute => :publish, :publish => 'false'}, :class => ('btn-primary' unless @report.publish)} Не показывать всем
+            .btn.checkbox.btn{:data => {:section => 'info',:attribute => :publish, :publish => 'true'}, :class => ('btn-primary' if @report.publish)} Публичный
+
+          %table.table#car
+            %thead
+              %th Поле
+              %th Значение
+            %tbody
+              %tr
+                %td
+                  Положение двигателя
+                %td#engine_placement
+                  = text_field 'report[car]', 'engine_placement', :value => (@report.car['engine_placement']), :data => {:attribute => :car, :change => :engine_placement}
+              %tr
+                %td
+                  Пробег
+                %td#mileage
+                  = text_field 'report[car]', 'mileage', :value => (@report.car['mileage']), :data => {:attribute => :car, :change => :mileage}
+              %tr
+                %td Тип двигателя
+                %td#year
+                  = text_field 'report[car]', 'engine_type', :value => (@report.car['engine_type']), :data => {:attribute => :car,  :change => :engine_type}
+              %tr
+                %td
+                  Число цилиндров
+                %td#cilinder_amount
+                  = text_field 'report[car]', 'cilynder_amount', :value => (@report.car['cilynder_amount']),  :data => {:attribute => :car, :change => 'cilynder_amount'}
+              
       #documents.tab-pane
         = render :partial => "reports/tabs/documents", :locals => {:report => @report}  
       #service_history.tab-pane

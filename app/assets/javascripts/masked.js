@@ -60,6 +60,7 @@
 			settings = $.extend({
 				placeholder: "_",
 				completed: null
+				
 			}, settings);
 
 			var defs = $.mask.definitions;
@@ -86,6 +87,7 @@
 				var buffer = $.map(mask.split(""), function(c, i) { if (c != '?') return defs[c] ? settings.placeholder : c });
 				var ignore = false;  			//Variable for ignoring control keys
 				var focusText = input.val();
+
 
 				input.data("buffer", buffer).data("tests", tests);
 
@@ -139,6 +141,7 @@
 						return false;
 					} else if (k == 27) {//escape
 						input.val(focusText);
+						
 						input.caret(0, checkVal());
 						return false;
 					}
@@ -159,7 +162,11 @@
 					} else if ((k >= 32 && k <= 125) || k > 186) {//typeable characters
 						var p = seekNext(pos.begin - 1);
 						if (p < len) {
-							var c = String.fromCharCode(k);
+							if (settings.upcase) {
+							 	var c = String.fromCharCode(k).toUpperCase();
+							} else {
+							 	var c = String.fromCharCode(k);
+							}
 							if (tests[p].test(c)) {
 								shiftR(p);
 								buffer[p] = c;
@@ -178,7 +185,9 @@
 					for (var i = start; i < end && i < len; i++) {
 						if (tests[i])
 							buffer[i] = settings.placeholder;
-					}
+
+					};
+					
 				};
 
 				function writeBuffer() { return input.val(buffer.join('')).val(); };
@@ -186,6 +195,7 @@
 				function checkVal(allow) {
 					//try to place characters where they belong
 					var test = input.val();
+
 					var lastMatch = -1;
 					for (var i = 0, pos = 0; i < len; i++) {
 						if (tests[i]) {

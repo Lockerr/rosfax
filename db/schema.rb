@@ -99,10 +99,10 @@ ActiveRecord::Schema.define(:version => 20121122112611) do
     t.string   "place"
     t.string   "condition"
     t.string   "state"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "images"
-    t.string   "descriptions"
+    t.string   "description"
   end
 
   add_index "points", ["report_id"], :name => "index_points_on_report_id"

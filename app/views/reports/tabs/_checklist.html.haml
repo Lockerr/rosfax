@@ -32,7 +32,7 @@
                         %h4= t("checklist.#{tab}.title")
                   .span2
                     .accordion-toggle
-                      .btn.btn-large.all_ok.pull-right Все ок
+                      .btn.btn-large.new_all_ok.pull-right Все ок
                 
               .accordion-body.collapse.in{id: "#{tab}-#{i}"}
                 .accordion-inner
@@ -42,17 +42,17 @@
                     - parameters = {:report_id => @report.id, :object => 'checklist', :section => 'tab', :place => param}  
                     - if check = @points.select{|i| i.place == param}.first
                       - parameters[:id] = check.id
-                    .row.object.form-inline{:data => parameters, :style => 'display: table'}
+                    .row-fluid.object.form-inline{:data => parameters, :style => 'display: table'}
                       .span2                    
                         = t("checklist.#{tab}.#{param}").to_s+ ':'
-                      .span3
-                        .pull-left{:style => 'margin-top: 0px'}
+                      .span5
+                        .divv{:style => 'margin-top: 0px; text-align: center'}
                           .btn-group.pads.radio
                             -Report.const_get(tab.upcase)[1].each do |i|
                               - parameters[:condition] = i
                               %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
                       .span3
-                        %input{:type => :text}
+                        %input.span10{:data => parameters, :type => :text, :value => (check.description if check), :disabled => :disabled}
                       .span1
                         photo_box
                     %hr{style: 'margin: 5px 0'}/

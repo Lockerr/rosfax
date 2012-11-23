@@ -197,13 +197,16 @@ $ ->
       container.data().wheels.rear_right = data
       store_report()
 
+
   $('.all_ok').live 'click', ->
-    pads = $(@).parent().parent().siblings().find('.pads')
+    pads = $(@).parent().parent().parent().siblings().find('.pads')
     for pad in pads
       $(pad).find('.btn').first().trigger('click')
     $(@).removeClass('all_ok')
     $(@).addClass('clear_ok')
     $(@).text('Очистить')
+  
+
 
   $('.clear_ok').live 'click', ->
     $(@).removeClass('clear_ok')
@@ -211,6 +214,29 @@ $ ->
     $(@).text('Все ОК')
     pads = $(@).parent().parent().siblings().find('.object')
     for pad in pads
+      if $(pad).data('object')
+        $.ajax
+          type: 'DELETE'
+          url: "/points/#{$(pad).data().id}.json"          
+        $(pad).find('.btn-primary').removeClass('btn-primary')
+        delete $(pad).data()['id']
+
+  $('.new_all_ok').live 'click', ->
+    pads = $(@).parents('.accordion-group').find('.pads')
+    for pad in pads
+      $(pad).find('.btn').first().trigger('click')
+    $(@).removeClass('new_all_ok')
+    $(@).addClass('new_clear_ok')
+    $(@).text('Очистить')
+
+  $('.new_clear_ok').live 'click', ->
+    $(@).removeClass('new_clear_ok')
+    $(@).addClass('new_all_ok')
+    $(@).text('Все ОК')
+    pads = $(@).parents('.accordion-group').find('.object')
+    for pad in pads
+      console.log $(pad).data('object')
+      document.pad = pad
       if $(pad).data('object')
         $.ajax
           type: 'DELETE'

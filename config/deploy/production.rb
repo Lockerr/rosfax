@@ -17,7 +17,7 @@ set :rvm_ruby_string, 'r328'
 set :deploy_via, :remote_cache
 set :scm, :git
 set :repository, "git@github.com:Lockerr/tradein.git"
-set :branch, "master"
+set :branch, "new_layout"
 
 role :web, domain
 role :app, domain

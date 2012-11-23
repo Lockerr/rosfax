@@ -14,23 +14,30 @@
 
     
     .span10{:data => {:spy => :scroll, :target => '#checklist_nav'}}
+
       - for tab in Report::CHECKLIST
-        - count = (Report.const_get(tab.upcase).size/7.0).round
+        - count = (Report.const_get(tab.upcase)[0].size/7.0).round
         - count.times do |i|
          
 
           .accordion{style: 'background-color: white'}
             .accordion-group
               .accordion-heading
-                .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab}-#{i}"}}
-                  - if count > 1 and i > 0
-                    %h4= t("checklist.#{tab}.title") + " (дополнение #{i})"
-                  - else
-                    %h4= t("checklist.#{tab}.title")
+                .row-fluid
+                  .span10
+                    .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab}-#{i}"}}
+                      - if count > 1 and i > 0
+                        %h4= t("checklist.#{tab}.title") + " (дополнение #{i})"
+                      - else
+                        %h4= t("checklist.#{tab}.title")
+                  .span2
+                    .accordion-toggle
+                      .btn.btn-large.all_ok.pull-right Все ок
+                
               .accordion-body.collapse.in{id: "#{tab}-#{i}"}
                 .accordion-inner
               
-                  - Report.const_get(tab.upcase).each_slice(7).to_a[i].each do |param|
+                  - Report.const_get(tab.upcase)[0].each_slice(7).to_a[i].each do |param|
                     
                     - parameters = {:report_id => @report.id, :object => 'checklist', :section => 'tab', :place => param}  
                     - if check = @points.select{|i| i.place == param}.first
@@ -41,7 +48,7 @@
                       .span3
                         .pull-left{:style => 'margin-top: 0px'}
                           .btn-group.pads.radio
-                            -%w(ок слабо сильно).each do |i|
+                            -Report.const_get(tab.upcase)[1].each do |i|
                               - parameters[:condition] = i
                               %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
                       .span3

@@ -25,12 +25,18 @@
       .accordion
         .accordion-group
           .accordion-heading
-            .accordion-toggle{data: {toggle: :collapse, target: '#suspension'}}
-              %h4= t("testdrive.suspension.title")
+          
+            .row-fluid
+              .span10
+                .accordion-toggle{data: {toggle: :collapse, target: '#suspension'}}
+                  %h4= t("testdrive.suspension.title")
+              .span2
+                .accordion-toggle
+                  .btn.btn-large.all_ok.pull-right Все ок
           #suspension.accordion-body.collapse.in
             .accordion-inner
           
-              - Report::SUSPENSION.each do |param|
+              - Report::SUSPENSION[0].each do |param|
                 
                 - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}  
                 - if check = @points.select{|i| i.place == param}.first
@@ -41,7 +47,7 @@
                   .span5
                     .pull-left{:style => 'margin-top: 0px'}
                       .btn-group.pads.radio
-                        -%w(ок слабо сильно).each do |i|
+                        - Report::SUSPENSION[1].each do |i|
                           - parameters[:condition] = i
                           %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
                   .span2
@@ -52,12 +58,17 @@
       .accordion
         .accordion-group
           .accordion-heading
-            .accordion-toggle{data: {toggle: :collapse, target: '#engine'}}
-              %h4= t("testdrive.engine.title")
+            .row-fluid
+              .span10
+                .accordion-toggle{data: {toggle: :collapse, target: '#engine'}}
+                  %h4= t("testdrive.engine.title")
+              .span2
+                .accordion-toggle
+                  .btn.btn-large.all_ok.pull-right Все ок
           #engine.accordion-body.collapse.in
             .accordion-inner
           
-              - Report::ENGINE.each do |param|
+              - Report::ENGINE[0].each do |param|
                 
                 - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}  
                 - if check = @points.select{|i| i.place == param}.first
@@ -68,7 +79,7 @@
                   .span5
                     .pull-left{:style => 'margin-top: 0px'}
                       .btn-group.pads.radio
-                        -%w(ОК УД НЕУД).each do |i|
+                        - Report::ENGINE[1].each do |i|
                           - parameters[:condition] = i
                           %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
                   .span2

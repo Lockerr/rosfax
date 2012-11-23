@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120102225) do
+ActiveRecord::Schema.define(:version => 20121122112611) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -99,9 +99,10 @@ ActiveRecord::Schema.define(:version => 20121120102225) do
     t.string   "place"
     t.string   "condition"
     t.string   "state"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "images"
+    t.string   "descriptions"
   end
 
   add_index "points", ["report_id"], :name => "index_points_on_report_id"

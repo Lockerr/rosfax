@@ -1,82 +1,83 @@
 #testdrive.tab-pane
-  .tabbable{:style => "margin-bottom: 18px;"}
-    %ul.nav.nav-tabs
-      %li.active
-        %a{"data-toggle" => "tab", :href => "#suspension"}
-          Подвеска
-          %span{:style => 'color: #ddd'}
-            = @report.points.where(:object => :testdrive, :section => :suspension).count
-            \/
-            = Report::SUSPENSION.count
-      %li
-        %a{"data-toggle" => "tab", :href => "#engine"}
-          КПП и ДВС
-          %span{:style => 'color: #ddd'}
-            = @report.points.where(:object => :testdrive, :section => :engine).count
-            \/
-            = Report::ENGINE.count
-              
+  .row
+    .span2
+      .tabbable.tabs-left.affix#testdive_nav{:style => "margin-bottom: 18px;"}
+        %ul.nav.nav-tabs
+          %li.active
+            %a{:href => "#suspension"}
+              Подвеска
+              %span{:style => 'color: #ddd'}
+                = @report.points.where(:object => :testdrive, :section => :suspension).count
+                \/
+                = Report::SUSPENSION.count
+          %li
+            %a{:href => "#engine"}
+              КПП и ДВС
+              %span{:style => 'color: #ddd'}
+                = @report.points.where(:object => :testdrive, :section => :engine).count
+                \/
+                = Report::ENGINE.count
+                  
 
-      %li
-        %a{"data-toggle" => "tab", :href => "#other_tests"} Прочее
+          %li
+            %a{:href => "#other_tests"} Прочее
+    .span10{:data => {:spy => :scroll, :target => '#testdive_nav'}}
+      .accordion
+        .accordion-group
+          .accordion-heading
+            .accordion-toggle{data: {toggle: :collapse, target: '#suspension'}}
+              %h4= t("testdrive.suspension.title")
+          #suspension.accordion-body.collapse.in
+            .accordion-inner
+          
+              - Report::SUSPENSION.each do |param|
+                
+                - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}  
+                - if check = @points.select{|i| i.place == param}.first
+                  - parameters[:id] = check.id
+                .row.object.form-inline{:data => parameters, :style => 'display: table'}
+                  .span2                    
+                    = t("testdrive.suspension.#{param}").to_s+ ':'
+                  .span5
+                    .pull-left{:style => 'margin-top: 0px'}
+                      .btn-group.pads.radio
+                        -%w(ок слабо сильно).each do |i|
+                          - parameters[:condition] = i
+                          %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+                  .span2
+                    photo_box
+                %hr{:style => 'margin: 5px 0'}/
+                
 
-    .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
-      #suspension.tab-pane.active
-        .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
-          .span12
-            .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
-
-        .span8.well
-          .form-horizontal
-            - Report::SUSPENSION.each do |param|
-              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}  
-              - if check = @points.select{|i| i.place == param}.first
-                - parameters[:id] = check.id
-              .control-group.object{:data => parameters}
-                %label.control-label= t("testdrive.suspension.#{param}").to_s+ ':'
-                .controls
-                  .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                    .btn-group.pads.radio
-                      -%w(ок слабо сильно).each do |i|
-                        - parameters[:condition] = i
-                        %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
-
-      #engine.tab-pane
-        .row{:style => 'margin-left: 0px; margin-bottom: 10px'}
-          .span12
-            .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
-        .span5.well
-          .form-horizontal
-            - Report::ENGINE[0..4].each do |param|
-              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
-              - if check = @points.select{|i| i.place == param}.first
-                - parameters[:id] = check.id
-              .control-group.object{:data => parameters}
-                %label.control-label= t("testdrive.engine.#{param}").to_s+ ':'
-                .controls
-                  .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                    .btn-group.pads.radio
-                      -%w(ОК УД НЕУД).each do |i|
-                        - parameters[:condition] = i
-                        %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
-        .span5.well
-          .form-horizontal
-            - Report::ENGINE[4..-1].each do |param|
-              - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}
-              - if check = @points.select{|i| i.place == param}.first
-                - parameters[:id] = check.id
-              .control-group.object{:data => parameters}
-                %label.control-label= t("testdrive.engine.#{param}").to_s+ ':'
-                .controls
-                  .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                    .btn-group.pads.radio
-                      -%w(ОК УД НЕУД).each do |i|
-                        - parameters[:condition] = i
-                        %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+      .accordion
+        .accordion-group
+          .accordion-heading
+            .accordion-toggle{data: {toggle: :collapse, target: '#engine'}}
+              %h4= t("testdrive.engine.title")
+          #engine.accordion-body.collapse.in
+            .accordion-inner
+          
+              - Report::ENGINE.each do |param|
+                
+                - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}  
+                - if check = @points.select{|i| i.place == param}.first
+                  - parameters[:id] = check.id
+                .row.object{:data => parameters, :style => 'margin-bottom: 0px'}
+                  .span2
+                    = t("testdrive.engine.#{param}").to_s+ ':'
+                  .span5
+                    .pull-left{:style => 'margin-top: 0px'}
+                      .btn-group.pads.radio
+                        -%w(ОК УД НЕУД).each do |i|
+                          - parameters[:condition] = i
+                          %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+                  .span2
+                    photo_box
+                %hr{:style => 'margin: 5px 0'}/
 
 
-      #other_tests.tab-pane
-        .span8.well
+        #other_tests
+        
           %label
             Примечание
             / = form_for @report do |f|

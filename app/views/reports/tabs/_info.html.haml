@@ -9,7 +9,7 @@
               %span{:style => 'color: #ddd'}= 1/1
           %li
             %a{:href => "#tab_documents"}
-              ПТС
+              Документы
               %span{:style => 'color: #ddd'}= 1/24
           %li
             %a{:href => "#tab_service_history"}
@@ -61,6 +61,28 @@
                     .controls
                       = text_field 'report[car]', 'vin', :value => @report.car['vin'], :placeholder => '*** ****** ****9999',  :data => {:attribute => :car, :change => 'vin'}
                   %legend
+                    Основные характеристики
+                  .control-group
+                    .control-label
+                      Положение двигателя
+                    .controls
+                      = text_field 'report[car]', 'engine_placement', :value => (@report.car['engine_placement']), :data => {:attribute => :car, :change => :engine_placement}
+                  .control-group
+                    .control-label
+                      Пробег
+                    .controls
+                      = text_field 'report[car]', 'mileage', :value => (@report.car['mileage']), :data => {:attribute => :car, :change => :mileage}
+                  .control-group
+                    .control-label
+                      Тип Двигателя
+                    .controls
+                      = text_field 'report[car]', 'engine_type', :value => (@report.car['engine_type']), :data => {:attribute => :car,  :change => :engine_type}
+                  .control-group
+                    .control-label
+                      Число цилиндров
+                    .controls
+                      = text_field 'report[car]', 'cylinder_amount', :value => @report.car['cylinder_amount'],  :data => {:attribute => :car, :change => 'cylinder_amount'}                  
+                  %legend
                     Покупатель
                   .control-group
                     .control-label
@@ -84,28 +106,6 @@
                       Телефон
                     .controls
                       = text_field 'report[car]', 'buyer_phone', :value => (@report.car['seller']['phone'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
-                  %legend
-                    Основные характеристики
-                  .control-group
-                    .control-label
-                      Положение двигателя
-                    .controls
-                      = text_field 'report[car]', 'engine_placement', :value => (@report.car['engine_placement']), :data => {:attribute => :car, :change => :engine_placement}
-                  .control-group
-                    .control-label
-                      Пробег
-                    .controls
-                      = text_field 'report[car]', 'mileage', :value => (@report.car['mileage']), :data => {:attribute => :car, :change => :mileage}
-                  .control-group
-                    .control-label
-                      Тип Двигателя
-                    .controls
-                      = text_field 'report[car]', 'engine_type', :value => (@report.car['engine_type']), :data => {:attribute => :car,  :change => :engine_type}
-                  .control-group
-                    .control-label
-                      Число цилиндров
-                    .controls
-                      = text_field 'report[car]', 'cylinder_amount', :value => @report.car['cylinder_amount'],  :data => {:attribute => :car, :change => 'cylinder_amount'}                  
 
     
 

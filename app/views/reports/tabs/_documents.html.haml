@@ -6,7 +6,7 @@
     .form-horizontal
       .control-group
         %label.span3{:style => 'padding-top: 5px'} Серия
-        = text_field "doc", 'series', :class => 'span9', :value => @report.documents['series'], :data => {:attribute => :documents, :change => :series}
+        = text_field "doc", 'series', :class => 'span4', :value => @report.documents['series'], :data => {:attribute => :documents, :change => :series}
       .control-group
         %label.span3{:style => 'padding-top: 5px'} Выдан
         .input-append{:style => 'display: block'}
@@ -15,34 +15,35 @@
             %i.icon-calendar
       .control-group
         %label.span3{:style => 'padding-top: 5px'} Кем
-        = text_field "doc", 'series', :class => 'span9', :value => @report.documents['whom'], :data => {:attribute => :documents, :change => :whom}
+        = text_field "doc", 'series', :class => 'span4', :value => @report.documents['whom'], :data => {:attribute => :documents, :change => :whom}
       .control-group
         %label.span3{:style => 'padding-top: 5px'} Страна
-        = text_field "doc", 'series', :class => 'span9', :value => @report.documents['country'], :data => {:attribute => :documents, :change => :country}
+        = text_field "doc", 'series', :class => 'span4', :value => @report.documents['country'], :data => {:attribute => :documents, :change => :country}
       .control-group{:style => 'margin-left: 10%'}
         .btn-group.pads.radio
           %button.checkbox.btn{:data => {:attribute => :documents,  :change => :document_validity, :document_validity => 1, :section => 'documents'}, :class => ('btn-primary' if @report.documents['document_validity'] == 1)} Оригинал
           %button.checkbox.btn{:data => {:attribute => :documents,  :change => :document_validity, :document_validity => 0, :section => 'documents'}, :class => ('btn-primary' if @report.documents['document_validity'] == 0)} Дубликат
-  .span8.well.well-small
+  .span5.well.well-small
     %legend Владельцы
-    .row{:style => 'margin-left: -2%'}
-      .span3.offset4 Постановка на учет
-      .span3{:style => 'margin-left: 10%'} Снятие с учета
-    .form-horizontal
-      - (1..6).to_a.each do |i|
-        .control-group.inline
-          %label.control-label{:for => 'owners', :style => 'width: 0px'}="#{i}."
-
-          .btn-toolbar.pull-left{:style => 'width: 125px; margin-top: 0px'}
-            .btn-group.pads.radio
-              %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis', :section => 'documents'}} физ
-              %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur', :section => 'documents'}} юр
-          .input-append.pull-left.span4.offset1{:style => 'display: block'}
-            = text_field 'pts', "start_owning_#{i}", :class => 'span7 pick_date', :data => {:attribute => :documents, :change => "start_owning_#{i}"}, :value => @report.documents["start_owning_#{i}"]
+    .row-fluid
+      .span4.offset4 Постановка на учет
+      .span3 Снятие с учета
+      
+    - (1..6).to_a.each do |i|
+      .row-fluid
+        .span1
+          ="#{i}."
+        .span3
+          .btn-group.pads.radio{style: 'padding-left: 0px'}
+            %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis', :section => 'documents'}} физ
+            %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur', :section => 'documents'}} юр
+        .span3
+          .input-append.pull-left{:style => 'display: block'}
+            = text_field 'pts', "start_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :documents, :change => "start_owning_#{i}"}, :value => @report.documents["start_owning_#{i}"]
             %span.add-on{:style => 'margin-left: -2px'}
               %i.icon-calendar
-          .input-append.pull-left.span4{:style => 'display: block'}
-            = text_field 'pts', "end_owning_#{i}", :class => 'span7 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
+        .span3.offset1
+          .input-append.pull-left{:style => 'display: block'}
+            = text_field 'pts', "end_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
             %span.add-on{:style => 'margin-left: -2px'}
               %i.icon-calendar
- 

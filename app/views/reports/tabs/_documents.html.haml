@@ -1,49 +1,65 @@
 - attribute = :documents
+#documents.tab-pane
+  .accordion{style: 'background-color: white'}
+    .accordion-group
+      .accordion-heading
+        .row-fluid
+          .span10
+            .accordion-toggle{id: "tab_documents", data: {toggle: :collapse, target: "#documents"}}
+              %h4 Общая
+      .accordion-body.collapse.in{id: 'documents'}
+        .accordion-inner
 
-.span12.documents
-  .span4.well.well-small
-    %legend ПТС
-    .form-horizontal
-      .control-group
-        %label{:style => 'padding-top: 5px'} Серия
-        = text_field "doc", 'series', :class => 'span4', :value => @report.documents['series'], :data => {:attribute => :documents, :change => :series}
-      .control-group
-        %label{:style => 'padding-top: 5px'} Выдан
-        .input-append.pull-left{:style => 'display: block'}
-          = text_field 'pts', 'created_at', :class => 'pick_date', :style => 'float:left; width: 59%', :value => @report.documents['issued'], :data => {:attribute => :documents, :change => :issued}
-          %span.add-on{:style => 'margin-left: -2px'}
-            %i.icon-calendar
-      .control-group
-        %label{:style => 'padding-top: 5px'} Кем
-        = text_field "doc", 'series', :class => 'span4', :value => @report.documents['whom'], :data => {:attribute => :documents, :change => :whom}
-      .control-group
-        %label{:style => 'padding-top: 5px'} Страна
-        = text_field "doc", 'series', :class => 'span4', :value => @report.documents['country'], :data => {:attribute => :documents, :change => :country}
-      .control-group{:style => 'margin-left: 10%'}
-        .btn-group.pads.radio
-          %button.checkbox.btn{:data => {:attribute => :documents,  :change => :document_validity, :document_validity => 1, :section => 'documents'}, :class => ('btn-primary' if @report.documents['document_validity'] == 1)} Оригинал
-          %button.checkbox.btn{:data => {:attribute => :documents,  :change => :document_validity, :document_validity => 0, :section => 'documents'}, :class => ('btn-primary' if @report.documents['document_validity'] == 0)} Дубликат
-  .span5.well.well-small
-    %legend Владельцы
-    .row-fluid
-      .span4.offset4 Постановка на учет
-      .span3 Снятие с учета
+          %legend ПТС
+          .form-horizontal
+            .control-group
+              .control-label
+                Серия
+              .controls
+                = text_field "doc", 'series', :value => @report.documents['series'], :data => {:attribute => :documents, :change => :series}
+            .control-group
+              .control-label Выдан
+              .controls
+                .input-append.pull-left{:style => 'display: block'}
+                  = text_field 'pts', 'created_at', :class => 'pick_date', :style => 'float:left; width: 59%', :value => @report.documents['issued'], :data => {:attribute => :documents, :change => :issued}
+                  %span.add-on{:style => 'margin-left: -2px'}
+                    %i.icon-calendar
+            .control-group
+              .control-label Кем
+              .controls
+                = text_field "doc", 'series', :class => 'span4', :value => @report.documents['whom'], :data => {:attribute => :documents, :change => :whom}
+            .control-group
+              .control-label Страна
+              .controls
+                = text_field "doc", 'series', :class => 'span4', :value => @report.documents['country'], :data => {:attribute => :documents, :change => :country}
+            .control-group
+              .controls
+                .btn-group.pads.radio
+                  %button.checkbox.btn{:data => {:attribute => :documents,  :change => :document_validity, :document_validity => 1, :section => 'documents'}, :class => ('btn-primary' if @report.documents['document_validity'] == 1)} Оригинал
+                  %button.checkbox.btn{:data => {:attribute => :documents,  :change => :document_validity, :document_validity => 0, :section => 'documents'}, :class => ('btn-primary' if @report.documents['document_validity'] == 0)} Дубликат
+  
+            %legend Владельцы
+            .row-fluid
+              .span4.offset4 Постановка на учет
+              .span3 Снятие с учета
       
-    - (1..6).to_a.each do |i|
-      .row-fluid
-        .span1
-          ="#{i}."
-        .span3
-          .btn-group.pads.radio{style: 'padding-left: 0px'}
-            %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis', :section => 'documents'}} физ
-            %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur', :section => 'documents'}} юр
-        .span3
-          .input-append.pull-left{:style => 'display: block'}
-            = text_field 'pts', "start_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :documents, :change => "start_owning_#{i}"}, :value => @report.documents["start_owning_#{i}"]
-            %span.add-on{:style => 'margin-left: -2px'}
-              %i.icon-calendar
-        .span3.offset1
-          .input-append.pull-left{:style => 'display: block'}
-            = text_field 'pts', "end_owning_#{i}", :class => 'span4 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
-            %span.add-on{:style => 'margin-left: -2px'}
-              %i.icon-calendar
+            - (1..6).to_a.each do |i|
+              .control-group
+                .form-inline
+                  
+                  %label.pull-left{style: 'padding-top: 5px'}
+                    ="#{i}."
+                
+                  .btn-group.pads.radio.pull-left.span2
+                    %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'fis', :section => 'documents'}, :style => 'padding-left: 12px'} физ
+                    %button.checkbox.btn{:data => {:attribute => :documents, :place => :documents, :change => "owner_#{i}_jur", "owner_#{i}_jur" => 'jur', :section => 'documents'}, :style => 'padding-left: 12px'} юр
+                
+                  .pull-left.input-append.span2
+                    = text_field 'pts', "start_owning_#{i}", :class => 'span1 pick_date', :data => {:attribute => :documents, :change => "start_owning_#{i}"}, :value => @report.documents["start_owning_#{i}"]
+                    %span.add-on{:style => 'margin-left: -2px'}
+                      %i.icon-calendar
+                
+                  .pull-left.input-append.span2
+                    = text_field 'pts', "end_owning_#{i}", :class => 'span1 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
+                    %span.add-on{:style => 'margin-left: -2px'}
+                      %i.icon-calendar

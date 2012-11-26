@@ -41,7 +41,7 @@
                 - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'suspension', :place => param}  
                 - if check = @points.select{|i| i.place == param}.first
                   - parameters[:id] = check.id
-                .row.object.form-inline{:data => parameters, :style => 'display: table'}
+                .row-fluid.object.form-inline{:data => parameters, :style => 'display: table'}
                   .span2                    
                     = t("testdrive.suspension.#{param}").to_s+ ':'
                   .span5

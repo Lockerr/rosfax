@@ -1,109 +1,116 @@
-#info.tab-pane.active.left
-  .tabbable.tabs-left{:style => "margin-bottom: 18px;"}
-    %ul.nav.nav-tabs.second
-      %li.active
-        %a{"data-toggle" => "tab", :href => "#general"}
-          Общая
-          %span{:style => 'color: #ddd'}= 1/1
-      %li
-        %a{"data-toggle" => "tab", :href => "#documents"}
-          ПТС
-          %span{:style => 'color: #ddd'}= 1/24
-      %li
-        %a{"data-toggle" => "tab", :href => "#service_history"}
-          Сервисная история
-          %span{:style => 'color: #ddd'}= 1/24
-    .tab-content.second{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden"}
-      #general.tab-pane.active
-        .row{:style => 'margin-bottom: 15px;'}
-          .span6.offset2
-            %li.btn-group.radio
-              .btn.checkbox.btn{:data => {:section => 'info', :attribute => :publish, :publish => 'false'}, :class => ('btn-primary' unless @report.publish)} Не показывать всем
-              .btn.checkbox.btn{:data => {:section => 'info',:attribute => :publish, :publish => 'true'}, :class => ('btn-primary' if @report.publish)} Публичный
-        .row-fluid
-          .span6.well
+#info.tab-pane.active
+  .row
+    .span3
+      .pull-right.tabbable.tabs-left.affix#testdive_nav{:style => "margin-bottom: 18px;"}
+        %ul.nav.nav-tabs
+          %li.active
+            %a{:href => "#tab_general"}
+              Общая
+              %span{:style => 'color: #ddd'}= 1/1
+          %li
+            %a{:href => "#tab_documents"}
+              ПТС
+              %span{:style => 'color: #ddd'}= 1/24
+          %li
+            %a{:href => "#tab_service_history"}
+              Сервисная история
+              %span{:style => 'color: #ddd'}= 1/24
+    .span7
+      #tab_general.tab-pane.active
+        .accordion{style: 'background-color: white'}
+          .accordion-group
+            .accordion-heading
+              .row-fluid
+                .span10
+                  .accordion-toggle{id: "tab_general", data: {toggle: :collapse, target: "#general"}}
+                    %h4 Общая
+            #general.accordion-body.collapse.in
+              .accordion-inner
 
-            %table.table#car
-              %thead
-                %th Поле
-                %th Значение
-              %tbody
-                %tr
-                  %td
-                    Марка/модель
-                  %td#mark
-                    = text_field 'report[car]', 'mark_model', :value => (@report.car['mark_model']), :data => {:provide => 'typeahead', :source => @models, :attribute => :car, :place => :attr, :change => :mark_model}, :autocomplete => 'off'
-                %tr
-                  %td Год выпуска
-                  %td#year
-                    .btn-toolbar
+                .row{:style => 'margin-bottom: 15px;'}
+                  .span6.offset2
+                    %li.btn-group.radio
+                      .btn.checkbox.btn{:data => {:section => 'info', :attribute => :publish, :publish => 'false'}, :class => ('btn-primary' unless @report.publish)} Не показывать всем
+                      .btn.checkbox.btn{:data => {:section => 'info',:attribute => :publish, :publish => 'true'}, :class => ('btn-primary' if @report.publish)} Публичный
+                .form-horizontal
+                  .control-group
+                    .control-label
+                      Марка/модель
+                    .controls
+                      = text_field 'report[car]', 'mark_model', :value => (@report.car['mark_model']), :data => {:provide => 'typeahead', :source => @models, :attribute => :car, :place => :attr, :change => :mark_model}, :autocomplete => 'off'
+                  .control-group
+                    .control-label
+                      Год выпуска
+                    .controls
                       .btn-group
-                        %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 58px'}
+                        %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 68px'}
                           = (@report.car['car']['year'] if @report.car['car']) || '---'
                           %span.caret
                         %ul.dropdown-menu.pull-left
                           - (1980..2012).to_a.reverse.each do |i|
                             %li
                               .dropdown-element{:data => {:attribute => 'car', :place => 'car', :change => 'year', :year => i}}=i
-                %tr
-                  %td Гоc. номер
-                  %td#year
-                    = text_field 'report[car]', 'gov_number', :value => @report.car['gov_number'],  :placeholder => 'A 999 AA 999', :data => {:attribute => :car,:change => :gov_number}
-                %tr
-                  %td
-                    VIN
-                  %td#vin
-                    = text_field 'report[car]', 'vin', :value => @report.car['vin'], :placeholder => '*** ****** ****9999',  :data => {:attribute => :car, :change => 'vin'}
-                %tr
-                  %td Покупатель
-                %tr
-                  %td ФИО
-                  %td#seller_fio
-                    = text_field 'report[car]', 'buyer_name', :value => (@report.car['buyer']['name'] if @report.car['buyer']),  :data => {:attribute => :car, :place => :buyer, :change => 'name'}
-                %tr
-                  %td Телефон
-                  %td#seller_phone
-                    = text_field 'report[car]', 'buyer_phone', :value => (@report.car['buyer']['phone'] if @report.car['buyer']),  :data => {:attribute => :car, :place => :buyer, :change => 'phone'}
-                %tr
-                  %td Продавец
-                %tr
-                  %td ФИО
-                  %td#seller_fio
-                    = text_field 'report[car]', 'seller_name', :value => (@report.car['seller']['name'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'name'}
-                %tr
-                  %td Телефон
-                  %td#seller_phone
-                    = text_field 'report[car]', 'seller_phone', :value => (@report.car['seller']['phone'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
-          .span6.well
-            %table.table#car
-              %thead
-                %th Поле
-                %th Значение
-              %tbody
-                %tr
-                  %td
-                    Положение двигателя
-                  %td#engine_placement
-                    = text_field 'report[car]', 'engine_placement', :value => (@report.car['engine_placement']), :data => {:attribute => :car, :change => :engine_placement}
-                %tr
-                  %td
-                    Пробег
-                  %td#mileage
-                    = text_field 'report[car]', 'mileage', :value => (@report.car['mileage']), :data => {:attribute => :car, :change => :mileage}
-                %tr
-                  %td Тип двигателя
-                  %td#year
-                    = text_field 'report[car]', 'engine_type', :value => (@report.car['engine_type']), :data => {:attribute => :car,  :change => :engine_type}
-                %tr
-                  %td
-                    Число цилиндров
-                  %td#cilinder_amount
-                    = text_field 'report[car]', 'cylinder_amount', :value => @report.car['cylinder_amount'],  :data => {:attribute => :car, :change => 'cylinder_amount'}
-                
-      #documents.tab-pane
-        = render :partial => "reports/tabs/documents", :locals => {:report => @report}  
-      #service_history.tab-pane
-        = render :partial => "reports/tabs/service_history", :locals => {:report => @report, :object => 'info', :section => 'service_history'}  
+                  .control-group
+                    .control-label
+                      Гос. номер
+                    .controls
+                      = text_field 'report[car]', 'gov_number', :value => @report.car['gov_number'],  :placeholder => 'A 999 AA 999', :data => {:attribute => :car,:change => :gov_number}
+                  .control-group
+                    .control-label
+                      VIN
+                    .controls
+                      = text_field 'report[car]', 'vin', :value => @report.car['vin'], :placeholder => '*** ****** ****9999',  :data => {:attribute => :car, :change => 'vin'}
+                  %legend
+                    Покупатель
+                  .control-group
+                    .control-label
+                      ФИО
+                    .controls
+                      = text_field 'report[car]', 'buyer_name', :value => (@report.car['buyer']['name'] if @report.car['buyer']),  :data => {:attribute => :car, :place => :buyer, :change => 'name'}
+                  .control-group
+                    .control-label
+                      Телефон
+                    .controls
+                      = text_field 'report[car]', 'buyer_phone', :value => (@report.car['buyer']['phone'] if @report.car['buyer']),  :data => {:attribute => :car, :place => :buyer, :change => 'phone'}
+                  %legend
+                    Продавец
+                  .control-group
+                    .control-label
+                      ФИО
+                    .controls
+                      = text_field 'report[car]', 'seller_name', :value => (@report.car['seller']['name'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'name'}
+                  .control-group
+                    .control-label
+                      Телефон
+                    .controls
+                      = text_field 'report[car]', 'buyer_phone', :value => (@report.car['seller']['phone'] if @report.car['seller']),  :data => {:attribute => :car, :place => :seller, :change => 'phone'}
+                  %legend
+                    Основные характеристики
+                  .control-group
+                    .control-label
+                      Положение двигателя
+                    .controls
+                      = text_field 'report[car]', 'engine_placement', :value => (@report.car['engine_placement']), :data => {:attribute => :car, :change => :engine_placement}
+                  .control-group
+                    .control-label
+                      Пробег
+                    .controls
+                      = text_field 'report[car]', 'mileage', :value => (@report.car['mileage']), :data => {:attribute => :car, :change => :mileage}
+                  .control-group
+                    .control-label
+                      Тип Двигателя
+                    .controls
+                      = text_field 'report[car]', 'engine_type', :value => (@report.car['engine_type']), :data => {:attribute => :car,  :change => :engine_type}
+                  .control-group
+                    .control-label
+                      Число цилиндров
+                    .controls
+                      = text_field 'report[car]', 'cylinder_amount', :value => @report.car['cylinder_amount'],  :data => {:attribute => :car, :change => 'cylinder_amount'}                  
+
+    
+
+      = render :partial => "reports/tabs/documents", :locals => {:report => @report}  
+      = render :partial => "reports/tabs/service_history", :locals => {:report => @report, :object => 'info', :section => 'service_history'}  
 
 
 

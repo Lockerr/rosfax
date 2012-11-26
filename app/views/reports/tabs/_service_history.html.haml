@@ -1,20 +1,25 @@
-.row{:style => 'margin-left: 0px; margin-bottom: 10px'}
-  .span12
-    .btn.btn-large.all_ok{:style => 'margin-left: 46%'} Все ок
-.row{:style => 'margin-left: 0px; margin-bottom: 10px'}
-  .span12
-    .well
-      %legend= t("#{object}.#{section}.title")
-      .form-horizontal
-        - Report::const_get(section.each_char.map(&:capitalize).join).each do |param|
-          - parameters = {:report_id => @report.id, :object => object, :section => section, :place => param}
-          - if check = @points.select{|i| i.place == param}.first
-            - parameters[:id] = check.id
-          .control-group.object{:data => parameters}
-            %label.control-label= t("#{object}.#{section}.#{param}").to_s+ ':'
-            .controls
-              .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                .btn-group.pads.radio
-                  - %w(Да Нет).each do |i|
-                    - parameters[:condition] = i
-                    %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+#tab_service_history.tab-pane
+  .accordion{style: 'background-color: white'}
+    .accordion-group
+      .accordion-heading
+        .row-fluid
+          .span10
+            .accordion-toggle{id: "tab_service_hostory", data: {toggle: :collapse, target: "#service_history"}}
+              %h4 Сервисная история
+      #service_history.accordion-body.collapse.in
+        .accordion-inner
+  
+          
+          .form-horizontal
+            - Report::const_get(section.each_char.map(&:capitalize).join).each do |param|
+              - parameters = {:report_id => @report.id, :object => object, :section => section, :place => param}
+              - if check = @points.select{|i| i.place == param}.first
+                - parameters[:id] = check.id
+              .control-group.object{:data => parameters}
+                %label.control-label= t("#{object}.#{section}.#{param}").to_s+ ':'
+                .controls
+                  .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                    .btn-group.pads.radio
+                      - %w(Да Нет).each do |i|
+                        - parameters[:condition] = i
+                        %button.check.btn{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i

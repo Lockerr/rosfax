@@ -124,7 +124,10 @@ class ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
-    
+    if params[:report][:links]
+      params[:report][:links] = @report.links + [params[:report][:links]]
+    end
+
     respond_to do |format|
       if can_manage?
         if @report.update_attributes(params[:report].except!(:id))

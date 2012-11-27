@@ -1,5 +1,7 @@
 Tradein::Application.routes.draw do
   
+  resources :links
+
   match ':id.pdf' => 'reports#show',:constraints => { :id => /\d.+/ }, :format => 'pdf'
   match ':id' => 'reports#show',:constraints => { :id => /\d.+/ }
   resources :feedbacks
@@ -36,6 +38,7 @@ Tradein::Application.routes.draw do
  
 
   resources :reports do
+    resources :links
     resources :points
     get 'images'
     get 'all_images'

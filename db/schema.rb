@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122112611) do
+ActiveRecord::Schema.define(:version => 20121127052557) do
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -84,6 +84,11 @@ ActiveRecord::Schema.define(:version => 20121122112611) do
     t.string   "author"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "links", :force => true do |t|
+    t.text    "url"
+    t.integer "report_id"
   end
 
   create_table "models", :force => true do |t|

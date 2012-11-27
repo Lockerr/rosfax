@@ -1,0 +1,24 @@
+.tab_pane{:id => "tab_#{tab}"}
+  .accordion{style: 'background-color: white'}
+    .accordion-group
+      .accordion-heading
+        .row-fluid
+          .span10
+            .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab}"}}
+              %h4 Ссылки
+      .accordion-body.collapse.in{id: tab}
+        .accordion-inner
+          .form-horizontal
+            = render report.links
+            
+            = render 'links/form'
+            / = form_for [report, Link.new], :html => {:class => 'new_link form-horizontal'}, :remote => true do |f|
+            /   .control-group
+            /     .control-label
+            /       ссылка:
+            /     .controls
+            /       = f.text_field :url
+            /       = f.submit
+
+                  
+

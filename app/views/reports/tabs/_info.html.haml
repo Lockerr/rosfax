@@ -15,10 +15,16 @@
             %a{:href => "#tab_service_history"}
               Сервисная история
               %span{:style => 'color: #ddd'}= 1/24
+          %li
+            %a{:href => "#tab_links"}
+              Ссылки
+              %span{:style => 'color: #ddd'}
+
     .span7
       = render :partial => 'reports/tabs/info/general', :locals => {:report => @report}  
       = render :partial => "reports/tabs/info/documents", :locals => {:report => @report}  
-      = render :partial => "reports/tabs/info/service_history", :locals => {:report => @report, :object => 'info', :section => 'service_history'}  
+      = render :partial => "reports/tabs/info/service_history", :locals => {:report => @report, :object => 'info', :section => 'service_history', :tab => :service_history}
+      = render :partial => 'reports/tabs/info/links', :locals => {:report => @report, :tab => :links}  
 
 
 

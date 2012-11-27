@@ -2,6 +2,7 @@
 class Report < ActiveRecord::Base
   has_many :points, :dependent => :destroy
   has_many :assets, :as => :attachable, :dependent => :destroy
+  has_many :links, :dependent => :destroy
   # has_many :defects
 
   has_many :elements, :class_name => 'Point', :conditions => ['object = ?', :element]
@@ -23,6 +24,7 @@ class Report < ActiveRecord::Base
   serialize :photo_others, Hash
   serialize :car, Hash
   serialize :documents, Hash
+  
 
   scope :public, where(:publish => true)
 
@@ -98,7 +100,7 @@ class Report < ActiveRecord::Base
 
   TESTDRIVE = %w(suspension engine)
     SUSPENSION = [
-      %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking),
+      %w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking circular_motion_gur circular_motion_shru),
       %w(ок слабо сильно)
     ]
     ENGINE = [

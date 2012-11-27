@@ -1,0 +1,6 @@
+.control-group.link{id: "link_#{link.id}"}
+  .control-label
+    ссылка:
+  .controls
+    = link_to link.url, link.url
+    = link_to 'x', link, method: :delete, data: { confirm: 'Вы уверены?' }, :class => 'btn btn-small btn-danger', :remote => true

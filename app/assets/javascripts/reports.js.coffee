@@ -243,7 +243,5 @@ $ ->
           url: "/points/#{$(pad).data().id}.json"          
         $(pad).find('.btn-primary').removeClass('btn-primary')
         delete $(pad).data()['id']
-        
-
-
+  
 

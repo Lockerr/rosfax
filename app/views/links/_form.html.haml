@@ -1,0 +1,7 @@
+= form_for [@report, Link.new], :html => {:class => 'new_link form-horizontal'}, :remote => true do |f|
+  .control-group
+    .control-label
+      ссылка:
+    .controls
+      = f.text_field :url
+      = f.submit 'добавить ссылку'

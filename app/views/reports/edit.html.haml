@@ -18,7 +18,7 @@
             %span{:style => 'color: #ddd'}
               = @report.points.where(:object => :checklist).count
               \/
-              = Report::COATING.count + Report::LIGHTS.count + Report::ELECTRONIC.count + Report::LIQUIDS.count + Report::COMPLETION.count
+              = 100500
         %li
           %a{"data-toggle" => "tab", :href => "#testdrive"}
             Тест-драйв

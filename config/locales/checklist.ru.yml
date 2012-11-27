@@ -1,0 +1,91 @@
+ru:
+  checklist:
+    title: Чеклист
+    devices:
+      title: Приборы
+      lamp_srs: Лампа SRS
+      check_engine: CheckEngine
+      speedometer: Спидометр
+      tachometer: Тахометр
+      indication_of_the_lever_automatic_transmission: Индикация рычага АКПП
+      backlight: Подсветка
+    coating:
+      title: Краска
+      front_left_wing: Переднее левое крыло
+      front_right_door: Передняя правая дверь
+      front_right_wing: Переднее правое крыло
+      rear_right_door: Заднее правое крыло
+      roof: Крыша
+      rear_left_door: Задняя левая дверь
+      front_left_door: Передняя левая дверь
+      rear_left_wing: Заднее левое крыло
+      rear: Зад
+      rear_right_wing: Заднее правое крыло
+      front: Перед
+    stickers:
+      title: Стикеры
+      tire_pressure_in_the_doorway: Давления шин в дрвеном проеме
+      information_in_the_doorway: Информационная в дверном проеме
+      under_the_hood: Под капотом
+      on_tank_hatches: На лючке бинзобака
+
+    documents:
+      title: Документы
+      series: ПТС, Серия
+      whom: ПТС, Кем выдана
+
+    lights:
+      title: Лампы
+      headlights: Ближний свет
+      distant_lights: Дальний свет
+      fog_lights: Противотуманки
+      turn_signal: Указатель поворота
+      brake_lights: Сигнал тормоза
+      repeater: Повторитель
+      marker_lights: Габариты
+      brake_lightsfog_lights: Тормозные огни
+      rear_marker_lights: Задние габаритные огни
+      rear_turn_signal: Задние указатели поворота
+      headlights_corrector: Корректор света фар
+      rear_fog_lights: Противотуманки
+      reverse: Задний ход
+
+    completion:
+      title: Комплектность
+      spare_wheel: Запасное колесо
+      tools: Инструменты
+      jack: Домкрат
+      sealant: герметик
+      compressor: Компрессор
+      key_lock_gear: Ключ замка КПП
+      theft_of_the_wheels: Секретка от колес
+      keychain_alarm: Брелок сигнализации
+      keychain_webasto: Брелок WEBASTO
+      key_to_the_locker: Ключ от блокиратора
+    liquids:
+      title: Жидкости
+      engine: Двигатель
+      transmission: Трансмиссия
+      antifreeze: Антифриз
+      power_steering: ГУР
+      brake: Тормозная
+    testdrive:
+      title: Тест-драйв
+
+
+    electronic:
+      title: Электроника
+      glass_elevators: Стеклоподъемники
+      central_locking: Центральный замок
+      seat_drive: Регулировка сидений
+      seat_heat: Подогрев сидений
+      mirrors: Зеркала
+      hatch: Багажник
+      climat: Климат контроль
+      radio: Радио/NAVI
+      adjustable_wheel: Регулировка руля
+      closer_rain_sensor: Дворники/Датчик дождя
+      seat_belt: Ремень безопасности
+      parktronic: Парктроник/Камера
+      sound_signal: Звуковой сигнал
+      battery_status: Состояние АКБ

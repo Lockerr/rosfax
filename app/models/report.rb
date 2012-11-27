@@ -56,42 +56,67 @@ class Report < ActiveRecord::Base
   }
 
   
-  
-  CHECKLIST = %w(coating lights electronic liquids completion stickers devices)
-    COATING = [
-      ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door", "rear_right_door", "rear_right_wing", "front", "rear", "roof"], 
-      %w(100 200 300 500 1000)
-    ]
+  #%w(coating lights electronic liquids completion stickers devices)
+  CHECKLIST = {
+    coating: {
+        names: [
+          ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door"],
+          ["rear_right_door", "rear_right_wing", "front", "rear", "roof"]
+          ],
+      values: [%w(100 200 300 500 1000)]*2,
+      legends: ['Краска 1', 'Краска 2']
+    },
     
-    LIGHTS =  [
-      %w( headlights distant_lights fog_lights marker_lights turn_signal headlights_corrector) + %w(brake_lights  rear_marker_lights rear_turn_signal rear_fog_lights reverse),
-      %w(ок левая правая обе)
-    ]
+    lights: {
+      names: [
+        %w( headlights distant_lights fog_lights marker_lights turn_signal headlights_corrector),
+        %w(brake_lights  rear_marker_lights rear_turn_signal rear_fog_lights reverse)
+      ],
+      values: [%w(ок левая правая обе)]*2,
+      legends: ['Лампы передние','Лампы задние']
+    },
     
-    ELECTRONIC =  [
-      %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch) +  %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt sound_signal battery_status),
-      %w( ОК УД НЕУД)
-    ]
+    
+    electronic: {
+      names: [
+        %w( glass_elevators central_locking seat_drive seat_heat mirrors hatch),
+        %w( climat radio adjustable_wheel closer_rain_sensor parktronic seat_belt sound_signal battery_status),
+      ],
+      values: [%w( ОК УД НЕУД)]*2,
+      legends: ['Электроника 1', 'Электроника 2']
+    
+    },
+    
+    liquids: {
+      names: [
+        %w(engine transmission antifreeze power_steering brake),
+        %w(engine transmission antifreeze power_steering brake)
+      ],
+      legends: ['Жидкости - уровень', 'Жидкости - состояние'],
+      values: [%w(OK -min min max max+), %w(ОК УД НЕУД)]
+    },
 
-    LIQUIDS = [
-      %w(engine transmission antifreeze power_steering brake),
-      %w(OK -min min max max+)
-    ]
+    completion: {
+      names: [
+      %w(spare_wheel jack tools sealant compressor key_lock_gear theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker)
+      ],
+      values: [%w(есть нет н/п)]
+    },
 
-    COMPLETION = [
-      %w(spare_wheel jack tools sealant compressor key_lock_gear theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker),
-      %w(есть нет н/п)
-    ]
+    stickers: {
+      names: [
+      %w(tire_pressure_in_the_doorway information_in_the_doorway under_the_hood on_tank_hatches)
+      ],
+      values: [%w(Да Нет)]
+    },
 
-    STICKERS = [
-      %w(tire_pressure_in_the_doorway information_in_the_doorway under_the_hood on_tank_hatches),
-      %w(Да Нет)
-    ]
-
-    DEVICES = [
-      %w(lamp_srs check_engine speedometer tachometer indication_of_the_lever_automatic_transmission backlight),
-      %w( ОК УД НЕУД)
-    ]
+    devices: {
+      names: [
+        %w(lamp_srs check_engine speedometer tachometer indication_of_the_lever_automatic_transmission backlight)
+      ],
+      values: [%w( ОК УД НЕУД)]
+    }
+  }
   
   ELEMENTS = %w(exterior interior windows_and_lights)
     WINDOWS_AND_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)

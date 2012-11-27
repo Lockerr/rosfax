@@ -3,42 +3,39 @@
     .span2
       .tabbable.tabs-left.affix#checklist_nav
         %ul.nav.nav-tabs
-          - for tab in Report::CHECKLIST
+          - for tab in Report::CHECKLIST.keys
             %li
               %a{:href => "#tab_#{tab}"}
-                = t("checklist.#{tab}.name")
+                = t("checklist.#{tab}.title")
                 %span{:style => 'color: #ddd'}
                   = @report.points.where(:object => :checklist, :section => tab).count
                   \/
-                  = Report.const_get(tab.split(//).map(&:capitalize).join).count
+                  = Report::CHECKLIST[tab][:names].flatten.count
 
     
     .span10{:data => {:spy => :scroll, :target => '#checklist_nav'}}
 
-      - for tab in Report::CHECKLIST
-        - count = (Report.const_get(tab.upcase)[0].size/7.0).round
-        - count.times do |i|
-         
-
-          .accordion{style: 'background-color: white'}
-            .accordion-group
-              .accordion-heading
-                .row-fluid
-                  .span10
-                    .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab}-#{i}"}}
-                      - if count > 1 and i > 0
-                        %h4= t("checklist.#{tab}.title") + " (дополнение #{i})"
-                      - else
-                        %h4= t("checklist.#{tab}.title")
-                  .span2
-                    .accordion-toggle
-                      .btn.btn-large.new_all_ok.pull-right Все ок
-                
-              .accordion-body.collapse.in{id: "#{tab}-#{i}"}
-                .accordion-inner
+      - for tab in Report::CHECKLIST.keys
+        .accordion{style: 'background-color: white'}
+          .accordion-group
+            .accordion-heading
+              .row-fluid
+                .span10
+                  .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab.to_s}"}}
+                    %h4= t("checklist.#{tab}.title")                    
+                .span2
+                  .accordion-toggle
+                    .btn.btn-large.new_all_ok.pull-right Все ок
               
-                  - Report.const_get(tab.upcase)[0].each_slice(7).to_a[i].each do |param|
-                    
+            .accordion-body.collapse.in{id: tab}
+              .accordion-inner
+                - index = 0
+                - for block in Report::CHECKLIST[tab][:names]
+                   
+                  - if Report::CHECKLIST[tab][:legends]
+                    %legend= Report::CHECKLIST[tab][:legends][index]
+                  - for param in block
+                  
                     - parameters = {:report_id => @report.id, :object => 'checklist', :section => 'tab', :place => param}  
                     - if check = @points.select{|i| i.place == param}.first
                       - parameters[:id] = check.id
@@ -48,7 +45,7 @@
                       .span5
                         .divv{:style => 'margin-top: 0px; text-align: center'}
                           .btn-group.pads.radio
-                            -Report.const_get(tab.upcase)[1].each do |i|
+                            - Report::CHECKLIST[tab][:values][index].each do |i|
                               - parameters[:condition] = i
                               - klass = ''
                               - klass += 'btn-primary' if check.condition == i if check
@@ -65,4 +62,5 @@
                           .file-input
                             %input{type: :file}
                     %hr{style: 'margin: 5px 0'}/
+                  - index += 1
 

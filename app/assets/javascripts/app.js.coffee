@@ -48,6 +48,7 @@ update_eye_fi = ->
 
       $('.photos').trigger 'change'
 
+
 @store_point = (element) ->
   data = element.data()
 

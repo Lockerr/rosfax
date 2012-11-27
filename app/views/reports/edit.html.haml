@@ -28,7 +28,7 @@
               = Report::ENGINE.count + Report::SUSPENSION.count
         %li
           %a{"data-toggle" => "tab", :href => "#elements"}
-            Элементы
+            Дефекты
             %span{:style => 'color: #ddd'}
               = @report.points.where(:object => :elements).count
               \/

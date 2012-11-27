@@ -5,7 +5,7 @@
         %ul.nav.nav-tabs
           %li.active
             %a{:href => "#suspension"}
-              Подвеска
+              =t('testdrive.suspension.title')
               %span{:style => 'color: #ddd'}
                 = @report.points.where(:object => :testdrive, :section => :suspension).count
                 \/
@@ -19,8 +19,8 @@
                 = Report::ENGINE.count
                   
 
-          %li
-            %a{:href => "#other_tests"} Прочее
+          / %li
+          /   %a{:href => "#other_tests"} Прочее
     .span10{:data => {:spy => :scroll, :target => '#testdive_nav'}}
       .accordion
         .accordion-group
@@ -87,10 +87,10 @@
                 %hr{:style => 'margin: 5px 0'}/
 
 
-        #other_tests
+        / #other_tests
         
-          %label
-            Примечание
-            / = form_for @report do |f|
-            /   = f.text_a
-          = text_area "doc", 'series', :class => 'span9', :value => (@report.testdrive_description), :data => {:attribute => :testdrive_description}
+        /   %label
+        /     Примечание
+        /     / = form_for @report do |f|
+        /     /   = f.text_a
+        /   = text_area "doc", 'series', :class => 'span9', :value => (@report.testdrive_description), :data => {:attribute => :testdrive_description}

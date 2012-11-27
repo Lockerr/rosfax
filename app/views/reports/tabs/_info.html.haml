@@ -64,9 +64,16 @@
                     Основные характеристики
                   .control-group
                     .control-label
-                      Положение двигателя
+                      Привод
                     .controls
-                      = text_field 'report[car]', 'engine_placement', :value => (@report.car['engine_placement']), :data => {:attribute => :car, :change => :engine_placement}
+                      .btn-group
+                        %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+                          = @report.car['drive'] || '---'
+                          %span.caret
+                        %ul.dropdown-menu.pull-left
+                          - ['передний', 'задний', 'полный'].each do |i|
+                            %li
+                              .dropdown-element{:data => {:attribute => :car, :change => :drive, :drive => i}}=i
                   .control-group
                     .control-label
                       Пробег
@@ -74,14 +81,26 @@
                       = text_field 'report[car]', 'mileage', :value => (@report.car['mileage']), :data => {:attribute => :car, :change => :mileage}
                   .control-group
                     .control-label
-                      Тип Двигателя
+                      Топливо
                     .controls
-                      = text_field 'report[car]', 'engine_type', :value => (@report.car['engine_type']), :data => {:attribute => :car,  :change => :engine_type}
+                      .btn-group
+                        %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+                          = @report.car['engine_type'] || '---'
+                          %span.caret
+                        %ul.dropdown-menu.pull-left
+                          - ['бензин', 'дизель', 'гибрид'].each do |i|
+                            %li
+                              .dropdown-element{:data => {:attribute => :car, :change => :engine_type, :engine_type => i}}=i
                   .control-group
                     .control-label
-                      Число цилиндров
+                      Объем двигателя
                     .controls
                       = text_field 'report[car]', 'cylinder_amount', :value => @report.car['cylinder_amount'],  :data => {:attribute => :car, :change => 'cylinder_amount'}                  
+                  .control-group
+                    .control-label
+                      Мощность л.с.
+                    .controls
+                      = text_field 'report[car]', 'hors_power', :value => @report.car['hors_power'],  :data => {:attribute => :car, :change => 'hors_power'}                  
                   %legend
                     Покупатель
                   .control-group

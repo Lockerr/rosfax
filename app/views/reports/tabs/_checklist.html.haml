@@ -53,7 +53,11 @@
                               %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
                       .span3
                         %input.span10{:data => parameters, :type => :text, :value => (check.description if check), :disabled => :disabled}
-                      .span1
-                        photo_box
+                      .span1.camera
+                        .btn.btn-large
+                          %i.icon-camera
+
+                          .file-input
+                            %input{type: :file}
                     %hr{style: 'margin: 5px 0'}/
 

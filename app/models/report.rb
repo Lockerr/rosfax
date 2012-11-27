@@ -102,7 +102,7 @@ class Report < ActiveRecord::Base
       %w(ок слабо сильно)
     ]
     ENGINE = [
-      %w(all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise shifting_down shifting_up parking_brake), 
+      %w(engine_start all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise shifting_down shifting_up parking_brake), 
       %w(ОК УД НЕУД)
     ]
 

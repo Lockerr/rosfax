@@ -73,7 +73,7 @@ ru:
       keychain_webasto: Брелок WEBASTO
       key_to_the_locker: Ключ от блокиратора
     liquids:
-      title: Жидкости
+      title: Жидкости - уровень
       engine: Двигатель
       transmission: Трансмиссия
       antifreeze: Антифриз
@@ -166,16 +166,17 @@ ru:
     title: Тест-драйв
     suspension:
 
-      title: Подвеска
+      title: Пневмоподвеска
       divestment_steering: Увод руля
       steering_wheel_is_straight: Руль стоит прямо
       luft_knock_on_the_handlebars: Люфт/стуки в руле
-      air_suspension: Пневмоподвеска
+      air_suspension: Регулировка пневмоподвески
       heartbeat_vibration_on_acseletation: Биение/вибрации (разгон)
       creaks_knocks_on_the_irregularities: Скрипы/стуки на неровностях
       heartbeat_vibration_on_braking: Биение/вибрации (торможение)
     engine:
       title: ДВС и КПП
+      engine_start: Запуск
       all_wheel_drive: Полный привод
       routes: Обороты ХХ
       routes_during_heavy_gas: Обороты при резком газе

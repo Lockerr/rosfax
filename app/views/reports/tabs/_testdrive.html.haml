@@ -5,14 +5,14 @@
         %ul.nav.nav-tabs
           %li.active
             %a{:href => "#suspension"}
-              =t('testdrive.suspension.title')
+              = t('testdrive.suspension.name')
               %span{:style => 'color: #ddd'}
                 = @report.points.where(:object => :testdrive, :section => :suspension).count
                 \/
                 = Report::SUSPENSION.count
           %li
             %a{:href => "#engine"}
-              КПП и ДВС
+              = t('testdrive.engine.name')
               %span{:style => 'color: #ddd'}
                 = @report.points.where(:object => :testdrive, :section => :engine).count
                 \/

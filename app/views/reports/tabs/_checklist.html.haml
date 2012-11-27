@@ -6,7 +6,7 @@
           - for tab in Report::CHECKLIST
             %li
               %a{:href => "#tab_#{tab}"}
-                = t("checklist.#{tab}.title")
+                = t("checklist.#{tab}.name")
                 %span{:style => 'color: #ddd'}
                   = @report.points.where(:object => :checklist, :section => tab).count
                   \/

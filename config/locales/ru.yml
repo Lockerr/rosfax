@@ -12,6 +12,7 @@ ru:
   checklist:
     title: Чеклист
     devices:
+      name: Приборы
       title: Приборы
       lamp_srs: Лампа SRS
       check_engine: CheckEngine
@@ -20,6 +21,7 @@ ru:
       indication_of_the_lever_automatic_transmission: Индикация рычага АКПП
       backlight: Подсветка
     coating:
+      name: Краска
       title: Краска
       front_left_wing: Переднее левое крыло
       front_right_door: Передняя правая дверь
@@ -33,6 +35,7 @@ ru:
       rear_right_wing: Заднее правое крыло
       front: Перед
     stickers:
+      name: Стикеры
       title: Стикеры
       tire_pressure_in_the_doorway: Давления шин в дрвеном проеме
       information_in_the_doorway: Информационная в дверном проеме
@@ -45,6 +48,7 @@ ru:
       whom: ПТС, Кем выдана
 
     lights:
+      name: Лампы
       title: Лампы
       headlights: Ближний свет
       distant_lights: Дальний свет
@@ -61,6 +65,7 @@ ru:
       reverse: Задний ход
 
     completion:
+      name: Комплектность
       title: Комплектность
       spare_wheel: Запасное колесо
       tools: Инструменты
@@ -73,6 +78,7 @@ ru:
       keychain_webasto: Брелок WEBASTO
       key_to_the_locker: Ключ от блокиратора
     liquids:
+      name: Жидкости
       title: Жидкости - уровень
       engine: Двигатель
       transmission: Трансмиссия
@@ -84,6 +90,7 @@ ru:
 
 
     electronic:
+      name: Электроника
       title: Электроника
       glass_elevators: Стеклоподъемники
       central_locking: Центральный замок
@@ -165,7 +172,7 @@ ru:
   testdrive:
     title: Тест-драйв
     suspension:
-
+      name: Подвеска
       title: Пневмоподвеска
       divestment_steering: Увод руля
       steering_wheel_is_straight: Руль стоит прямо
@@ -177,6 +184,7 @@ ru:
       circular_motion_gur: Круговое движение. ГУР
       circular_motion_shru: Круговое движение. Работа ШРУСов
     engine:
+      name: ДВС и КПП
       title: ДВС и КПП
       engine_start: Запуск
       all_wheel_drive: Полный привод

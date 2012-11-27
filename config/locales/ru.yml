@@ -70,7 +70,48 @@ ru:
     rust: Ржавчина
     traces_of_repair: Следы ремонта
     missing_parts: Отсутствующие детали
+  
 
+  activerecord:
+    attributes:
+    models:
+  helpers:
+    label:
+      user:
+        email: Почта
+        password: Пароль
+        remember_me: Запомни меня
+        password_confirmation: ''
+  user:
+    signed_in: Вход в систему выполнен.
+  brakes: Тормоза
+  brake: Тормоз
+  brake_fluid: Тормозная жидкость
+  air_conditioning: Кондиционер
+  antifreeze: Антифриз
+  distant_lights: Дальний свет
+  mirrors: Зеркала
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: Уже используется
+  mark_model:
+    title: Модель
+  car:
+    title: Информация
+    mark_model:
+      title: Модель
+    gov:
+      title: Гос.номер
+  coating:
+    title: Краска
+    front_left_wing:
+      title: Крыло переднее левое
+    front_right_wing:
+      title: Крыло переднее правое
 
 
   defects:

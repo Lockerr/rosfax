@@ -63,7 +63,7 @@ class Report < ActiveRecord::Base
           ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door"],
           ["rear_right_door", "rear_right_wing", "front", "rear", "roof"]
           ],
-      values: [%w(100 200 300 500 1000)]*2,
+      values: [%w(150 300 500 1000)]*2,
       legends: ['Краска 1', 'Краска 2']
     },
     

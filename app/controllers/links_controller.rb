@@ -52,7 +52,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.save
-        format.js   { redirect_to new_report_link_path(@link.report)}
+        format.js
         format.html { redirect_to @link, notice: 'Link was successfully created.' }
         format.json { render json: @link, status: :created, location: @link }
       else
@@ -70,9 +70,11 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.update_attributes(params[:link])
+        format.js
         format.html { redirect_to @link, notice: 'Link was successfully updated.' }
         format.json { head :no_content }
       else
+        format.js
         format.html { render action: "edit" }
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end

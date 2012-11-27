@@ -8,4 +8,5 @@ else
   $('.new_link_<%= @link.site %>').find('.control-group').addClass('success')
   $('.new_link_<%= @link.site %>').find('.control-group').removeClass('error')
 
+
 $('.alert-feedback').fadeOut(10000);

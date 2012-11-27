@@ -61,8 +61,6 @@ class ReportsController < ApplicationController
     render :json => {:counters => @report.counters}
   end
 
-  # GET /reports/new
-  # GET /reports/new.json
   def new
     @report = Report.new
     @models = []

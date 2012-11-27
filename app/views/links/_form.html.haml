@@ -1,7 +1,8 @@
-= form_for [@report, Link.new], :html => {:class => 'new_link form-horizontal'}, :remote => true do |f|
+= form_for [@report, @report.links.where(:site => site).first || Link.new], :html => {:class => "new_link_#{site} form-horizontal"}, :remote => true do |f|
   .control-group
     .control-label
-      ссылка:
+      = f.hidden_field :site, :value => site
+      = site
     .controls
-      = f.text_field :url
-      = f.submit 'добавить ссылку'
+      = f.text_field :url, :value => @report.links.where(:site => site).any? ? @report.links.where(:site => site).first.url : ''
+      = f.submit 'добавить ссылку', :class => 'btn'

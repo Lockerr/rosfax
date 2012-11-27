@@ -58,7 +58,7 @@ class Report < ActiveRecord::Base
   CHECKLIST = %w(coating lights electronic liquids completion stickers devices)
     COATING = [
       ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door", "rear_right_door", "rear_right_wing", "front", "rear", "roof"], 
-      %w(100 200 300 400+)
+      %w(100 200 300 500 1000)
     ]
     
     LIGHTS =  [

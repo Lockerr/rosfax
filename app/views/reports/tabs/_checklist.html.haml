@@ -50,7 +50,12 @@
                           .btn-group.pads.radio
                             -Report.const_get(tab.upcase)[1].each do |i|
                               - parameters[:condition] = i
-                              %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+                              - klass = ''
+                              - klass += 'btn-primary' if check.condition == i if check
+                              - klass += tab == 'coating' ? ' btn-small' : ' btn-large'
+
+
+                              %button.check.btn{:class => klass, :data => parameters}= i
                       .span3
                         %input.span10{:data => parameters, :type => :text, :value => (check.description if check), :disabled => :disabled}
                       .span1.camera

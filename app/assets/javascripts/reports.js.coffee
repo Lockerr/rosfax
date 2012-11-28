@@ -1,6 +1,6 @@
 
 @appendUploader = (tab) ->
-  tabs = ['#wwindows_and_lights', '#exterior', '#interior', '#under_the_hood', '#video', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
+  tabs = ['#photo_exterior', '#photo_interior', '#photo_under_the_hood', '#photo_video', '#photo_other_photos' ]
 
   if tab in tabs
     $("#{tab}.row-fluid").append($('.uploader'))

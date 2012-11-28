@@ -93,14 +93,14 @@ class Report < ActiveRecord::Base
         %w(engine transmission antifreeze power_steering brake)
       ],
       legends: ['Жидкости - уровень', 'Жидкости - состояние'],
-      values: [%w(OK -min min max max+), %w(ОК УД НЕУД)]
+      values: [%w(ОК УД НЕУД), %w(ОК УД НЕУД)]
     },
 
     completion: {
       names: [
       %w(spare_wheel jack tools sealant compressor key_lock_gear theft_of_the_wheels keychain_alarm keychain_webasto key_to_the_locker)
       ],
-      values: [%w(есть нет н/п)]
+      values: [%w(ОК н/п НЕТ)]
     },
 
     stickers: {
@@ -119,7 +119,7 @@ class Report < ActiveRecord::Base
   
     suspension: {
       names: [%w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking circular_motion_gur circular_motion_shru)],
-      values: [%w(ок слабо сильно)]
+      values: [%w(ОК УД НЕУД)]
       },
 
     engine: {
@@ -148,13 +148,12 @@ class Report < ActiveRecord::Base
 
   def diff
     result = {}
-    objects = %w( checklist testdrive elements )
-   
-    for object in objects
+ 
+    for object in %w( checklist testdrive elements )
       
-      sections = Report.const_get(object.split(//).map(&:capitalize).join)
+      sections = Report.const_get(object.upcase)
       places = []
-      sections.map{|i| places.push Report.const_get(i.split(//).map(&:capitalize).join)}
+      sections.map{|i| places.push Report.const_get(i.upcase)}
       places.flatten
     
       if points.where(:object => object, :place => places.flatten).count('id') < places.flatten.count

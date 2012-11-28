@@ -1,5 +1,8 @@
 ru:
   checklist:
+    wheels:
+      title: Колеса
+      
     title: Чеклист
     devices:
       title: Приборы
@@ -91,7 +94,7 @@ ru:
       battery_status: Состояние АКБ
     suspension:
       name: Подвеска
-      title: Пневмоподвеска
+      title: Подвеска
       divestment_steering: Увод руля
       steering_wheel_is_straight: Руль стоит прямо
       luft_knock_on_the_handlebars: Люфт/стуки в руле

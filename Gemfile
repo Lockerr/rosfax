@@ -13,6 +13,7 @@ gem 'newrelic_rpm'
 gem "airbrake"
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
+gem 'turbolinks'
 
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
 gem 'delayed_job_active_record'

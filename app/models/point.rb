@@ -1,5 +1,5 @@
 class Point < ActiveRecord::Base
-  attr_accessible :condition, :object, :place, :report_id, :section, :state, :images, :asset_id
+  attr_accessible :condition, :object, :place, :report_id, :section, :state, :images, :asset_id, :description
 
   belongs_to :report
   has_many :assets, :as => :attachable

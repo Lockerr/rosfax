@@ -4,28 +4,28 @@
       .tabbable.tabs-left.affix#photo_nav{:style => "margin-bottom: 18px;"}
         %ul.nav.nav-tabs.second
           %li.active
-            %a{"data-toggle" => "tab", :href => "#exterior"}
+            %a{"data-toggle" => "tab", :href => "#photo_exterior"}
               Экстерьер
               %span{:style => 'color: #ddd'}=1
           %li
-            %a{"data-toggle" => "tab", :href => "#interior"}
+            %a{"data-toggle" => "tab", :href => "#photo_interior"}
               Интерьер
               %span{:style => 'color: #ddd'}=1
           %li
-            %a{"data-toggle" => "tab", :href => "#under_the_hood"}
+            %a{"data-toggle" => "tab", :href => "#photo_under_the_hood"}
               Под капотом
               %span{:style => 'color: #ddd'}=1
           %li
-            %a{"data-toggle" => "tab", :href => "#other_photos"}
+            %a{"data-toggle" => "tab", :href => "#photo_other_photos"}
               Прочее
               %span{:style => 'color: #ddd'}=1
           %li
-            %a{"data-toggle" => "tab", :href => "#video"}
+            %a{"data-toggle" => "tab", :href => "#photo_video"}
               Видео
     .span10
       .tab-content{:style => "padding-bottom: 9px; border-bottom: 1px solid #ddd;overflow: hidden;height: 750px"}
         - for section in %w(exterior interior under_the_hood other_photos video)
-          .tab-pane.row-fluid{:id => section, :class => ('active' if section == 'exterior')}
+          .tab-pane.row-fluid{:id => "photo_#{section}", :class => ('active' if section == 'exterior')}
             .span8.well
               %ul.thumbnails.span9
                 
@@ -35,7 +35,7 @@
                 = render :partial => 'new_drop', :locals => {:assets => assets, :count => count, :section => section, :object => @report}
 
               .span{:style => "height: 96px; overflow-x: scroll; width: 100%; overflow-y: hidden;border: 1px solid #08C; margin-left: 0"}
-                .imgbox{:id => section, :style => "height: 110px; width: #{@report.assets(:section => section).count*116}px", :data => {:attribute => section}}
+                .imgbox{:id => "imgbox_#{section}", :style => "height: 110px; width: #{@report.assets(:section => section).count*116}px", :data => {:attribute => section}}
                   - for image in @report.assets.where(:section => section)
                     .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px'}
                       .thumb{:data => image.attributes}

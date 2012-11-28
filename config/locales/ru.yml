@@ -209,6 +209,8 @@ ru:
         brake_fluid: Тормозная жидкость
         fluid_power_steering: Жидкость ГУР
   elements:
+    wheels:
+      title: Колеса
     title: Элементы
     exterior:
       title: Экстерьер

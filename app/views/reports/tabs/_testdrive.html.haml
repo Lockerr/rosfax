@@ -45,11 +45,14 @@
                   .span2                    
                     = t("testdrive.suspension.#{param}").to_s+ ':'
                   .span5
-                    .pull-left{:style => 'margin-top: 0px'}
+                    .divv{:style => 'margin-top: 0px; text-align: center'}
                       .btn-group.pads.radio
                         - Report::SUSPENSION[1].each do |i|
                           - parameters[:condition] = i
                           %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+                  .span3
+                    = text_field 'point', 'description', :value => (check ? check.description : '')
+                  
                   .span2
                     photo_box
                 %hr{:style => 'margin: 5px 0'}/
@@ -73,15 +76,18 @@
                 - parameters = {:report_id => @report.id, :object => 'testdrive', :section => 'engine', :place => param}  
                 - if check = @points.select{|i| i.place == param}.first
                   - parameters[:id] = check.id
-                .row.object{:data => parameters, :style => 'margin-bottom: 0px'}
+                .row-fluid.object{:data => parameters, :style => 'margin-bottom: 0px'}
                   .span2
                     = t("testdrive.engine.#{param}").to_s+ ':'
                   .span5
-                    .pull-left{:style => 'margin-top: 0px'}
+                    .divv{:style => 'margin-top: 0px; text-align: center'}
                       .btn-group.pads.radio
                         - Report::ENGINE[1].each do |i|
                           - parameters[:condition] = i
                           %button.check.btn.btn-large{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
+                  .span3
+                    = text_field 'point', 'description', :value => (check ? check.description : '')
+
                   .span2
                     photo_box
                 %hr{:style => 'margin: 5px 0'}/

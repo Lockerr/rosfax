@@ -1,0 +1,13 @@
+- image = object.image(:attribute => attribute, :place => place)
+.drop{:id => place, :object => object.class, :image => image.try(:first).try(:first), :style => 'display: inline-block', :object_id => object.id, 'data-attribute' => attribute, 'data-place' => place}
+  .thumbnail{:style => 'width: 43px; float: left; height: 37px'}
+    %a{:href => '#', :style => 'height: 68px; width: 100px'}
+      - if image
+        .thumb{:data => {:attribute => attribute, :place => place}, :id => image.first[0]}
+          = image_tag(image.first[1], :id => image.first[0])
+      - else
+        .thumb{:data => {:attribute => attribute, :place => place}}
+          = image_tag('http://s3-eu-west-1.amazonaws.com/rosfax/box.png')
+    .btn.btn-mini{:style => 'position: relative; top: -20px; left: 80px', :id => image ? image[0] : ''}
+      = object.send(attribute)[place].try(:count) || 0
+

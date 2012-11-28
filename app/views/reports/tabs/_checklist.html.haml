@@ -39,7 +39,7 @@
                     - parameters = {:report_id => @report.id, :object => 'checklist', :section => 'tab', :place => param}  
                     - if check = @points.select{|i| i.place == param}.first
                       - parameters[:id] = check.id
-                    .row-fluid.object.form-inline{:data => parameters, :style => 'display: table'}
+                    .row-fluid.object.form-inline{:data => parameters}
                       .span2                    
                         = t("checklist.#{tab}.#{param}").to_s+ ':'
                       .span5
@@ -54,7 +54,9 @@
 
                               %button.check.btn{:class => klass, :data => parameters}= i
                       .span3
-                        %input.span10{:data => parameters, :type => :text, :value => (check.description if check), :disabled => :disabled}
+                        = text_field 'point', 'description', :value => (check ? check.description : '')
+                        
+                      .span1
                       .span1.camera
                         .btn.btn-large
                           %i.icon-camera
@@ -63,4 +65,7 @@
                             %input{type: :file}
                     %hr{style: 'margin: 5px 0'}/
                   - index += 1
+
+      
+      = render :partial => 'reports/tabs/wheels'
 

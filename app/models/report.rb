@@ -115,9 +115,20 @@ class Report < ActiveRecord::Base
         %w(lamp_srs check_engine speedometer tachometer indication_of_the_lever_automatic_transmission backlight)
       ],
       values: [%w( ОК УД НЕУД)]
+    },
+  
+    suspension: {
+      names: [%w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking circular_motion_gur circular_motion_shru)],
+      values: [%w(ок слабо сильно)]
+      },
+
+    engine: {
+      names: [%w(engine_start all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise shifting_down shifting_up parking_brake)],
+      values: [%w(ОК УД НЕУД)]
+
     }
   }
-  
+
   ELEMENTS = %w(exterior interior windows_and_lights)
     WINDOWS_AND_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)
     EXTERIOR = %w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold)

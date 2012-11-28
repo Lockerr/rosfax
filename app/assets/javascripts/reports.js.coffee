@@ -1,6 +1,6 @@
 
 @appendUploader = (tab) ->
-  tabs = ['#wwindows_and_lights', '#eexterior','#iinterior', '#exterior', '#interior', '#under_the_hood', '#other_photos', '#wheels', '#video', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
+  tabs = ['#wwindows_and_lights', '#exterior', '#interior', '#under_the_hood', '#video', '#defects-compiled', "#defects-exterior", "#defects-interior", "#defects-windows_and_lights", "#defects-powertrains", "#defects-chasis", "#defects-wheels", "#defects-electric", "#defects-liquids", "#defects-other", "#defects-video"]
 
   if tab in tabs
     $("#{tab}.row-fluid").append($('.uploader'))
@@ -160,7 +160,7 @@ $ ->
         complete: ->
           window.location.href = '/reports/'
 
-  $('input, textarea').change ->
+  $('input:not(#point_description), textarea').change ->
     element = $(@)
     if element.data('change') 
       element.data(element.data('change'), element.val())
@@ -243,5 +243,28 @@ $ ->
           url: "/points/#{$(pad).data().id}.json"          
         $(pad).find('.btn-primary').removeClass('btn-primary')
         delete $(pad).data()['id']
-  
 
+  $('input#point_description').change ->
+    that = $(@)  
+    object = that.parents('.object')
+    data = object.data()
+
+    if data.id
+      $.ajax
+        url: "/points/#{data.id}.json"
+        type: 'PUT'
+        data: {point: description: @.value}
+        async: false
+    else
+      data.description = @.value
+
+      $.ajax
+        url: '/points.json'
+        type: 'POST'
+        data: {point: data}
+        async: false
+
+        success: (response) ->
+          object.data('id', response.id)
+          object.find('.btn').data('id', response.id)
+          

@@ -1,5 +1,5 @@
 .object_drop{:data => {:object => 'elements', :object_id => object.id}}
-  .thumbnail{:style => 'width: 100px; float: left; margin-right: 5px; height: 67px'}
+  .thumbnail{:style => 'width: 50px; float: left; margin-right: 5px; height: 35px; padding: 2px'}
     %a{:href => '#', :style => 'height: 68px; width: 100px'}
       - if object.images.any?
         .thumb{:data => {:image_id => object.image.id}}
@@ -7,5 +7,4 @@
       - else
         .thumb
           = image_tag('http://s3-eu-west-1.amazonaws.com/rosfax/box.png')
-    .btn.btn-mini{:style => 'position: relative; top: -20px; left: 80px'}
-      = object.images.size
+

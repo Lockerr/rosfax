@@ -1,33 +1,57 @@
-.row-fluid#wheels
-  .span8
-    .alert.alert-info
-      Во всех колесах одинаково
-      %input.all_wheels{:type => 'checkbox', :style => 'margin-top: -2px'}
-    .row-fluid
-      .span6
-        %h5 Переднее левое колесо
-        = render :partial => 'wheel-form', :locals => {:report => @report,:place => 'front_left'}
-      .span6{:id => 'right_wheel_form'}
-        %h5 Переднее правое колесо
-        = render :partial => 'wheel-form', :locals => {:report => @report,:place => 'front_right'}
-    .row-fluid
-      .span12
-        .well{:style => "height: 96px; overflow-x: scroll; width: 93%; overflow-y: hidden;"}
-          - section = 'wheels'
-          - assets = @report.assets.where(:section => section).group(:position)
-          - count = @report.assets.where(:section => section).group(:position).count
-              
-          = render :partial => 'wheels_drop', :locals => {:assets => assets, :count => count, :section => section, :object => @report}
-          / = render :partial => 'drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
-          / = render :partial => 'drop', :locals => {:object => @report, :place => ':two', :attribute => 'wheels'}
-          / = render :partial => 'drop', :locals => {:object => @report, :place => ':three', :attribute => 'wheels'}
-          / = render :partial => 'drop', :locals => {:object => @report, :place => ':four', :attribute => 'wheels'}
+- tab = 'wheels'
+.accordion{style: 'background-color: white'}
+  .accordion-group
+    .accordion-heading
+      .row-fluid
+        .span4
+          .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab.to_s}"}}
+            %h4= t("elements.#{tab}.title")                    
+        .span6
+          .alert.alert-info
+            Во всех колесах одинаково
+            %input.all_wheels{:type => 'checkbox', :style => 'margin-top: -2px'}
+        .span2
+          .accordion-toggle
+            .btn.btn-large.new_all_ok.pull-right Все ок
+      
+    .accordion-body.collapse.in{id: tab}
+      .accordion-inner
+        .row-fluid
+          .span4
+            %legend
+              Переднее левое колесо
+          .span1.offset7
+            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
+        = render partial: 'reports/tabs/wheel', locals: {place: 'front_left'}
+    
+        .row-fluid
+          .span4
+            %legend
+              Переднее левое колесо
+          .span1.offset7
+            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
+        = render partial: 'reports/tabs/wheel', locals: {place: 'front_right'}
+    
+        .row-fluid
+          .span4
+            %legend
+              Переднее левое колесо
+          .span1.offset7
+            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
+        = render partial: 'reports/tabs/wheel', locals: {place: 'rear_left'}
+    
+        .row-fluid
+          .span4
+            %legend
+              Переднее левое колесо
+          .span1.offset7
+            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
+        = render partial: 'reports/tabs/wheel', locals: {place: 'rear_right'}
+
+  
 
 
-    .row-fluid
-      .span6
-        %h5 Заднее левое колесо
-        = render :partial => 'wheel-form', :locals => {:report => @report,:place => 'rear_left'}
-      .span6{:id => 'right_wheel_form'}
-        %h5 Заднее правое колесо
-        = render :partial => 'wheel-form', :locals => {:report => @report,:place => 'rear_right'}
+
+
+
+      

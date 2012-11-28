@@ -218,6 +218,8 @@ GEM
     treetop (1.4.11)
       polyglot
       polyglot (>= 0.3.1)
+    turbolinks (0.5.2)
+      coffee-rails
     turn (0.9.6)
       ansi
     tzinfo (0.3.33)
@@ -266,6 +268,7 @@ DEPENDENCIES
   spine-rails
   symbolize
   thin
+  turbolinks
   turn
   twitter-bootstrap-rails!
   uglifier

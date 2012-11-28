@@ -9,10 +9,6 @@
             Информация
             %span{:style => 'color: #ddd'}= 1
         %li
-          %a{"data-toggle" => "tab", :href => "#photo"}
-            Фото
-            %span{:style => 'color: #ddd'}= 1
-        %li
           %a{"data-toggle" => "tab", :href => "#checklist"}
             Чеклист
             %span{:style => 'color: #ddd'}
@@ -20,22 +16,21 @@
               \/
               = 100500
         %li
-          %a{"data-toggle" => "tab", :href => "#testdrive"}
-            Тест-драйв
-            %span{:style => 'color: #ddd'}
-              = @report.points.where(:object => :testdrive).count
-              \/
-              = Report::ENGINE.count + Report::SUSPENSION.count
-        %li
           %a{"data-toggle" => "tab", :href => "#elements"}
             Дефекты
             %span{:style => 'color: #ddd'}
               = @report.points.where(:object => :elements).count
               \/
               = Report::WINDOWS_AND_LIGHTS.count + Report::EXTERIOR.count + Report::INTERIOR.count
+        %li
+          %a{"data-toggle" => "tab", :href => "#photo"}
+            Фото
+            %span{:style => 'color: #ddd'}= 1
+      
       .tab-content.first
-        - for symbol in %w(photo checklist testdrive elements info)
+        - for symbol in %w(photo checklist elements testdrive info)
           = render "reports/tabs/#{symbol}"
+  
   .span4.uploader.hide
     = render :partial => 'uploader', :locals => {:attribute => ''}
 

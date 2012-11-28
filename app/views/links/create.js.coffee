@@ -1,4 +1,5 @@
 errors = JSON.parse('<%= @link.errors.messages.to_json.html_safe%>')
+
 if errors.url
   $('body').prepend("<div class='alert-feedback alert alert-error' style='position: fixed;top: 40px;right: 0px'>ссылка: #{errors.url[0]}</div>");
   $('.new_link_<%= @link.site %>').find('.control-group').addClass('error')

@@ -49,9 +49,9 @@ $(document).ready ->
     window.location.href = "/reports/models/?ids=#{arr}"
 
   $('td:not(.actions)').hover (->
-    $(@).parent().css('text-decoration', 'underline')
+    $(@).parent().find('td:not(.actions)').css('text-decoration', 'underline')
   ), ->
-    $(@).parent().css('text-decoration', 'none')
+    $(@).parent().find('td:not(.actions)').css('text-decoration', 'none')
 
   $('td:not(.actions)').click ->
     console.log 'click'

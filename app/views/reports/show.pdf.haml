@@ -31,17 +31,17 @@
     .row{:style => 'padding: 10px 0 10px 0'}
       .offset4
         .span10
-          Положение двигателя
+          Объем двигателя, см3
         .span5.offset1
-          %input{:class => 'span5', :value => @report.car['engine_placement']}
-        .span7.offset1
-          Тип двигателя
+          %input{:class => 'span5', :value => @report.car['cylinder_amount']}
+        .span6.offset2
+          Топливо
         .span6
           %input{:class => 'span6', :value => @report.car['engine_type']}
-        .span10.offset1
-          Число цилиндров
-        .span2
-          %input{:class => 'span2', :value => @report.car['cylinder_amount']}
+        .span6.offset1
+          Привод
+        .span5.offset1
+          %input{:class => 'span5', :value => @report.car['drive']}
   .row
     .span5.offset5
       %h2 Фото
@@ -93,8 +93,8 @@
     - unless @diff.empty?
       %h3.offset6 Не проверенные
       - for object in @diff.keys
-        .row.bddd
-          .offset4.block-title= t("#{object}.title")
+        / .row.bddd
+        /   .offset4.block-title= t("#{object}.title")
         %table.table.table-striped
           - for section in @diff[object].keys
             %tr

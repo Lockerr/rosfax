@@ -29,7 +29,7 @@ class Report < ActiveRecord::Base
 
   scope :public, where(:publish => true)
 
-  NORMAL_CONDITION = ['ок', 'ok', 'УД' , 'OK', 'есть', 150, '150', 100, '100', '1', 1]
+  NORMAL_CONDITION = ['ок', 'ok', 'УД' , 'ОК', 'OK', 'есть', 150, '150', 100, '100', '1', 1]
   WHEEL = %w(:front_left_wheel :front_right_wheel :rear_right_wheel :rear_left_wheel :stepney)
   
   EXTERIOR_PARTS = %w(:hood :front_right_wing :right_front_door :rear_right_door :rear_right_wing :boot_lid :rear_left_wing :rear_left_door :front_left_door :front_left_wing_of_the :roof :front_bumper :skirt_front_bumper :rear_bumper :rear_apron :right_threshold :left_threshold)
@@ -162,17 +162,12 @@ class Report < ActiveRecord::Base
       end
     end
     
-    TESTDRIVE.each do |section|
-      puts Report.const_get(section.upcase)[0]
-      Report.const_get(section.upcase)[0].each do |place|
-        points.find_or_create_by_object_and_place_and_section(:testdrive,place,section)      
-      end
-    end
+
 
   end
 
   def diff
-    result = {'checklist' => {}, 'elements' => {}, 'testdrive' => {}}
+    result = {'checklist' => {}}
     empty = points.where(object: [:checklist, :testdrive]).where('`condition` is NULL').where('`description` is NULL')
     empty.each do |point|
       
@@ -180,42 +175,12 @@ class Report < ActiveRecord::Base
       result[point.object][point.section].push point.place
     end
 
-    empty = points.where(object: :elements).where('`condition` is NULL').where('`description` is NULL').where('`state` is NULL')
-    empty.each do |point|
-      result[point.object][point.section] ||= []
-      result[point.object][point.section].push point.place
-    end
-
-
-
-
-    # for object in %w( checklist testdrive elements )
-      
-    #   sections = Report.const_get(object.upcase)
-    #   places = []
-    #   sections.map{|i| places.push Report.const_get(i.upcase)}
-    #   places.flatten
-    
-    #   if points.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
-
-
-    #     for section in Report.const_get(object.upcase)
-    #       # puts "Проверка сеции ============================== #{section}"
-    #       in_section =  points.where(:object => object, :section => section, :place => Report.const_get(section.upcase))
-    #       if in_section.count('id') < Report.const_get(section.upcase).size
-    #         dif = Report.const_get(section.upcase) - in_section.group(:place).select(:place).map(&:place)
-
-    #         for place in dif
-    #             result[object] ||= {}
-    #             result[object][section] ||= []
-    #             result[object][section].push place                
-
-    #         end
-    #       end
-    #     end
-    #   end
-  
+    # empty = points.where(object: :elements).where('`condition` is NULL').where('`description` is NULL').where('`state` is NULL')
+    # empty.each do |point|
+    #   result[point.object][point.section] ||= []
+    #   result[point.object][point.section].push point.place
     # end
+
     result.any? ? result : false
   end
   

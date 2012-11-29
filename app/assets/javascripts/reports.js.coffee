@@ -175,27 +175,27 @@ $ ->
     
     store_report()
 
-  $('.all_wheels').change ->
-    if $(@).prop('checked')
-      data = container.data().wheels.front_left
-      for wheel in $('.wheel')
-        
-        params = ['width', 'diameter', 'profile', 'brand', 'protector']
-        $("input[type='text']").val($("input[type='text']").first().val())
-        for param in params
-          span_caret = "<span class='caret'></span>"
-          $(wheel).find('.' + param).empty()
-          $(wheel).find('.' + param).append(data[param])
-          $(wheel).find('.' + param).append(span_caret)
-        for param in ['pads', 'discs', 'damper']
-          $(wheel).find('.' + param).find('.btn').removeClass('btn-primary')
-          $("."+ param).find(".btn[data-#{param}=#{data[param]}]").addClass('btn-primary')          
-        $(wheel).find('input').val(data.brand)
+  $('.all_wheels').click ->
+    
+    data = container.data().wheels.front_left
+    for wheel in $('.wheel')
+      
+      params = ['width', 'diameter', 'profile', 'brand', 'protector']
+      $("input[type='text']").val($("input[type='text']").first().val())
+      for param in params
+        span_caret = "<span class='caret'></span>"
+        $(wheel).find('.' + param).empty()
+        $(wheel).find('.' + param).append(data[param])
+        $(wheel).find('.' + param).append(span_caret)
+      for param in ['pads', 'discs', 'damper']
+        $(wheel).find('.' + param).find('.btn').removeClass('btn-primary')
+        $("."+ param).find(".btn[data-#{param}=#{data[param]}]").addClass('btn-primary')          
+      $(wheel).find('input').val(data.brand)
 
-      container.data().wheels.front_right = data
-      container.data().wheels.rear_left = data
-      container.data().wheels.rear_right = data
-      store_report()
+    container.data().wheels.front_right = data
+    container.data().wheels.rear_left = data
+    container.data().wheels.rear_right = data
+    store_report()
 
 
   $('.all_ok').live 'click', ->
@@ -266,8 +266,4 @@ $ ->
 
         success: (response) ->
           object.data('id', response.id)
-          object.find('.btn').data('id', response.id)
-          
-  $('td:not(.actions)').click ->
-    console.log 'click'
-    window.location = "/reports/#{$('td:not(.actions)').first().parent().data().report}/edit"
+          object.find('.btn').data('id', response.id)       

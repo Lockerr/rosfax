@@ -6,52 +6,15 @@
         .span4
           .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab.to_s}"}}
             %h4= t("elements.#{tab}.title")                    
-        .span6
-          .alert.alert-info
-            Во всех колесах одинаково
-            %input.all_wheels{:type => 'checkbox', :style => 'margin-top: -2px'}
-        .span2
+        
+          
+        .span8
           .accordion-toggle
-            .btn.btn-large.new_all_ok.pull-right Все ок
+            .btn.btn-large.all_wheels.pull-right Во всех колесах одинаково
       
     .accordion-body.collapse.in{id: tab}
       .accordion-inner
         .row-fluid
-          .span4
-            %legend
-              Переднее левое колесо
-          .span1.offset7
-            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
-        = render partial: 'reports/tabs/wheel', locals: {place: 'front_left'}
-    
-        .row-fluid
-          .span4
-            %legend
-              Переднее левое колесо
-          .span1.offset7
-            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
-        = render partial: 'reports/tabs/wheel', locals: {place: 'front_right'}
-    
-        .row-fluid
-          .span4
-            %legend
-              Переднее левое колесо
-          .span1.offset7
-            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
-        = render partial: 'reports/tabs/wheel', locals: {place: 'rear_left'}
-    
-        .row-fluid
-          .span4
-            %legend
-              Переднее левое колесо
-          .span1.offset7
-            = render :partial => 'wheel_drop', :locals => {:object => @report, :place => ':one', :attribute => 'wheels'}
-        = render partial: 'reports/tabs/wheel', locals: {place: 'rear_right'}
-
-  
-
-
-
-
-
-      
+          - %w(front_left front_right rear_left rear_right).each do |place|
+            = render partial: 'reports/tabs/wheel', locals: {place: place}  
+          

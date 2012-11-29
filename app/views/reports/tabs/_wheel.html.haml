@@ -1,63 +1,75 @@
-.row-fluid.wheel{:data => {:attribute => 'wheel', :place => place}}
-  .span3
-    %label.control-label.span7 Ширина
-    .btn-group.span3
-      %button.btn.btn-mini.dropdown-toggle.width{"data-toggle" => "dropdown", :style => 'width: 56px'}
-        = @report.wheels[place] ? @report.wheels[place]['width'] : '---'
-        %span.caret
-      %ul.dropdown-menu
-        - [135,145,155,165,175,185,195,205,215,225,235,245,255,265,275,285,295,305,315,325,335,345].each do |i|
-          %li
-            .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'width', :width => i}}=i
-  .span3
-    %label.control-label.span7 Профиль
-    .btn-group.span3
-      %button.btn.btn-mini.dropdown-toggle.profile{"data-toggle" => "dropdown", :style => 'width: 58px'}
-        = @report.wheels[place] ? @report.wheels[place]['profile'] : '---'
-        %span.caret
-      %ul.dropdown-menu{:data => {:attribute => 'wheel'}}
-        - [25,30,35,40,45,50,55,60,65,70,75,80,85,95,100].each do |i|
-          %li
-            .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'profile', :profile => i}}=i
-  .span3
-    %label.control-label.span7 Диаметр
-    .btn-group.span3
-      %button.btn.btn-mini.dropdown-toggle.diameter{"data-toggle" => "dropdown", :style => 'width: 58px'}
-        = @report.wheels[place] ? @report.wheels[place]['diameter'] : '---'
-        %span.caret
-      %ul.dropdown-menu.pull-right
-        - (12..24).to_a.each do |i|
-          %li
-            .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'diameter', :diameter => i}}=i
-  .span3
-    %label.control-label.span7 Протектор
-    .btn-group{:class => ('dropup' if (place == 'rear_left' || place == 'rear_right'))}
-      %button.btn.btn-mini.dropdown-toggle.protector{"data-toggle" => "dropdown", :style => 'width: 58px'}
-        = @report.wheels[place] ? @report.wheels[place]['protector'] : '---'
-        %span.caret
-      %ul.dropdown-menu.pull-left
-        - [1,2,3,4,5,6,7,8].each do |i|
-          %li
-            .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
-.row-fluid
-  .span3
-    .btn-group
-      = text_field 'wheel', 'brand', :placeholder => 'Производитель', :data => {:provide => 'typeahead', :source => "#{%w(Amtel Barum BFGoodrich Bridgestone Continental Cordiant Dunlop Dunlop JP Fulda Gislaved Goodyear Kelly Kleber Michelin Nokian Nordman Pirelli Sava Tigar Tunga Yokohama)}", :attribute => 'wheels',:place => place, :change => 'brand'}, :value => (@report.wheels[place]['brand'] if @report.wheels[place]), :style => ' width: 156px'
+.span3.wheel
+  %legend
+    =t("checklist.wheels.#{place}")
+  .row-fluid
+    .span7
+      Ширина
+    .span5
+      .btn-group
+        %button.btn.btn-mini.dropdown-toggle.width{"data-toggle" => "dropdown", :style => 'width: 66px'}
+          = @report.wheels[place] ? @report.wheels[place]['width'] : '---'
+          %span.caret
+        %ul.dropdown-menu
+          - [135,145,155,165,175,185,195,205,215,225,235,245,255,265,275,285,295,305,315,325,335,345].each do |i|
+            %li
+              .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'width', :width => i}}=i
+  .row-fluid
+    .span7
+      Профиль
+    .span5
+      .btn-group
+        %button.btn.btn-mini.dropdown-toggle.profile{"data-toggle" => "dropdown", :style => 'width: 66px'}
+          = @report.wheels[place] ? @report.wheels[place]['profile'] : '---'
+          %span.caret
+        %ul.dropdown-menu{:data => {:attribute => 'wheel'}}
+          - [25,30,35,40,45,50,55,60,65,70,75,80,85,95,100].each do |i|
+            %li
+              .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'profile', :profile => i}}=i
+  .row-fluid
+    .span7
+      Диаметр
+    .span5
+      .btn-group
+        %button.btn.btn-mini.dropdown-toggle.diameter{"data-toggle" => "dropdown", :style => 'width: 66px'}
+          = @report.wheels[place] ? @report.wheels[place]['diameter'] : '---'
+          %span.caret
+        %ul.dropdown-menu.pull-right
+          - (12..24).to_a.each do |i|
+            %li
+              .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'diameter', :diameter => i}}=i
+  .row-fluid
+    .span7
+      Протектор
+    .span5
+      .btn-group
+        %button.btn.btn-mini.dropdown-toggle.protector{"data-toggle" => "dropdown", :style => 'width: 66px'}
+          = @report.wheels[place] ? @report.wheels[place]['protector'] : '---'
+          %span.caret
+        %ul.dropdown-menu.pull-left
+          - [1,2,3,4,5,6,7,8].each do |i|
+            %li
+              .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
+  .row-fluid
+    .span12
+      .btn-group
+        = text_field 'wheel', 'brand', :placeholder => 'Производитель', :data => {:provide => 'typeahead', :source => "#{%w(Amtel Barum BFGoodrich Bridgestone Continental Cordiant Dunlop Dunlop JP Fulda Gislaved Goodyear Kelly Kleber Michelin Nokian Nordman Pirelli Sava Tigar Tunga Yokohama)}", :attribute => 'wheels',:place => place, :change => 'brand'}, :value => (@report.wheels[place]['brand'] if @report.wheels[place]), :style => ' width: 159px'
+  .row-fluid
+    .span12
+      %label.span7.control-label=t("wheels.brake_pads")
+      .btn-group.pads.radio.span5{:style => 'padding-left: 0px'}
+        %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '1'}} ok
+        %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '0'}} не ok
+    
+  .row-fluid
+    .span12
+      %label.span7.control-label=t("wheels.brake_discs")
+      .btn-group.discs.radio.span5{:style => 'padding-left: 0px'}
+        %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '1'}} ok
+        %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '0'}} не ok
 
-  .span3
-    %label.span7.control-label=t("wheels.brake_pads")
-    .btn-group.pads.radio.span4{:style => 'padding-left: 0px'}
-      %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '1'}} ok
-      %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'pads', :pads => '0'}} не ok
-  
-  .span3
-    %label.span7.control-label=t("wheels.brake_discs")
-    .btn-group.discs.radio.span4{:style => 'padding-left: 0px'}
-      %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '1'}} ok
-      %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'discs', :discs => '0'}} не ok
-
-  .span3
-    %label.span7.control-label=t("wheels.damper")
-    .btn-group.damper.radio.span4{:style => 'padding-left: 0px; margin-left: 1px'}
-      %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '1'}} ok
-      %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '0'}} не ok
+  .row-fluid
+    .span12
+      %label.span7.control-label=t("wheels.damper")
+      .btn-group.damper.radio.span5{:style => 'padding-left: 0px'}
+        %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '1'}} ok
+        %button.checkbox.btn.btn-mini{:data => {:attribute => 'wheels', :place => place, :change => 'damper', :damper => '0'}} не ok

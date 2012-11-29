@@ -2,7 +2,11 @@ ru:
   checklist:
     wheels:
       title: Колеса
-      
+      front_left: Переднее левое
+      front_right: Переднее правое
+      rear_left: Заднее левое
+      rear_right: Заднее правое
+
     title: Чеклист
     devices:
       title: Приборы

@@ -73,7 +73,7 @@ class Report < ActiveRecord::Base
         %w( headlights distant_lights fog_lights marker_lights turn_signal headlights_corrector),
         %w(brake_lights  rear_marker_lights rear_turn_signal rear_fog_lights reverse)
       ],
-      values: [%w(ок левая правая обе)]*2,
+      values: [%w(ОК ЛЕВ ПРАВ ОБЕ)]*2,
       legends: ['Лампы передние','Лампы задние']
     },
     
@@ -108,7 +108,7 @@ class Report < ActiveRecord::Base
       names: [
       %w(tire_pressure_in_the_doorway information_in_the_doorway under_the_hood on_tank_hatches)
       ],
-      values: [%w(Да Нет)]
+      values: [%w(ОК н/п НЕТ)]
     },
 
     devices: {

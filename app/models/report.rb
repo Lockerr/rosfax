@@ -25,6 +25,7 @@ class Report < ActiveRecord::Base
   serialize :car, Hash
   serialize :documents, Hash
   
+  before_create :generate_points
 
   scope :public, where(:publish => true)
 
@@ -146,36 +147,74 @@ class Report < ActiveRecord::Base
 
   SERVICE_HISTORY = %w(service_history meets_car are_all_the_pages marks_of_all_maintenance instructions)
 
-  def diff
-    result = {}
- 
-    for object in %w( checklist testdrive elements )
-      
-      sections = Report.const_get(object.upcase)
-      places = []
-      sections.map{|i| places.push Report.const_get(i.upcase)}
-      places.flatten
+  def generate_points
     
-      if points.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
-
-
-        for section in Report.const_get(object.upcase)
-          # puts "Проверка сеции ============================== #{section}"
-          in_section =  points.where(:object => object, :section => section, :place => Report.const_get(section.upcase))
-          if in_section.count('id') < Report.const_get(section.upcase).size
-            dif = Report.const_get(section.upcase) - in_section.group(:place).select(:place).map(&:place)
-
-            for place in dif
-                result[object] ||= {}
-                result[object][section] ||= []
-                result[object][section].push place                
-
-            end
-          end
-        end
+    CHECKLIST.keys.each do |section|
+      CHECKLIST[section][:names].flatten.each do |place|
+        points.find_or_create_by_object_and_place_and_section(:checklist,place,section)      
       end
-  
     end
+
+    ELEMENTS.each do |section|
+      Report.const_get(section.upcase).each do |place|
+        points.find_or_create_by_object_and_place_and_section(:elements,place,section)      
+      end
+    end
+    
+    TESTDRIVE.each do |section|
+      puts Report.const_get(section.upcase)[0]
+      Report.const_get(section.upcase)[0].each do |place|
+        points.find_or_create_by_object_and_place_and_section(:testdrive,place,section)      
+      end
+    end
+
+  end
+
+  def diff
+    result = {'checklist' => {}, 'elements' => {}, 'testdrive' => {}}
+    empty = points.where(object: [:checklist, :testdrive]).where('`condition` is NULL').where('`description` is NULL')
+    empty.each do |point|
+      
+      result[point.object][point.section] ||= []
+      result[point.object][point.section].push point.place
+    end
+
+    empty = points.where(object: :elements).where('`condition` is NULL').where('`description` is NULL').where('`state` is NULL')
+    empty.each do |point|
+      result[point.object][point.section] ||= []
+      result[point.object][point.section].push point.place
+    end
+
+
+
+
+    # for object in %w( checklist testdrive elements )
+      
+    #   sections = Report.const_get(object.upcase)
+    #   places = []
+    #   sections.map{|i| places.push Report.const_get(i.upcase)}
+    #   places.flatten
+    
+    #   if points.where(:object => object, :place => places.flatten).count('id') < places.flatten.count
+
+
+    #     for section in Report.const_get(object.upcase)
+    #       # puts "Проверка сеции ============================== #{section}"
+    #       in_section =  points.where(:object => object, :section => section, :place => Report.const_get(section.upcase))
+    #       if in_section.count('id') < Report.const_get(section.upcase).size
+    #         dif = Report.const_get(section.upcase) - in_section.group(:place).select(:place).map(&:place)
+
+    #         for place in dif
+    #             result[object] ||= {}
+    #             result[object][section] ||= []
+    #             result[object][section].push place                
+
+    #         end
+    #       end
+    #     end
+    #   end
+  
+    # end
     result.any? ? result : false
   end
   

@@ -54,7 +54,7 @@
                       .thumb.pull-left{:data => image.attributes, :style => 'margin: 2px; border: 1px solid #ccc'}
                         = image_tag image.url(:thumb), :id => image.id
         
-        - %w( checklist testdrive elements ).each do |object|
+        - %w( checklist elements ).each do |object|
           %hr{:style => 'margin: 0'}/
           .row
             .span12
@@ -69,17 +69,19 @@
                     %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
                       Свернуть
                       
-          - if @report.points.where(:object => object.to_sym).any?
+          
+          
+          - if @filled_points.any?
             .row
               .span12
                 .collapse{:id => object, :class => object}
-                  - for block in @report.points.where(:object => object.to_sym).group(:section).map(&:section)
+                  - for block in @filled_points.where(:object => object.to_sym).group(:section).map(&:section)
                     .row
                       .span8
                         %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
                           %h4{:style => 'margin: 0'}
                             = t("#{object}.#{block}.title")
-                            - size =  @report.points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
+                            - size =  @filled_points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
                             %span{:style => 'font-size: 70%; color: #ddd'}
                               = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                     .collapse{:id => "points_#{block}", :class => object}
@@ -87,7 +89,7 @@
                       .row
                         .span8
                           %ul.thumbnails
-                            - @report.points.where(:section => block.to_sym).each do |point|
+                            - @filled_points.where(:section => block.to_sym).each do |point|
                               %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => ((['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
                                 .row-fluid
                                   .span9{:style => 'padding: 4px'}
@@ -107,48 +109,49 @@
                 %b
                   Свернуть
         .row.collapse{:id => 'unchecked'}
-          - unless @report.diff.empty?
-            - for object in @report.diff.keys
+
+          - unless @diff.empty?
+            - for object in @diff.keys
               %label
                 %h3= t("#{object}.title")
               %table.table.table-striped
-                - for section in @report.diff[object].keys
+                - for section in @diff[object].keys
                   %tr
                     %td{:style => 'width: 100px'}
                       = t("#{object}.#{section}.title")
                       %td
-                        - for place in @report.diff[object][section]
+                        - for place in @diff[object][section]
                           %span.badge= t("#{object}.#{section}.#{place}")
     
-      .span4
-        / #vk_comments
-        /   :javascript
-        /     VK.Widgets.Comments("vk_comments", {limit: 10, width: "370", attach: "*"});
-        / .span2
-        /   .like{:style => 'height: 30px'}
-        /     #vk_like
-        /     :javascript
-        /       VK.Widgets.Like("vk_like", {type: "button", verb: 1});
+      / .span4
+      /   / #vk_comments
+      /   /   :javascript
+      /   /     VK.Widgets.Comments("vk_comments", {limit: 10, width: "370", attach: "*"});
+      /   / .span2
+      /   /   .like{:style => 'height: 30px'}
+      /   /     #vk_like
+      /   /     :javascript
+      /   /       VK.Widgets.Like("vk_like", {type: "button", verb: 1});
 
-        /   .like{:style => 'height: 30px'}
-        /     .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
-        /   .like{:style => 'height: 30px'}
-        /     %a.mrc__plugin_uber_like_button{"data-mrc-config" => "{'cm' : '3', 'ck' : '3', 'sz' : '20', 'st' : '1', 'tp' : 'ok'}", :href => "http://connect.mail.ru/share", :target => "_blank"}  Нравится
-        /     %script{:charset => "UTF-8", :src => "http://cdn.connect.mail.ru/js/loader.js", :type => "text/javascript"}
-        /   .like{:style => 'height: 30px'}
-        /     .g-plusone{:data => {:size => 'medium'}}
-        /     :javascript
-        /       window.___gcfg = {lang: 'ru'};
+      /   /   .like{:style => 'height: 30px'}
+      /   /     .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
+      /   /   .like{:style => 'height: 30px'}
+      /   /     %a.mrc__plugin_uber_like_button{"data-mrc-config" => "{'cm' : '3', 'ck' : '3', 'sz' : '20', 'st' : '1', 'tp' : 'ok'}", :href => "http://connect.mail.ru/share", :target => "_blank"}  Нравится
+      /   /     %script{:charset => "UTF-8", :src => "http://cdn.connect.mail.ru/js/loader.js", :type => "text/javascript"}
+      /   /   .like{:style => 'height: 30px'}
+      /   /     .g-plusone{:data => {:size => 'medium'}}
+      /   /     :javascript
+      /   /       window.___gcfg = {lang: 'ru'};
 
-        /       (function() {
-        /         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        /         po.src = 'https://apis.google.com/js/plusone.js';
-        /         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        /       })();
-        /   .like{:style => 'height: 30px'}
-        /     %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
-        /     :javascript
-        /       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      /   /       (function() {
+      /   /         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      /   /         po.src = 'https://apis.google.com/js/plusone.js';
+      /   /         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      /   /       })();
+      /   /   .like{:style => 'height: 30px'}
+      /   /     %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
+      /   /     :javascript
+      /   /       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
 
 

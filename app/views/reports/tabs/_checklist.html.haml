@@ -38,7 +38,7 @@
                     %legend= Report::CHECKLIST[tab][:legends][index]
                   - for param in block
                   
-                    - parameters = {:report_id => @report.id, :object => 'checklist', :section => 'tab', :place => param}  
+                    - parameters = {:report_id => @report.id, :object => 'checklist', :section => tab, :place => param}  
                     - if check = @points.select{|i| i.place == param}.first
                       - parameters[:id] = check.id
                     .row-fluid.object.form-inline{:data => parameters}

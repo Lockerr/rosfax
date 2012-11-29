@@ -38,6 +38,8 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @diff = @report.diff
+    @filled_points = @report.points.filled
     
     # if current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin?    
       # @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort

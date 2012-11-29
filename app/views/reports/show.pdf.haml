@@ -69,12 +69,12 @@
     
                   
       
-  - %w( checklist testdrive elements ).each do |object|
+  - %w( checklist elements ).each do |object|
     .row
       .span40.offset5
         %h2= t("#{object}.title")
-    - if @report.points.where(:object => object.to_sym).any?
-      -for block in @report.points.where(:object => object.to_sym).group(:section).map(&:section)
+    - if @filled_points.where(:object => object.to_sym).any?
+      -for block in @filled_points.where(:object => object.to_sym).group(:section).map(&:section)
         .row{:style => 'padding-top: 20px'}
           .span50.bddd
             .offset4
@@ -83,29 +83,29 @@
         .row
           .span50
             .row.offset1
-              - @report.points.where(:section => block.to_sym).each do |point|
+              - @filled_points.where(:section => block.to_sym).each do |point|
                 .span19.offset4.left
                   .div
                     .div.left{:style => 'font-size: 10pt'}= t("#{object}.#{block}.#{point.place}")
                     .div.right{:style => 'font-size: 10pt',:class => ((['ок', 'ok', 0, 'OK', 'ОК', 'есть', 100, '100', '1', 1].include? point.condition) ? 'green' : 'red')}
                       = point.condition
   .row
-    - unless @report.diff.empty?
+    - unless @diff.empty?
       %h3.offset6 Не проверенные
-      - for object in @report.diff.keys
+      - for object in @diff.keys
         .row.bddd
           .offset4.block-title= t("#{object}.title")
         %table.table.table-striped
-          - for section in @report.diff[object].keys
+          - for section in @diff[object].keys
             %tr
               %td{:style => 'width: 120px'}
                 .block-title{:style => 'font-size: 11pt'}= t("#{object}.#{section}.title")
                 %td{:style => 'line-height: 0.8;'}
-                  - for place in @report.diff[object][section]
+                  - for place in @diff[object][section]
                     %span.badge{:style => 'font-size: 8pt;line-height: 0.7;'}
                       = t("#{object}.#{section}.#{place}")
                       %span.red
-                        - unless @report.diff[object][section][-1] == place
+                        - unless @diff[object][section][-1] == place
                           = " / "
   %br/
   %br/

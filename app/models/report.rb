@@ -29,6 +29,7 @@ class Report < ActiveRecord::Base
 
   scope :public, where(:publish => true)
 
+  NORMAL_CONDITION = ['ок', 'ok', 'УД' , 'OK', 'есть', 150, '150', 100, '100', '1', 1]
   WHEEL = %w(:front_left_wheel :front_right_wheel :rear_right_wheel :rear_left_wheel :stepney)
   
   EXTERIOR_PARTS = %w(:hood :front_right_wing :right_front_door :rear_right_door :rear_right_wing :boot_lid :rear_left_wing :rear_left_door :front_left_door :front_left_wing_of_the :roof :front_bumper :skirt_front_bumper :rear_bumper :rear_apron :right_threshold :left_threshold)

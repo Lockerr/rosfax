@@ -81,7 +81,7 @@
                         %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
                           %h4{:style => 'margin: 0'}
                             = t("#{object}.#{block}.title")
-                            - size =  @filled_points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", ['ок', 'ok', 'OK', 'есть', 100, '100', '1', 1]]).size()
+                            - size =  @filled_points.where(:section => block.to_sym).where(["`points`.`condition` not in (?)", Report::NORMAL_CONDITION]).size()
                             %span{:style => 'font-size: 70%; color: #ddd'}
                               = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                     .collapse{:id => "points_#{block}", :class => object}
@@ -90,7 +90,7 @@
                         .span8
                           %ul.thumbnails
                             - @filled_points.where(:section => block.to_sym).each do |point|
-                              %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => ((['ок', 'ok', 0, 'OK', 'есть', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
+                              %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => ((['УД','ок', 'ok', 0, 'OK', 'есть', 150, '150', 100, '100', '1', 1].include? point.condition) ? 'alert-success' : 'alert-error')}
                                 .row-fluid
                                   .span9{:style => 'padding: 4px'}
                                     = t("#{object}.#{block}.#{point.place}")

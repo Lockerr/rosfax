@@ -1,6 +1,12 @@
 
-.hero-unit
-  %h2 Список отчетов
+.container
+  
+  .row{style: 'margin-top: 10px'}
+    .span3
+      %legend Список отчетов
+    .span8.offset1{style: 'margin-top: 8px'}
+      %input.span7.search-query.pull-right.icon-search{type: :search, disabled: :disabled}
+        %i.icon-search{style: 'padding-top: 1px;margin-top:-22px; margin-left: 76px'}
 
   %table.table.table-bordered.table-striped.table-condensed
     %thead
@@ -10,29 +16,32 @@
         %th VIN
         %th Продавец
         %th Покупатель
+        %th Организация
+
         %th Дата создания
 
     %tbody
       - @reports.each do |report|
-        %tr
+        %tr{data: {report: report.id}}
           %td= report.model_name
           %td= report.car[:car][:year] if report.car[:car]
           %td= report.car['vin']
           %td= report.car['seller']['name'].split(/\s/)[0] if report.car['seller']['name'] if report.car['seller']
           %td= report.car['buyer']['name'].split(/\s/)[0] if report.car['buyer']['name'] if report.car['seller']
+          %td= report.company.try(:name)
           %td= report.created_at.strftime('%d.%m.%y')
-          %td
+          %td.actions
             - if current_user
               - if current_user.reports.include? report or current_user.admin? or current_user.company.reports.include? report
-                = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'
-                = link_to 'Печать', report_path(report, :format => :pdf), :class => 'btn btn-primary'
-                = link_to 'Изменить', edit_report_path(report), :class => 'btn btn-primary'
+                = link_to '', report_path(report), :class => 'btn btn-primary icon-search', :style => 'padding-bottom: 9px'
+                = link_to '', report_path(report, :format => :pdf), :class => 'btn btn-primary icon-print', :style => 'padding-bottom: 9px'
+                
                 - if current_user.admin?
                   .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id, :disabled => :disabled}
-                    Удалить
-                -else 
+                    x
+                - else 
                   .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}
-                    Удалить
+                    x
 
               - else
                 = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'

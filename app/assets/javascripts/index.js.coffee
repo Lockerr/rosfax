@@ -48,4 +48,11 @@ $(document).ready ->
     console.log arr
     window.location.href = "/reports/models/?ids=#{arr}"
 
+  $('td:not(.actions)').hover (->
+    $(@).parent().css('text-decoration', 'underline')
+  ), ->
+    $(@).parent().css('text-decoration', 'none')
 
+  $('td:not(.actions)').click ->
+    console.log 'click'
+    window.location = "/reports/#{$('td:not(.actions)').first().parent().data().report}/edit"

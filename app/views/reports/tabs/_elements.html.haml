@@ -1,7 +1,7 @@
 #elements.tab-pane
   .row
-    .span2
-      .tabbable.tabs-left.affix#elements_nav{:style => "margin-bottom: 18px;"}
+    .span2{style: 'height: 1px'}
+      .tabbable.tabs-left.affix#elements_nav{:style => "margin-bottom: 18px; position: fixed"}
         %ul.nav.nav-tabs.second
           %li.active
             %a{"data-toggle" => "tab", :href => "#eexterior"}

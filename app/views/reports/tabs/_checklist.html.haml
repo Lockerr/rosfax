@@ -1,7 +1,7 @@
 #checklist.tab-pane
   .row
-    .span2
-      .tabbable.tabs-left.affix#checklist_nav
+    .span2{style: 'height: 1px'}
+      .tabbable.tabs-left.affix#checklist_nav{style: 'position: fixed'}
         %ul.nav.nav-tabs
           - for tab in Report::CHECKLIST.keys
             %li

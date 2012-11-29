@@ -51,8 +51,8 @@
               .dropdown-element{:data => {:attribute => 'wheels',:place => place, :change => 'protector', :protector => i}}=i
   .row-fluid
     .span12
-      .btn-group
-        = text_field 'wheel', 'brand', :placeholder => 'Производитель', :data => {:provide => 'typeahead', :source => "#{%w(Amtel Barum BFGoodrich Bridgestone Continental Cordiant Dunlop Dunlop JP Fulda Gislaved Goodyear Kelly Kleber Michelin Nokian Nordman Pirelli Sava Tigar Tunga Yokohama)}", :attribute => 'wheels',:place => place, :change => 'brand'}, :value => (@report.wheels[place]['brand'] if @report.wheels[place]), :style => ' width: 159px'
+      
+      / = text_field 'wheel', 'brand', :data => {:provide => 'typeahead', :source => "#{%w(Amtel Barum BFGoodrich Bridgestone Continental Cordiant Dunlop Dunlop JP Fulda Gislaved Goodyear Kelly Kleber Michelin Nokian Nordman Pirelli Sava Tigar Tunga Yokohama)}", :attribute => 'wheels',:place => place, :change => 'brand'}, :value => (@report.wheels[place]['brand'] if @report.wheels[place]), :style => ' width: 159px'
   .row-fluid
     .span12
       %label.span7.control-label=t("wheels.brake_pads")

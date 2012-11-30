@@ -53,6 +53,7 @@ class PointsController < ApplicationController
 
   def update
     @point = Point.find(params[:id])
+    params[:point][:condition] = nil if params[:point][:condition] == ''
     expire_fragment ['show', @point.report]
     expire_fragment ['edit', @point.report]
 

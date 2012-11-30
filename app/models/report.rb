@@ -177,8 +177,8 @@ class Report < ActiveRecord::Base
       end
     end
 
-    ELEMENTS.each do |section|
-      Report.const_get(section.upcase).each do |place|
+    ELEMENTS.keys.each do |section|
+      ELEMENTS[section][:names].flatten.each do |place|
         points.find_or_create_by_object_and_place_and_section(:elements,place,section)      
       end
     end

@@ -45,17 +45,23 @@
                               %button.check.btn.btn-small{:data => parameters, :class => ('btn-primary' if check.send(change) == i if check)}= i
                       .span2
                         .btn-group
-                          .btn.btn-small
-                            - if check.try(:state)
-                              = check.state
-                            - else
-                              Состояние
-                          .dropdown-menu
-                            - %w(Завод Ремонт Замена Покраска).each do |i|
-                              %li
-                                .dropdown-element.alone{:data => {:change => :state,:value => i}}= t(i).to_s
-                          .btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown"}
-                            %span.caret
+                          - if @elements[tab][:type] == :check
+                            - parameters[:change] = 'state'
+                            - parameters[:state] = 'Перекрас'
+                            .btn-group.pads.radio{:style => 'padding-left: 0px'}
+                              %button.check.btn.btn-small{:data => parameters, :class => ('btn-primary' if check.state == 'Перекрас' if check)}= 'Перекрас'
+                          - else
+                            .btn.btn-small
+                              - if check.try(:state)
+                                = check.state
+                              - else
+                                Состояние
+                            .dropdown-menu
+                              - %w(Завод Ремонт Замена Покраска).each do |i|
+                                %li
+                                  .dropdown-element.alone{:data => {:change => :state,:value => i}}= t(i).to_s
+                            .btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown"}
+                              %span.caret
                       .span3
                         = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'  
                       .span1.camera

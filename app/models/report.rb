@@ -142,15 +142,18 @@ class Report < ActiveRecord::Base
       },
     windows_and_lights: {
       names: [%w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)],
-      values: [%w(ОК НОРМ УД НЕУД)]
+      values: [%w(ОК НОРМ УД НЕУД)],
+      type: :check
       },
     exterior: {
       names: [%w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold)],
-      values: [%w(ОК НОРМ УД НЕУД)]
+      values: [%w(ОК НОРМ УД НЕУД)],
+      type: :check
       },
     interior: {
       names: [%w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest)],
-      values: [%w(ОК НОРМ УД НЕУД)]
+      values: [%w(ОК НОРМ УД НЕУД)],
+      type: :check
     }
   }
 

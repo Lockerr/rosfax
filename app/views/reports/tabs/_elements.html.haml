@@ -3,26 +3,18 @@
     .span2{style: 'height: 1px'}
       .tabbable.tabs-left.affix#elements_nav{:style => "margin-bottom: 18px; position: fixed"}
         %ul.nav.nav-tabs.second
-          %li.active
-            %a{"data-toggle" => "tab", :href => "#eexterior"}
-              Экстерьер
-              %span{:style => 'color: #ddd'}
-                = "#{@report.elements.where(:section => :exterior).count}/#{Report::DEFECTS_CATEGORIES[:exterior].count}"
-          %li
-            %a{:href => "#iinterior"}
-              Интерьер
-              %span{:style => 'color: #ddd'}
-                = "#{@report.elements.where(:section => :interior).count}/#{Report::DEFECTS_CATEGORIES[:interior].count}"
-          %li
-            %a{:href => "#wwindows_and_lights"}
-              Стекла и фары
-              %span{:style => 'color: #ddd'}
-                = "#{@report.elements.where(:section => :windows_and_lights).count}/#{Report::DEFECTS_CATEGORIES[:windows_and_lights].count}"
-
+          - Report::ELEMENTS.keys.each do |tab|
+            %li{class: (tab == 'exterior' ? 'active' : nil)}
+              %a{:href => "#tab_#{tab}"}
+                = t("elements.#{tab}.title")
+                %span{:style => 'color: #ddd'}
+                  = "#{@report.elements.filled.where(section: tab).count}/#{Report::ELEMENTS[tab][:names].count}"
+          
 
     
-    .span10  
-      - for tab in %w(exterior interior windows_and_lights)
+    .span10
+      - @elements = Report::ELEMENTS
+      - for tab in @elements.keys
         
         .accordion{style: 'background-color: white'}
           .accordion-group
@@ -30,41 +22,45 @@
               .row-fluid
                 .span10
                   .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab}"}}
-                    %h4= tab
+                    %h4= t("elements.#{tab}.title")
             .accordion-body.collapse.in{id: tab}
               .accordion-inner
-                - Report.const_get(tab.upcase).each do |param|
-                  - parameters = {:report_id => @report.id, :object => 'elements', :section => tab, :place => param}
-                  - if @points.select{|i| i.place == param}.select{|i| i.object == 'elements'}.any?
-                    - check = @points.select{|i| i.place == param}.select{|i| i.object == 'elements'}.first
-                    - parameters[:id] = check.id 
-                  .object.row-fluid{:data => parameters}
-                    .span2
-                      = t("defects.exterior.#{param}").to_s+ ':'
-                    .span3
-                      .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
-                        .btn-group.pads.radio{:style => 'padding-left: 0px'}
-                          -%w(ок мелкие крупные).each do |i|
-                            - parameters[:condition] = i
-                            %button.check.btn.btn-small{:data => parameters, :class => ('btn-primary' if check.condition == i if check)}= i
-                    .span2
-                      .btn-group
-                        .btn.btn-small
-                          - if check.try(:state)
-                            = check.state
-                          - else
-                            Состояние
-                        .dropdown-menu
-                          - %w(Завод Ремонт Замена Покраска).each do |i|
-                            %li
-                              .dropdown-element.alone{:data => {:change => :state,:value => i}}= t(i).to_s
-                        .btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown"}
-                          %span.caret
-                    .span3
-                      = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'  
-                    .span1.camera
-                      .btn{style: 'padding-top: 9px'}
-                        %i.icon-camera
-                    .span1
-                      = render :partial => 'element_drop', :locals => {:object => check || Point.new, :place => :one}
-                  %hr{style: 'margin: 5px 0'}/
+                - @elements[tab][:names].size.times do |index|
+                  - @elements[tab][:names][index].each do |place|
+                    - parameters = {:report_id => @report.id, :object => 'elements', :section => tab, :place => place}
+                    - if @points.select{|i| i.place == place}.select{|i| i.object == 'elements'}.any?
+                      - check = @points.select{|i| i.place == place}.select{|i| i.object == 'elements'}.first
+                      - parameters[:id] = check.id 
+                    .object.row-fluid{:data => parameters}
+                      .span2
+                        = t("elements.#{tab}.#{place}").to_s+ ':'
+                      .span3
+                        .btn-toolbar.pull-left{:style => 'margin-top: 0px'}
+                          .btn-group.pads.radio{:style => 'padding-left: 0px'}
+                            - @elements[tab][:values][index].each do |i|
+                              - change = :condition
+                              - parameters[change] = i
+                              - parameters[:change] = change
+
+                              %button.check.btn.btn-small{:data => parameters, :class => ('btn-primary' if check.send(change) == i if check)}= i
+                      .span2
+                        .btn-group
+                          .btn.btn-small
+                            - if check.try(:state)
+                              = check.state
+                            - else
+                              Состояние
+                          .dropdown-menu
+                            - %w(Завод Ремонт Замена Покраска).each do |i|
+                              %li
+                                .dropdown-element.alone{:data => {:change => :state,:value => i}}= t(i).to_s
+                          .btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown"}
+                            %span.caret
+                      .span3
+                        = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'  
+                      .span1.camera
+                        .btn{style: 'padding-top: 9px'}
+                          %i.icon-camera
+                      .span1
+                        = render :partial => 'element_drop', :locals => {:object => check || Point.new, :place => :one}
+                    %hr{style: 'margin: 5px 0'}/

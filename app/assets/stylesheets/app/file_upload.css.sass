@@ -1,0 +1,15 @@
+.file-upload::-webkit-file-upload-button 
+  visibility: hidden
+
+.file-upload:before
+  display: inline-block
+  // outline: none
+  // white-space: nowrap
+  -webkit-user-select: none
+  
+
+.file-upload:hover:before 
+  border-color: black
+
+.file-upload:active:before 
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9)

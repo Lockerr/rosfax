@@ -14,14 +14,14 @@
             %span{:style => 'color: #ddd'}
               = @report.points.where(:object => :checklist).count
               \/
-              = 100500
+              num
         %li
           %a{"data-toggle" => "tab", :href => "#elements"}
             Дефекты
             %span{:style => 'color: #ddd'}
               = @report.points.where(:object => :elements).count
               \/
-              = Report::WINDOWS_AND_LIGHTS.count + Report::EXTERIOR.count + Report::INTERIOR.count
+              num
         %li
           %a{"data-toggle" => "tab", :href => "#photo"}
             Фото

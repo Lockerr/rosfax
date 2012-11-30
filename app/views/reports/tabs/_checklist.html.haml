@@ -52,19 +52,22 @@
                               - klass = ''
                               - klass += 'btn-primary' if check.condition == i if check
                               - klass += tab == 'coating' ? ' btn-small' : ' btn-large'
-
+                              - parameters[:change] = :condition
 
                               %button.check.btn{:class => klass, :data => parameters}= i
                       .span3
                         = text_field 'point', 'description', :value => (check ? check.description : '')
                         
                       .span1
-                      .span1.camera
-                        .btn.btn-large
-                          %i.icon-camera
+                      .span1
+                        %input.file-upload.btn.icon-camera{type: :file}
+                          
+                      / .span1.camera
+                      /   .btn.btn-large
+                      /     %i
 
-                          .file-input
-                            %input{type: :file}
+                      /     .file-input
+                      /       %input{type: :file}
                     %hr{style: 'margin: 5px 0'}/
                   - index += 1
 

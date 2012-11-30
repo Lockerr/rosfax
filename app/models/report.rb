@@ -131,10 +131,28 @@ class Report < ActiveRecord::Base
     }
   }
 
-  ELEMENTS = %w(exterior interior windows_and_lights)
-    WINDOWS_AND_LIGHTS = %w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)
-    EXTERIOR = %w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold)
-    INTERIOR = %w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest)
+  ELEMENTS = {
+    radiators: {
+      names: [%w(fans belts nozzles power_management fluid_leaks)],
+      values: [%w(ок мелкие крупные)]
+      },
+    hull: {
+      names: [%w(left_front_spar right_front_spar TV left-pillar right-pillar left_rear_spar right_rear_spar boot_floor)],
+      values: [%w(ок мелкие крупные)]
+      },
+    windows_and_lights: {
+      names: [%w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)],
+      values: [%w(ОК НОРМ УД НЕУД)]
+      },
+    exterior: {
+      names: [%w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold)],
+      values: [%w(ОК НОРМ УД НЕУД)]
+      },
+    interior: {
+      names: [%w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest)],
+      values: [%w(ОК НОРМ УД НЕУД)]
+    }
+  }
 
   TESTDRIVE = %w(suspension engine)
     SUSPENSION = [

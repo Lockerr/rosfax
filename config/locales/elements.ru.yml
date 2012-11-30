@@ -1,0 +1,72 @@
+ru:
+  elements:
+    title: Элементы
+    
+    wheels:
+      title: Колеса
+    
+    exterior:
+      title: Экстерьер
+      hood: Крыша
+      front_right_wing: Крыло переднее правое
+      right_front_door: Дверь передняя правая
+      rear_right_door: Дверь задняя правая
+      rear_right_wing: Крыло заднее правое
+      boot_lid: Крышка багажника
+      rear_left_wing: Крыло заднее левое
+      rear_left_door: Дверь задняя левая
+      front_left_door: Дверь передняя левая
+      front_left_wing_of_the: Крыло переднее левое
+      roof: Крыша
+      front_bumper: Бампер передний
+      skirt_front_bumper: Юбка переднего бампера
+      rear_bumper: Задний бампер
+      rear_apron: Юбка заднего бампера
+      right_threshold: Порог правый
+      left_threshold: Порог левый
+    interior:
+      title: Интерьер
+      front_left_seat: Сидение переднее левое
+      front_right_seat: Сидение переднее правое
+      back_sofa: Задний диван
+      third_row_seats: Третий ряд сидений
+      covering_left_front_door: Обшивка левой передней двери
+      covering_right_front_door: Обшивка правой передней двери
+      covering_left_rear_door: Обшивка левой задней двери
+      covering_rear_right_door: Обшивка правой задней двери
+      covering_trunk: Обшивка багажника
+      ceiling: Потолок
+      torpedo: Торпедо
+      central_console: Центральная консоль
+      armrest: Подлокотник
+    windows_and_lights:
+      title: Стекла и освещение
+      front_left_headlight: Фара передняя левая
+      front_right_headlight: Фара передняя правая
+      rear_left_light: Фонарь задний левый
+      rear_right_light: Фонарь задний правый
+      head-on-window: Лобовое стекло
+      front_right_window: Стекло переднее правое
+      rear_right_window: Стекло заднее правое
+      rear_right_ventilator: Форточка задняя правая
+      rear_window: Заднее стекло
+      rear_left_ventilator: Форточка задняя левая
+      rear_left_window: Стекло заднее левое
+      front_left_window: Стекло переднее левое
+    hull:
+      title: Кузов
+      left_front_spar: Передний левый лонжерон
+      right_front_spar: Передний правый лонжерон
+      TV: Телевизор
+      left-pillar: Левая центральная стойка
+      right-pillar: Правая центральная стойка
+      left_rear_spar: Задний левый лонжерон
+      right_rear_spar: Задний правый лонжерон
+      boot_floor: Пол багажника
+    radiators:
+      title: Радиаторы
+      fans: Вентиляторы
+      belts: Ремни
+      nozzles: Патрубки
+      power_management: Блок управления
+      fluid_leaks: Течи жидкостей

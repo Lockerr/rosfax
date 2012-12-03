@@ -1,24 +1,20 @@
 Tradein::Application.routes.draw do
   
   resources :links
-
+  
   match ':id.pdf' => 'reports#show',:constraints => { :id => /\d.+/ }, :format => 'pdf'
   match ':id' => 'reports#show',:constraints => { :id => /\d.+/ }
+
   resources :feedbacks
-
   resources :companies
-
-  put 'profiles/update_password'
   resources :profiles
-  
-  get 'assets/processed'
-  # resources :assets
-
   resources :points do
     resources :image
     resources :assets
   end
 
+  put 'profiles/update_password'
+  get 'assets/processed'
   get "home/index"
   get 'home/demo'
   
@@ -30,23 +26,20 @@ Tradein::Application.routes.draw do
     resource :profile
   end
 
-
   resources :models do
     get 'index_block'
   end
 
- 
-
   resources :reports do
     resources :links
     resources :points
-    get 'images'
-    get 'all_images'
+    resources :defects
     resources :assets
     post 'place'
     delete 'remove_asset'
     get 'image'
-    resources :defects
+    get 'images'
+    get 'all_images'
     collection do
       get 'models'
     end

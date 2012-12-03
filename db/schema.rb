@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20121127055654) do
     t.text     "interior"
     t.text     "under_the_hood"
     t.text     "photo_others"
+    t.text     "checklist"
     t.text     "car"
     t.text     "documents"
     t.integer  "user_id"

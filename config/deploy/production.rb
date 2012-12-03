@@ -6,7 +6,7 @@ puts "#                     Enter y/N + enter to continue                  #"
 puts "#                                                                    #"
 puts "######################################################################\e[0m\n" 
 
-load 'deploy/assets'
+# load 'deploy/assets'
 
 proceed = STDIN.gets[0..0] rescue nil 
 exit unless proceed == 'y' || proceed == 'Y' 

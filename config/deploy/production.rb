@@ -5,7 +5,7 @@ puts "#        Are you REALLY sure you want to deploy to production?       #"
 puts "#                     Enter y/N + enter to continue                  #"
 puts "#                                                                    #"
 puts "######################################################################\e[0m\n" 
-
+load 'deploy/assets'
 proceed = STDIN.gets[0..0] rescue nil 
 exit unless proceed == 'y' || proceed == 'Y' 
 
@@ -27,8 +27,8 @@ set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
 set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
 namespace :deploy do
-  after :update_code, :assets:precompile
   
+
   task :restart do
     run "if [ -f #{unicorn_pid} ]; then kill -USR2 `cat #{unicorn_pid}`; else cd /home/perekup/rosfax/current && rvm r328 do bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D ; fi"
   end
@@ -52,6 +52,7 @@ namespace :deploy do
       else
         logger.info "Skipping asset pre-compilation because there were no asset changes"
       end
+    end
   end
 
 end

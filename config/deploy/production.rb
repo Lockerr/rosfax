@@ -5,7 +5,9 @@ puts "#        Are you REALLY sure you want to deploy to production?       #"
 puts "#                     Enter y/N + enter to continue                  #"
 puts "#                                                                    #"
 puts "######################################################################\e[0m\n" 
+
 load 'deploy/assets'
+
 proceed = STDIN.gets[0..0] rescue nil 
 exit unless proceed == 'y' || proceed == 'Y' 
 
@@ -44,16 +46,16 @@ namespace :deploy do
   end
   
 
-  namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
-      from = source.next_revision(current_revision)
-      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
-        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
-      else
-        logger.info "Skipping asset pre-compilation because there were no asset changes"
-      end
-    end
-  end
+  # namespace :assets do
+  #   task :precompile, :roles => :web, :except => { :no_release => true } do
+  #     from = source.next_revision(current_revision)
+  #     if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+  #       run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+  #     else
+  #       logger.info "Skipping asset pre-compilation because there were no asset changes"
+  #     end
+  #   end
+  # end
 
 end
 

@@ -12,7 +12,7 @@ Tradein::Application.routes.draw do
   resources :profiles
   
   get 'assets/processed'
-  resources :assets
+  # resources :assets
 
   resources :points do
     resources :image

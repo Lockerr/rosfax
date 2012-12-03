@@ -54,6 +54,7 @@
         .span8{:class => (@report.assets[0..4].index(asset) == 0 ? 'offset4' : 'offset1' )}
           %img.rg_i{ :src => asset.url(:thumb) }/
     - else
+    
       .span8.offset4
         %img.rg_i{:src => "http://s3-eu-west-1.amazonaws.com/rosfax/data/311/thumb.jpg?1350286273"}/
       .span8.offset1
@@ -93,8 +94,8 @@
     - unless @diff.empty?
       %h3.offset6 Не проверенные
       - for object in @diff.keys
-        / .row.bddd
-        /   .offset4.block-title= t("#{object}.title")
+        .row.bddd
+          .offset4.block-title= t("#{object}.title")
         %table.table.table-striped
           - for section in @diff[object].keys
             %tr

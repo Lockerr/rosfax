@@ -4,6 +4,7 @@ class Asset < ActiveRecord::Base
   unless Rails.env == 'development'
     has_attached_file :data,
             :styles => {
+              :small => {geometry: '50x34', :format => :jpg },
               :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
               :carousel => {:geometry => '900x600>', :format => :jpg, :pre_convert_options => "-auto-orient"},
               :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}

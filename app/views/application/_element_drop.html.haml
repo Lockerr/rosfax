@@ -1,9 +1,13 @@
-.object_drop{:data => {:object => 'elements', :object_id => object.id}}
+.object_drop{:data => {:object => object.object, :object_id => object.id}}
   .thumbnail{:style => 'width: 50px; float: left; margin-right: 5px; height: 35px; padding: 2px'}
-    %a{:href => '#', :style => 'height: 68px; width: 100px'}
-      - if object.images.any?
-        .thumb{:data => {:image_id => object.image.id}}
-          = image_tag(object.image.url(:thumb))
+    %a{:href => '#', :style => 'height: 34px; width: 50px'}
+      - if object.assets.any?
+        - asset = object.assets.last
+        .thumb{:data => asset.attributes, style: 'width: 50px; height: 35px'}
+          - if asset.data_processing
+            = image_tag asset.url(:thumb), :processing => asset.id, :class => 'processing', :id => asset.id
+          - else
+            = image_tag asset.url(:thumb), id: asset.id
       - else
         .thumb
           = image_tag('http://s3-eu-west-1.amazonaws.com/rosfax/box.png')

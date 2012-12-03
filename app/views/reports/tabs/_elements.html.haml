@@ -15,7 +15,6 @@
     .span10
       - @elements = Report::ELEMENTS
       - for tab in @elements.keys
-        
         .accordion{style: 'background-color: white'}
           .accordion-group
             .accordion-heading
@@ -47,9 +46,9 @@
                         .btn-group
                           - if @elements[tab][:type] == :check
                             - parameters[:change] = 'state'
-                            - parameters[:state] = 'Перекрас'
+                            - parameters[:state] = @elements[tab][:check]
                             .btn-group.pads.radio{:style => 'padding-left: 0px'}
-                              %button.check.btn.btn-small{:data => parameters, :class => ('btn-primary' if check.state == 'Перекрас' if check)}= 'Перекрас'
+                              %button.check.btn.btn-small{:data => parameters, :class => ('btn-primary' if check.state == @elements[tab][:check] if check)}= @elements[tab][:check]
                           - else
                             .btn.btn-small
                               - if check.try(:state)
@@ -63,10 +62,11 @@
                             .btn.btn-small.dropdown-toggle{"data-toggle" => "dropdown"}
                               %span.caret
                       .span3
-                        = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'  
-                      .span1.camera
-                        .btn{style: 'padding-top: 9px'}
-                          %i.icon-camera
+                        = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'
+                        
                       .span1
-                        = render :partial => 'element_drop', :locals => {:object => check || Point.new, :place => :one}
+                        = form_for 'asset', :remote => true, :html => {multipart: true, :id => "new_point_#{check.id}_asset", :data => {id: check.id}}  do |f|                        
+                          = f.file_field :data, class: 'file-upload'
+                      .span1
+                        = render :partial => 'element_drop', :locals => {:object => check, :place => :one}
                     %hr{style: 'margin: 5px 0'}/

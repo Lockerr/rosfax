@@ -160,7 +160,7 @@ $ ->
         complete: ->
           window.location.href = '/reports/'
 
-  $('input:not(#point_description), textarea').change ->
+  $('input:not(#point_description):not(.file-upload), textarea').change ->
     element = $(@)
     if element.data('change') 
       element.data(element.data('change'), element.val())

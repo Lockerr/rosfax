@@ -1,13 +1,12 @@
 ru:
-  elements:
-    title: Элементы
+  
     
     wheels:
       title: Колеса
     
     exterior:
       title: Экстерьер
-      hood: Крыша
+      hood: Капот
       front_right_wing: Крыло переднее правое
       right_front_door: Дверь передняя правая
       rear_right_door: Дверь задняя правая
@@ -40,7 +39,7 @@ ru:
       central_console: Центральная консоль
       armrest: Подлокотник
     windows_and_lights:
-      title: Стекла и освещение
+      title: Стекла и фары
       front_left_headlight: Фара передняя левая
       front_right_headlight: Фара передняя правая
       rear_left_light: Фонарь задний левый
@@ -63,8 +62,9 @@ ru:
       left_rear_spar: Задний левый лонжерон
       right_rear_spar: Задний правый лонжерон
       boot_floor: Пол багажника
-    radiators:
-      title: Радиаторы
+    under_the_hood:
+      title: Под капотом
+      radiators: Радиаторы
       fans: Вентиляторы
       belts: Ремни
       nozzles: Патрубки

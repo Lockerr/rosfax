@@ -35,12 +35,12 @@
                 - for block in Report::CHECKLIST[tab][:names]
                    
                   - if Report::CHECKLIST[tab][:legends]
-                    %legend= Report::CHECKLIST[tab][:legends][index]
+                    %legend{style: 'margin-bottom: 6px'}= Report::CHECKLIST[tab][:legends][index]
                   - for param in block
                   
                     - parameters = {:report_id => @report.id, :object => 'checklist', :section => tab, :place => param}  
-                    - if check = @points.select{|i| i.place == param}.first
-                      - parameters[:id] = check.id
+                    - check = @points.select{|i| i.place == param}.first
+                    - parameters[:id] = check.id
                     .row-fluid.object.form-inline{:data => parameters}
                       .span3                    
                         = t("checklist.#{tab}.#{param}").to_s+ ':'
@@ -56,12 +56,15 @@
 
                               %button.check.btn{:class => klass, :data => parameters}= i
                       .span3
-                        = text_field 'point', 'description', :value => (check ? check.description : '')
+                        = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'
                         
                       .span1
+                        = form_for 'asset', :remote => true, :html => {multipart: true, :id => "new_point_#{check.id}_asset", :data => {id: check.id}}  do |f|
+                          = f.file_field :data, class: 'file-upload'
+                        
+                      
                       .span1
-                        %input.file-upload.btn.icon-camera{type: :file}
-                          
+                        = render :partial => 'element_drop', :locals => {:object => check, :place => :one}
                       / .span1.camera
                       /   .btn.btn-large
                       /     %i

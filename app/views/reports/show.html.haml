@@ -112,8 +112,8 @@
 
           - unless @diff.empty?
             - for object in @diff.keys
-              / %label
-              /   %h3= t("#{object}.title")
+              %label
+                %h3= t("#{object}.title")
               %table.table.table-striped{style: 'margin-left: 30px'}
                 - for section in @diff[object].keys
                   %tr

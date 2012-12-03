@@ -31,13 +31,29 @@ class AssetsController < ApplicationController
 
   def create
     if params[:asset]
-      if report = Report.find(params[:report_id])
-        expire_fragment ['show', report]
-        expire_fragment ['edit', report]
+      if params[:report_id]
+        if report = Report.find(params[:report_id])
+          expire_fragment ['show', report]
+          expire_fragment ['edit', report]
 
-        asset = report.assets.create(params[:asset])
+          @asset = report.assets.create(params[:asset])
+        end
+      elsif params[:point_id]
+        if point = Point.find(params[:point_id])  
+          @asset = point.assets.create(params[:asset])
+          raise 'match'
+        end
       end
-      render :json => { :pic_path => asset.url.to_s , :name => asset.name, :id => asset.id }, :content_type => 'text/html'
+    elsif params[:point_id]
+      if point = Point.find(params[:point_id])  
+        @asset = point.assets.create(data: params['file-0'])
+        
+      end
+    end
+    respond_to do |format|
+      format.json {render :json => { :pic_path => asset.url.to_s , :name => asset.name, :id => asset.id }, :content_type => 'text/html'}
+      format.html 
+      format.js
     end
   end
 

@@ -59,15 +59,15 @@ class Report < ActiveRecord::Base
 
   
   #%w(coating lights electronic liquids completion stickers devices)
+    # coating: {
+    #     names: [
+    #       ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door"],
+    #       ["rear_right_door", "rear_right_wing", "front", "rear", "roof"]
+    #       ],
+    #   values: [%w(150 300 500 1000)]*2,
+    #   legends: ['Краска 1', 'Краска 2']
+    # },
   CHECKLIST = {
-    coating: {
-        names: [
-          ["front_left_wing", "front_left_door", "rear_left_door", "rear_left_wing", "front_right_wing", "front_right_door"],
-          ["rear_right_door", "rear_right_wing", "front", "rear", "roof"]
-          ],
-      values: [%w(150 300 500 1000)]*2,
-      legends: ['Краска 1', 'Краска 2']
-    },
     
     lights: {
       names: [
@@ -122,38 +122,46 @@ class Report < ActiveRecord::Base
     suspension: {
       names: [%w(divestment_steering steering_wheel_is_straight luft_knock_on_the_handlebars air_suspension heartbeat_vibration_on_acseletation creaks_knocks_on_the_irregularities heartbeat_vibration_on_braking circular_motion_gur circular_motion_shru)],
       values: [%w(ОК УД НЕУД)]
-      },
+    },
 
     engine: {
-      names: [%w(engine_start all_wheel_drive routes routes_during_heavy_gas smoke_from_exhaust engine_noise shifting_down shifting_up parking_brake)],
+      names: [%w(engine_start routes routes_during_heavy_gas smoke_from_exhaust engine_noise shifting_down shifting_up parking_brake all_wheel_drive)],
       values: [%w(ОК УД НЕУД)]
 
     }
   }
 
   ELEMENTS = {
-    radiators: {
-      names: [%w(fans belts nozzles power_management fluid_leaks)],
-      values: [%w(ок мелкие крупные)]
-      },
-    hull: {
-      names: [%w(left_front_spar right_front_spar TV left-pillar right-pillar left_rear_spar right_rear_spar boot_floor)],
-      values: [%w(ок мелкие крупные)]
-      },
-    windows_and_lights: {
-      names: [%w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)],
-      values: [%w(ОК НОРМ УД НЕУД)],
-      type: :check
-      },
     exterior: {
       names: [%w(hood front_right_wing right_front_door rear_right_door rear_right_wing boot_lid rear_left_wing rear_left_door front_left_door front_left_wing_of_the roof front_bumper skirt_front_bumper rear_bumper rear_apron right_threshold left_threshold)],
       values: [%w(ОК НОРМ УД НЕУД)],
-      type: :check
-      },
+      type: :check,
+      check: 'ЗАМЕНА'
+    },
     interior: {
       names: [%w(front_left_seat front_right_seat back_sofa third_row_seats covering_left_front_door covering_right_front_door covering_left_rear_door covering_rear_right_door covering_trunk ceiling torpedo central_console armrest)],
       values: [%w(ОК НОРМ УД НЕУД)],
-      type: :check
+      type: :check,
+      check: 'ЗАМЕНА'
+    },
+    windows_and_lights: {
+      names: [%w(front_left_headlight front_right_headlight rear_left_light rear_right_light head-on-window front_right_window rear_right_window rear_right_ventilator rear_window rear_left_ventilator rear_left_window front_left_window)],
+      values: [%w(ОК НОРМ УД НЕУД)],
+      type: :check,
+      check: 'ЗАМЕНА'
+    },
+
+    hull: {
+      names: [%w(left_front_spar right_front_spar TV left-pillar right-pillar left_rear_spar right_rear_spar boot_floor)],
+      values: [%w(ОК УД НЕУД)],
+      type: :check,
+      check: 'РЕМОНТ'
+    },
+    under_the_hood: {
+      names: [%w(radiators fans belts nozzles power_management fluid_leaks)],
+      values: [%w(ОК УД НЕУД)],
+      type: :check,
+      check: 'ЗАМЕНА'
     }
   }
 
@@ -188,19 +196,21 @@ class Report < ActiveRecord::Base
   end
 
   def diff
-    result = {'checklist' => {}}
+    result = {'checklist' => {}, 'elements' => {}}
     empty = points.where(object: [:checklist, :testdrive]).where('`condition` is NULL').where('`description` is NULL')
+
     empty.each do |point|
       
       result[point.object][point.section] ||= []
       result[point.object][point.section].push point.place
     end
 
-    # empty = points.where(object: :elements).where('`condition` is NULL').where('`description` is NULL').where('`state` is NULL')
-    # empty.each do |point|
-    #   result[point.object][point.section] ||= []
-    #   result[point.object][point.section].push point.place
-    # end
+    empty = points.where(object: :elements).where('`condition` is NULL').where('`description` is NULL').where('`state` is NULL')
+
+    empty.each do |point|
+      result[point.object][point.section] ||= []
+      result[point.object][point.section].push point.place
+    end
 
     result.any? ? result : false
   end

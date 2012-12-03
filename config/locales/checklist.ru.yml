@@ -112,7 +112,7 @@ ru:
       title: ДВС и КПП
       name: ДВС и КПП
       engine_start: Запуск
-      all_wheel_drive: Полный привод
+      all_wheel_drive: Подключение полного привода
       routes: Обороты ХХ
       routes_during_heavy_gas: Обороты при резком газе
       smoke_from_exhaust: Дым из выхлопа

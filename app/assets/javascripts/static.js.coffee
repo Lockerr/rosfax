@@ -10,6 +10,8 @@ $(document).ready ->
   $('input#profile_phone').mask("+7(999) 999 99 99")
   
   $('input#report_car_vin').mask("*** ****** ****9999",{upcase: true})
+
+  $('.processing').parent().activity()
     
 
 
@@ -31,3 +33,5 @@ $(document).ready ->
   $.each $('.nav-tabs'), ->
     $(this).children().first().addClass('active')
 
+  $('.move_to_top').click ->
+    $(document).scrollTop(0)

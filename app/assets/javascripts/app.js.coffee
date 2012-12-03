@@ -80,7 +80,7 @@ get_images = ->
   ids = $.map($(".processing"), (n, i) -> n.id ).unique()
   if ids.length > 0
     console.log ids
-
+    size = 
     $.ajax
       url: '/assets/processed'
       data: {assets: ids, size: 'thumb'}
@@ -108,7 +108,8 @@ refresh_image = (refresh_rate, src, id) ->
           image.removeClass('processing')
           image.parent().removeClass('processing_image')
           image.parent().activity(false)
-          image.parent().addClass('image')
+          image.parent()
+          
 
           $.each $('.photos img'), ->
             this.ondragstart = (event) ->

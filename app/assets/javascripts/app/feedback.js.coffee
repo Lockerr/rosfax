@@ -7,3 +7,7 @@ $ ->
 
   $('.feedback').click ->
     $('.feedback-modal').modal('show')
+
+  
+  $('.move_to_top').click ->
+    $(document).scrollTop(0)

@@ -3,9 +3,10 @@
   %head
     %title Tradein
     = stylesheet_link_tag    "application"
-    = javascript_include_tag "application"
+    = javascript_include_tag controller_name
     = csrf_meta_tags
   %body{:data => {:spy => :scroll, :target => '.nav'}}
+
     .container-fluid
       
       - unless request.path == '/'

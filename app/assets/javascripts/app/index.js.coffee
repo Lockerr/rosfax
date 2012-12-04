@@ -53,6 +53,3 @@ $(document).ready ->
   ), ->
     $(@).parent().find('td:not(.actions)').css('text-decoration', 'none')
 
-  $('td:not(.actions)').click ->
-    console.log 'click'
-    window.location = "/reports/#{$('td:not(.actions)').first().parent().data().report}/edit"

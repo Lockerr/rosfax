@@ -1,3 +1,4 @@
+
 $(document).ready ->
 
   $('.hide_unchecked').click ->
@@ -33,5 +34,3 @@ $(document).ready ->
   $.each $('.nav-tabs'), ->
     $(this).children().first().addClass('active')
 
-  $('.move_to_top').click ->
-    $(document).scrollTop(0)

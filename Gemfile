@@ -30,11 +30,11 @@ gem 'hirb'
 gem "devise-async"
 gem 'russian'
 gem 'spine-rails'
+gem 'coffee-rails'
 
 
 group :assets do
   gem 'sass-rails'
-  gem 'coffee-rails'
   gem 'uglifier'
 
 end

@@ -95,7 +95,7 @@
                                   .span9{:style => 'padding: 4px'}
                                     = t("#{object}.#{block}.#{point.place}")
                                   .span3{:style => 'text-align: right;padding: 4px'}
-                                    = point.condition
+                                    = point.condition || point.state
         
         .row
           .span12

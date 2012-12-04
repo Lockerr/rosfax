@@ -44,7 +44,7 @@ Tradein::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( clean.js.coffee home.js.coffee reports.js.coffee reports_show.js.coffee)
+  config.assets.precompile += %w( clean.js home.js reports.js reports_show.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

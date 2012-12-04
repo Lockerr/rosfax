@@ -77,7 +77,7 @@
     - if @filled_points.where(:object => object.to_sym).any?
       -for block in @filled_points.where(:object => object.to_sym).group(:section).map(&:section)
         .row{:style => 'padding-top: 20px'}
-          .span50.bddd
+          .span50.bddd{:style => 'margin-bottom: 5px'}
             .offset4
               .block-title
                 = t("#{object}.#{block}.title")
@@ -90,6 +90,16 @@
                     .div.left{:style => 'font-size: 10pt'}= t("#{object}.#{block}.#{point.place}")
                     .div.right{:style => 'font-size: 10pt',:class => ((Report::NORMAL_CONDITION.include? point.condition) ? 'green' : 'red')}
                       = point.condition
+        - points = @report.points.where(:section => block.to_sym).where('description is not null')
+        - if points.any?
+
+          .row{:style => 'margin-top: 5px'}
+            .span46
+              .row
+                %hr/
+                .span43.offset5{:style => 'font-size: 9pt; font-style: italic; text-align: justify'}
+                  - points.each do |point|
+                    = t("#{object}.#{block}.#{point.place}") + ': ' + point.description + '.' 
   .row
     - unless @diff.empty?
       %h3.offset6 Не проверенные

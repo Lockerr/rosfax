@@ -50,6 +50,10 @@ class AssetsController < ApplicationController
         
       end
     end
+    
+    expire_fragment ['show', @asset.attachable.report]
+    expire_fragment ['edit', @asset.attachable.report]
+    
     respond_to do |format|
       format.json {render :json => { :pic_path => asset.url.to_s , :name => asset.name, :id => asset.id }, :content_type => 'text/html'}
       format.html 

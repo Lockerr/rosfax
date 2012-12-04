@@ -1,9 +1,7 @@
 ru:
-  
-    
+  elements:
     wheels:
       title: Колеса
-    
     exterior:
       title: Экстерьер
       hood: Капот

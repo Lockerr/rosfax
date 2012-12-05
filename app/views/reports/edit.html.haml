@@ -1,38 +1,37 @@
-= cache ['edit', @report] do 
-  %p#notice= notice
-  .row
+%p#notice= notice
+.row
 
-    .tabbable
-      %ul.nav.nav-tabs.first.offset2
-        %li.active
-          %a{"data-toggle" => "tab", :href => "#info"}
-            Информация
-            %span{:style => 'color: #ddd'}= 1
-        %li
-          %a{"data-toggle" => "tab", :href => "#elements"}
-            Осмотр
-            %span{:style => 'color: #ddd'}
-              = @report.points.where(:object => :elements).count
-              \/
-              num
-        %li
-          %a{"data-toggle" => "tab", :href => "#checklist"}
-            Чеклист
-            %span{:style => 'color: #ddd'}
-              = @report.points.where(:object => :checklist).count
-              \/
-              num
-        %li
-          %a{"data-toggle" => "tab", :href => "#photo"}
-            Фото
-            %span{:style => 'color: #ddd'}= 1
-      
-      .tab-content.first
-        - for symbol in %w(photo checklist elements testdrive info)
-          = render "reports/tabs/#{symbol}"
-  
-  .span4.uploader.hide
-    = render :partial => 'uploader', :locals => {:attribute => ''}
+  .tabbable
+    %ul.nav.nav-tabs.first.offset2
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#info"}
+          Информация
+          %span{:style => 'color: #ddd'}= 1
+      %li
+        %a{"data-toggle" => "tab", :href => "#elements"}
+          Осмотр
+          %span{:style => 'color: #ddd'}
+            = @report.points.where(:object => :elements).count
+            \/
+            num
+      %li
+        %a{"data-toggle" => "tab", :href => "#checklist"}
+          Чеклист
+          %span{:style => 'color: #ddd'}
+            = @report.points.where(:object => :checklist).count
+            \/
+            num
+      %li
+        %a{"data-toggle" => "tab", :href => "#photo"}
+          Фото
+          %span{:style => 'color: #ddd'}= 1
+    
+    .tab-content.first
+      - for symbol in %w(photo checklist elements testdrive info)
+        = render "reports/tabs/#{symbol}"
 
-  = render 'carousel'
+.span4.uploader.hide
+  = render :partial => 'uploader', :locals => {:attribute => ''}
+
+= render 'carousel'
 

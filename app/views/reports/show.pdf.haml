@@ -3,11 +3,13 @@
     .span50{:style => 'background-color: #59306a'}
 
   .row
-    .span7.offset4
+    .span7.offset4{style: 'margin-top: 11px'}
       - unless Rails.env == 'development'
         - if @report.company
           - if @report.company.asset
-            %img{src: @report.company.asset.url}
+            %img{src: @report.company.asset.url(:carousel)}
+      - else
+        %img{src: "http://s3-eu-west-1.amazonaws.com/rosfax/data/342/carousel.jpg?1354701320", width: 200}
 
     .span12.offset18
       %h3.text-right

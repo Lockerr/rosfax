@@ -35,6 +35,7 @@ class PointsController < ApplicationController
     @point = Point.new(params[:point])
     expire_fragment ['show', @point.report]
     expire_fragment ['edit', @point.report]
+    expire_fragment ['pdf', @point.report]
 
     respond_to do |format|
       if @point.save
@@ -57,6 +58,7 @@ class PointsController < ApplicationController
     params[:point][:state] = nil if params[:point][:state] == ''
     expire_fragment ['show', @point.report]
     expire_fragment ['edit', @point.report]
+    expire_fragment ['pdf', @point.report]
 
     respond_to do |format|
       if @point.update_attributes(params[:point].except(:id))

@@ -90,7 +90,7 @@
                         .span8
                           %ul.thumbnails
                             - points = @filled_points.where(:section => block.to_sym).each do |point|
-                              %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => ((Report::NORMAL_CONDITION.include? point.condition) ? 'alert-success' : 'alert-error')}
+                              %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => point.alert_class}
                                 .row-fluid
                                   .span9{:style => 'padding: 4px'}
                                     = t("#{object}.#{block}.#{point.place}")

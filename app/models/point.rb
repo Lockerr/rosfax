@@ -12,6 +12,25 @@ class Point < ActiveRecord::Base
   validates_presence_of :object
   serialize :images, Array
 
- 
+  def alert_class
+    if Report::NORMAL_CONDITION.include? condition
+      'alert-success'
+    elsif  Report::BAD_CONDITION.include? condition
+      'alert-error'
+    else
+      'alert-normal'
+    end      
+  end
+
+  def point_color
+    if Report::NORMAL_CONDITION.include? condition
+      'red'
+    elsif  Report::BAD_CONDITION.include? condition
+      'green'
+    else
+      'normal'
+    end      
+  end
+
 
 end

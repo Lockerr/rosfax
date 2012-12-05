@@ -88,7 +88,7 @@
                 .span19.offset4.left
                   .div
                     .div.left{:style => 'font-size: 10pt'}= t("#{object}.#{block}.#{point.place}")
-                    .div.right{:style => 'font-size: 10pt',:class => ((Report::NORMAL_CONDITION.include? point.condition) ? 'green' : 'red')}
+                    .div.right{:style => 'font-size: 10pt',:class => point.point_color}
                       = point.condition
         - points = @report.points.where(:section => block.to_sym).where('description is not null')
         - if points.any?

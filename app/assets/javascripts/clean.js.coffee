@@ -6,5 +6,6 @@
 
 $ ->
   $('td:not(.actions)').click ->
-    console.log 'click'
-    window.location = "/reports/#{$('td:not(.actions)').first().parent().data().report}/edit"
+    console.log 'clickl'
+    console.log $(@)
+    window.location = "/reports/#{$(@).parent().data().report}/edit"

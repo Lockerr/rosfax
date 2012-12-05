@@ -29,7 +29,7 @@ class Report < ActiveRecord::Base
 
   scope :public, where(:publish => true)
 
-  NORMAL_CONDITION = ['ок', 'ok', 'УД' , 'ОК', 'OK', 'есть', 150, '150', 100, '100', '1', 1]
+  NORMAL_CONDITION = ['ок', 'ok', 'УД' , 'OK', 'ОК', 'есть', 150, '150', 100, '100', '1', 1]
   BAD_CONDITION = ['ОБЕ', 'НЕУД', 'НЕТ']
   WHEEL = %w(:front_left_wheel :front_right_wheel :rear_right_wheel :rear_left_wheel :stepney)
   

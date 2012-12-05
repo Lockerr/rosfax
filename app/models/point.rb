@@ -24,9 +24,9 @@ class Point < ActiveRecord::Base
 
   def point_color
     if Report::NORMAL_CONDITION.include? condition
-      'red'
-    elsif  Report::BAD_CONDITION.include? condition
       'green'
+    elsif  Report::BAD_CONDITION.include? condition
+      'red'
     else
       'normal'
     end      

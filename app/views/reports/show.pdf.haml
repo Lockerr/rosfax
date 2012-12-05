@@ -7,7 +7,7 @@
       - unless Rails.env == 'development'
         - if @report.company
           - if @report.company.asset
-            %img{src: @report.company.asset.url(:carousel)}
+            %img{src: @report.company.asset.url(:carousel), width: 200}
       - else
         %img{src: "http://s3-eu-west-1.amazonaws.com/rosfax/data/342/carousel.jpg?1354701320", width: 200}
 

@@ -6,14 +6,18 @@ Tradein::Application.routes.draw do
   match ':id' => 'reports#show',:constraints => { :id => /\d.+/ }
 
   resources :feedbacks
-  resources :companies
+  resources :companies do
+    put 'upload_logotype'
+  end
+  
+  put 'profiles/update_password'
+  
   resources :profiles
   resources :points do
     resources :image
     resources :assets
   end
 
-  put 'profiles/update_password'
   get 'assets/processed'
   get "home/index"
   get 'home/demo'

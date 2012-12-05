@@ -80,4 +80,12 @@ class CompaniesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def upload_logotype
+    @company = Company.find(params[:company_id])
+    asset = @company.build_asset(data: params[:company][:logo])
+    asset.save
+    redirect_to :back
+  end
+
 end

@@ -2,6 +2,9 @@
 class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
+  
+  layout 'profile'
+
   def index
     @profiles = Profile.all
 
@@ -36,7 +39,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @profile = current_user.profile ||= current_user.create_profile
-    render :layout => 'report'        
+           
   end
 
   # POST /profiles
@@ -58,7 +61,7 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1
   # PUT /profiles/1.json
   def update
-    params[:profile][:phone] = params[:profile][:phone].gsub(/\D/, '')[1..-1] if params[:profile][:phone]
+    params[:profile][:phone] = params[:profile][:phone].gsub(/\D/, '')[1..-1] if params[:profile][:phone] if params[:profile]
     
     @profile = Profile.find(params[:id])
 

@@ -4,8 +4,11 @@
 
   .row
     .span7.offset4
-      %h3
-        logo
+      - unless Rails.env == 'development'
+        - if @report.company
+          - if @report.company.asset
+            %img{src: @report.company.asset.url}
+
     .span12.offset18
       %h3.text-right
         Отчет #

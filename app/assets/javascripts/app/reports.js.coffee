@@ -222,9 +222,14 @@ $ ->
         delete $(pad).data()['id']
 
   $('.new_all_ok').live 'click', ->
-    pads = $(@).parents('.accordion-group').find('.pads')
-    for pad in pads
-      $(pad).find('.btn').first().trigger('click')
+    objects = $(@).parents('.accordion-group').find('.object')
+    for object in objects
+      for pad in $(object).find('.pads').first()
+        button = $(pad).find('.btn').first()
+        button.trigger('click') unless button.hasClass('btn-primary')
+      for pad in $($(object).find('.pads')[1])
+        button = $(pad).find('.btn')
+        button.trigger('click') if button.hasClass('btn-primary')
     $(@).removeClass('new_all_ok')
     $(@).addClass('new_clear_ok')
     $(@).text('Очистить')
@@ -235,14 +240,9 @@ $ ->
     $(@).text('Все ОК')
     pads = $(@).parents('.accordion-group').find('.object')
     for pad in pads
-      console.log $(pad).data('object')
-      document.pad = pad
-      if $(pad).data('object')
-        $.ajax
-          type: 'DELETE'
-          url: "/points/#{$(pad).data().id}.json"          
-        $(pad).find('.btn-primary').removeClass('btn-primary')
-        delete $(pad).data()['id']
+      for button in $(pad).find('.btn')
+        button = $(button)
+        button.trigger('click') if button.hasClass('btn-primary')
 
   $('input#point_description').change ->
     that = $(@)  

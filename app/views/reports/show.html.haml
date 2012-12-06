@@ -1,13 +1,13 @@
 = cache ['show', @report] do 
   .container#report{:report => @report.id}
-    .row
-      .span4
-        %h2
-          Отчет #
-          = @report.id
-          от
-          =@report.created_at.strftime('%d.%m.%y')
+    %legend
       
+      %h3
+        Отчет #
+        = @report.id
+        от
+        =@report.created_at.strftime('%d.%m.%y')
+  
 
 
 
@@ -17,19 +17,43 @@
           = image_tag( @report.assets.first.url(:thumb), :width => '120px', :id => @report.assets.first.id ) if @report.assets.any?
 
       .span10
-        %table.table.table-striped
-          %tr
-            %td= @report.car['mark_model']
-            %td= @report.car['mark_model']
-            %td= @report.car['year']
-          %tr
-            %td= @report.car['vin']
-            %td Регистрационный номер
-            %td Пробег
-          %tr
-            %td Количество цилиндров
-            %td Расположение двигателя
-            %td Тип двигателя
+        .row-fluid
+          .well.well-small.well-special.span4
+            .span12{style: 'min-height: initial'}
+              = @report.car['mark_model']
+            
+          .well.well-small.well-special.span4
+            .span6{style: 'min-height: initial'}
+              Гос. номер
+            .span6{style: 'text-align: right;min-height: initial'}
+              %span.badge.badge-info
+                = @report.car['gov_number']
+          .well.well-small.well-special.span4
+            .span8{style: 'min-height: initial'}
+              Пробег, км
+            .span4{style: 'text-align: right;min-height: initial'}
+              %span.badge.badge-info
+                = @report.car['mileage']
+        .row-fluid
+          .well.well-small.well-special.span4
+            .span8{style: 'min-height: initial'}
+              Объем двигателя, см3
+            .span4{style: 'text-align: right;min-height: initial'}
+              %span.badge.badge-info
+                =@report.car['cylinder_amount']
+          .well.well-small.well-special.span4
+            .span8{style: 'min-height: initial'}
+              Топливо
+            .span4{style: 'text-align: right;min-height: initial'}
+              %span.badge.badge-info
+                =@report.car['engine_type']
+          .well.well-small.well-special.span4
+            .span8{style: 'min-height: initial'}
+              Привод
+            .span4{style: 'text-align: right;min-height: initial'}
+              %span.badge.badge-info
+                =@report.car['drive']
+    %hr/
     .row
       .span8
         .row#row

@@ -22,6 +22,10 @@
                 .span10
                   .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab}"}}
                     %h4= t("elements.#{tab}.title")
+                .span2
+                  .accordion-toggle
+                    .btn.btn-large.new_all_ok.pull-right Все ок
+
             .accordion-body.collapse.in{id: tab}
               .accordion-inner
                 - @elements[tab][:names].size.times do |index|

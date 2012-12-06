@@ -26,6 +26,11 @@ class Report < ActiveRecord::Base
   serialize :documents, Hash
   
   before_create :generate_points
+  
+  after_update :expire_pages
+  after_create :expire_pages
+  before_destroy :expire_pages
+
 
   scope :public, where(:publish => true)
 
@@ -369,6 +374,12 @@ class Report < ActiveRecord::Base
 
   def car_mark_model=(markmodel)
     car['mark_model'] = markmodel
+  end
+
+  def expire_pages
+    ActionController::Base.expire_page(Rails.application.routes.url_helpers.edit_report_path(self))  
+    ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self))  
+    ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self, :format => 'pdf'))  
   end
 
 

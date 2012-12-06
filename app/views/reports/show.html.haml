@@ -1,191 +1,190 @@
-= cache ['show', @report] do 
-  .container#report{:report => @report.id}
-    %legend
-      
-      %h3
-        Отчет #
-        = @report.id
-        от
-        =@report.created_at.strftime('%d.%m.%y')
-  
+.container#report{:report => @report.id}
+  %legend
+    
+    %h3
+      Отчет #
+      = @report.id
+      от
+      =@report.created_at.strftime('%d.%m.%y')
 
 
 
-    .row
-      .span2
-        .thumb{:data => (@report.assets.first.attributes if @report.assets.any?)}
-          = image_tag( @report.assets.first.url(:thumb), :width => '120px', :id => @report.assets.first.id ) if @report.assets.any?
 
-      .span10
-        .row-fluid
-          .well.well-small.well-special.span4
-            .span12{style: 'min-height: initial'}
-              = @report.car['mark_model']
-            
-          .well.well-small.well-special.span4
-            .span6{style: 'min-height: initial'}
-              Гос. номер
-            .span6{style: 'text-align: right;min-height: initial'}
-              %span.badge.badge-info
-                = @report.car['gov_number']
-          .well.well-small.well-special.span4
-            .span8{style: 'min-height: initial'}
-              Пробег, км
-            .span4{style: 'text-align: right;min-height: initial'}
-              %span.badge.badge-info
-                = @report.car['mileage']
-        .row-fluid
-          .well.well-small.well-special.span4
-            .span8{style: 'min-height: initial'}
-              Объем двигателя, см3
-            .span4{style: 'text-align: right;min-height: initial'}
-              %span.badge.badge-info
-                =@report.car['cylinder_amount']
-          .well.well-small.well-special.span4
-            .span8{style: 'min-height: initial'}
-              Топливо
-            .span4{style: 'text-align: right;min-height: initial'}
-              %span.badge.badge-info
-                =@report.car['engine_type']
-          .well.well-small.well-special.span4
-            .span8{style: 'min-height: initial'}
-              Привод
-            .span4{style: 'text-align: right;min-height: initial'}
-              %span.badge.badge-info
-                =@report.car['drive']
-    %hr/
-    .row
-      .span8
-        .row#row
-          .span8
+  .row
+    .span2
+      .thumb{:data => (@report.assets.first.attributes if @report.assets.any?)}
+        = image_tag( @report.assets.first.url(:thumb), :width => '120px', :id => @report.assets.first.id ) if @report.assets.any?
+
+    .span10
+      .row-fluid
+        .well.well-small.well-special.span4
+          .span12{style: 'min-height: initial'}
+            = @report.car['mark_model']
+          
+        .well.well-small.well-special.span4
+          .span6{style: 'min-height: initial'}
+            Гос. номер
+          .span6{style: 'text-align: right;min-height: initial'}
+            %span.badge.badge-info
+              = @report.car['gov_number']
+        .well.well-small.well-special.span4
+          .span8{style: 'min-height: initial'}
+            Пробег, км
+          .span4{style: 'text-align: right;min-height: initial'}
+            %span.badge.badge-info
+              = @report.car['mileage']
+      .row-fluid
+        .well.well-small.well-special.span4
+          .span8{style: 'min-height: initial'}
+            Объем двигателя, см3
+          .span4{style: 'text-align: right;min-height: initial'}
+            %span.badge.badge-info
+              =@report.car['cylinder_amount']
+        .well.well-small.well-special.span4
+          .span8{style: 'min-height: initial'}
+            Топливо
+          .span4{style: 'text-align: right;min-height: initial'}
+            %span.badge.badge-info
+              =@report.car['engine_type']
+        .well.well-small.well-special.span4
+          .span8{style: 'min-height: initial'}
+            Привод
+          .span4{style: 'text-align: right;min-height: initial'}
+            %span.badge.badge-info
+              =@report.car['drive']
+  %hr/
+  .row
+    .span8
+      .row#row
+        .span8
+          .row
+            .span8
+              %a{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle()"}
+                %h3{:style => 'margin: 0'}
+                  Фото
+                  %span{:style => 'font-size: 70%; color: #ddd'}
+                    ='(' + @report.assigned.size.to_s + ')'
+                  - if @report.assigned.any?
+                    %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Развернуть
+                    %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                      Свернуть  
+          - if @report.assigned.any?
             .row
               .span8
-                %a{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle()"}
-                  %h3{:style => 'margin: 0'}
-                    Фото
-                    %span{:style => 'font-size: 70%; color: #ddd'}
-                      ='(' + @report.assigned.size.to_s + ')'
-                    - if @report.assigned.any?
-                      %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                        Развернуть
-                      %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                        Свернуть  
-            - if @report.assigned.any?
-              .row
-                .span8
-                  #photo.collapse
-                    - Asset.where(:id => @report.assigned).each do |image|
-                      .thumb.pull-left{:data => image.attributes, :style => 'margin: 2px; border: 1px solid #ccc'}
-                        = image_tag image.url(:thumb), :id => image.id
-        
-        - %w( checklist elements ).each do |object|
-          %hr{:style => 'margin: 0'}/
-          .row
-            .span12
-              %a.pull-left{:data => {:toggle => 'collapse', :target => "##{object}"}, :onclick => "$(this).siblings('a.btn').toggle()"}
-                %h3{:style => 'margin: 0'}
-                  =t("#{object}.title")
-                  %span{:style => 'font-size: 70%; color: #ddd'}
-                    = "(" + (@report.points.where(:object => object).size*100.0/46).round(0).to_i.to_s + "%)"
-                  - if @report.points.where(:object => object).any?
-                    %a.btn.btn-link{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                      Развернуть
-                    %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                      Свернуть
-                      
-          
-          
-          - if @filled_points.any?
-            .row
-              .span12
-                .collapse{:id => object, :class => object}
-                  - for block in @filled_points.where(:object => object.to_sym).group(:section).map(&:section)
-                    .row
-                      .span8
-                        %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
-                          %h4{:style => 'margin: 0'}
-                            = t("#{object}.#{block}.title")
-                            - size =  @filled_points.where(:section => block.to_sym).where(["`points`.`condition` not in (?) or state is not null", Report::NORMAL_CONDITION]).size()
-                            %span{:style => 'font-size: 70%; color: #ddd'}
-                              = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
-                    .collapse{:id => "points_#{block}", :class => object}
-                      
-                      .row
-                        .span8
-                          %ul.thumbnails
-                            - points = @filled_points.where(:section => block.to_sym).each do |point|
-                              %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => point.alert_class}
-                                .row-fluid
-                                  .span9{:style => 'padding: 4px'}
-                                    = t("#{object}.#{block}.#{point.place}")
-                                    - if point.state
-                                      = " (#{point.state})"
-                                  .span3{:style => 'text-align: right;padding: 4px'}
-                                    = point.condition
-                          .row
-                            .span12{style: 'margin-bottom: 20px; margin-top: -10px'}
-                              - @report.points.where(:section => block.to_sym).where('description is not null').each do |point|
-
-                                = t("#{object}.#{block}.#{point.place}") + ': ' + point.description + '.'
-                                
-        
+                #photo.collapse
+                  - Asset.where(:id => @report.assigned).each do |image|
+                    .thumb.pull-left{:data => image.attributes, :style => 'margin: 2px; border: 1px solid #ccc'}
+                      = image_tag image.url(:thumb), :id => image.id
+      
+      - %w( checklist elements ).each do |object|
+        %hr{:style => 'margin: 0'}/
         .row
           .span12
-            %a.pull-left{:style => 'color: #ddd',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
-              %h3.pull-left Не проверенные    
-            %a.pull-left{:style => 'color: #ddd;margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
-              %span
-                %b
-                  Развернуть
-              %span.hide
-                %b
-                  Свернуть
-        .row.collapse{:id => 'unchecked'}
+            %a.pull-left{:data => {:toggle => 'collapse', :target => "##{object}"}, :onclick => "$(this).siblings('a.btn').toggle()"}
+              %h3{:style => 'margin: 0'}
+                =t("#{object}.title")
+                %span{:style => 'font-size: 70%; color: #ddd'}
+                  = "(" + (@report.points.where(:object => object).size*100.0/46).round(0).to_i.to_s + "%)"
+                - if @report.points.where(:object => object).any?
+                  %a.btn.btn-link{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                    Развернуть
+                  %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
+                    Свернуть
+                    
+        
+        
+        - if @filled_points.any?
+          .row
+            .span12
+              .collapse{:id => object, :class => object}
+                - for block in @filled_points.where(:object => object.to_sym).group(:section).map(&:section)
+                  .row
+                    .span8
+                      %a{:data => {:toggle => 'collapse', :target => "#points_#{block}"}}
+                        %h4{:style => 'margin: 0'}
+                          = t("#{object}.#{block}.title")
+                          - size =  @filled_points.where(:section => block.to_sym).where(["`points`.`condition` not in (?) or state is not null", Report::NORMAL_CONDITION]).size()
+                          %span{:style => 'font-size: 70%; color: #ddd'}
+                            = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
+                  .collapse{:id => "points_#{block}", :class => object}
+                    
+                    .row
+                      .span8
+                        %ul.thumbnails
+                          - points = @filled_points.where(:section => block.to_sym).each do |point|
+                            %li.alert.span4.thumbnail{:style => 'padding: 0px; border: 0px;margin-bottom: 4px;min-height: 20px; height: 30px', :class => point.alert_class}
+                              .row-fluid
+                                .span9{:style => 'padding: 4px'}
+                                  = t("#{object}.#{block}.#{point.place}")
+                                  - if point.state
+                                    = " (#{point.state})"
+                                .span3{:style => 'text-align: right;padding: 4px'}
+                                  = point.condition
+                        .row
+                          .span12{style: 'margin-bottom: 20px; margin-top: -10px'}
+                            - @report.points.where(:section => block.to_sym).where('description is not null').each do |point|
 
-          - unless @diff.empty?
-            - for object in @diff.keys
-              %label
-                %h3= t("#{object}.title")
-              %table.table.table-striped{style: 'margin-left: 30px'}
-                - for section in @diff[object].keys
-                  %tr
-                    %td{:style => 'width: 100px'}
-                      = t("#{object}.#{section}.title")
-                      %td
-                        - for place in @diff[object][section]
-                          %span.badge= t("#{object}.#{section}.#{place}")
-    
-      / .span4
-      /   / #vk_comments
-      /   /   :javascript
-      /   /     VK.Widgets.Comments("vk_comments", {limit: 10, width: "370", attach: "*"});
-      /   / .span2
-      /   /   .like{:style => 'height: 30px'}
-      /   /     #vk_like
-      /   /     :javascript
-      /   /       VK.Widgets.Like("vk_like", {type: "button", verb: 1});
+                              = t("#{object}.#{block}.#{point.place}") + ': ' + point.description + '.'
+                              
+      
+      .row
+        .span12
+          %a.pull-left{:style => 'color: #ddd',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
+            %h3.pull-left Не проверенные    
+          %a.pull-left{:style => 'color: #ddd;margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
+            %span
+              %b
+                Развернуть
+            %span.hide
+              %b
+                Свернуть
+      .row.collapse{:id => 'unchecked'}
 
-      /   /   .like{:style => 'height: 30px'}
-      /   /     .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
-      /   /   .like{:style => 'height: 30px'}
-      /   /     %a.mrc__plugin_uber_like_button{"data-mrc-config" => "{'cm' : '3', 'ck' : '3', 'sz' : '20', 'st' : '1', 'tp' : 'ok'}", :href => "http://connect.mail.ru/share", :target => "_blank"}  Нравится
-      /   /     %script{:charset => "UTF-8", :src => "http://cdn.connect.mail.ru/js/loader.js", :type => "text/javascript"}
-      /   /   .like{:style => 'height: 30px'}
-      /   /     .g-plusone{:data => {:size => 'medium'}}
-      /   /     :javascript
-      /   /       window.___gcfg = {lang: 'ru'};
+        - unless @diff.empty?
+          - for object in @diff.keys
+            %label
+              %h3= t("#{object}.title")
+            %table.table.table-striped{style: 'margin-left: 30px'}
+              - for section in @diff[object].keys
+                %tr
+                  %td{:style => 'width: 100px'}
+                    = t("#{object}.#{section}.title")
+                    %td
+                      - for place in @diff[object][section]
+                        %span.badge= t("#{object}.#{section}.#{place}")
+  
+    / .span4
+    /   / #vk_comments
+    /   /   :javascript
+    /   /     VK.Widgets.Comments("vk_comments", {limit: 10, width: "370", attach: "*"});
+    /   / .span2
+    /   /   .like{:style => 'height: 30px'}
+    /   /     #vk_like
+    /   /     :javascript
+    /   /       VK.Widgets.Like("vk_like", {type: "button", verb: 1});
 
-      /   /       (function() {
-      /   /         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-      /   /         po.src = 'https://apis.google.com/js/plusone.js';
-      /   /         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      /   /       })();
-      /   /   .like{:style => 'height: 30px'}
-      /   /     %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
-      /   /     :javascript
-      /   /       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    /   /   .like{:style => 'height: 30px'}
+    /   /     .fb-like{:data => {:layout => "button_count", :send => "false", 'show-faces'=> "true", :width => "170"}}
+    /   /   .like{:style => 'height: 30px'}
+    /   /     %a.mrc__plugin_uber_like_button{"data-mrc-config" => "{'cm' : '3', 'ck' : '3', 'sz' : '20', 'st' : '1', 'tp' : 'ok'}", :href => "http://connect.mail.ru/share", :target => "_blank"}  Нравится
+    /   /     %script{:charset => "UTF-8", :src => "http://cdn.connect.mail.ru/js/loader.js", :type => "text/javascript"}
+    /   /   .like{:style => 'height: 30px'}
+    /   /     .g-plusone{:data => {:size => 'medium'}}
+    /   /     :javascript
+    /   /       window.___gcfg = {lang: 'ru'};
+
+    /   /       (function() {
+    /   /         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    /   /         po.src = 'https://apis.google.com/js/plusone.js';
+    /   /         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    /   /       })();
+    /   /   .like{:style => 'height: 30px'}
+    /   /     %a.twitter-share-button{"data-lang" => "en", "data-via" => "twitterapi", :href => "https://twitter.com/share"} Tweet
+    /   /     :javascript
+    /   /       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
 
 
-    - unless params[:format] == 'pdf'
-      = render 'carousel'
+  - unless params[:format] == 'pdf'
+    = render 'carousel'

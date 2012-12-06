@@ -56,9 +56,10 @@ class PointsController < ApplicationController
     @point = Point.find(params[:id])
     params[:point][:condition] = nil if params[:point][:condition] == ''
     params[:point][:state] = nil if params[:point][:state] == ''
-    expire_fragment ['show', @point.report]
-    expire_fragment ['edit', @point.report]
-    expire_fragment ['pdf', @point.report]
+    @point.report.expire_pages
+    # expire_fragment ['show', @point.report]
+    # expire_fragment ['edit', @point.report]
+    # expire_fragment ['pdf', @point.report]
 
     respond_to do |format|
       if @point.update_attributes(params[:point].except(:id))
@@ -82,6 +83,6 @@ class PointsController < ApplicationController
     end
   end
 
-  
+
 
 end

@@ -4,6 +4,8 @@ class ReportsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
 
 
+  caches_page :edit
+  caches_page :show
 
   layout 'clean'
 

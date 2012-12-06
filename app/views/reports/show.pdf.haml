@@ -29,10 +29,10 @@
           Гос. номер
         .span6.offset1
           %input{:class => 'span6', :value => @report.car['gov_number']}
-        .span3.offset1
+        .span3.offset2
           Пробег
-        .span6.offset1
-          %input{:class => 'span8', :value => @report.car['mileage']}
+        .span5.offset2
+          %input{:class => 'span6', :value => @report.car['mileage']}
     .row{:style => 'padding: 10px 0 10px 0'}
       .offset4
         .span10
@@ -43,10 +43,10 @@
           Топливо
         .span6
           %input{:class => 'span6', :value => @report.car['engine_type']}
-        .span6.offset1
+        .span5.offset2
           Привод
-        .span5.offset1
-          %input{:class => 'span5', :value => @report.car['drive']}
+        .span5
+          %input{:class => 'span6', :value => @report.car['drive']}
   .row
     .span5.offset5
       %h2 Фото
@@ -80,7 +80,7 @@
       .span40.offset5
         %h2= t("#{object}.title")
     - if @filled_points.where(:object => object.to_sym).any?
-      -for block in @filled_points.where(:object => object.to_sym).group(:section).map(&:section)
+      -for block in @filled_points.where(:object => object.to_sym).group(:section).map(&:section) - ['coating']
         .row{:style => 'padding-top: 20px'}
           .span50.bddd{:style => 'margin-bottom: 5px'}
             .offset4

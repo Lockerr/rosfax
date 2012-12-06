@@ -32,5 +32,10 @@ class Point < ActiveRecord::Base
     end      
   end
 
+  def self.normalize
+    Point.where(:state => '').update_all :state => nil
+    Point.where(:condition => '').update_all :condition => nil
+
+  end
 
 end

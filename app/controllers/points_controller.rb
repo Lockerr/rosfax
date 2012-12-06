@@ -82,5 +82,6 @@ class PointsController < ApplicationController
     end
   end
 
+  
 
 end

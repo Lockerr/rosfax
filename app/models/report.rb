@@ -377,9 +377,11 @@ class Report < ActiveRecord::Base
   end
 
   def expire_pages
-    ActionController::Base.expire_page(Rails.application.routes.url_helpers.edit_report_path(self))  
-    ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self))  
-    ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self, :format => 'pdf'))  
+    
+
+    # ActionController::Base.expire_page(Rails.application.routes.url_helpers.edit_report_path(self))  
+    # ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self))  
+    # ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self, :format => 'pdf'))  
   end
 
 

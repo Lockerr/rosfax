@@ -54,7 +54,9 @@ class PointsController < ApplicationController
     @point = Point.find(params[:id])
     params[:point][:condition] = nil if params[:point][:condition] == ''
     params[:point][:state] = nil if params[:point][:state] == ''
-    @point.report.expire_pages
+    expire_action edit_report_url(@point.report)
+    expire_action report_url(@point.report)
+    expire_action report_url(@point.report, :format => :pdf)
 
 
     respond_to do |format|

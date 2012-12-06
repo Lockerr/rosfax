@@ -1,11 +1,20 @@
 #encoding: utf-8
 class ReportsController < ApplicationController
-
+  
   before_filter :authenticate_user!, :except => [:index]
 
 
-  caches_page :edit
-  caches_page :show
+
+  caches_action :edit
+  caches_action :show, :cache_path => proc {
+    @report = Report.find(params[:id])
+    if request.format == 'text/html'
+      report_url(@report)
+    elsif request.format == 'application/pdf'
+      report_url(@report, :format => :pdf)
+    end
+  }
+      
 
   layout 'clean'
 
@@ -39,6 +48,7 @@ class ReportsController < ApplicationController
   end
 
   def show
+
     @report = Report.find(params[:id])
     @diff = @report.diff
     @filled_points = @report.points.filled
@@ -125,6 +135,10 @@ class ReportsController < ApplicationController
   end
 
   def update
+    expire_action edit_report_path(self)
+    expire_action report_path(self)
+    expire_action report_path(self, :format => :pdf)
+
     @report = Report.find(params[:id])
     if params[:report][:links]
       params[:report][:links] = @report.links + [params[:report][:links]]
@@ -133,8 +147,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if can_manage?
         if @report.update_attributes(params[:report].except!(:id))
-          expire_fragment ['show', @report]
-          expire_fragment ['edit', @report]
+
           format.json { head :ok }
         else
           format.json { render json: @report.errors, status: :unprocessable_entity }
@@ -193,5 +206,8 @@ class ReportsController < ApplicationController
 
     # current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin? 
   end
+
+  
+
 
 end

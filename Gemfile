@@ -19,7 +19,7 @@ gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem 'turbolinks'
 
-gem 'twitter-bootstrap-rails', '2.1.3'
+gem 'twitter-bootstrap-rails', '2.0.7'
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 gem 'devise'

@@ -4,7 +4,10 @@ gem 'rails', '3.2.8'
 
 gem 'thin'
 gem 'mysql2'
+
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 gem 'haml-rails'
 gem 'ruby-haml-js'
 gem 'paperclip'

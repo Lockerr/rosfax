@@ -95,9 +95,10 @@ class ReportsController < ApplicationController
   # GET /reports/1/edit
   def edit
     @report = Report.find(params[:id])
-    
+
     if can_manage?
       @points = @report.points
+
       @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
     end
     
@@ -135,11 +136,13 @@ class ReportsController < ApplicationController
   end
 
   def update
-    expire_action edit_report_path(self)
-    expire_action report_path(self)
-    expire_action report_path(self, :format => :pdf)
 
     @report = Report.find(params[:id])
+    
+    expire_action edit_report_url(@report)
+    expire_action report_url(@report)
+    expire_action report_url(@report, :format => :pdf)
+    
     if params[:report][:links]
       params[:report][:links] = @report.links + [params[:report][:links]]
     end

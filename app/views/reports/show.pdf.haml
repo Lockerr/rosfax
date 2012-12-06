@@ -114,7 +114,8 @@
                 .span43.offset5{:style => 'font-size: 9pt; font-style: italic; text-align: justify'}
                   = points.map{|i| t("#{i.object}.#{i.section}.#{i.place}")}.join(', ')
                   \-
-                  - if points.first.state == 'Перекрас'
+                                      
+                  - if points.first.state == 'ПЕРЕКРАС'
                     ПЕРЕКРАШЕНО
                   - elsif points.first.state == 'ЗАМЕНА'
                     ЗАМЕНЕНО

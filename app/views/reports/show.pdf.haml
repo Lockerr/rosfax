@@ -105,6 +105,23 @@
                 .span43.offset5{:style => 'font-size: 9pt; font-style: italic; text-align: justify'}
                   - points.each do |point|
                     = t("#{object}.#{block}.#{point.place}") + ': ' + point.description + '.' 
+        - points = @report.points.where(:section => block.to_sym).where('state is not null')
+        - if points.any?
+          .row{:style => 'margin-top: 5px'}
+            .span46
+              .row
+                %hr/
+                .span43.offset5{:style => 'font-size: 9pt; font-style: italic; text-align: justify'}
+                  = points.map{|i| t("#{i.object}.#{i.section}.#{i.place}")}.join(', ')
+                  \-
+                  - if points.first.state == 'Перекрас'
+                    ПЕРЕКРАШЕНО
+                  - elsif points.first.state == 'ЗАМЕНА'
+                    ЗАМЕНЕНО
+                  - elsif points.first.state == 'РЕМОНТ'
+                    РЕМОНТИРОВАНО
+
+                    
   .row
     - unless @diff.empty?
       %h3.offset6 Не проверенные

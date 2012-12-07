@@ -45,7 +45,6 @@ $(document).ready ->
     $.each $('.alert'), ->
       arr.push this.id
 
-    console.log arr
     window.location.href = "/reports/models/?ids=#{arr}"
 
   $('td:not(.actions)').hover (->

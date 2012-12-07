@@ -3,8 +3,6 @@ class ReportsController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:index]
 
-
-
   caches_action :edit
   caches_action :show, :cache_path => proc {
     @report = Report.find(params[:id])
@@ -14,7 +12,6 @@ class ReportsController < ApplicationController
       report_url(@report, :format => :pdf)
     end
   }
-      
 
   layout 'clean'
 

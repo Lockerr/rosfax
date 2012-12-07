@@ -6,10 +6,6 @@
       = @report.id
       от
       =@report.created_at.strftime('%d.%m.%y')
-
-
-
-
   .row
     .span2
       .thumb{:data => (@report.assets.first.attributes if @report.assets.any?)}

@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
 
   FTP = Rails.root.join('tmp')
-  unless Rails.env != 'development' 
+  unless Rails.env == 'development' 
     unless Rails.root.to_s.match('/home/user/')
       has_attached_file :data,
               :styles => {
@@ -18,12 +18,12 @@ class Asset < ActiveRecord::Base
   
     else
       has_attached_file :data,
-      :styles => {
-        :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
-        :carousel => {:geometry => '900x600>', :format => :jpg, :pre_convert_options => "-auto-orient"},
-        :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
-        },
-        :default_url => "/assets/loading.gif"
+        :styles => {
+          :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
+          :carousel => {:geometry => '900x600>', :format => :jpg, :pre_convert_options => "-auto-orient"},
+          :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
+          },
+          :default_url => "/assets/loading.gif"
     end
 
   else

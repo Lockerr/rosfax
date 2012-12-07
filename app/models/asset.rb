@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
 
   FTP = Rails.root.join('tmp')
-  unless Rails.env == 'development'
+  if Rails.env != 'development'
     has_attached_file :data,
             :styles => {
               :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},

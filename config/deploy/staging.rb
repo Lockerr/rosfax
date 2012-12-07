@@ -11,7 +11,7 @@ set :unicorn_pid, "#{deploy_to}/shared/pids/server.pid"
 set :rails_env, 'development'
 set :deploy_via, :remote_cache
 set :scm, :git
-set :repository, '.'
+set :repository, 'anton@192.168.1.71:work/tradein/'
 
 
 namespace :deploy do

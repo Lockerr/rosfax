@@ -14,6 +14,16 @@ class Asset < ActiveRecord::Base
             :bucket => 'rosfax',
             :path => ":attachment/:id/:style.:extension",
             :s3_host_name =>  's3-eu-west-1.amazonaws.com'
+  
+  elsif Rails.root.to_s.match('/home/user/')
+    has_attached_file :data,
+      :styles => {
+        :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
+        :carousel => {:geometry => '900x600>', :format => :jpg, :pre_convert_options => "-auto-orient"},
+        :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
+        },
+        :default_url => "/assets/loading.gif"
+
   else
     has_attached_file :data,
       :styles => {

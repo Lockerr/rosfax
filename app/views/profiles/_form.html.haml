@@ -30,18 +30,18 @@
         .controls
           = f.submit 'Сохранить', :class => 'btn'
     
-    = form_for(current_user.company, :url => company_upload_logotype_path(current_user.company), :html => {:class => 'form form-horizontal'} ) do |f|
       - if current_user.company
-        - if asset = current_user.company.asset
-          %img{src: asset.url }
-      %legend
-        Прикрепить логотип
-      .control-group
-        .controls
-          = f.file_field :logo
-      .control-group
-        .controls
-          = f.submit "Прикрепить файл", :class => 'btn'
+        = form_for(current_user.company, :url => company_upload_logotype_path(current_user.company), :html => {:class => 'form form-horizontal'} ) do |f|
+          - if asset = current_user.company.asset
+            %img{src: asset.url }
+          %legend
+            Прикрепить логотип
+          .control-group
+            .controls
+              = f.file_field :logo
+          .control-group
+            .controls
+              = f.submit "Прикрепить файл", :class => 'btn'
 
     = form_for(current_user, :url => { :action => "update_password" }, :html => {:class => 'form form-horizontal'} ) do |f|
       %legend

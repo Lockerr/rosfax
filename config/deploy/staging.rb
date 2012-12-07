@@ -9,7 +9,7 @@ role :db, domain, :primary => true
 
 set :unicorn_pid, "#{deploy_to}/shared/pids/server.pid"
 set :rails_env, 'development'
-set :deploy_via, :remote_cache
+set :deploy_via, :copy
 set :scm, :git
 set :repository, 'anton@192.168.1.71:work/tradein/'
 

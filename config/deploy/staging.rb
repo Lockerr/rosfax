@@ -11,7 +11,8 @@ set :unicorn_pid, "#{deploy_to}/shared/pids/server.pid"
 set :rails_env, 'development'
 set :deploy_via, :copy
 set :scm, :git
-set :repository, 'anton@192.168.1.71:work/tradein/'
+set :branch, :new_layout
+set :repository, 'anton@192.168.1.71:work/tradein'
 
 
 namespace :deploy do
@@ -20,7 +21,7 @@ namespace :deploy do
   end
   
   task :start do
-    run "cd /home/perekup/rosfax/current && rvm r328 do bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D "
+    run "cd #{deploy_to}/current && rails s -p 3000 -e #{rails_env} -d"
   end
   
   task :stop do

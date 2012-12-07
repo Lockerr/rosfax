@@ -29,6 +29,13 @@
             .accordion-body.collapse.in{id: tab}
               .accordion-inner
                 - @elements[tab][:names].size.times do |index|
+                  - if @elements[tab][:names].size > 1
+                    - if @elements[tab][:legends]
+                      %legend{style: 'margin-bottom: 6px'}
+                        = @elements[tab][:legends][index]
+                    - else
+                      %legend{style: 'margin-bottom: 6px'}
+                        = t("elements.#{tab}.title")                      
                   - @elements[tab][:names][index].each do |place|
                     - parameters = {:report_id => @report.id, :object => 'elements', :section => tab, :place => place}
                     - if @points.select{|i| i.place == place}.select{|i| i.object == 'elements'}.any?

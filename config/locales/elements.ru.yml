@@ -4,7 +4,7 @@ ru:
     wheels:
       title: Колеса
     exterior:
-      title: Экстерьер
+      title: Краска
       hood: Капот
       front_right_wing: Крыло переднее правое
       right_front_door: Дверь передняя правая
@@ -23,7 +23,7 @@ ru:
       right_threshold: Порог правый
       left_threshold: Порог левый
     interior:
-      title: Интерьер
+      title: Салон
       front_left_seat: Сидение переднее левое
       front_right_seat: Сидение переднее правое
       back_sofa: Задний диван

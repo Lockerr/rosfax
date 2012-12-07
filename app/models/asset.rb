@@ -1,8 +1,10 @@
 class Asset < ActiveRecord::Base
 
   FTP = Rails.root.join('tmp')
-  if Rails.env == 'production' 
+  if Rails.env == 'production'
+    Rails.logger.info '**************************** MATCH PRODUCTION'
     if Rails.root.to_s.match('/home/user/')
+      Rails.logger.info ' *************************** MATCH RAILS_ROOT'
       has_attached_file :data,
         :styles => {
           :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
@@ -11,6 +13,7 @@ class Asset < ActiveRecord::Base
           },
           :default_url => "/assets/loading.gif"
     else
+      Rails.logger.info '########################## SET S3'
       has_attached_file :data,
         :styles => {
           :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
@@ -26,6 +29,7 @@ class Asset < ActiveRecord::Base
     end
 
   else
+    Rails.logger.info '########################## SET LOCAL'
     has_attached_file :data,
       :styles => {
         :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},

@@ -2,9 +2,9 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.8'
 
-gem 'thin'
-gem 'mysql2'
 
+gem 'mysql2'
+gem 'thin'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
@@ -43,6 +43,7 @@ group :assets do
 end
 
 group :development do
+
   gem 'rvm-capistrano'
   gem 'quiet_assets'
   gem 'sextant'

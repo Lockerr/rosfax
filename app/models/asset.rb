@@ -3,7 +3,7 @@ class Asset < ActiveRecord::Base
   FTP = Rails.root.join('tmp')
   if Rails.env == 'production'
     Rails.logger.info '**************************** MATCH PRODUCTION'
-    if Rails.root.to_s.match('/home/user/')
+    if Rails.root.to_s.match('/home/user/') or Rails.root.to_s.match('/home/anton/work/tradein')
       Rails.logger.info ' *************************** MATCH RAILS_ROOT'
       has_attached_file :data,
         :styles => {

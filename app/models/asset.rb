@@ -1,22 +1,8 @@
 class Asset < ActiveRecord::Base
 
   FTP = Rails.root.join('tmp')
-  unless Rails.env == 'development' 
-    unless Rails.root.to_s.match('/home/user/')
-      has_attached_file :data,
-              :styles => {
-                :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
-                :carousel => {:geometry => '900x600>', :format => :jpg, :pre_convert_options => "-auto-orient"},
-                :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
-              },
-              :default_url => "/assets/loading.gif",
-              :storage => :s3,
-              :s3_credentials => { :access_key_id => 'AKIAJVTSIEA4Y2WZG5TQ', :secret_access_key => '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' },
-              :bucket => 'rosfax',
-              :path => ":attachment/:id/:style.:extension",
-              :s3_host_name =>  's3-eu-west-1.amazonaws.com'
-  
-    else
+  if Rails.env == 'production' 
+    if Rails.root.to_s.match('/home/user/')
       has_attached_file :data,
         :styles => {
           :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
@@ -24,6 +10,19 @@ class Asset < ActiveRecord::Base
           :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
           },
           :default_url => "/assets/loading.gif"
+    else
+      has_attached_file :data,
+        :styles => {
+          :thumb => {:geometry => '100x68>', :format => :jpg, :pre_convert_options => "-auto-orient"},
+          :carousel => {:geometry => '900x600>', :format => :jpg, :pre_convert_options => "-auto-orient"},
+          :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
+        },
+        :default_url => "/assets/loading.gif",
+        :storage => :s3,
+        :s3_credentials => { :access_key_id => 'AKIAJVTSIEA4Y2WZG5TQ', :secret_access_key => '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' },
+        :bucket => 'rosfax',
+        :path => ":attachment/:id/:style.:extension",
+        :s3_host_name =>  's3-eu-west-1.amazonaws.com'
     end
 
   else

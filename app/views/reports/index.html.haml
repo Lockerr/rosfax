@@ -27,7 +27,7 @@
           %td= report.car[:car][:year] if report.car[:car]
           %td= report.car['vin']
           %td= report.car['seller']['name'].split(/\s/)[0] if report.car['seller']['name'] if report.car['seller']
-          %td= report.car['buyer']['name'].split(/\s/)[0] if report.car['buyer']['name'] if report.car['seller']
+          %td= report.car['buyer']['name'].split(/\s/)[0] if report.car['buyer']['name'] if report.car['buyer']
           %td= report.company.try(:name)
           %td= report.created_at.strftime('%d.%m.%y')
           %td.actions

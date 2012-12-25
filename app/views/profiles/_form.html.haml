@@ -32,11 +32,12 @@
     
     - if current_user.company
       = form_for(current_user.company, :url => company_upload_logotype_path(current_user.company), :remote => true, :html => {:class => 'form form-horizontal'} ) do |f|
-        - if asset = current_user.company.asset
-          - if asset.data_processing
-            %img{src: "/system/assets/data/000/000/#{asset.id}/original/#{asset.data_file_name}"}
-          -else
-            %img{src: asset.url(:carousel)}
+        .logotype
+          - if asset = current_user.company.asset
+            - if asset.data_processing
+              %img{src: "/system/assets/data/000/000/#{asset.id}/original/#{asset.data_file_name}"}
+            -else
+              %img{src: asset.url(:carousel)}
         %legend
           Прикрепить логотип
         .control-group

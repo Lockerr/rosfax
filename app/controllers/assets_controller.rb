@@ -53,7 +53,7 @@ class AssetsController < ApplicationController
     
    
     respond_to do |format|
-      format.json {render :json => { :pic_path => asset.url.to_s , :name => asset.name, :id => asset.id }, :content_type => 'text/html'}
+      format.json {render :json => { :pic_path => @asset.url.to_s , :name => @asset.name, :id => @asset.id }, :content_type => 'text/html'}
       format.html 
       format.js
     end

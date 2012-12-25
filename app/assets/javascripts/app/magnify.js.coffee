@@ -4,7 +4,7 @@ loader = (image_object) ->
     window.native_height = image_object.height
     $('.item.active .large').css('background', "url('#{image_object.src}') no-repeat")
     $('.item.active .large').attr('loading', 'false')
-    $('.item.active .large').activity(false)
+    $('.item.active .large').spin(false)
 
 
   $(image_object).onload = ->
@@ -26,7 +26,7 @@ loader = (image_object) ->
       src = small.attr('src')
       
       unless large.attr('unactive') == 'true'
-        large.activity({width: 13, space: 40, segments: 20, opacity: 1/100, length: 80})
+        large.spin({lines: 10, length: 8, width: 4, radius: 8})
         large.attr('unactive', true)
 
       loader(image_object)

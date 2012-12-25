@@ -391,11 +391,16 @@ class Report < ActiveRecord::Base
   end
 
   def expire_pages
-    
-
     # ActionController::Base.expire_page(Rails.application.routes.url_helpers.edit_report_path(self))  
     # ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self))  
     # ActionController::Base.expire_page(Rails.application.routes.url_helpers.report_path(self, :format => 'pdf'))  
+  end
+
+  def can_manage?(current_user)
+    return false unless current_user
+    current_user.admin? or
+    company == current_user.company or
+    user == current_user
   end
 
 

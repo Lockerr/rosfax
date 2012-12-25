@@ -163,10 +163,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
     @report.destroy
 
-    respond_to do |format|
-      format.html { render :inline => 'ok' }
-      format.json { head :ok }
-    end
+    redirect_to :back
   end
 
   def all_images

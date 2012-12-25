@@ -12,7 +12,10 @@ $(document).ready ->
   
   $('input#report_car_vin').mask("*** ****** ****9999",{upcase: true})
 
-  $('.processing').parent().activity()
+
+  
+  $('.processing').parent().spin()
+  
     
 
 

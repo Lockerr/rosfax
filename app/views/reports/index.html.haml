@@ -30,21 +30,16 @@
           %td= report.car['buyer']['name'].split(/\s/)[0] if report.car['buyer']['name'] if report.car['buyer']
           %td= report.company.try(:name)
           %td= report.created_at.strftime('%d.%m.%y')
-          %td.actions
+          %td.actions{style: 'width: 107px'}
+            = link_to "<i class=\"icon-search\"></i>".html_safe, report_path(report), :class => 'hide btn btn-primary btn-small'
+            = link_to "<i class=\"icon-print\"></i>".html_safe, report_path(report, :format => :pdf), :class => 'hide btn btn-primary btn-small'
             - if current_user
-              - if current_user.reports.include? report or current_user.admin? or current_user.company.reports.include? report
-                = link_to '', report_path(report), :class => 'btn btn-primary icon-search', :style => 'padding-bottom: 9px'
-                = link_to '', report_path(report, :format => :pdf), :class => 'btn btn-primary icon-print', :style => 'padding-bottom: 9px'
-                
-                - if current_user.admin?
-                  .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id, :disabled => :disabled}
-                    x
-                - else 
-                  .btn.btn-danger.destroy_report{'data-confirm' => 'Точно?', :report_id => report.id}
-                    x
+              - if report.can_manage?(current_user)
+                = link_to "<i class=\"icon-remove\"></i>".html_safe, report_path(report), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-danger hide btn-small'
+            
+            
 
-              - else
-                = link_to 'Просмотреть', report_path(report), :class => 'btn btn-primary'
+            
   %br
 
 

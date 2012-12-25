@@ -74,7 +74,9 @@ update_eye_fi = ->
 
 
 get_images = ->
-  $('.processing_image').activity()
+  
+  $('.processing_image').spin()
+    
   console.log 'refreshing is set to true'
   refreshing = true
   ids = $.map($(".processing"), (n, i) -> n.id ).unique()
@@ -107,7 +109,7 @@ refresh_image = (refresh_rate, src, id) ->
           image.attr('src', src)
           image.removeClass('processing')
           image.parent().removeClass('processing_image')
-          image.parent().activity(false)
+          image.parent().spin(false)
           image.parent()
           
 

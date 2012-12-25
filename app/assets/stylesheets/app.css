@@ -14,3 +14,33 @@
   font-family: Trebuchet;
   src: url("tahoma.ttf");
 }
+
+/*@media (min-width: 960px) and (max-width: 1024px) {
+  .modal {
+    left: 34%;
+    top: 41%;
+  }
+}*/
+
+/*@media (min-width: 1200px)
+  .modal
+    left: 36%
+    top: 41%
+@media (min-width: 1680px)
+  .modal
+    left: 41%
+    top: 41%
+
+
+@media (min-width: 768px) and (max-width: 979px)
+  .modal
+    left: 1%
+    top: 1%
+@media (max-width: 767px)
+  .modal
+    left: 1%
+    top: 1%
+@media (max-width: 480px)
+  .modal
+    left: 1%
+    top: 1%*/

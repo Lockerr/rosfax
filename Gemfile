@@ -18,8 +18,11 @@ gem "airbrake"
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem 'turbolinks'
+gem 'therubyracer'
 
-gem 'twitter-bootstrap-rails', '2.0.7'
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
+
 gem 'delayed_job_active_record'
 gem 'delayed_paperclip'    , '2.4.5.2', :git => 'git://github.com/tommeier/delayed_paperclip', :branch => 'fix_312'
 gem 'devise'

@@ -22,11 +22,11 @@
             .controls
               = f.check_box :remember_me
       .span4.alerts
-        bla
+        
     .row
       .span12
         .form-actions
-          = f.submit "Войти", :class => 'btn btn-primary'
+          = f.submit "Войти", :class => 'btn btn-primary', :data => {'loading-text' => "Авторизация..."}
           %br/
           %br/
           = render "devise/shared/links"

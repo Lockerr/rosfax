@@ -181,6 +181,14 @@ class ReportsController < ApplicationController
 
   end
 
+  def empty_form
+    @report = Report.find(params[:report_id])
+    @diff = @report.diff
+    @filled_points = @report.points.filled
+    @points = @report.points
+    render :pdf => "report_#{@report_id}", :layout => 'pdf.html.haml'
+  end
+
   def place
     report = Report.find(params[:report_id])
     report.place(:position => params[:position], :asset => params[:asset], :attribute => params[:attribute])

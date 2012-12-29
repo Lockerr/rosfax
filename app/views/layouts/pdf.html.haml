@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title Tradein
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    
+    %meta{:content => "width=320, target-densitydpi=high-dpi", :name => "viewport", }/
+
+
+    = wicked_pdf_stylesheet_link_tag "pdf"
+    
+    
+    = csrf_meta_tags
+
+  %body
+
+
+    = yield

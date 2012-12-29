@@ -35,6 +35,7 @@ Tradein::Application.routes.draw do
   end
 
   resources :reports do
+    get 'empty_form'
     resources :links
     resources :points
     resources :defects

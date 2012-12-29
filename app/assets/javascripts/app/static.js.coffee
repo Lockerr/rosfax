@@ -1,6 +1,6 @@
 
 $(document).ready ->
-
+  
   $('.hide_unchecked').click ->
     $('.unchecked').toggle(500)
 
@@ -9,17 +9,10 @@ $(document).ready ->
   
   $('input#report_car_gov_number').mask("~ 999 ~~ 99?9", {upcase: true})
   $('input#profile_phone').mask("+7(999) 999 99 99")
-  
   $('input#report_car_vin').mask("*** ****** ****9999",{upcase: true})
-
-
+  $('input#report_car_buyer_phone, input#report_car_seller_phone').mask("+7(999) 999 99 99")
   
   $('.processing').parent().spin()
-  
-    
-
-
-  $('input#report_car_buyer_phone, input#report_car_seller_phone').mask("+7(999) 999 99 99")
 
   $(' .nav-tabs.first li').click ->
     appendUploader($("#{$(@).find('a').attr('href')}.tab-pane .nav-tabs li.active a").first().attr('href'))

@@ -60,13 +60,16 @@
               = t("#{object}.#{block}.title")
       .row
         .span50
-          .row.offset1
+          .row
             - @points.where(:section => block.to_sym).each do |point|
-              .span19.offset4.left
+              .span24.offset1.left
                 .div
-                  .div.left{:style => 'font-size: 10pt'}= t("#{object}.#{block}.#{point.place}")
-                  .div.right{:style => 'font-size: 10pt',:class => point.point_color}
-                    = point.condition
+                  .div.left{:style => 'font-size: 9pt'}= t("#{object}.#{block}.#{point.place}")
+                  .div.right{:style => 'font-size: 5pt'}
+                    - for value in Report.const_get(object.upcase)[block.to_sym][:values][0]
+                      .span2{:style => 'padding: 1px; border: 1px solid #ccc; border-collapse: collapse; text-align: center'}
+                        = value
+
       - points = @report.points.where(:section => block.to_sym).where('description is not null')
       - if points.any?
 
@@ -77,22 +80,7 @@
               .span43.offset5{:style => 'font-size: 9pt; font-style: italic; text-align: justify'}
                 - points.each do |point|
                   = t("#{object}.#{block}.#{point.place}") + ': ' + point.description + '.' 
-      - points = @report.points.where(:section => block.to_sym).where('state is not null')
-      - if points.any?
-        .row{:style => 'margin-top: 5px'}
-          .span46
-            .row
-              %hr/
-              .span43.offset5{:style => 'font-size: 9pt; font-style: italic; text-align: justify'}
-                = points.map{|i| t("#{i.object}.#{i.section}.#{i.place}")}.join(', ')
-                \-
-                                    
-                - if points.first.state == 'ПЕРЕКРАС'
-                  ПЕРЕКРАШЕНО
-                - elsif points.first.state == 'ЗАМЕНА'
-                  ЗАМЕНЕНО
-                - elsif points.first.state == 'РЕМОНТ'
-                  РЕМОНТИРОВАНО
+      
 
                   
 / .row

@@ -90,6 +90,7 @@ get_images = ->
         setTimeout(( -> refreshing = false), 1000)
         if data.keys.length == 0
           if $(".processing").length > 0
+            true
         else
           for i in data.keys
             setTimeout(( -> refresh_image(5000, data.assets[i], i)), 5000)
@@ -157,11 +158,11 @@ $(document).ready ->
       setTimeout((-> refresh_loop(refresh_rate)), refresh_rate)
 
   $('.photos').trigger 'custom_change'
-  unless window.location.hostname == '0.0.0.0' || window.location.hostname == "partners.lvh.me"
-    # eye_fi_loop = ->
-    #     update_eye_fi()
-    #     setTimeout((-> eye_fi_loop(5000)), 5000)
-    # setTimeout((-> eye_fi_loop(5000)), 5000)
+  # unless window.location.hostname == '0.0.0.0' || window.location.hostname == "partners.lvh.me"
+  # eye_fi_loop = ->
+  #     update_eye_fi()
+  #     setTimeout((-> eye_fi_loop(5000)), 5000)
+  # setTimeout((-> eye_fi_loop(5000)), 5000)
 
   $('.feedback').mouseenter(->
     $('.alert').toggleClass('alert-success').toggleClass('alert-error')

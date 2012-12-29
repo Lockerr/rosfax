@@ -13,7 +13,7 @@
             .btn.btn-large.all_wheels.pull-right Во всех колесах одинаково
       
     .accordion-body.collapse.in{id: tab}
-      .accordion-inner
+      .accordion-inner{:style => 'height: 628px'}
         .row-fluid
           - %w(front_left front_right rear_left rear_right).each do |place|
             = render partial: 'reports/tabs/wheel', locals: {place: place}  

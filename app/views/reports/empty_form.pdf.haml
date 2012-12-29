@@ -70,16 +70,7 @@
                       .span2{:style => 'padding: 1px; border: 1px solid #ccc; border-collapse: collapse; text-align: center'}
                         = value
 
-      - points = @report.points.where(:section => block.to_sym).where('description is not null')
-      - if points.any?
 
-        .row{:style => 'margin-top: 5px'}
-          .span46
-            .row
-              %hr/
-              .span43.offset5{:style => 'font-size: 9pt; font-style: italic; text-align: justify'}
-                - points.each do |point|
-                  = t("#{object}.#{block}.#{point.place}") + ': ' + point.description + '.' 
       
 
                   

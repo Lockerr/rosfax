@@ -32,7 +32,7 @@ $(document).ready ->
             item.append large
             mag.append item
           
-          $($(".carousel-inner .item#asset_id_#{data.id}")).addClass('active')
+          $($(".carousel-inner .item")).last().addClass('active')
           $('#myCarousel').carousel('pause')
           $('#modal_carousel').modal('show')
           if $('.carousel-inner .item').size() > 1

@@ -94,7 +94,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
 
     if can_manage?
-      @points = @report.points
+      @points = @report.points.includes(:assets)
 
       @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
     end

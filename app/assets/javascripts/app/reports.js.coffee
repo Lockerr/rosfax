@@ -150,16 +150,6 @@ $ ->
 
 
 
-  $('.destroy_report').click ->
-    confirmation = confirm('Точно?')
-    if confirmation
-      report = $(@).attr('report_id')
-      $.ajax
-        url: '/reports/' + report + '.json'
-        type: 'DELETE'
-        complete: ->
-          window.location.href = '/reports/'
-
   $('input:not(#point_description):not(.file-upload), textarea').change ->
     element = $(@)
     if element.data('change') 

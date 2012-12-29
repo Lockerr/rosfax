@@ -30,24 +30,26 @@ class AssetsController < ApplicationController
   end  
 
   def create
+
     if params[:asset]
       if params[:report_id]
         if report = Report.find(params[:report_id])
+          @asset = report.assets.create(params[:asset])
           expire_fragment ['show', report]
           expire_fragment ['edit', report]
-
-          @asset = report.assets.create(params[:asset])
         end
       elsif params[:point_id]
         if point = Point.find(params[:point_id])  
           @asset = point.assets.create(params[:asset])
-          raise 'match'
+          expire_fragment ['show', point.report]
+          expire_fragment ['edit', point.report]
         end
       end
     elsif params[:point_id]
       if point = Point.find(params[:point_id])  
         @asset = point.assets.create(data: params['file-0'])
-        
+        expire_fragment ['show', point.report]
+        expire_fragment ['edit', point.report]
       end
     end
     

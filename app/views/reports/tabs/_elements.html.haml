@@ -76,7 +76,7 @@
                         = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'
                         
                       .span1
-                        = form_for 'asset', :remote => true, :html => {multipart: true, :id => "new_point_#{check.id}_asset", :data => {id: check.id}}  do |f|                        
+                        = form_for 'asset', :remote => true, :html => {:onSubmit => "alert(this);",:id => "new_point_#{check.id}_asset", :data => {id: check.id}}  do |f|                        
                           = f.file_field :data, class: 'file-upload'
                       .span1
                         = render :partial => 'element_drop', :locals => {:object => check, :place => :one}

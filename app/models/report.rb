@@ -1,5 +1,9 @@
 #encoding: utf-8
 class Report < ActiveRecord::Base
+
+  paginates_per 10
+  max_paginates_per 50
+
   has_many :points, :dependent => :destroy
   has_many :assets, :as => :attachable, :dependent => :destroy
   has_many :links, :dependent => :destroy

@@ -1,4 +1,13 @@
 ru:
+  views:
+    pagination:
+      first: "&laquo; Первая"
+      last: "Последняя &raquo;"
+      previous: "&lsaquo; Предидущая"
+      next: "Следующая &rsaquo;"
+      truncate: "..."
+
+
   lorem: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec neque leo, vel mattis velit. Sed scelerisque, quam quis vestibulum vulputate, dui tellus viverra sem.
   info:
     service_history:

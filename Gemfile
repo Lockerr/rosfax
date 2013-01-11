@@ -8,6 +8,8 @@ gem 'thin'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+gem 'kaminari-bootstrap'
+
 gem 'haml-rails'
 gem 'ruby-haml-js'
 gem 'paperclip'

@@ -33,6 +33,7 @@ class ReportsController < ApplicationController
       @reports = Report.public
     end
 
+    @reports = @reports.page params[:page]
     
 
     respond_to do |format|

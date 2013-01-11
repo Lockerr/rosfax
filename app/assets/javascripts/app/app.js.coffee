@@ -163,8 +163,3 @@ $(document).ready ->
   #     update_eye_fi()
   #     setTimeout((-> eye_fi_loop(5000)), 5000)
   # setTimeout((-> eye_fi_loop(5000)), 5000)
-
-  $('.feedback').mouseenter(->
-    $('.alert').toggleClass('alert-success').toggleClass('alert-error')
-  ).mouseleave ->
-    $('.alert').toggleClass('alert-success').toggleClass('alert-error')

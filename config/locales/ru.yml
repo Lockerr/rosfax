@@ -3,7 +3,7 @@ ru:
     pagination:
       first: "&laquo; Первая"
       last: "Последняя &raquo;"
-      previous: "&lsaquo; Предидущая"
+      previous: "&lsaquo; Предыдущая"
       next: "Следующая &rsaquo;"
       truncate: "..."
 

@@ -63,6 +63,5 @@
                     = text_field 'pts', "end_owning_#{i}", :class => 'span1 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
                     %span.add-on{:style => 'margin-left: -2px'}
                       %i.icon-calendar
-                  .pull-left
-                    = @report.documents["start_owning_#{i}"] -
+                  
 

@@ -65,8 +65,8 @@
                       %span.add-on{:style => 'margin-left: -2px'}
                         %i.icon-calendar
                     .span2
-                      - start_date = DateTime.parse @report.documents["start_owning_#{i}"]
-                      - end_date = DateTime.parse @report.documents["end_owning_#{i}"]
+                      - start_date = DateTime.parse @report.documents["start_owning_#{i}"] if @report.documents["start_owning_#{i}"]
+                      - end_date = DateTime.parse @report.documents["end_owning_#{i}"] if @report.documents["end_owning_#{i}"]
                       = "#{((end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month))} мес." if start_date and end_date
                     
                     .pull-left.input-append.span3

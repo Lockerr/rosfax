@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Report < ActiveRecord::Base
 
-  paginates_per 10
+  paginates_per 20
   max_paginates_per 50
 
   has_many :points, :dependent => :destroy

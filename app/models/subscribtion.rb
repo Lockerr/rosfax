@@ -1,9 +1,7 @@
 class Subscribtion < ActiveRecord::Base
   attr_accessible :by_email, :email_period, :filter, :user_id
   belongs_to :user
-  
-  # validates :year_to, :numericaly => {:greater_then => :year_from}
-  
+   
   serialize :filter, Hash
 
   before_save :process_filter
@@ -18,12 +16,12 @@ class Subscribtion < ActiveRecord::Base
 
     if filter[:year_from].presence
       if filter[:year_to].presence
-        filter[:year] = {:year => (filter[:year_from]..filter[:year_to])}
+        filter[:year] = [(filter[:year_from].to_i..filter[:year_to].to_i), nil]
       else
-        filter[:year] = "year > #{filter[:year_from]}"
+        filter[:year] = [(filter[:year_from].to_i..Date.today.year.to_i), nil]
       end
     elsif filter[:year_to].presence
-      filter[:year] = (year < filter[:year_to])
+      filter[:year] = [(20.years.ago.year .. filter[:year_to]), nil]
     end
 
     filter.delete(:year_from)
@@ -31,14 +29,15 @@ class Subscribtion < ActiveRecord::Base
 
     if filter[:price_from].presence
       if filter[:price_to].presence
-        filter[:price] = (filter[:price_from]..filter[:price_to])
+        filter[:price] = [(filter[:price_from].to_i..filter[:price_to].to_i), nil]
       else
-        filter[:price] = (filter[:price_from]..100000000)
+        filter[:price] = [(filter[:price_from].to_i..100000000), nil]
       end
     elsif filter[:price_to].presence
       filter[:price] = (price < filter[:price_to])
     end
     filter[:brands] = {:name => filter[:brands]}
+    
     filter.delete(:price_from)
     filter.delete(:price_to)
     filter.delete(:country)

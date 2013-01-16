@@ -1,0 +1,25 @@
+%h1 Listing subscribtions
+
+%table
+  %tr
+    %th User
+    %th Filter
+    %th By email
+    %th Email period
+    %th
+    %th
+    %th
+
+  - @subscribtions.each do |subscribtion|
+    %tr
+      %td= subscribtion.user_id
+      %td= subscribtion.filter
+      %td= subscribtion.by_email
+      %td= subscribtion.email_period
+      %td= link_to 'Show', subscribtion
+      %td= link_to 'Edit', edit_subscribtion_path(subscribtion)
+      %td= link_to 'Destroy', subscribtion, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Subscribtion', new_subscribtion_path

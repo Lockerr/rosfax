@@ -3,7 +3,7 @@ class Report < ActiveRecord::Base
 
   paginates_per 20
   max_paginates_per 50
-
+  
   has_many :points, :dependent => :destroy
   has_many :assets, :as => :attachable, :dependent => :destroy
   has_many :links, :dependent => :destroy
@@ -15,6 +15,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :model
+  belongs_to :brand
   belongs_to :company
 
   attr_accessor :car_mark_model, :counters

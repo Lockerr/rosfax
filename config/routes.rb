@@ -1,5 +1,14 @@
 Tradein::Application.routes.draw do
   
+  resources :subscribtions
+
+
+  devise_for :user
+  
+  
+
+  resources :countries
+  resources :schedules
   resources :links
   
   match ':id.pdf' => 'reports#show',:constraints => { :id => /\d.+/ }, :format => 'pdf'
@@ -24,7 +33,6 @@ Tradein::Application.routes.draw do
   
   match 'view/22', :controller => :home, :action => :demo
   
-  devise_for :user
 
   resources :user, :except => [:index, :edit, :new, :show, :create, :update, :destroy] do
     resource :profile

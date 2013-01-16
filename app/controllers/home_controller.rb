@@ -10,6 +10,7 @@ class HomeController < ApplicationController
 
   def index
     redirect_to reports_path if Rails.root.to_s.split('/')[2] == 'user'
+    render :layout => false
   end
 
   def demo

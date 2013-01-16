@@ -1,3 +1,10 @@
+jQuery.fn.forceNumeric = ->
+  @each ->
+    $(this).keydown (e) ->
+      key = e.which or e.keyCode
+      return true  if not e.shiftKey and not e.altKey and not e.ctrlKey and key >= 48 and key <= 57 or key >= 96 and key <= 105 or key is 8 or key is 9 or key is 13 or key is 35 or key is 36 or key is 37 or key is 39 or key is 46 or key is 45
+      false
+
 
 $(document).ready ->
   
@@ -11,6 +18,7 @@ $(document).ready ->
   $('input#profile_phone').mask("+7(999) 999 99 99")
   $('input#report_car_vin').mask("*** ****** ****9999",{upcase: true})
   $('input#report_car_buyer_phone, input#report_car_seller_phone').mask("+7(999) 999 99 99")
+  $('input#report_car_price').forceNumeric()
   
   $('.processing').parent().spin()
 

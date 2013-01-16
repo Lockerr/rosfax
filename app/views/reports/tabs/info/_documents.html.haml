@@ -43,10 +43,8 @@
               %label.pull-left
                 №
               .span3.offset3 Постановка на учет
-              .span2
-                %span{style: 'font-size: 13px'}
-                  Срок владения
-              .span3 Снятие с учета
+              .span3 Срок владения
+              .span2 Снятие с учета
       
             - (1..6).to_a.each do |i|
               .row-fluid
@@ -64,13 +62,13 @@
                       = text_field 'pts', "start_owning_#{i}", :class => 'span8 pick_date', :data => {:attribute => :documents, :change => "start_owning_#{i}"}, :value => @report.documents["start_owning_#{i}"]
                       %span.add-on{:style => 'margin-left: -2px'}
                         %i.icon-calendar
-                    .span2
+                    .span3
                       - start_date = DateTime.parse @report.documents["start_owning_#{i}"] if @report.documents["start_owning_#{i}"]
                       - end_date = DateTime.parse @report.documents["end_owning_#{i}"] if @report.documents["end_owning_#{i}"]
-                      = "#{((end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month))} мес." if start_date and end_date
+                      = distance_of_time_in_words(start_date, end_date) if start_date and end_date
                     
-                    .pull-left.input-append.span3
-                      = text_field 'pts', "end_owning_#{i}", :class => 'span8 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
+                    .pull-left.input-append.span2
+                      = text_field 'pts', "end_owning_#{i}", :class => 'span12 pick_date', :data => {:attribute => :documents, :change => "end_owning_#{i}"}, :value => @report.documents["end_owning_#{i}"]
                       %span.add-on{:style => 'margin-left: -2px'}
                         %i.icon-calendar
 

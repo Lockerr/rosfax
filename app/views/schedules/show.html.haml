@@ -1,0 +1,4 @@
+.container
+  %h3
+    %p.text-success
+      = "Вы успешно записаны на осмотр Rosfax на #{(@schedule.inspection_start_time  + 6.hours).strftime('%H:00')} #{(@schedule.inspection_start_time  + 6.hours).strftime('%d-%m-%Y')}."

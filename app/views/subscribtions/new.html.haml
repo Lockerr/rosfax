@@ -1,0 +1,86 @@
+.container{style: 'margin-top: 10px;'}
+
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#specify"} Мне нужны конкретные марки/модели
+    %li
+      %a{"data-toggle" => "tab", :href => "#choose"} Я не знаю какую хочу машину
+    
+  .tab-content
+    #specify.tab-pane.fade.active.in
+      = form_for current_user.subscribtions.new, :class => 'form form-horizontal' do |f|
+        = f.hidden_field :user_id, :value => current_user.id
+        = f.fields_for :filter do |t|
+          = t.select :engine_type, %w(дизель бензин гибрид), {:prompt => 'топливо'}, {class: :span2, style: 'margin-left: 30px'}
+          = t.select :transmission, %w(автомат механика), {:prompt => 'коробка'}, {class: :span2, style: 'margin-left: 25px'}
+          = t.select :year_from, (1980..Time.now.year).to_a.reverse, {:prompt => 'год от'}, {class: :span2, style: 'margin-left: 25px'}
+          = t.select :year_to, (1980..Time.now.year).to_a.reverse, {:prompt => 'год до'}, {class: :span2, style: 'margin-left: 0px'}
+          = t.select :price_from, [50000, 100000, 400000, 1000000, 2000000], {:prompt => 'цена от'}, {class: :span2, style: 'margin-left: 25px'}
+          = t.select :price_to, [50000, 100000, 400000, 1000000, 2000000], {:prompt => 'цена до'}, {class: :span2, style: 'margin-left: 0px'}
+          .row-fluid
+            .span6
+              %legend
+                Производитель
+              - for country in Country.all
+                %label.checkbox.inline
+                  = t.check_box :country,{:multiple => true}, country.name, nil
+                  = country.name
+            .span6
+              %legend
+                Производитель
+              - for brand in Brand.where(:popular => true)
+                %label.checkbox.inline
+                  = t.check_box :brands,{:multiple => true}, brand.name,nil
+                  = brand.name
+                
+
+
+        = f.submit 'Подписать на рассылку', class: 'btn btn-primary'
+
+.form-inline
+  #inputType.select.btn{"data-name" => 'filter[engine_type]'}
+    .option.selected
+      автомат
+    .option{"data-value" => "автомат"}
+      автомат
+    .option{"data-value" => "механика"}
+      механика
+  #inputType.select.btn{"data-name" => 'filter[suspension]'}
+    .option.selected
+      Коробка
+    .option{"data-value" => "Челябинск"}
+      Челябинск
+    .option{"data-value" => "Екатеринбург"}
+      Екатеринбург
+    .option{"data-value" => "Магнитогорск"}
+      Магнитогорск
+.form-inline
+  .control-group
+    
+    .controls
+      #inputType.select.btn{"data-name" => 'city'}
+        .option.selected
+          &nbsp;
+        .option{"data-value" => "Челябинск"}
+          Челябинск
+        .option{"data-value" => "Екатеринбург"}
+          Екатеринбург
+        .option{"data-value" => "Магнитогорск"}
+          Магнитогорск
+.form-inline
+  .control-group
+    
+    .controls
+      #inputType.select.btn{"data-name" => 'city'}
+        .option.selected
+          &nbsp;
+        .option{"data-value" => "Челябинск"}
+          Челябинск
+        .option{"data-value" => "Екатеринбург"}
+          Екатеринбург
+        .option{"data-value" => "Магнитогорск"}
+          Магнитогорск
+
+    #choose.tab-pane.fade
+      %p Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+    

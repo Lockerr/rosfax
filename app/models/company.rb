@@ -4,4 +4,7 @@ class Company < ActiveRecord::Base
   has_many :reports
 
   has_one :asset, :as => :attachable
+
+  has_many :schedules
+  
 end

@@ -1,0 +1,23 @@
+
+.row
+  %legend
+    = "Здравствуйте! Вы всего в одном шаге от успешной записи на осмотр Rosfax на #{(@schedule.inspection_start_time).strftime('%H:00')} #{(@schedule.inspection_start_time).strftime('%d-%m-%Y')}. Для того, чтобы закончить запись, пожалуйста представьтесь и укажите Ваш номер мобильного телефона."
+  = form_for @schedule, :html => {:class => 'form-horizontal'} do |f|
+    = f.hidden_field :company_id
+    = f.hidden_field :inspection_start_time
+    
+      
+    .control-group
+      .control-label
+        Имя
+      .controls
+        = f.text_field :name
+    .control-group
+      .control-label
+        Телефон
+      .controls
+        = f.text_field :phone
+    .control-group
+      .controls
+        = f.submit 'OK', :class => 'btn', :disabled => :disabled
+        .btn.cancel{:disabled => :disabled} Отмена

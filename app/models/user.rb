@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   include Devise::Async::Model
   has_one :profile
   has_many :reports
+  has_many :subscribtions
+
   belongs_to :company
   has_many :assets, :as => :attachable
   
@@ -25,7 +27,7 @@ class User < ActiveRecord::Base
       user = Ftp::User.new
       user.userid = email
       user.passwd = ActiveRecord::Base.connection.execute("SELECT PASSWORD('#{password}')").first[0]
-      user.save
+      user.save!
     end
 
   end

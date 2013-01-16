@@ -1,0 +1,38 @@
+#schedule-calendar
+  %legend Календарь осмотров
+  - @schedules = []
+  %table.table-bordered.table-striped.table
+    %thead
+      %tr
+        %th
+          День
+        - index = 0
+        
+        - (-1..5).each do |i|
+          - i += params[:day].to_i if params[:day]
+          
+          - @schedules[index] = Schedule.where(:inspection_start_time => [Date.today + i.days .. Date.today + i.days + 1])
+          - if (Date.today + i.days) == Date.today
+            %th.text-info
+              = Russian::strftime(Date.today + i.days, "%d %A")
+          - else
+            %th
+              = Russian::strftime(Date.today + i.days, "%d %A")
+          - index += 1
+      - 9.upto(22) do |hour|
+        %tr{style: 'height: 43px'}
+          %td
+            = "#{hour}:00"
+          - 7.times do |i|
+            - day = i - 1 + (params[:day].to_i if params[:day]).to_i
+
+            - if @schedules[i]
+              - if @schedules[i].select{|s| s.inspection_start_time.hour == hour}.any?
+                %td.booked{style: 'width: 152px; padding: 2px; cursor: arrow'}
+                  .alert.alert-info{style: 'margin: 0px'}
+                    %span{style: 'cursor: default'}
+                      Забронировано
+              - else
+                %td.free{style: 'width: 152px; padding: 2px', data: {time: hour, date: i - 1 + params[:date].to_i, company: @center.id}}
+                  .alert.alert-success{style: 'margin: 0px; display: none; cursor: pointer'}
+                    Свободно

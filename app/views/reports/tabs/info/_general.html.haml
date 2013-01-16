@@ -30,8 +30,8 @@
                     %span.caret
                   %ul.dropdown-menu.pull-left
                     - (1980..2012).to_a.reverse.each do |i|
-                      %li
-                        .dropdown-element{:data => {:attribute => 'car', :place => 'car', :change => 'year', :year => i}}=i
+                      %li                      
+                        .dropdown-element{:data => {attribute: :year, :year => i}}=i
             .control-group
               .control-label
                 Гос. номер
@@ -42,6 +42,28 @@
                 VIN
               .controls
                 = text_field 'report[car]', 'vin', :value => @report.car['vin'], :placeholder => '*** ****** ****9999',  :data => {:attribute => :car, :change => 'vin'}
+            .control-group
+              .control-label
+                Цена
+              .controls
+                = text_field 'report[car]', 'price', :value => @report.car['price'], :placeholder => 'тыс. рублей',  :data => {:attribute => :car, :change => 'price'}
+            .control-group
+              .control-label
+                Страна производитель
+              .controls
+                .btn-group
+                  %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px'}
+                    = (@report.car['car']['country'] if @report.car['car']) || '---'
+                    %span.caret
+                  %ul.dropdown-menu.pull-left
+                    - %w(Россия Америка Германия Франция Италия Испания Англия Япония Корея Китай).sort.each do |i|
+                      %li
+                        .dropdown-element{:data => {:attribute => 'car', :place => 'car', :change => 'country', :country => i}}=i
+                    %li.divider
+                    %li
+                      .dropdown-element{:data => {:attribute => 'car', :place => 'car', :change => 'country', :country => 'Прочие'}} Прочее
+
+
             %legend
               Основные характеристики
             .control-group
@@ -75,14 +97,26 @@
                         .dropdown-element{:data => {:attribute => :car, :change => :engine_type, :engine_type => i}}=i
             .control-group
               .control-label
+                Коробка передач
+              .controls
+                .btn-group
+                  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
+                    = @report.car['transmission'] || '---'
+                    %span.caret
+                  %ul.dropdown-menu.pull-left
+                    - ['автомат', 'механика'].each do |i|
+                      %li
+                        .dropdown-element{:data => {:attribute => :car, :change => :transmission, :transmission => i}}=i
+            .control-group
+              .control-label
                 Объем двигателя
               .controls
-                = text_field 'report[car]', 'cylinder_amount', :value => @report.car['cylinder_amount'],  :data => {:attribute => :car, :change => 'cylinder_amount'}                  
+                = text_field 'report[car]', 'cylinder_amount', :value => @report.car['cylinder_amount'],  :data => {:attribute => :car, :change => 'cylinder_amount'}
             .control-group
               .control-label
                 Мощность л.с.
               .controls
-                = text_field 'report[car]', 'hors_power', :value => @report.car['hors_power'],  :data => {:attribute => :car, :change => 'hors_power'}                  
+                = text_field 'report[car]', 'hors_power', :value => @report.car['hors_power'],  :data => {:attribute => :car, :change => 'hors_power'}
             %legend
               Покупатель
             .control-group

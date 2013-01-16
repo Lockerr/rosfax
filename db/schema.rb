@@ -11,7 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207082242) do
+ActiveRecord::Schema.define(:version => 20130116081025) do
+
+  create_table "active_admin_comments", :force => true do |t|
+    t.string   "resource_id",   :null => false
+    t.string   "resource_type", :null => false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.text     "body"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "namespace"
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "admin_users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
+  add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "assets", :force => true do |t|
     t.string   "data_file_name"
@@ -31,8 +64,9 @@ ActiveRecord::Schema.define(:version => 20121207082242) do
   add_index "assets", ["attachable_id", "attachable_type"], :name => "index_assets_on_attachable_id_and_attachable_type"
 
   create_table "brands", :force => true do |t|
-    t.string  "name",    :null => false
+    t.string  "name",       :null => false
     t.boolean "popular"
+    t.integer "country_id"
   end
 
   create_table "cars", :force => true do |t|
@@ -51,6 +85,13 @@ ActiveRecord::Schema.define(:version => 20121207082242) do
     t.string   "address"
     t.integer  "phone",      :limit => 8
     t.string   "site"
+    t.string   "city"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "defects", :force => true do |t|
@@ -140,6 +181,30 @@ ActiveRecord::Schema.define(:version => 20121207082242) do
     t.boolean  "publish",               :default => false
     t.text     "testdrive_description"
     t.integer  "company_id"
+    t.string   "transmissin"
+    t.string   "engine_type"
+    t.string   "transmission"
+    t.integer  "year"
+    t.integer  "price"
+    t.integer  "brand_id"
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "company_id"
+    t.datetime "inspection_start_time"
+    t.string   "name"
+    t.string   "phone"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  create_table "subscribtions", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "filter"
+    t.boolean  "by_email"
+    t.integer  "email_period"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|

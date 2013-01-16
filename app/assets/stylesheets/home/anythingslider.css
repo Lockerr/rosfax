@@ -1,0 +1,184 @@
+/*
+	AnythingSlider v1.7+ Default (base) theme
+	By Chris Coyier: http://css-tricks.com
+	with major improvements by Doug Neiner: http://pixelgraphics.us/
+	based on work by Remy Sharp: http://jqueryfordesigners.com/
+*/
+
+/*****************************
+  SET DEFAULT DIMENSIONS HERE
+ *****************************/
+/* change the ID to match your slider */
+#slider {
+	width: 410px;
+	height: 300px;
+	/* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+	overflow-x: hidden;
+}
+/* Opera width restriction */
+.anythingBase { max-width: 32766px; }
+
+/*****************
+  SET COLORS HERE
+ *****************/
+/**** Default state (no keyboard focus) ****/
+/* slider window - top & bottom borders, default state */
+div.anythingSlider .anythingWindow {
+	
+}
+/* Navigation buttons, default state */
+div.anythingSlider .anythingControls ul a.cur {
+    background:url("../img/page_bg.png") no-repeat;
+    color:#FFF;
+}
+/* start-stop button, stopped, default state */
+div.anythingSlider .start-stop {
+	background-color: #040;
+	color: #fff;
+}
+/* start-stop button, playing, default state */
+div.anythingSlider .start-stop.playing {
+
+}
+/* start-stop button, default hovered text color (when visible) */
+div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover {
+	color: #ddd;
+}
+
+/**** Active State (slider has keyboard focus) ****/
+/* slider window - top & bottom borders, active state */
+div.anythingSlider.activeSlider .anythingWindow {
+	border-color: #7C9127;
+}
+/* Navigation buttons, active state */
+div.anythingSlider.activeSlider .anythingControls ul a.cur, div.anythingSlider.activeSlider .anythingControls ul a {
+
+}
+/* start-stop button, stopped, active state */
+div.anythingSlider .start-stop {
+	color: #fff;
+}
+/* start-stop button, playing, active state */
+div.anythingSlider .start-stop.playing {
+}
+/* start-stop button, active slider hovered text color (when visible) */
+div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover {
+	color: #040404;
+}
+
+/***********************
+  COMMON SLIDER STYLING
+ ***********************/
+/* Overall Wrapper: 45px right & left padding for the arrows, 28px @ bottom for navigation */
+div.anythingSlider {
+	display: block;
+	overflow: visible !important; /* needed for Opera and Safari */
+	position: relative;
+    padding: 0;
+}
+/* anythingSlider viewport window */
+div.anythingSlider .anythingWindow {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+    
+}
+/* anythingSlider base (original element) */
+.anythingBase {
+	background: transparent;
+	list-style: none;
+	position: absolute;
+	overflow: visible !important;
+	padding: 0;
+}
+/* all panels inside the slider */
+.anythingBase .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+}
+.anythingBase .panel.vertical {
+	float: none;
+}
+
+/* Navigation Arrows */
+div.anythingSlider .arrow {
+	position: absolute;
+    top:50%;
+    margin-top:-23px;
+}
+div.anythingSlider .arrow a {
+	display: block;
+	height: 47px;
+	width: 24px;
+	text-align: center;
+	outline: 0;
+}
+/* hide text, target the span so IE7 doesn't text-indent the link */
+div.anythingSlider .arrow a span { display: block; text-indent: -9999px; }
+/* back arrow */
+div.anythingSlider .back { left: 41px; }
+div.anythingSlider .back a { 
+    background:url("../img/larr.png") no-repeat;
+}
+div.anythingSlider .back.disabled { display: none; } /* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
+/* forward arrow */
+div.anythingSlider .forward { right: 41px; }
+div.anythingSlider .forward a { 
+    background:url("../img/rarr.png") no-repeat;
+}
+div.anythingSlider .forward.disabled { display: none; } /* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
+
+/* Navigation Links */
+div.anythingSlider .anythingControls { outline: 0; }
+div.anythingSlider .anythingControls ul {
+    position: absolute;
+    top:-30px;
+    padding:0;
+    margin:0;
+}
+div.anythingSlider .anythingControls ul li {
+    display: inline;
+}
+div.anythingSlider .anythingControls ul a {
+    display: block;
+    width:20px;
+    height:20px;
+    float: left;
+    text-align: center;
+    color:#000;
+    font-family: "Trebuchet MS", "Helvetica CY", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+}
+div.anythingSlider .anythingControls ul a:hover {
+    background:url("../img/page_bg.png") no-repeat;
+    color:#FFF;
+}
+/* Navigation size window */
+div.anythingSlider .anythingControls .anythingNavWindow { overflow: hidden; float: left; }
+
+/* slider autoplay right-to-left, reverse order of nav links to look better */
+div.anythingSlider.rtl .anythingControls ul a { float: right; } /* reverse order of nav links */
+div.anythingSlider.rtl .anythingControls ul { float: left; }    /* move nav link group to left */
+div.anythingSlider.rtl .anythingWindow {
+	direction: ltr;
+	unicode-bidi: bidi-override;
+}
+/* div.anythingSlider.rtl .start-stop { float: right; } */ /* move start/stop button - in case you want to switch sides */
+
+/* Autoplay Start/Stop button */
+div.anythingSlider .start-stop {
+}
+/* hide cell shading on hover - makes the button appear to come forward */
+div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover { background-image: none; }
+
+/* probably not necessary, but added just in case */
+div.anythingSlider, div.anythingSlider .anythingWindow, div.anythingSlider .anythingControls ul a, div.anythingSlider .arrow a, div.anythingSlider .start-stop {
+	transition-duration: 0;
+	-o-transition-duration: 0;
+	-moz-transition-duration: 0;
+	-webkit-transition-duration: 0;
+}

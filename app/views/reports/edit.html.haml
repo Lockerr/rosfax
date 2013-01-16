@@ -29,10 +29,9 @@
     
     .tab-content.first
       - for symbol in %w(photo checklist elements testdrive info)
-        = render "reports/tabs/#{symbol}"
+        = render "reports/tabs/#{symbol}", :report => @report
 
 .span4.uploader.hide
   = render :partial => 'uploader', :locals => {:attribute => ''}
 
 = render 'carousel'
-

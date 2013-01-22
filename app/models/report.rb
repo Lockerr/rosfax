@@ -17,6 +17,7 @@ class Report < ActiveRecord::Base
   belongs_to :model
   belongs_to :brand
   belongs_to :company
+  belongs_to :country
 
   attr_accessor :car_mark_model, :counters
 

@@ -26,12 +26,12 @@
               .controls
                 .btn-group
                   %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 68px'}
-                    = (@report.car['car']['year'] if @report.car['car']) || '---'
+                    = @report.year || '---'
                     %span.caret
                   %ul.dropdown-menu.pull-left
                     - (1980..2012).to_a.reverse.each do |i|
                       %li                      
-                        .dropdown-element{:data => {attribute: :year, :year => i}}=i
+                        .dropdown-element{:data => {attribute: :year, :value => i}}=i
             .control-group
               .control-label
                 Гос. номер
@@ -53,15 +53,16 @@
               .controls
                 .btn-group
                   %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px'}
-                    = (@report.car['car']['country'] if @report.car['car']) || '---'
+                    = @report.country.try(:name) || '---'
                     %span.caret
                   %ul.dropdown-menu.pull-left
-                    - %w(Россия Америка Германия Франция Италия Испания Англия Япония Корея Китай).sort.each do |i|
+                    - Country.where("name <> 'Прочие'").order(:name).each do |i|
                       %li
-                        .dropdown-element{:data => {:attribute => 'car', :place => 'car', :change => 'country', :country => i}}=i
+                        .dropdown-element{:data => {attribute: :country_id, value: i.id}}=i.name
                     %li.divider
+                    - country = Country.where(name: "Прочие").first
                     %li
-                      .dropdown-element{:data => {:attribute => 'car', :place => 'car', :change => 'country', :country => 'Прочие'}} Прочее
+                      .dropdown-element{:data => {attribute: :country_id, value: country.id}}=country.name
 
 
             %legend
@@ -89,24 +90,24 @@
               .controls
                 .btn-group
                   %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                    = @report.car['engine_type'] || '---'
+                    = @report.engine_type.presence || '---'
                     %span.caret
                   %ul.dropdown-menu.pull-left
                     - ['бензин', 'дизель', 'гибрид'].each do |i|
                       %li
-                        .dropdown-element{:data => {:attribute => :car, :change => :engine_type, :engine_type => i}}=i
+                        .dropdown-element{:data => {:attribute => :engine_type, :value => i}}=i
             .control-group
               .control-label
                 Коробка передач
               .controls
                 .btn-group
                   %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                    = @report.car['transmission'] || '---'
+                    = @report.transmission.presence || '---'
                     %span.caret
                   %ul.dropdown-menu.pull-left
                     - ['автомат', 'механика'].each do |i|
                       %li
-                        .dropdown-element{:data => {:attribute => :car, :change => :transmission, :transmission => i}}=i
+                        .dropdown-element{:data => {:attribute => :transmission, :value => i}}=i
             .control-group
               .control-label
                 Объем двигателя

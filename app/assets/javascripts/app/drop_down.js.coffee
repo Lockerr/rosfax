@@ -22,8 +22,9 @@ $(document).ready ->
   $(".dropdown-element:not('.alone')").live 'click', ->
 
     element = $(@)
-    attr           = element.data('attribute')
-    change         = element.data('change')
+    data = $(@).data()
+    attr = element.data('attribute')
+    
     
     btns = element.parents('.btn-group').find('.btn')
 
@@ -40,8 +41,13 @@ $(document).ready ->
         container_data[place][change] = element.data(change)
         console.log "dropdown-element: preivous data => #{container_data[place][change]}"
         console.log "dropdown-element: data(change) => #{element.data(change)}"
-      else
+      else if (change = element.data('change'))
+        console.log 'container have change'
         container_data[change] = element.data(change)
+      else
+        console.log "dropdown-element: preivous data => #{container_data}"
+        console.log "dropdown-element: change #{attr} => #{element.data().value}"
+        container_data = element.data().value
 
       container.data(attr, container_data)
       store_report()

@@ -109,7 +109,7 @@ html {
 body {
     margin:0;
     padding:0;
-    background:url("bg.jpg") no-repeat top;
+    background:url("/assets/home/bg.jpg") no-repeat top;
 }
 
 .clr {
@@ -228,19 +228,19 @@ body {
 }
 
 .menu ul li.m1 a {
-    background:url("i1.png") no-repeat center 4px;
+    background:url("/assets/home/i1.png") no-repeat center 4px;
 }
 
 .menu ul li.m2 a {
-    background:url("i2.png") no-repeat top;
+    background:url("/assets/home/i2.png") no-repeat top;
 }
 
 .menu ul li.m3 a {
-    background:url("i3.png") no-repeat top;
+    background:url("/assets/home/i3.png") no-repeat top;
 }
 
 .menu ul li.m4 a {
-    background:url("i4.png") no-repeat top;
+    background:url("/assets/home/i4.png") no-repeat top;
 }
 
 .menu ul li.m5 {
@@ -249,20 +249,20 @@ body {
 }
 
 .menu ul li.m5 a {
-    background:url("i5.png") no-repeat top;
+    background:url("/assets/home/i5.png") no-repeat top;
     padding:90px 40px 0 40px;
 }
 
 .menu ul li.m6 a {
-    background:url("i6.png") no-repeat top;
+    background:url("/assets/home/i6.png") no-repeat top;
 }
 
 .menu ul li.m7 a {
-    background:url("i7.png") no-repeat top;
+    background:url("/assets/home/i7.png") no-repeat top;
 }
 
 .menu ul li.m8 a {
-    background:url("i8.png") no-repeat top;
+    background:url("/assets/home/i8.png") no-repeat top;
 }
 
 #main {

@@ -1,2 +1,4 @@
-class SubscribtionsController < InheritedResources::Base
+class SubscribtionsController < ApplicationController
+  def index
+  end
 end

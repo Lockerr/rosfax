@@ -7,7 +7,7 @@ class Subscribtion < ActiveRecord::Base
   before_save :process_filter
 
   def humanize_filter
-
+    
   end
 
   def process_filter

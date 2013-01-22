@@ -172,7 +172,7 @@ body {
 
 #request a {
     display: block;
-    background:url("request.png") no-repeat;
+    background:url("/assets/home/request.png") no-repeat;
     width:184px;
     height:44px;
     color:#FFF;
@@ -186,7 +186,7 @@ body {
 }
 
 #request a:hover {
-    background:url("request_hov.png") no-repeat left top;
+    background:url("/assets/home/request_hov.png") no-repeat left top;
 }
 
 #top_text {

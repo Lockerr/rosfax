@@ -6,7 +6,7 @@
     //slider
     $('#slider').anythingSlider({
         autoPlay : true,
-        delay : 3000,
+        delay : 5000,
         animationTime : 600,
         startText: "",
         stopText: ""

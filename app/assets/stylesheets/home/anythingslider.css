@@ -28,7 +28,7 @@ div.anythingSlider .anythingWindow {
 }
 /* Navigation buttons, default state */
 div.anythingSlider .anythingControls ul a.cur {
-    background:url("../img/page_bg.png") no-repeat;
+    background:url("/assets/home/page_bg.png") no-repeat;
     color:#FFF;
 }
 /* start-stop button, stopped, default state */
@@ -121,13 +121,13 @@ div.anythingSlider .arrow a span { display: block; text-indent: -9999px; }
 /* back arrow */
 div.anythingSlider .back { left: 41px; }
 div.anythingSlider .back a { 
-    background:url("../img/larr.png") no-repeat;
+    background:url("/assets/home/larr.png") no-repeat;
 }
 div.anythingSlider .back.disabled { display: none; } /* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
 /* forward arrow */
 div.anythingSlider .forward { right: 41px; }
 div.anythingSlider .forward a { 
-    background:url("../img/rarr.png") no-repeat;
+    background:url("assets/home/rarr.png") no-repeat;
 }
 div.anythingSlider .forward.disabled { display: none; } /* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
 
@@ -154,7 +154,7 @@ div.anythingSlider .anythingControls ul a {
     font-weight: bold;
 }
 div.anythingSlider .anythingControls ul a:hover {
-    background:url("../img/page_bg.png") no-repeat;
+    background:url("assets/home/page_bg.png") no-repeat;
     color:#FFF;
 }
 /* Navigation size window */

@@ -6,7 +6,7 @@ gem 'rails', '3.2.11'
 
 
 gem 'mysql2'
-gem 'thin'
+
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
@@ -54,6 +54,7 @@ group :development do
   gem 'rvm-capistrano'
   gem 'quiet_assets'
   gem 'sextant'
+  gem 'thin'
 end
 
 

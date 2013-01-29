@@ -29,7 +29,7 @@ class SchedulesController < ApplicationController
   # GET /schedules/new.json
   def new
     @schedule = Schedule.new
-    @schedule.inspection_start_time = (Date.today + params[:schedule][:date].to_i.days).to_time + params[:schedule][:time].to_i.hours + 6.hours
+    @schedule.inspection_start_time = (Date.today + params[:schedule][:date].to_i.days).to_time + params[:schedule][:time].to_i.hours
     @schedule.company_id = params[:schedule][:company]
 
 

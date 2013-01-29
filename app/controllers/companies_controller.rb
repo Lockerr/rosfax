@@ -4,6 +4,7 @@ class CompaniesController < ApplicationController
   def index
       @companies = Company.scoped
       @companies = @companies.where(:city => params[:city]) if params[:city]
+      
     
 
 

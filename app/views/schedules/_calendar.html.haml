@@ -1,6 +1,6 @@
 #schedule-calendar
   %legend Календарь осмотров
-  - @schedules = []
+  - schedules = []
   %table.table-bordered.table-striped.table
     %thead
       %tr
@@ -9,7 +9,7 @@
         - index = 0
         - (1..7).each do |i|
           - i += params[:day].to_i if params[:day]
-          - @schedules[index] = Schedule.where(:inspection_start_time => [Date.today + i.days .. Date.today + i.days + 1])
+          - schedules[index] = @schedules.where(:inspection_start_time => [Date.today + i.days .. Date.today + i.days + 1])
           - if (Date.today + i.days) == Date.today
             %th.text-info
               = Russian::strftime(Date.today + i.days, "%d %A")
@@ -17,15 +17,15 @@
             %th
               = Russian::strftime(Date.today + i.days, "%d %A")
           - index += 1
-      - 9.upto(22) do |hour|
+      - 9.upto(18) do |hour|
         %tr{style: 'height: 43px'}
           %td
             = "#{hour}:00"
           - 7.times do |i|
             - day = i - 1 + (params[:day].to_i if params[:day]).to_i
 
-            - if @schedules[i]
-              - if @schedules[i].select{|s| s.inspection_start_time.hour == hour}.any?
+            - if schedules[i]
+              - if @schedules.select{|s| s.inspection_start_time.hour == hour and s.inspection_start_time.strftime('%d-%m-%y') == (Date.today + (i-1).day).strftime('%d-%m-%y')}.any?
                 %td.booked{style: 'width: 152px; padding: 2px; cursor: arrow'}
                   .alert.alert-info{style: 'margin: 0px'}
                     %span{style: 'cursor: default'}

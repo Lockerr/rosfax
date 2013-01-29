@@ -50,6 +50,8 @@ group :assets do
 end
 
 group :development do
+  gem 'meta_request'
+  gem "better_errors"
 
   gem 'rvm-capistrano'
   gem 'quiet_assets'

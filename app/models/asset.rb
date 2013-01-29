@@ -37,7 +37,7 @@ class Asset < ActiveRecord::Base
         :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
         },
         :default_url => "/assets/loading.gif"
-            
+
   end
 
 

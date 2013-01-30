@@ -4,9 +4,6 @@ class CompaniesController < ApplicationController
   def index
       @companies = Company.scoped
       @companies = @companies.where(:city => params[:city]) if params[:city]
-      
-    
-
 
     respond_to do |format|
       format.html # index.html.erb

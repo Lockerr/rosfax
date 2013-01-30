@@ -9,7 +9,6 @@ $(document).ready ->
   $('.free').live 'mouseleave', ->
     $(@).find('.alert').fadeOut(200)
 
-  
   $('.free').live 'click', ->
     $.ajax
       type: 'get'
@@ -24,16 +23,15 @@ $(document).ready ->
 
   $('input[name=center]').live 'change', ->
     $('.container#scheduler').empty()
-    city = $('input[name=city]').val() 
+    city = $('input[name=city]').val()
     center = $('input[name=center]').val()
     $.ajax
       type: 'get'
       url: "schedules.js?city=#{city}&center=#{center}"
       complete: (data) ->
-        
         $('.container#scheduler').append(data.responseText)
         $('.container#scheduler').show()
-  
+
   $('#schedule_phone').live 'change', ->
     $('.btn[disabled=disabled]').removeAttr('disabled')
 
@@ -85,6 +83,3 @@ jQuery ($) ->
       select.find(".btn:eq(0)").html $(this).html()
       select.find("input[type=hidden]").trigger('selector_change')
       e.preventDefault()
-    
-
-    

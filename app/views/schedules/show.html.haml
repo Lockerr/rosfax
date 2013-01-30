@@ -1,4 +1,4 @@
 .container
   %h3
     %p.text-success
-      = "Вы успешно записаны на осмотр Rosfax на #{@schedule.inspection_start_time.strftime('%H:00  %d-%B-%Y')}."
+      = "Вы успешно записаны на осмотр Rosfax на #{Russian::strftime(@schedule.inspection_start_time, '%H:00  %d %B %Y')}."

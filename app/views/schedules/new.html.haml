@@ -1,5 +1,33 @@
-%h1 New schedule
+.container#selector
+  %legend
+    Запись на осмотр
+  #schedule-city-selection
+    %form.form-horizontal
+      .control-group
+        .control-label
+          Выберите город:
+        .controls
+          #inputType.select.btn{"data-name" => 'city'}
+            .option.selected
+              &nbsp;
+            .option{"data-value" => "Челябинск"}
+              Челябинск
+            .option{"data-value" => "Екатеринбург"}
+              Екатеринбург
+            .option{"data-value" => "Магнитогорск"}
+              Магнитогорск
 
-= render 'form'
 
-= link_to 'Back', schedules_path
+
+
+
+
+  #schedule-company-selector{style: 'display: none;'}
+    %form.form-horizontal
+      .control-group
+        .control-label
+          Выберите центр:
+        .controls
+          #inputType.select.btn{"data-name" => 'center'}
+
+.container#scheduler{style: 'display: none;'}

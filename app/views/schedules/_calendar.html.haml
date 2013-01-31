@@ -8,8 +8,8 @@
           День
         - index = 0
         - (1..7).each do |i|
-          - i += params[:day].to_i if params[:day]
-          - schedules[index] = @schedules.where(:inspection_start_time => [Date.today + i.days .. Date.today + i.days + 1])
+          / - i += params[:day].to_i if params[:day]
+          - schedules[index] = @schedules.select{|schedule| schedule.inspection_start_time == [Date.today + i.days .. Date.today + i.days + 1]}
           - if (Date.today + i.days) == Date.today
             %th.text-info
               = Russian::strftime(Date.today + i.days, "%d %A")
@@ -31,6 +31,6 @@
                     %span{style: 'cursor: default'}
                       Забронировано
               - else
-                %td.free{style: 'width: 152px; padding: 2px', data: {time: hour, date: i - 1 + params[:date].to_i, company: @center.id}}
+                %td.free{style: 'width: 152px; padding: 2px', data: {time: hour, date: i - 1 + params[:date].to_i, company: @center.try(:id)}}
                   .alert.alert-success{style: 'margin: 0px; display: none; cursor: pointer'}
                     Свободно

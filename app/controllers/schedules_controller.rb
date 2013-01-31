@@ -2,10 +2,8 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    if params[:city] and params[:center]
-      @center = Company.find(params[:center])
-      @schedules = @center.schedules
-    end
+    @schedules = Schedule.all
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,9 +26,15 @@ class SchedulesController < ApplicationController
   # GET /schedules/new
   # GET /schedules/new.json
   def new
+    if params[:city] and params[:center]
+      @center = Company.find(params[:center])
+      @schedules = @center.schedules
+    end
     @schedule = Schedule.new
-    @schedule.inspection_start_time = (Date.today + params[:schedule][:date].to_i.days + 2.day) + params[:schedule][:time].to_i.hours
-    @schedule.company_id = params[:schedule][:company]
+    if params[:schedule]
+      @schedule.inspection_start_time = (Date.today + params[:schedule][:date].to_i.days + 2.day) + params[:schedule][:time].to_i.hours
+      @schedule.company_id = params[:schedule][:company]
+    end
 
 
 

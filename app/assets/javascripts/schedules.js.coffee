@@ -18,7 +18,7 @@ $(document).ready ->
   $('input[name=city]').live 'change', ->
     $.ajax
       type: 'get'
-      url: "companies.js?city=#{$(@).val()}"
+      url: "/companies.js?city=#{$(@).val()}"
       $('.container#scheduler').empty()
 
   $('input[name=center]').live 'change', ->
@@ -27,7 +27,7 @@ $(document).ready ->
     center = $('input[name=center]').val()
     $.ajax
       type: 'get'
-      url: "schedules.js?city=#{city}&center=#{center}"
+      url: "/schedules.js?city=#{city}&center=#{center}"
       complete: (data) ->
         $('.container#scheduler').append(data.responseText)
         $('.container#scheduler').show()

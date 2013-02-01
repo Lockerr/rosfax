@@ -25,7 +25,13 @@
             - day = i - 1 + (params[:day].to_i if params[:day]).to_i
 
             - if schedules[i]
-              - if @schedules.select{|s| s.inspection_start_time.hour == hour and s.inspection_start_time.to_date == Date.today + i+1.day}.any?
+              - if @schedules.select{|s| s.inspection_start_time.hour == hour and s.inspection_start_time.to_date == Date.today + i+1.day}.first == @schedule
+                %td.booked{style: 'width: 152px; padding: 2px; cursor: arrow'}
+                  .alert.alert-error{style: 'margin: 0px'}
+                    %span{style: 'cursor: default'}
+                      %h4
+                        Эта
+              - elsif @schedules.select{|s| s.inspection_start_time.hour == hour and s.inspection_start_time.to_date == Date.today + i+1.day}.any?
                 %td.booked{style: 'width: 152px; padding: 2px; cursor: arrow'}
                   .alert.alert-info{style: 'margin: 0px'}
                     %span{style: 'cursor: default'}

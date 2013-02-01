@@ -1,0 +1,12 @@
+%td= @schedule.name
+%td= @schedule.phone
+%td= @schedule.company.name
+
+%td= @schedule.inspection_start_time.strftime('%H:00 %-d %B %Y')
+%td.actions
+
+  = link_to glyph(:edit), schedule_path(@schedule), class: 'btn'
+  - if @schedule.confirmed
+    = link_to glyph(:ok), schedule_confirm_path(@schedule, :schedule => {:confirmed => false}, :format => :js),method: :put, remote: true, class: 'btn btn-success', id: 'unconfirm'
+  - else
+    = link_to '!', schedule_confirm_path(@schedule, :schedule => {:confirmed => true}, :format => :js),method: :put, remote: true, class: 'btn btn-danger', id: 'confirm'

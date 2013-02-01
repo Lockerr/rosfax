@@ -4,24 +4,53 @@
 
 $(document).ready ->
 
-  $('.free').on 'mouseenter', ->
+  $('.free').live 'mouseenter', ->
     $(@).find('.alert').fadeIn(200)
-  $('.free').on 'mouseleave', ->
+    $(@).find('.alert').addClass('active')
+  $('.free').live 'mouseleave', ->
     $(@).find('.alert').fadeOut(200)
+    $(@).find('.alert').removeClass('active')
 
-  $('.free').on 'click', ->
-    $.ajax
-      type: 'get'
-      url: 'schedules/new.js'
-      data: {schedule:{time: $(@).data('time'), date: $(@).data('date'), company: $(@).data('company')}}
+  $('.free').live 'click', ->
+    if $('#move_schedule.btn.active').length > 0
+      console.log 'put'
+      $.ajax
+        type: 'put'
+        url: "/schedules/#{$('.schedule').attr('id')}.json"
+        data: {schedule:{time: $(@).data('time'), date: $(@).data('date')}}
+        success: ->
+          free = $('.alert-success.active').parent()
+          free_alert = $('.alert-success.active')
+          booked_alert = $('.alert-error')
+          booked = booked_alert.parent()
+          booked.append(free_alert)
+          booked.removeClass('booked')
+          booked.addClass('free')
+          free.append(booked_alert)
+          free.removeClass('free')
+          free.addClass('booked')
+    else if $('#schedule_block.btn.active').length > 0
+      $.ajax
+        type: 'put'
+        url: "/schedules/#{$('.schedule').attr('id')}/block.json"
+        data: {schedule:{time: $(@).data('time'), date: $(@).data('date')}}
 
-  $('input[name=city]').on 'change', ->
+
+    else if $('.container.schedule').length == 0
+
+      $.ajax
+        type: 'get'
+        url: '/schedules/new.js'
+        data: {schedule:{time: $(@).data('time'), date: $(@).data('date'), company: $(@).data('company')}}
+
+  $('input[name=city]').live 'change', ->
+
     $.ajax
       type: 'get'
       url: "/companies.js?city=#{$(@).val()}"
       $('.container#scheduler').empty()
 
-  $('input[name=center]').on 'change', ->
+  $('input[name=center]').live 'change', ->
     $('.container#scheduler').empty()
     city = $('input[name=city]').val()
     center = $('input[name=center]').val()
@@ -32,36 +61,9 @@ $(document).ready ->
         $('.container#scheduler').append(data.responseText)
         $('.container#scheduler').show()
 
-  $('#schedule_phone').on 'change', ->
+  $('#schedule_phone').live 'change', ->
     $('.btn[disabled=disabled]').removeAttr('disabled')
 
-
-
-#!
-# * Convert .select elements to Bootstrap Dropdown Group
-# * Assumes jQuery and Bootstrap scripts already linked
-# *
-# * Expected markup:
-# *
-# *   <div id="someId" data-name="someName" class="select someClass">
-# *     <div class="option selected" data-value="1"> Item 1 <i class="icon-ok"></i></div>
-# *     <div class="option" data-value="2"> Item 2 <span>some html</span></div>
-# *     <div class="option" data-value="3"> Item 3 <img src="little.img"></div>
-# *   </div>
-# *
-# * Author: John Rocela 2012 <me@iamjamoy.com>
-# * From: http://blog.iamjamoy.com/convert-select-boxes-to-a-fancy-html-dropdown
-# *
-# * Inspired by updates from Colin Faulkingham (https://gist.github.com/2320588)
-# *                      and Frank Basti (http://jsfiddle.net/xuAQv/13)
-# *
-# * Modified: Ivan Novikov (http://github.com/NIA), Dec 2012
-# * Changed: use classes on divs instead of select/option tags,
-# *          thus allow arbitrary html inside options,
-# *          propagate original element classes to buttons,
-# *          fixed IE compatibility and rounded corners of first .btn,
-# *          avoid using javascript: pseudo-protocol
-# 
 jQuery ($) ->
   $(".select").each (i, e) ->
     unless $(e).data("convert") is "no"
@@ -76,10 +78,11 @@ jQuery ($) ->
         select.find(".dropdown-menu").append "<li><a href=\"#\" data-value=\"" + $(q).data("value") + "\">" + $(q).html() + "</a></li>"
       $(e).remove()
 
-    $(".dropdown-menu.from-selector a").die('click')
-    $(".dropdown-menu.from-selector a").live 'click', (e) ->
+    $(".dropdown-menu.from-selector a").die 'click'
+    $(".dropdown-menu.from-selector a").live 'click', (e)->
+
       select = $(@).parents('.btn-group')
-      select.find("input[type=hidden]").val($(this).data("value")).change()
+      select.find("input[type=hidden]").val($(this).data("value"))
       select.find(".btn:eq(0)").html $(this).html()
-      select.find("input[type=hidden]").trigger('selector_change')
+      select.find("input[type=hidden]").trigger('change')
       e.preventDefault()

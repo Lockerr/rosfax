@@ -4,7 +4,7 @@
 end
 
 Допустим /^я создал scedule на завтра для этой компании$/ do
-  @schedule = @company.schedules.create(:name => 'Антон', :phone => '+7 908 815 51 07', :inspection_start_time => Time.new('2013', 1, 2, 10), :confirmed => false)
+  @schedule = @company.schedules.create(:name => 'Антон', :phone => '+7 908 815 51 07', :inspection_start_time => Time.now.at_beginning_of_hour + 2.days, :confirmed => false)
 end
 
 Допустим /^есть пользователь$/ do
@@ -25,14 +25,16 @@ end
   page.should have_selector arg1
 end
 
-
-
 То /^шедуля не верифицирована$/ do
   @schedule.confirmed.should == false
 end
 
 Если /^я нажму на '([^\"]*)'$/ do |arg1|
-  click_on(arg1)
+  page.find(arg1).click
+end
+
+Если /^я нажму '([^\"]*)'$/ do |arg1|
+  page.find(arg1).click
 end
 
 То /^я должен увидеть '(.*?)'$/ do |arg1|
@@ -44,20 +46,12 @@ end
   page.should have_selector('#unconfirm')
 end
 
-Если /^я нажму на шедулю$/ do
-  click_on('change_time')
-end
-
-То /^я должен увидеть подробности шедули$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Если /^я нажму изменить время$/ do
   pending # express the regexp above with the code you wish you had
 end
 
 То /^шедуля должна подсветиться$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should have_content 'Эта'
 end
 
 Если /^я нажму место в календаре$/ do
@@ -85,4 +79,18 @@ end
 end
 
 
+Если /^я кликаю на 'free'$/ do
+  page.find('.free').click
+end
 
+Если /^я введу в поле 'name' значение 'Антон'$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Если /^я введу в поле 'phone' значение '\+(\d+) (\d+) (\d+) (\d+) (\d+)'$/ do |arg1, arg2, arg3, arg4, arg5|
+  pending # express the regexp above with the code you wish you had
+end
+
+То /^поле должно быть заблокированным$/ do
+  pending # express the regexp above with the code you wish you had
+end

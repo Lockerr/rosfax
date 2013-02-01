@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Schedule < ActiveRecord::Base
-  attr_accessible :company_id, :inspection_start_date, :inspection_start_time, :name, :phone, :hour, :confirmed
+  attr_accessible :company_id, :inspection_start_date, :inspection_start_time, :name, :phone, :hour, :confirmed, :time, :date
   belongs_to :company
   # validate :scheduling
 

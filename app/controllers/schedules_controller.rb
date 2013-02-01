@@ -1,3 +1,4 @@
+#encoding: utf-8
 class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
@@ -16,6 +17,7 @@ class SchedulesController < ApplicationController
   # GET /schedules/1.json
   def show
     @schedule = Schedule.find(params[:id])
+    @schedules = @schedule.company.schedules
 
     respond_to do |format|
       format.html # show.html.erb
@@ -57,7 +59,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }
+        format.html { redirect_to @schedule, notice: "Вы успешно записаны на осмотр Rosfax на #{Russian::strftime(@schedule.inspection_start_time, '%H:00  %d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
       else
         format.html { render action: "new" }
@@ -70,11 +72,16 @@ class SchedulesController < ApplicationController
   # PUT /schedules/1.json
   def update
     @schedule = Schedule.find(params[:id])
-
+    params[:schedule][:inspection_start_time] = (Date.today + params[:schedule][:date].to_i.days + 2.day) + params[:schedule][:time].to_i.hours
     respond_to do |format|
-      if @schedule.update_attributes(params[:schedule])
+      if @schedule.update_attributes(params[:schedule].except('time', 'date'))
         format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: {time: params[:schedule][:time], date: params[:schedule][:date], status: :ok}}
+        format.js {
+          if params[:schedule][:time]
+            render 'move'
+          end
+        }
       else
         format.html { render action: "edit" }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }

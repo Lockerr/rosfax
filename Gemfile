@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
 gem 'mysql2'
-gem 'jquery-rails'
+gem 'jquery-rails', '2.1.4'
 gem 'jquery-ui-rails'
 gem 'kaminari-bootstrap'
 

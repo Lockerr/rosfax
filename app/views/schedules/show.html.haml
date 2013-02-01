@@ -1,4 +1,11 @@
-.container
-  %h3
-    %p.text-success
-      = "Вы успешно записаны на осмотр Rosfax на #{Russian::strftime(@schedule.inspection_start_time, '%H:00  %d %B %Y')}."
+.container.schedule{:id => @schedule.id}
+  %legend
+    Управление осмотром
+  %p=@schedule.name
+  %p=@schedule.phone
+  %button.btn#move_schedule{data:{toggle: :button}}
+    Передвинуть
+  %button.btn#schedule_block{data:{toggle: :button}}
+    Блокировать
+
+  = render 'calendar'

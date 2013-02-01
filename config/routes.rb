@@ -4,13 +4,14 @@ Tradein::Application.routes.draw do
 
 
   devise_for :user
-  
-  
-
   resources :countries
-  resources :schedules
+  resources :schedules do
+    put 'confirm'
+    
+  end
+
   resources :links
-  
+
   match ':id.pdf' => 'reports#show',:constraints => { :id => /\d.+/ }, :format => 'pdf'
   match ':id' => 'reports#show',:constraints => { :id => /\d.+/ }
 

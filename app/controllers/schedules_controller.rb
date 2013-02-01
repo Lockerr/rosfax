@@ -82,6 +82,22 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def confirm
+    @schedule = Schedule.find(params[:schedule_id])
+
+    respond_to do |format|
+      if @schedule.update_attributes(params[:schedule])
+        format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
+        format.json { head :no_content }
+        format.js
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @schedule.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
+
   # DELETE /schedules/1
   # DELETE /schedules/1.json
   def destroy

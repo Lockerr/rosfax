@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122100453) do
+ActiveRecord::Schema.define(:version => 20130131095014) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -195,8 +195,9 @@ ActiveRecord::Schema.define(:version => 20130122100453) do
     t.datetime "inspection_start_time"
     t.string   "name"
     t.string   "phone"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.boolean  "confirmed",             :default => false
   end
 
   create_table "subscribtions", :force => true do |t|

@@ -4,24 +4,24 @@
 
 $(document).ready ->
 
-  $('.free').live 'mouseenter', ->
+  $('.free').on 'mouseenter', ->
     $(@).find('.alert').fadeIn(200)
-  $('.free').live 'mouseleave', ->
+  $('.free').on 'mouseleave', ->
     $(@).find('.alert').fadeOut(200)
 
-  $('.free').live 'click', ->
+  $('.free').on 'click', ->
     $.ajax
       type: 'get'
       url: 'schedules/new.js'
       data: {schedule:{time: $(@).data('time'), date: $(@).data('date'), company: $(@).data('company')}}
 
-  $('input[name=city]').live 'change', ->
+  $('input[name=city]').on 'change', ->
     $.ajax
       type: 'get'
       url: "/companies.js?city=#{$(@).val()}"
       $('.container#scheduler').empty()
 
-  $('input[name=center]').live 'change', ->
+  $('input[name=center]').on 'change', ->
     $('.container#scheduler').empty()
     city = $('input[name=city]').val()
     center = $('input[name=center]').val()
@@ -32,7 +32,7 @@ $(document).ready ->
         $('.container#scheduler').append(data.responseText)
         $('.container#scheduler').show()
 
-  $('#schedule_phone').live 'change', ->
+  $('#schedule_phone').on 'change', ->
     $('.btn[disabled=disabled]').removeAttr('disabled')
 
 

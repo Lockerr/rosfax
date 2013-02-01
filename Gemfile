@@ -5,7 +5,7 @@ gem 'mysql2'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'kaminari-bootstrap'
-gem "binding_of_caller"
+
 gem 'haml-rails'
 gem 'ruby-haml-js'
 gem 'paperclip'
@@ -31,7 +31,7 @@ gem 'sass'
 gem 'hirb'
 gem "devise-async"
 gem 'russian'
-gem 'spine-rails'
+# gem 'spine-rails'
 gem 'coffee-rails'
 gem 'rb-inotify', '~> 0.8.8'
 
@@ -50,16 +50,18 @@ group :development do
   gem 'quiet_assets'
   gem 'sextant'
   gem 'thin'
+  gem "binding_of_caller"
 end
 
 group :development, :test do
-  
+  gem 'poltergeist'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'ruby-prof'
   gem 'minitest'
-
+  gem 'capybara'
   gem 'database_cleaner'
+  gem 'capybara-webkit'
 end
 
 group :test do

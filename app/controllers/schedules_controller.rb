@@ -3,8 +3,15 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.all
-
+    
+    @center = Company.find(params[:center]) if params[:center]
+    if @center
+      @schedules = @center.schedules
+    elsif current_user.company
+      @schedules = current_user.company.schedules
+    else
+      @schedules = nil
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,6 +25,7 @@ class SchedulesController < ApplicationController
   def show
     @schedule = Schedule.find(params[:id])
     @schedules = @schedule.company.schedules
+    @center = @schedule.company
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,8 +42,9 @@ class SchedulesController < ApplicationController
     end
     @schedule = Schedule.new
     if params[:schedule]
-      @schedule.inspection_start_time = (Date.today + params[:schedule][:date].to_i.days + 2.day) + params[:schedule][:time].to_i.hours
-      @schedule.company_id = params[:schedule][:company]
+      for key in params[:schedule].keys
+        @schedule[key] = params[:schedule][key]
+      end
     end
 
 
@@ -59,7 +68,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to @schedule, notice: "Вы успешно записаны на осмотр Rosfax на #{Russian::strftime(@schedule.inspection_start_time, '%H:00  %d %B %Y')}." }
+        format.html { redirect_to @schedule, notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
       else
         format.html { render action: "new" }
@@ -103,6 +112,15 @@ class SchedulesController < ApplicationController
         format.js
       end
     end
+  end
+
+  def block
+    @schedule = Schedule.find(params[:schedule_id])
+    params[:schedule][:inspection_start_time] = (Date.today + params[:schedule][:date].to_i.days + 2.day) + params[:schedule][:time].to_i.hours
+    @schedule = Schedule.new
+    @schedule.create(params[:schedule].except('time', 'date'))
+
+
   end
 
   # DELETE /schedules/1

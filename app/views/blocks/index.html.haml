@@ -1,0 +1,25 @@
+%h1 Listing blocks
+
+%table
+  %tr
+    %th Month
+    %th Day
+    %th Hour
+    %th Company
+    %th
+    %th
+    %th
+
+  - @blocks.each do |block|
+    %tr
+      %td= block.month
+      %td= block.day
+      %td= block.hour
+      %td= block.company_id
+      %td= link_to 'Show', block
+      %td= link_to 'Edit', edit_block_path(block)
+      %td= link_to 'Destroy', block, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Block', new_block_path

@@ -1,5 +1,8 @@
 Tradein::Application.routes.draw do
   
+  resources :blocks
+
+
   resources :subscribtions
 
 
@@ -7,7 +10,8 @@ Tradein::Application.routes.draw do
   resources :countries
   resources :schedules do
     put 'confirm'
-    
+    resources :blocks
+
   end
 
   resources :links

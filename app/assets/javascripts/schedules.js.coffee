@@ -31,9 +31,9 @@ $(document).ready ->
           free.addClass('booked')
     else if $('#schedule_block.btn.active').length > 0
       $.ajax
-        type: 'put'
-        url: "/schedules/#{$('.schedule').attr('id')}/block.json"
-        data: {schedule:{time: $(@).data('time'), date: $(@).data('date')}}
+        type: 'post'
+        url: "/schedules/#{$('.schedule').attr('id')}/blocks.json"
+        data: {schedule:$(@).data()}
 
 
     else if $('.container.schedule').length == 0
@@ -41,7 +41,7 @@ $(document).ready ->
       $.ajax
         type: 'get'
         url: '/schedules/new.js'
-        data: {schedule:{time: $(@).data('time'), date: $(@).data('date'), company: $(@).data('company')}}
+        data: {schedule:$(@).data()}
 
   $('input[name=city]').live 'change', ->
 

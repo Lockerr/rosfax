@@ -6,5 +6,6 @@ class Company < ActiveRecord::Base
   has_one :asset, :as => :attachable
 
   has_many :schedules
-  
+  has_many :blocks
+
 end

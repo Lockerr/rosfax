@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Month:
+  = @block.month
+%p
+  %b Day:
+  = @block.day
+%p
+  %b Hour:
+  = @block.hour
+%p
+  %b Company:
+  = @block.company_id
+
+= link_to 'Edit', edit_block_path(@block)
+\|
+= link_to 'Back', blocks_path

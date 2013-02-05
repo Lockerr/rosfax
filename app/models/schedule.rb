@@ -2,6 +2,8 @@
 class Schedule < ActiveRecord::Base
   attr_accessible :company_id, :inspection_start_date, :inspection_start_time, :name, :phone, :hour, :confirmed, :time, :date
   belongs_to :company
+
+  validates_presence_of :company_id
   # validate :scheduling
 
   def start_time

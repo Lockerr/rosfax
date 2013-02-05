@@ -46,6 +46,7 @@ class BlocksController < ApplicationController
       if @block.save
         format.html { redirect_to @block, notice: 'Block was successfully created.' }
         format.json { render json: @block, status: :created, location: @block }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @block.errors, status: :unprocessable_entity }
@@ -78,6 +79,7 @@ class BlocksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to blocks_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end

@@ -25,7 +25,7 @@
             - day = i - 1 + (params[:day].to_i if params[:day]).to_i
 
             - if schedules[i]
-
+              - js_data = {hour: hour, company_id: @center.id, date: (Date.today + i.days + 1.day).to_date}
               - if @schedules.select{|s| s.hour == hour and s.date == Date.today + i+1.day}.first == @schedule and @schedule
                 %td.booked{style: 'width: 152px; padding: 2px; cursor: arrow'}
                   .alert.alert-error{style: 'margin: 0px'}
@@ -37,7 +37,13 @@
                   .alert.alert-info{style: 'margin: 0px'}
                     %span{style: 'cursor: default'}
                       Забронировано
+              - elsif @center.blocks.select{|s| s.hour == hour and s.date == Date.today + i+1.day}.any?
+                - block_data = js_data.merge id: (@center.blocks.select{|s| s.hour == hour and s.date == Date.today + i+1.day}[0].id)
+                %td.blocked{style: 'width: 152px; padding: 2px; cursor: arrow', data: block_data}
+                  .alert.alert-disabled{style: 'margin: 0px'}
+                    %span{style: 'cursor: default'}
+                      Нет приема
               - else
-                %td.free{style: 'width: 152px; padding: 2px', data: {hour: hour, company_id: @center.try(:id), date: (Date.today + i.days + 1.day).to_date}}
+                %td.free{style: 'width: 152px; padding: 2px', data: js_data}
                   .alert.alert-success{style: 'margin: 0px; display: none; cursor: pointer'}
                     Свободно

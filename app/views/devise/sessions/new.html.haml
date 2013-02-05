@@ -1,6 +1,6 @@
 
 .container
-  = form_for resource, :as => resource_name, :url => session_path(resource_name), :remote => true, :html => {:class => 'form form-horizontal'} do |f|
+  = form_for resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form form-horizontal'} do |f|
     %legend
       Войти
     .row
@@ -22,7 +22,6 @@
             .controls
               = f.check_box :remember_me
       .span4.alerts
-        
     .row
       .span12
         .form-actions

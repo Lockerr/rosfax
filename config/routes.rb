@@ -1,17 +1,19 @@
 Tradein::Application.routes.draw do
-  
+
+  if Rails.env.cucumber?
+    map.login_backdoor '/login/:email',
+      :controller => 'sessions', :action => 'backdoor'
+  end
+
   resources :blocks
 
-
   resources :subscribtions
-
 
   devise_for :user
   resources :countries
   resources :schedules do
     put 'confirm'
     resources :blocks
-
   end
 
   resources :links
@@ -23,9 +25,9 @@ Tradein::Application.routes.draw do
   resources :companies do
     put 'upload_logotype'
   end
-  
+
   put 'profiles/update_password'
-  
+
   resources :profiles
   resources :points do
     resources :image
@@ -35,9 +37,9 @@ Tradein::Application.routes.draw do
   get 'assets/processed'
   get "home/index"
   get 'home/demo'
-  
+
   match 'view/22', :controller => :home, :action => :demo
-  
+
 
   resources :user, :except => [:index, :edit, :new, :show, :create, :update, :destroy] do
     resource :profile
@@ -66,7 +68,7 @@ Tradein::Application.routes.draw do
   end
 
   get 'ftp/update_eye_fi'
-  
+
   root :to => 'home#partners', :constraints => {:subdomain => "partners"}
   root :to => 'home#partners', :constraints => {:subdomain => "partner"}
   root :to => 'home#index'

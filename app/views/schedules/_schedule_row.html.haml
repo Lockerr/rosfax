@@ -1,8 +1,10 @@
 %td= @schedule.name
 %td= @schedule.phone
 %td= @schedule.company.name
-
-%td= @schedule.inspection_start_time.strftime('%H:00 %-d %B %Y')
+%td
+  =@schedule.hour
+  часов
+%td= Russian::strftime(@schedule.date, '%-d %B %Y')
 %td.actions
 
   = link_to glyph(:edit), schedule_path(@schedule), class: 'btn'

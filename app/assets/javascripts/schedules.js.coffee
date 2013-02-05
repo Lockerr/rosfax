@@ -5,11 +5,32 @@
 $(document).ready ->
 
   $('.free').live 'mouseenter', ->
-    $(@).find('.alert').fadeIn(200)
-    $(@).find('.alert').addClass('active')
+    $(@).find('.alert-success').fadeIn(200)
+    $(@).find('.alert-success').addClass('active')
   $('.free').live 'mouseleave', ->
-    $(@).find('.alert').fadeOut(200)
-    $(@).find('.alert').removeClass('active')
+    $(@).find('.alert-success').fadeOut(200)
+    $(@).find('.alert-success').removeClass('active')
+
+  $('#move_schedule').click -> 
+    $('#schedule_block').removeClass('active')
+  $('#schedule_block').click -> 
+    $('#move_schedule').removeClass('active')
+
+  $('.blocked').live 'click', ->
+    that = $(@)
+    if $('#schedule_block.btn.active').length > 0
+      $.ajax
+        async: true
+        type: 'delete'
+        url: "/blocks/#{$(@).data('id')}.json"
+        success: ->
+          alert = that.find('.alert')
+          alert.addClass('alert-success')
+          alert.removeClass('alert-disabled')
+          alert.html('Свободно')
+          that.removeClass('blocked')
+          that.addClass('free')
+          alert.hide()
 
   $('.free').live 'click', ->
     if $('#move_schedule.btn.active').length > 0
@@ -32,8 +53,9 @@ $(document).ready ->
     else if $('#schedule_block.btn.active').length > 0
       $.ajax
         type: 'post'
-        url: "/schedules/#{$('.schedule').attr('id')}/blocks.json"
-        data: {schedule:$(@).data()}
+        async: true
+        url: "/schedules/#{$('.schedule').attr('id')}/blocks.js"
+        data: {block:$(@).data()}
 
 
     else if $('.container.schedule').length == 0

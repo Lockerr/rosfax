@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204043714) do
+ActiveRecord::Schema.define(:version => 20130204124027) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -64,12 +64,11 @@ ActiveRecord::Schema.define(:version => 20130204043714) do
   add_index "assets", ["attachable_id", "attachable_type"], :name => "index_assets_on_attachable_id_and_attachable_type"
 
   create_table "blocks", :force => true do |t|
-    t.integer  "month"
-    t.integer  "day"
     t.integer  "hour"
     t.integer  "company_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.date     "date"
   end
 
   create_table "brands", :force => true do |t|

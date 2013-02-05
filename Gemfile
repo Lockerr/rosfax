@@ -61,7 +61,7 @@ group :development, :test do
   gem 'minitest'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'capybara-webkit'
+
 end
 
 group :test do
@@ -70,6 +70,7 @@ group :test do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-cucumber'
+  gem 'capybara-webkit'
   gem 'cucumber'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'

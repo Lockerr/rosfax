@@ -3,15 +3,16 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    
     @center = Company.find(params[:center]) if params[:center]
-    if @center
+    if @center 
       @schedules = @center.schedules
-    elsif current_user.company
+    elsif current_user
       @schedules = current_user.company.schedules
     else
-      @schedules = nil
+      @schedules = []
     end
+    # @schedules = Schedule.all
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -132,6 +133,7 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to schedules_url }
       format.json { head :no_content }
+
     end
   end
 end

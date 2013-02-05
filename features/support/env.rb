@@ -3,17 +3,13 @@ require 'capybara'
 require 'capybara/dsl'
 require 'capybara/session'
 require 'capybara/cucumber'
-# require 'capybara/mechanize/cucumber'
-
+require 'rspec/core'
 require 'rubygems'
 require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
-  # Loading more in this block will cause your tests to run faster. However,
-  # if you change any configuration or code from libraries loaded here, you'll
-  # need to restart spork for it take effect.
 
 end
 
@@ -21,6 +17,7 @@ Spork.each_run do
   # This code will be run each time you run your specs.
 
 end
+
 
 # --- Instructions ---
 # Sort the contents of this file into a Spork.prefork and a Spork.each_run
@@ -70,6 +67,7 @@ require 'capybara/poltergeist'
 Capybara.default_selector = :css
 Capybara.javascript_driver = :poltergeist
 
+
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how 
 # your application behaves in the production environment, where an error page will 
@@ -90,7 +88,7 @@ ActionController::Base.allow_rescue = false
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :deletion
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end

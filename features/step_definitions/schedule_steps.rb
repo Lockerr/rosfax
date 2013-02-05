@@ -1,10 +1,28 @@
 # encoding: utf-8
+def sign_in
+  visit '/user/sign_in'
+  fill_in "user_email", :with => 'antiqe@gmail.com'
+  fill_in "user_password", :with => 12345
+  click_button "Войти"
+end
+
+Пусть /^у пользователя должна быть компания$/ do
+  @user.company.should_not be_nil
+  @user.company.name.should == 'Уах'
+end
+
+
+Пусть /^я залогинился$/ do
+  sign_in
+end
+
+
 Допустим /^я создал компанию$/ do
   @company = Company.create(:name => 'Уах', :city => 'Челябинск')
 end
 
 Допустим /^я создал scedule на завтра для этой компании$/ do
-  @schedule = @company.schedules.create(:name => 'Антон', :phone => '+7 908 815 51 07', :inspection_start_time => Time.now.at_beginning_of_hour + 2.days, :confirmed => false)
+  @schedule = @company.schedules.create(:name => 'Антон', :phone => '+7 908 815 51 07', :date => Date.today + 2.days, :hour => 12, :confirmed => false)
 end
 
 Допустим /^есть пользователь$/ do

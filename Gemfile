@@ -10,13 +10,13 @@ gem 'kaminari-bootstrap'
 gem 'haml-rails'
 gem 'ruby-haml-js'
 gem 'paperclip'
-gem 'capistrano_colors'
+
 gem 'ru_propisju'
 gem 'newrelic_rpm'
 gem "airbrake"
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
-gem 'turbolinks'
+
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
@@ -44,6 +44,7 @@ group :assets do
 end
 
 group :development do
+  gem 'capistrano_colors'
   gem 'meta_request'
   gem "better_errors"
 

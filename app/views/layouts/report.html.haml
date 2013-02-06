@@ -10,6 +10,7 @@
     = csrf_meta_tags
   %body
     = render 'navbar'
+    = bootstrap_flash
     = render 'feed_back'
     - if @report and !@report.new_record?
       .container#report{'report' => @report.id, :source => @report.attributes.to_json}

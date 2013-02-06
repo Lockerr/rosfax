@@ -12,11 +12,9 @@ class UserMailer < ActionMailer::Base
     devise_mail(record, :reset_password_instructions)
   end
 
-  def new_schedule_notification(record)
+  def new_schedule_notification(record, recepient)
     @schedule = record
-    for email in @schedule.company.new_schedule_emails
-      mail(:to => email, subject: 'мргл-мргл ом-ном-ном') if email.presence
-    end
+    mail(:to => recepient, subject: 'мргл-мргл ом-ном-ном')
   end
 
   def change_schedule_notification(record)

@@ -10,7 +10,9 @@ class Schedule < ActiveRecord::Base
   after_update :notify_about_moving
 
   def notify_about_creation
-    UserMailer.delay.new_schedule_notification(self)
+    for email in company.new_schedule_emails.delete_if{|e| e.empty?}
+      UserMailer.delay.new_schedule_notification(self, email)
+    end 
   end
 
   def notify_about_moving

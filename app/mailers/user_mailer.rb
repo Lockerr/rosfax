@@ -15,14 +15,14 @@ class UserMailer < ActionMailer::Base
   def new_schedule_notification(record)
     @schedule = record
     for email in @schedule.company.new_schedule_emails
-      mail(:to => email, subject: 'мргл-мргл ом-ном-ном')
+      mail(:to => email, subject: 'мргл-мргл ом-ном-ном') if email.presence
     end
   end
 
   def change_schedule_notification(record)
     @schedule = record
-    for email in @schedule.company.new_schedule_emails
-      mail(:to => email, subject: 'УПЯЧКА! УПЯЧКА! УБЕЙТЕ МЕНЯ КТОНИБУДЬ!!!')
+    for email in @schedule.company.change_schedule_emails
+      mail(:to => email, subject: 'УПЯЧКА! УПЯЧКА! УБЕЙТЕ МЕНЯ КТОНИБУДЬ!!!') if email.presence
     end
   end
 

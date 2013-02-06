@@ -12,6 +12,7 @@ class Ability
         can :manage, Point
         can :manage, Company, id: user.company_id
         can :manage, User, user_id: user.id
+        can :manage, Block
     else
         can :read, Report
         can :read, Company

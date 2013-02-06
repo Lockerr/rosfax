@@ -20,6 +20,10 @@ class UserMailer < ActionMailer::Base
   end
 
   def change_schedule_notification(record)
+    @schedule = record
+    for email in @schedule.company.new_schedule_emails
+      mail(:to => email, subject: 'УПЯЧКА! УПЯЧКА! УБЕЙТЕ МЕНЯ КТОНИБУДЬ!!!')
+    end
   end
 
 

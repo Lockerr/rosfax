@@ -1,7 +1,9 @@
 class CompaniesController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :update]
   before_filter :is_admin?, :only => :destroy
+
   load_and_authorize_resource
+
   # GET /companies
   # GET /companies.json
   def index

@@ -18,7 +18,7 @@ end
 
 
 Допустим /^я создал компанию$/ do
-  @company = Company.create(:name => 'Уах', :city => 'Челябинск')
+  @company = Company.create(:name => 'Уах', :city => 'Челябинск', new_schedule_emails: ['antiqe@gmail.com', 'lockerr@mail.ru'])
 end
 
 Допустим /^я создал scedule на завтра для этой компании$/ do
@@ -92,4 +92,8 @@ end
 
 То /^поле должно быть заблокированным$/ do
   pending # express the regexp above with the code you wish you had
+end
+
+То /^администраторы компании должны получить письма$/ do
+  ActionMailer::Base.deliveries.count.should == 2
 end

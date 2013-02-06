@@ -10,6 +10,7 @@ class Ability
         can :manage, Schedule
         can :manage, Profile
         can :manage, Point
+        can :manage, Company, id: user.company_id
         can :manage, User, user_id: user.id
     else
         can :read, Report

@@ -1,4 +1,5 @@
 class FeedbacksController < ApplicationController
+  load_and_authorize_resource
   # GET /feedbacks
   # GET /feedbacks.json
   def index

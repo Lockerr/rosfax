@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'cancan'
 gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'jquery-rails', '2.1.4'

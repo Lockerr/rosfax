@@ -1,6 +1,7 @@
 #= require jquery.min
 #= require jquery_ujs
 #= require twitter/bootstrap
+#= require lib/masked
 
 $(document).ready ->
 
@@ -34,12 +35,13 @@ $(document).ready ->
 
   $('.free').live 'click', ->
     if $('#move_schedule.btn.active').length > 0
-      console.log 'put'
+      console.log 'moving schedule'
       $.ajax
         type: 'put'
         url: "/schedules/#{$('.schedule').attr('id')}.json"
-        data: {schedule:{time: $(@).data('time'), date: $(@).data('date')}}
+        data: {schedule:$(@).data()}
         success: ->
+          console.log 'moving return success'
           free = $('.alert-success.active').parent()
           free_alert = $('.alert-success.active')
           booked_alert = $('.alert-error')

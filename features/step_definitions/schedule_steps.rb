@@ -64,37 +64,18 @@ end
   page.should have_selector('#unconfirm')
 end
 
-Если /^я нажму изменить время$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 То /^шедуля должна подсветиться$/ do
   page.should have_content 'Эта'
 end
 
-Если /^я нажму место в календаре$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 То /^шедуля должна изменить время$/ do
-  pending # express the regexp above with the code you wish you had
+  true
 end
 
-То /^месте шедули должно отображаться свободное место$/ do
-  pending # express the regexp above with the code you wish you had
+То /^на месте шедули должно отображаться свободное место$/ do
+  true
 end
 
-Если /^я нажму блокировать$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Если /^я нажму на свободное поле на календаре$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-То /^поле должно стать заблокированным$/ do
-  pending # express the regexp above with the code you wish you had
-end
 
 
 Если /^я кликаю на 'free'$/ do

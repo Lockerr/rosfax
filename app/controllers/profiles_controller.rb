@@ -1,5 +1,6 @@
 #endcoding: utf-8
 class ProfilesController < ApplicationController
+  load_and_authorize_resource
   # GET /profiles
   # GET /profiles.json
   

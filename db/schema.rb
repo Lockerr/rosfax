@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204124027) do
+ActiveRecord::Schema.define(:version => 20130206082346) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -88,12 +88,14 @@ ActiveRecord::Schema.define(:version => 20130204124027) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "address"
-    t.integer  "phone",      :limit => 8
+    t.integer  "phone",                  :limit => 8
     t.string   "site"
     t.string   "city"
+    t.text     "new_schedule_emails"
+    t.text     "change_schedule_emails"
   end
 
   create_table "countries", :force => true do |t|
@@ -124,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20130204124027) do
     t.string   "locked_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "queue"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"

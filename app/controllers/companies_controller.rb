@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+  before_filter :authenticate_user!, :only => [:create, :update]
+  before_filter :is_admin?, :only => :destroy
+  load_and_authorize_resource
   # GET /companies
   # GET /companies.json
   def index
@@ -64,6 +67,7 @@ class CompaniesController < ApplicationController
       if @company.update_attributes(params[:company])
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @company.errors, status: :unprocessable_entity }

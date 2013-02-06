@@ -54,6 +54,7 @@ GEM
       erubis (>= 2.7.0)
     binding_of_caller (0.6.8)
     builder (3.0.4)
+    cancan (1.6.9)
     capistrano (2.14.1)
       highline
       net-scp (>= 1.0.0)
@@ -353,6 +354,7 @@ DEPENDENCIES
   aws-sdk
   better_errors
   binding_of_caller
+  cancan
   capistrano_colors
   capybara
   capybara-webkit

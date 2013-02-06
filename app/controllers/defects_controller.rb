@@ -1,4 +1,5 @@
 class DefectsController < ApplicationController
+  load_and_authorize_resource
   # GET /defects
   # GET /defects.json
 

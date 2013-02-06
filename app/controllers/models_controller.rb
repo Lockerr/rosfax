@@ -1,4 +1,5 @@
 class ModelsController < ApplicationController
+  load_and_authorize_resource
   def index_block
     unless params[:model_id]  and params[:model_id] == 'undefined'
       @model = Model.find(params[:model_id])

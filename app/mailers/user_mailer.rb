@@ -1,3 +1,4 @@
+#encoding: utf-8
 class UserMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
 
@@ -10,5 +11,16 @@ class UserMailer < ActionMailer::Base
   def reset_password_instructions(record)
     devise_mail(record, :reset_password_instructions)
   end
+
+  def new_schedule_notification(record)
+    @schedule = record
+    for email in @schedule.company.new_schedule_emails
+      mail(:to => email, subject: 'мргл-мргл ом-ном-ном')
+    end
+  end
+
+  def change_schedule_notification(record)
+  end
+
 
 end

@@ -1,4 +1,5 @@
 class PointsController < ApplicationController
+  load_and_authorize_resource
 
   def index
     @points = Point.all

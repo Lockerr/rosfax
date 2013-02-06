@@ -12,7 +12,7 @@
             .link.pull-left
               =link_to 'войти', new_user_session_path
             .link.pull-left{:style => 'margin-left: 28px'}
-              =link_to 'зарегистрироваться', new_user_registration_path
+              / =link_to 'зарегистрироваться', new_user_registration_path
           - else
             .link.pull-left
               = current_user.email

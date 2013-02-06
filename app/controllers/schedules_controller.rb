@@ -1,5 +1,6 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
+  load_and_authorize_resource
   # GET /schedules
   # GET /schedules.json
   def index
@@ -15,7 +16,8 @@ class SchedulesController < ApplicationController
 
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {
+      }
       format.json { render json: @schedules }
       format.js {render partial: 'calendar', layout: false}
     end
@@ -69,6 +71,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.save
+        UserMailer.new_schedule_notification(@schedule).deliver
         format.html { redirect_to @schedule, notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
       else
@@ -82,9 +85,9 @@ class SchedulesController < ApplicationController
   # PUT /schedules/1.json
   def update
     @schedule = Schedule.find(params[:id])
-    params[:schedule][:inspection_start_time] = (Date.today + params[:schedule][:date].to_i.days + 2.day) + params[:schedule][:time].to_i.hours
+
     respond_to do |format|
-      if @schedule.update_attributes(params[:schedule].except('time', 'date'))
+      if @schedule.update_attributes(params[:schedule])
         format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
         format.json { render json: {time: params[:schedule][:time], date: params[:schedule][:date], status: :ok}}
         format.js {

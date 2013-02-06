@@ -1,4 +1,5 @@
 class ImageController  < ApplicationController
+  load_and_authorize_resource
   def destroy
     if params[:point_id]
       result =

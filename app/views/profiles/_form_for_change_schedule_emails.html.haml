@@ -1,0 +1,9 @@
+= form_for current_user.company , remote: :true, :html => {class: 'form form-horizontal'} do |f|
+  %legend
+    Почтовые ящики для отправки уведомлений об изменении времени осмотра
+  - 5.times do |i|
+    .control-group
+      .controls
+        = email_field_tag 'company[change_schedule_emails][]', current_user.company.change_schedule_emails[i]
+  = f.submit 'Записать'
+

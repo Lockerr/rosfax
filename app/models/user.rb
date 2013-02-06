@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable  :registerable,
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
   before_create :grand_access_to_ftp
@@ -16,8 +16,12 @@ class User < ActiveRecord::Base
 
   belongs_to :company
   has_many :assets, :as => :attachable
-  
+
   def admin?
+    %w(antiqe@gmail.com lockerr@mail.ru).include?(email)
+  end
+
+  def is_admin?
     %w(antiqe@gmail.com lockerr@mail.ru).include?(email)
   end
 

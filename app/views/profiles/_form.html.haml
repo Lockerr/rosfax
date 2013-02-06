@@ -46,11 +46,14 @@
         .control-group
           .controls
             = f.submit "Прикрепить файл", :class => 'btn'
+    .form_for_new_schedule_emails
+      = render 'form_for_new_schedule_emails'
+    .form_for_change_schedule_emails
+      = render 'form_for_change_schedule_emails'
 
     = form_for(current_user, :url => { :action => "update_password" }, :html => {:class => 'form form-horizontal'} ) do |f|
       %legend
         Сменить пароль 
-      
       .control-group
         = f.label :password, "Новый пароль", :class => 'control-label'
         .controls

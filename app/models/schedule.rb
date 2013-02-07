@@ -13,7 +13,7 @@ class Schedule < ActiveRecord::Base
 
   def notify_about_moving
     for email in company.new_schedule_emails.delete_if{|e| e.empty?}
-      UserMailer.delay.change_schedule_notification(self)
+      UserMailer.delay.change_schedule_notification(self, email)
     end
   end
 

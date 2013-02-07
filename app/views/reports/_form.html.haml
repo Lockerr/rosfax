@@ -10,4 +10,4 @@
     = f.label 'Марка-модель'
     = f.text_field :car_mark_model, :data => {:provide => 'typeahead', :source => @models.keys, :models => @models}, :autocomplete => 'off'
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'btn btn-primary'

@@ -18,8 +18,7 @@ class SchedulesController < ApplicationController
 
 
     respond_to do |format|
-      format.html {
-      }
+      format.html
       format.json { render json: @schedules }
       format.js {render partial: 'calendar', layout: false}
     end
@@ -28,6 +27,7 @@ class SchedulesController < ApplicationController
   # GET /schedules/1
   # GET /schedules/1.json
   def show
+
     @schedule = Schedule.find(params[:id])
     @schedules = @schedule.company.schedules
     @center = @schedule.company
@@ -75,7 +75,7 @@ class SchedulesController < ApplicationController
       if @schedule.save
         @schedule.notify_about_creation
 
-        format.html { redirect_to @schedule, notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
+        format.html { redirect_to (current_user ? @schedule : root_path), notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
       else
         format.html { render action: "new" }
@@ -88,9 +88,10 @@ class SchedulesController < ApplicationController
   # PUT /schedules/1.json
   def update
     @schedule = Schedule.find(params[:id])
-    
+
     respond_to do |format|
       if @schedule.update_attributes(params[:schedule])
+        @schedule.notify_about_moving if (params[:schedule].keys & ['date', 'hour']).any?
         format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
         format.json { render json: {time: params[:schedule][:time], date: params[:schedule][:date], status: :ok}}
         format.js {

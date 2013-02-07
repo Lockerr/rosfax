@@ -14,14 +14,12 @@ class UserMailer < ActionMailer::Base
 
   def new_schedule_notification(record, recepient)
     @schedule = record
-    mail(:to => recepient, subject: 'мргл-мргл ом-ном-ном')
+    mail(:to => recepient, subject: 'Rosfax: новая запись на осмотр.')
   end
 
-  def change_schedule_notification(record)
+  def change_schedule_notification(record, recepient)
     @schedule = record
-    for email in @schedule.company.change_schedule_emails
-      mail(:to => email, subject: 'УПЯЧКА! УПЯЧКА! УБЕЙТЕ МЕНЯ КТОНИБУДЬ!!!') if email.presence
-    end
+    mail(:to => recepient, subject: 'Rosfax: изменение времени осмотра.')
   end
 
 

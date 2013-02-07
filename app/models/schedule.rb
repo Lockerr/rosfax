@@ -4,10 +4,6 @@ class Schedule < ActiveRecord::Base
   belongs_to :company
 
   validates_presence_of :company_id
-  # validate :scheduling
-  
-  after_create :notify_about_creation
-  after_update :notify_about_moving
 
   def notify_about_creation
     for email in company.new_schedule_emails.delete_if{|e| e.empty?}
@@ -16,7 +12,9 @@ class Schedule < ActiveRecord::Base
   end
 
   def notify_about_moving
-    UserMailer.delay.change_schedule_notification(self)
+    for email in company.new_schedule_emails.delete_if{|e| e.empty?}
+      UserMailer.delay.change_schedule_notification(self)
+    end
   end
 
   def start_time

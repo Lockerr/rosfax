@@ -73,7 +73,8 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if @schedule.save
-        
+        @schedule.notify_about_creation
+
         format.html { redirect_to @schedule, notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
       else
@@ -87,7 +88,7 @@ class SchedulesController < ApplicationController
   # PUT /schedules/1.json
   def update
     @schedule = Schedule.find(params[:id])
-
+    
     respond_to do |format|
       if @schedule.update_attributes(params[:schedule])
         format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }

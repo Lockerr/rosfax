@@ -10,6 +10,9 @@ class Subscribtion < ActiveRecord::Base
     
   end
 
+  def reports
+  end
+
   def process_filter
     
     filter.delete_if{|k,v| v.empty?}
@@ -36,8 +39,9 @@ class Subscribtion < ActiveRecord::Base
     elsif filter[:price_to].presence
       filter[:price] = (price < filter[:price_to])
     end
-    filter[:brands] = {:name => filter[:brands]}
-    
+    filter[:brands] = {:name => filter[:brands]} if filter[:brands].presence
+    filter[:countries] = {:name => filter[:country]} if filter[:country].presence
+
     filter.delete(:price_from)
     filter.delete(:price_to)
     filter.delete(:country)

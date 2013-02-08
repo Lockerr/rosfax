@@ -22,6 +22,9 @@ class ReportsController < ApplicationController
   end
 
   def index
+
+
+
     if current_user
       if current_user.admin?
         @reports = Report.scoped
@@ -31,11 +34,13 @@ class ReportsController < ApplicationController
         @reports = current_user.reports.scoped      
       end
     else
-      @reports = Report.public
+      @reports = Report.public.scoped
     end
 
+    @reports = @reports.joins([:brand, :country]).where(Subscribtion.find(params[:subscribtion_id]).filter) if params[:subscribtion_id]
+
     @reports = @reports.page params[:page]
-    
+
 
     respond_to do |format|
       format.html {

@@ -16,9 +16,10 @@
       %td= subscribtion.filter
       %td= subscribtion.by_email
       %td= subscribtion.email_period
-      %td= link_to 'Show', subscribtion
-      %td= link_to 'Edit', edit_subscribtion_path(subscribtion)
-      %td= link_to 'Destroy', subscribtion, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', subscribtion, class: :btn
+      %td= link_to 'reports', subscribtion_reports_path(subscribtion), class: :btn
+      %td= link_to 'Edit', edit_subscribtion_path(subscribtion), class: :btn
+      %td= link_to 'Destroy', subscribtion, method: :delete, data: { confirm: 'Are you sure?' }, class: :btn
 
 %br
 

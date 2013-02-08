@@ -8,7 +8,10 @@ Tradein::Application.routes.draw do
 
   resources :blocks
 
-  resources :subscribtions
+  resources :subscribtions do
+    resources :reports
+  end
+
 
   devise_for :user
   resources :countries

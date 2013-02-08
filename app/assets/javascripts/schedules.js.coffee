@@ -2,6 +2,7 @@
 #= require jquery_ujs
 #= require twitter/bootstrap
 #= require lib/masked
+#= require lib/select2dropdown
 
 $(document).ready ->
 
@@ -88,25 +89,3 @@ $(document).ready ->
   $('#schedule_phone').live 'change', ->
     $('.btn[disabled=disabled]').removeAttr('disabled')
 
-jQuery ($) ->
-  $(".select").each (i, e) ->
-    unless $(e).data("convert") is "no"
-      $(e).hide().removeClass "select"
-      current = $(e).find(".option.selected").html() or "&nbsp;"
-      val = $(e).find(".option.selected").data("value")
-      name = $(e).data("name") or ""
-      $(e).parent().append "<div class=\"btn-group\" id=\"select-group-" + i + "\" />"
-      select = $("#select-group-" + i)
-      select.html "<a class=\"btn " + $(e).attr("class") + "\" type=\"button\">" + current + "</a><a class=\"btn dropdown-toggle " + $(e).attr("class") + "\" data-toggle=\"dropdown\" href=\"#\"><span class=\"caret\"></span></a><ul class=\"dropdown-menu from-selector\"></ul><input type=\"hidden\" value=\"" + val + "\" name=\"" + name + "\" id=\"" + $(e).attr("id") + "\" class=\"" + $(e).attr("class") + "\" />"
-      $(e).find(".option").each (o, q) ->
-        select.find(".dropdown-menu").append "<li><a href=\"#\" data-value=\"" + $(q).data("value") + "\">" + $(q).html() + "</a></li>"
-      $(e).remove()
-
-    $(".dropdown-menu.from-selector a").die 'click'
-    $(".dropdown-menu.from-selector a").live 'click', (e)->
-
-      select = $(@).parents('.btn-group')
-      select.find("input[type=hidden]").val($(this).data("value"))
-      select.find(".btn:eq(0)").html $(this).html()
-      select.find("input[type=hidden]").trigger('change')
-      e.preventDefault()

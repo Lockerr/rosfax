@@ -4,6 +4,7 @@ class StaticController < ApplicationController
   end
 
   def yandex_validation
-    render :text => 'Verification: 4ed32e0d73358fa4'
+    render :layout => false
+    
   end
 end

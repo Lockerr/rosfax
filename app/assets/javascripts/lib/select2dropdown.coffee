@@ -56,16 +56,17 @@ jQuery ($) ->
     $(e).remove()
 
     new_options = $(".dropdown-menu.from-selector a")
-    
+
     new_options.die 'click'
-    
-    new_options.live 'click', (e) ->
+
+    $(".dropdown-menu.from-selector a").live 'click', (e) ->
       select = $(@).parents('.btn-group')
-      select.find("input[type=hidden]").val(@.value)
+      select.find("input[type=hidden]").val($(@).attr('value'))
       select.find(".btn:eq(0)").html($(@).html()).addClass('active')
       select.find("input[type=hidden]").trigger('change')
+
       e.preventDefault()
-  
+
   $(".bootstrap-check").each (i, e) ->
     btn = $(document.createElement('button')).
       attr({
@@ -76,6 +77,5 @@ jQuery ($) ->
            }).html(
            e.value
            )
-
     $(e).parent().append(btn)
     $(e).hide()

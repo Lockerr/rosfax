@@ -7,14 +7,13 @@
         .control-label
           Выберите город:
         .controls
-          #inputType.select.btn{"data-name" => 'city'}
-            .option.selected
-              &nbsp;
-            .option{"data-value" => "Челябинск"}
+          %select.bootstrap-select{name: :city}
+            %option.selected
+            %option{value: "Челябинск"}
               Челябинск
-            .option{"data-value" => "Екатеринбург"}
+            %option{value: "Екатеринбург"}
               Екатеринбург
-            .option{"data-value" => "Магнитогорск"}
+            %option{value: "Магнитогорск"}
               Магнитогорск
 
 
@@ -28,6 +27,6 @@
         .control-label
           Выберите центр:
         .controls
-          #inputType.select.btn{"data-name" => 'center'}
+          %select.bootstrap-select{name: :center}
 
 .container#scheduler{style: 'display: none;'}

@@ -78,7 +78,7 @@ $(document).ready ->
   $('input[name=center]').live 'change', ->
     $('.container#scheduler').empty()
     city = $('input[name=city]').val()
-    center = $('input[name=center]').val()
+    center = @.value
     $.ajax
       type: 'get'
       url: "/schedules.js?city=#{city}&center=#{center}"

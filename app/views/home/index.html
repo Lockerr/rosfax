@@ -28,7 +28,7 @@
 <body>
 
 <div id="page">
-    <%= link_to '.', destroy_user_session_path%>
+    <%= current_user ? link_to '.', destroy_user_session_path : ''%>
     <header id="head">
 
         <div id="logo">

@@ -1,8 +1,13 @@
+#encoding: utf-8
 class ApplicationController < ActionController::Base
   # protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to :back, :notice => exception.message
+    if exception.action == :show and exception.subject.class == Report
+      redirect_to report_access_path(exception.subject), flash[:notice] => 'Введите верный код доступа'
+    else
+      redirect_to :back, :notice => exception.message
+    end
   end
 
   def after_sign_out_path_for(resource_or_scope)
@@ -19,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_ability
-    @current_ability ||= Ability.new(current_user, request.format)
+    @current_ability ||= Ability.new(current_user, request)
   end
 
 end

@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user, format=nil)
+  def initialize(user, request=nil)
     user ||= User.new # guest user (not logged in)
     if user.is_admin?
         can :manage, :all
@@ -14,10 +14,13 @@ class Ability
         can :manage, User, user_id: user.id
         can :manage, Block
     else
-        can :read, Report
+        # raise request.params[:access_key]
+        can :read, Report, publish: true
+        can :read, Report, publish: false if Report.where(id: request.params[:id], access_key: request.params[:access_key]).count == 1
+        can :access, Report
         can :read, Company
         can :create, Schedule
-        can :read, Schedule if format == 'js'
+        can :read, Schedule if request.format == 'js'
     end
   end
 end

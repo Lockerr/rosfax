@@ -1,0 +1,9 @@
+%legend
+  Доступ к отчету ограничен
+%form.form.form-horizontal{action: report_path(params[:report_id])}
+  .control-group
+    %label.control-label Код доступа
+    .controls
+      %input{type: :text,name: 'access_key', id: 'access_key'}
+  %button{type: :submit, class: :btn}
+    Получить доступ

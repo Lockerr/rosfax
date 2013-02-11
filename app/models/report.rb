@@ -3,7 +3,7 @@ class Report < ActiveRecord::Base
 
   paginates_per 20
   max_paginates_per 50
-  
+
   has_many :points, :dependent => :destroy
   has_many :assets, :as => :attachable, :dependent => :destroy
   has_many :links, :dependent => :destroy
@@ -35,6 +35,7 @@ class Report < ActiveRecord::Base
   
   after_update :expire_pages
   after_create :expire_pages
+  before_create :generate_key
   before_destroy :expire_pages
 
 
@@ -409,5 +410,7 @@ class Report < ActiveRecord::Base
     user == current_user
   end
 
-
+  def generate_key
+    key = rand(100000..1000000-1)
+  end
 end

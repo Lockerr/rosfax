@@ -1,7 +1,3 @@
-
-#  blabla
-
-
 jQuery ($) ->
   $(".bootstrap-select").each (i, e) ->
 
@@ -68,8 +64,8 @@ jQuery ($) ->
       e.preventDefault()
 
   $(".bootstrap-check").each (i, e) ->
-    btn = $(document.createElement('button')).
-      attr({
+    btn = $(document.createElement('button'))
+      .attr({
         type: 'button',
         class: 'btn',
         style: 'float: left; margin-left: 5px; margin-bottom: 5px',

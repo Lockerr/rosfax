@@ -1,8 +1,8 @@
 #encoding: utf-8
 class ReportsController < ApplicationController
   load_and_authorize_resource
-  
-  before_filter :authenticate_user!, :except => [:index]
+
+  # before_filter :authenticate_user!, :except => [:index]
 
   caches_action :edit
   caches_action :show, :cache_path => proc {
@@ -22,16 +22,13 @@ class ReportsController < ApplicationController
   end
 
   def index
-
-
-
     if current_user
       if current_user.admin?
         @reports = Report.scoped
       elsif current_user.company
         @reports = current_user.company.reports.scoped
       else current_user
-        @reports = current_user.reports.scoped      
+        @reports = current_user.reports.scoped
       end
     else
       @reports = Report.public.scoped
@@ -41,6 +38,7 @@ class ReportsController < ApplicationController
 
     @reports = @reports.page params[:page]
 
+    @reports = @reports.order('id desc')
 
     respond_to do |format|
       format.html {
@@ -56,21 +54,15 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
     @diff = @report.diff
     @filled_points = @report.points.filled
-    
+
     # if current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin?    
       # @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
     # end
 
     respond_to do |format|
-      if can_manage?
-        format.html { render :layout => 'report_show'}
-        format.json { render json: @report }
-        format.pdf {render :pdf => "report_#{@report_id}", :layout => 'report_show_pdf.html.haml'}
-        
-      else
-        format.html { render :inline => 'Нет доступа'}
-        format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}
-      end
+      format.html { render :layout => 'report_show'}
+      format.json { render json: @report }
+      format.pdf {render :pdf => "report_#{@report_id}", :layout => 'report_show_pdf.html.haml'}
     end
   end
 
@@ -100,20 +92,17 @@ class ReportsController < ApplicationController
   def edit
     @report = Report.find(params[:id])
 
-    if can_manage?
+
       @points = @report.points.includes(:assets)
 
       @models = Model.includes(:brand).select(['models.name', 'brands.name']).map {|y| [y.brand.name, y.name].join(' ')}.sort
-    end
-    
+
+
     respond_to do |format|
-      if can_manage?
+      
         format.html { render :layout => 'report'}
         format.json { render json: @report }
-      else
-        format.html { render :inline => 'Нет доступа'}
-        format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}
-      end
+      
     end
   end
 
@@ -140,29 +129,22 @@ class ReportsController < ApplicationController
   end
 
   def update
-
     @report = Report.find(params[:id])
-    
+
     expire_action edit_report_url(@report)
     expire_action report_url(@report)
     expire_action report_url(@report, :format => :pdf)
-    
+
     if params[:report][:links]
       params[:report][:links] = @report.links + [params[:report][:links]]
     end
 
     respond_to do |format|
-      if can_manage?
         if @report.update_attributes(params[:report].except!(:id))
-
           format.json { head :ok }
         else
           format.json { render json: @report.errors, status: :unprocessable_entity }
         end
-      else
-        format.html { render :inline => 'Нет доступа'}
-        format.json { render json: 'Нет доступа'.to_json, status: :unauthorized}
-      end
     end
   end
 
@@ -208,16 +190,19 @@ class ReportsController < ApplicationController
     render :json => {:status => :ok, :images => images, :places => images.keys}
   end
 
+  def access
+  end
+
   private
 
-  def can_manage?
-    current_user.admin? or
-    @report.company == current_user.company or
-    @report.user == current_user
+  # def can_manage?
+  #   current_user.admin? or
+  #   @report.company == current_user.company or
+  #   @report.user == current_user
 
 
-    # current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin? 
-  end
+  #   # current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin? 
+  # end
 
   
 

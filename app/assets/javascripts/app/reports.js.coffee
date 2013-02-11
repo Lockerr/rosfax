@@ -64,8 +64,6 @@
         event.dataTransfer.dropEffect = "copy"
         attribute = target.data().section
 
-        
-
         report_id = $('#report.container').data('id')
 
         image = $(document.createElement('div'))
@@ -156,20 +154,20 @@ $ ->
       element.data(element.data('change'), element.val())
     else
       element.data(element.data('attribute'), element.val())
-    
+
 
     update_object(@)
     console.log 'change'
     if $('.all_wheels').prop('checked')
       $("input[type='text']").val($("input[type='text']").first().val())
-    
+
     store_report()
 
   $('.all_wheels').click ->
-    
+
     data = container.data().wheels.front_left
     for wheel in $('.wheel')
-      
+
       params = ['width', 'diameter', 'profile', 'brand', 'protector']
       $("input[type='text']").val($("input[type='text']").first().val())
       for param in params
@@ -207,7 +205,7 @@ $ ->
       if $(pad).data('object')
         $.ajax
           type: 'DELETE'
-          url: "/points/#{$(pad).data().id}.json"          
+          url: "/points/#{$(pad).data().id}.json"
         $(pad).find('.btn-primary').removeClass('btn-primary')
         delete $(pad).data()['id']
 
@@ -256,4 +254,4 @@ $ ->
 
         success: (response) ->
           object.data('id', response.id)
-          object.find('.btn').data('id', response.id)       
+          object.find('.btn').data('id', response.id)

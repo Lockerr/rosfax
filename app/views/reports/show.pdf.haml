@@ -1,3 +1,8 @@
+.row{style: 'position: fixed;'}
+  .offset41.span9.pull-right
+    %small{style: 'font-size:x-small ;'}
+      Ключ доступа
+      = @report.access_key
 .row
   .span50{:style => 'background-color: #59306a'}
 
@@ -18,6 +23,7 @@
     %h3.text-right
       от
       =@report.created_at.strftime('%d.%m.%y')
+  
   
 .bddd
   .row{:style => 'padding: 10px 0 0 0'}
@@ -50,8 +56,9 @@
   .span5.offset5
     %h2 Фото
   .span40{:style => 'margin-top: 19px'}
-    Остальные фото доступны по адресу
-    = link_to report_url(@report).gsub('/reports',''),report_url(@report).gsub('/reports','')
+    Остальные фото доступны по адресу:
+    %br/
+    = link_to report_url(@report, access_key: @report.access_key).gsub('/reports',''),report_url(@report).gsub('/reports','')
 .row{:style => 'margin-top: 25px;'}
   - unless Rails.env == 'development'
     - for asset in @report.assets[0..4]

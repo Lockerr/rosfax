@@ -5,6 +5,3 @@ ul = $('#schedule-company-selector').find('ul')
 ul.empty()
 for company in companies
   ul.append("<li><a value=#{company.id}>#{company.name}</a></li>")
-
-
-

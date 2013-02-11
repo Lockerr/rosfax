@@ -23,7 +23,6 @@
               %legend.inline
                 Страна производитель
               - for country in Country.all
-                
                 = t.check_box :country,{:multiple => true, class: 'bootstrap-check'}, country.name, nil
 
           .row-fluid

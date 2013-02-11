@@ -12,10 +12,15 @@
           - schedules[index] = @schedules.select{|schedule| schedule.inspection_start_time == [Date.today + i.days .. Date.today + i.days + 1]}
           - if (Date.today + i.days) == Date.today
             %th.text-info
-              = Russian::strftime(Date.today + i.days, "%d %A")
+              = Russian::strftime(Date.today + i.days, "%d %B")
+              %br/
+              = Russian::strftime(Date.today + i.days, "%A").mb_chars.downcase
           - else
             %th
-              = Russian::strftime(Date.today + i.days, "%d %A")
+              = Russian::strftime(Date.today + i.days, "%d %B")
+              %br/
+              = Russian::strftime(Date.today + i.days, "%A").mb_chars.downcase
+
           - index += 1
       - 9.upto(18) do |hour|
         %tr{style: 'height: 43px'}

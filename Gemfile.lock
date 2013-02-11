@@ -107,7 +107,7 @@ GEM
       warden (~> 1.2.1)
     devise-async (0.6.0)
       devise (>= 2.2)
-    diff-lcs (1.2.0)
+    diff-lcs (1.2.1)
     email_spec (1.4.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -258,18 +258,9 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     ref (1.0.2)
-    rspec (2.0.1)
-      rspec-core (~> 2.0.1)
-      rspec-expectations (~> 2.0.1)
-      rspec-mocks (~> 2.0.1)
     rspec-core (2.0.1)
     rspec-expectations (2.0.1)
       diff-lcs (>= 1.1.2)
-    rspec-mocks (2.0.1)
-      rspec-core (~> 2.0.1)
-      rspec-expectations (~> 2.0.1)
-    rspec-rails (2.0.1)
-      rspec (~> 2.0.0)
     ru_propisju (2.1.4)
     ruby-haml-js (0.0.3)
       execjs
@@ -389,7 +380,8 @@ DEPENDENCIES
   rb-fsevent
   rb-inotify (~> 0.8.8)
   rb-notifu
-  rspec-rails
+  rspec-core
+  rspec-expectations
   ru_propisju
   ruby-haml-js
   ruby-prof

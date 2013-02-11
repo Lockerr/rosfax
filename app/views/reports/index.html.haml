@@ -37,10 +37,6 @@
             - if current_user
               - if report.can_manage?(current_user)
                 = link_to "<i class=\"icon-remove\"></i>".html_safe, report_path(report), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-danger hide btn-small'
-            
-            
-
-            
   %br
 
   = paginate @reports

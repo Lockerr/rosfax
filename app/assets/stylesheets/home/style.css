@@ -185,6 +185,20 @@ body {
     font-size:18px;
 }
 
+.b-img-radius {
+  zoom: 1;
+  position: relative;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+.b-img-radius img {
+display: block;
+visibility: hidden;
+}
+  
 #request a:hover {
     background:url("/assets/home/request_hov.png") no-repeat left top;
 }

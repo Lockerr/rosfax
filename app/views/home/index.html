@@ -156,11 +156,12 @@
                 <ul class="ul_reset">
                     <%- for report in @reports %>
                         <li>
-                            <%= image_tag report.assets.first.url(:thumb), width: 118, height: 88 %>
+
+                            <%= image_tag report.assets.first.url(:thumb), width: 118, height: 88, style: 'border-radius: 6px;' %>
                             <%= link_to "
                                 #{report.model.brand.name}
                                 #{report.model.name}
-                                #{(report.year.to_s + ' u г.') if report.year}
+                                #{(report.year.to_s + ' г.') if report.year}
                                 ", report_path(report) %>
                             <br/>
                             <% if report.car %>

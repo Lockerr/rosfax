@@ -24,7 +24,7 @@
       - @reports.each do |report|
         %tr{data: {report: report.id}}
           %td= report.model_name
-          %td= report.car[:car][:year] if report.car[:car]
+          %td= report.year
           %td= report.car['vin']
           %td= report.car['seller']['name'].split(/\s/)[0] if report.car['seller']['name'] if report.car['seller']
           %td= report.car['buyer']['name'].split(/\s/)[0] if report.car['buyer']['name'] if report.car['buyer']

@@ -8,18 +8,11 @@
           День
         - index = 0
         - (1..7).each do |i|
-          / - i += params[:day].to_i if params[:day]
           - schedules[index] = @schedules.select{|schedule| schedule.inspection_start_time == [Date.today + i.days .. Date.today + i.days + 1]}
-          - if (Date.today + i.days) == Date.today
-            %th.text-info
-              = Russian::strftime(Date.today + i.days, "%d %B")
-              %br/
-              = Russian::strftime(Date.today + i.days, "%A").mb_chars.downcase
-          - else
-            %th
-              = Russian::strftime(Date.today + i.days, "%d %B")
-              %br/
-              = Russian::strftime(Date.today + i.days, "%A").mb_chars.downcase
+          %th{style: 'text-align: center ;'}
+            = Russian::strftime(Date.today + i.days, "%d %B")
+            %br/
+            = Russian::strftime(Date.today + i.days, "%A").mb_chars.downcase
 
           - index += 1
       - 9.upto(18) do |hour|

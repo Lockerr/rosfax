@@ -45,7 +45,7 @@ class Asset < ActiveRecord::Base
 
   process_in_background :data
 
-  belongs_to :attachable, :polymorphic => true
+  belongs_to :attachable, :polymorphic => true, counter_cache: true
   scope :processed, where(:data_processing => false)
 
   def url(*args)

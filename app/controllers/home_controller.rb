@@ -10,6 +10,7 @@ class HomeController < ApplicationController
 
   def index
     redirect_to reports_path if Rails.root.to_s.split('/')[2] == 'user'
+    @reports = Report.where('assets_count > 0').last(3)
     render :layout => false
   end
 

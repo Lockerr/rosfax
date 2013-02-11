@@ -74,9 +74,10 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       if @schedule.save
         @schedule.notify_about_creation
-
+        flash[:js] = "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}."
         format.html { redirect_to (current_user ? @schedule : root_path), notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
+        format.js 
       else
         format.html { render action: "new" }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }

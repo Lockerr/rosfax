@@ -59,7 +59,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'rspec-core'
   gem 'rspec-expectations'
-  # gem 'rspec-rails'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'ruby-prof'
   gem 'minitest'

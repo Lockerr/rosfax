@@ -22,7 +22,8 @@ class Report < ActiveRecord::Base
   attr_accessor :car_mark_model, :counters
 
   validates_presence_of :model
-  
+  validates_presence_of :access_key
+
   serialize :exterior, Hash
   serialize :wheels, Hash
   serialize :interior, Hash
@@ -31,15 +32,16 @@ class Report < ActiveRecord::Base
   serialize :car, Hash
   serialize :documents, Hash
   
-  before_create :generate_points
-  
+  after_create :generate_points
+
   after_update :expire_pages
   after_create :expire_pages
-  before_create :generate_key
+  before_validation :generate_key
   before_destroy :expire_pages
 
 
   scope :public, where(:publish => true)
+  
 
   NORMAL_CONDITION = ['ок', 'ok','OK', 'ОК', 'есть', 150, '150', 100, '100']
   BAD_CONDITION = [1, '1', 2,'2', 'НЕУД', 'НЕТ']
@@ -411,6 +413,6 @@ class Report < ActiveRecord::Base
   end
 
   def generate_key
-    key = rand(100000..1000000-1)
+    self.access_key ||= rand(100000..1000000-1)
   end
 end

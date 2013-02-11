@@ -87,5 +87,18 @@ $(document).ready ->
         $('.container#scheduler').show()
 
   $('#schedule_phone').live 'change', ->
-    $('.btn[disabled=disabled]').removeAttr('disabled')
+    if @.value.match /[\+\d\(\)\ ]{17}/
+      $('.btn[disabled=disabled]').removeAttr('disabled')
+    else
+      $('#schedule_phone').parents('form').find('.btn').attr('disabled', '')
+
+  $('#schedule_phone').live 'keyup', (e) ->
+    console.log @.value
+    if @.value.match /[\+\d\(\)\ ]{17}/
+      $('.btn[disabled=disabled]').removeAttr('disabled')
+    else
+      console.log 'dont match'
+      $('#schedule_phone').parents('form').find('.btn').attr('disabled', '')
+
+
 

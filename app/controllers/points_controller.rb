@@ -1,6 +1,8 @@
 class PointsController < ApplicationController
   load_and_authorize_resource
 
+  cache_sweeper :report_sweeper
+
   def index
     @points = Point.all
 
@@ -55,10 +57,6 @@ class PointsController < ApplicationController
     @point = Point.find(params[:id])
     params[:point][:condition] = nil if params[:point][:condition] == ''
     params[:point][:state] = nil if params[:point][:state] == ''
-    expire_action edit_report_url(@point.report)
-    expire_action report_url(@point.report)
-    expire_action report_url(@point.report, :format => :pdf)
-
 
     respond_to do |format|
       if @point.update_attributes(params[:point].except(:id))

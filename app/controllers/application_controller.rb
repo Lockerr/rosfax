@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
     if exception.action == :show and exception.subject.class == Report
       redirect_to report_access_path(exception.subject), flash[:notice] => 'Введите верный код доступа'
     else
-      redirect_to :back, :notice => exception.message
+       if request.env['HTTP_REFERER']
+        redirect_to :back, :notice => exception.message
+      else
+        redirect_to root_path, :notice => exception.message
+      end
     end
   end
 

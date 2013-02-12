@@ -2,16 +2,19 @@
 class ReportsController < ApplicationController
   load_and_authorize_resource
 
+  cache_sweeper :report_sweeper
+
   # before_filter :authenticate_user!, :except => [:index]
 
   caches_action :edit
   caches_action :show, :cache_path => proc {
     @report = Report.find(params[:id])
-    if request.format == 'text/html'
-      report_url(@report)
-    elsif request.format == 'application/pdf'
-      report_url(@report, :format => :pdf)
-    end
+    
+      if request.format == 'text/html'
+        report_url(@report, :access_key => (params[:access_key] if params[:access_key] and params[:acces_key] == @report.access_key))
+      elsif request.format == 'application/pdf'
+        report_url(@report, :format => :pdf, :access_key => (params[:access_key] if params[:access_key] and params[:acces_key] == @report.access_key))
+      end
   }
 
   layout 'clean'
@@ -22,6 +25,7 @@ class ReportsController < ApplicationController
   end
 
   def index
+
     if current_user
       if current_user.admin?
         @reports = Report.scoped
@@ -131,10 +135,6 @@ class ReportsController < ApplicationController
   def update
     @report = Report.find(params[:id])
 
-    expire_action edit_report_url(@report)
-    expire_action report_url(@report)
-    expire_action report_url(@report, :format => :pdf)
-
     if params[:report][:links]
       params[:report][:links] = @report.links + [params[:report][:links]]
     end
@@ -194,17 +194,4 @@ class ReportsController < ApplicationController
   end
 
   private
-
-  # def can_manage?
-  #   current_user.admin? or
-  #   @report.company == current_user.company or
-  #   @report.user == current_user
-
-
-  #   # current_user.reports.include? @report or current_user.company.reports.include? @report or current_user.admin? 
-  # end
-
-  
-
-
 end

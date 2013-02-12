@@ -6,6 +6,7 @@
       = @report.id
       от
       =@report.created_at.strftime('%d.%m.%y')
+      = link_to glyph(:print), report_path(@report, :format => :pdf, access_key: @report.access_key), :class => 'btn btn-primary'
     
   .row
     .span2

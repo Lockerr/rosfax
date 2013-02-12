@@ -1,5 +1,8 @@
 Tradein::Application.routes.draw do
 
+  resources :reports
+
+
   if Rails.env.cucumber?
     map.login_backdoor '/login/:email',
       :controller => 'sessions', :action => 'backdoor'

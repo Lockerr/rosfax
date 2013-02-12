@@ -9,7 +9,6 @@ class ReportsController < ApplicationController
   caches_action :edit
   caches_action :show, :cache_path => proc {
     @report = Report.find(params[:id])
-    
       if request.format == 'text/html'
         report_url(@report, :access_key => (params[:access_key] if params[:access_key] and params[:acces_key] == @report.access_key))
       elsif request.format == 'application/pdf'

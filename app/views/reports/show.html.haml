@@ -1,13 +1,11 @@
 .container#report{:report => @report.id}
   %legend
-    
     %h3
       Отчет #
       = @report.id
       от
       =@report.created_at.strftime('%d.%m.%y')
       = link_to glyph(:print), report_path(@report, :format => :pdf, access_key: @report.access_key), :class => 'btn btn-primary'
-    
   .row
     .span2
       .thumb{:data => (@report.assets.first.attributes if @report.assets.any?)}
@@ -18,7 +16,6 @@
         .well.well-small.well-special.span4
           .span12{style: 'min-height: initial'}
             = @report.car['mark_model']
-          
         .well.well-small.well-special.span4
           .span6{style: 'min-height: initial'}
             Гос. номер

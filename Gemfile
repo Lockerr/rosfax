@@ -60,27 +60,26 @@ group :development, :test do
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'guard-cucumber'
+  gem 'spork-rails'
   gem 'factory_girl_rails'
   gem 'ruby-prof'
   gem 'minitest'
-  gem 'capybara'
   gem 'database_cleaner'
 
 end
 
 group :test do
+  gem 'rspec-rails'
   gem 'turn', :require => false
-  gem 'spork-rails'
-  gem 'guard-spork'
-  gem 'guard-rspec'
-  gem 'guard-cucumber'
   gem 'capybara-webkit'
   gem 'cucumber'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'rb-fsevent'
   gem 'growl'
-  gem 'guard-spork'
   gem 'launchy'
   gem 'email_spec'
   gem 'capybara'

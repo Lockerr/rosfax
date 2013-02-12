@@ -157,7 +157,7 @@
                     <%- for report in @reports %>
                         <li>
 
-                            <%= image_tag report.assets.first.url(:thumb), width: 118, height: 88, style: 'border-radius: 6px;' %>
+                            <%= image_tag report.assets.first.url(:thumb), width: 118, height: 88, style: 'border-radius: 12px;' %>
                             <%= link_to "
                                 #{report.model.brand.name}
                                 #{report.model.name}

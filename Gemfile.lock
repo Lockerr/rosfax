@@ -6,6 +6,14 @@ GIT
     delayed_paperclip (2.4.5.2)
       paperclip (>= 2.4.5)
 
+GIT
+  remote: git@github.com:scosman/delayed_job_active_record.git
+  revision: c9703faad12a3e3051c3d802176f4752a218bcde
+  specs:
+    delayed_job_active_record (0.3.3)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -97,9 +105,6 @@ GEM
     database_cleaner (0.9.1)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
-    delayed_job_active_record (0.4.0)
-      activerecord (>= 2.1.0, < 4)
-      delayed_job (~> 3.0)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -364,7 +369,7 @@ DEPENDENCIES
   cucumber
   cucumber-rails
   database_cleaner
-  delayed_job_active_record
+  delayed_job_active_record!
   delayed_paperclip (= 2.4.5.2)!
   devise
   devise-async

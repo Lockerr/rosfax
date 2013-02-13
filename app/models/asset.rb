@@ -26,6 +26,7 @@ class Asset < ActiveRecord::Base
         :bucket => 'rosfax',
         :path => ":attachment/:id/:style.:extension",
         :s3_host_name =>  's3-eu-west-1.amazonaws.com'
+      
     end
 
   else
@@ -37,13 +38,14 @@ class Asset < ActiveRecord::Base
         :magnify => {:geometry => '1800x1200', :format => :jpg, :pre_convert_options => "-auto-orient"}
         },
         :default_url => "/assets/loading.gif"
+      
 
   end
 
-
-
-
   process_in_background :data
+
+
+  
 
   belongs_to :attachable, :polymorphic => true, counter_cache: true
   scope :processed, where(:data_processing => false)

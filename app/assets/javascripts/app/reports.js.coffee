@@ -53,48 +53,55 @@
     async: false
 
 @assing_drops = ->
-    droppable = $('.drop')
-    $.each $('.drop'), ->
+  $.each $('.photos img'), ->
+    this.ondragstart = (event) ->
+      window.dragged = event.target
+      console.log "Dragged object id is #{event.target.id}"
+  
+  droppable = $('.drop')
+  
+  $.each $('.thumb'), ->
+    console.log 'assign drop'
+    this.ondrop = (event) ->
+      target = $(@)
+      console.log target
+      obj = window.dragged
+      console.log "Dragged object id is #{obj.id}"
+      # event.preventDefault()
+      # event.dataTransfer.dropEffect = "copy"
+      # attribute = target.data().section
 
-      this.ondrop  = (event) ->
-        target = $(@)
-        obj = window.dragged
-        console.log "Dragged object id is #{obj.id}"
-        event.preventDefault()
-        event.dataTransfer.dropEffect = "copy"
-        attribute = target.data().section
+      # report_id = $('#report.container').data('id')
 
-        report_id = $('#report.container').data('id')
+      # image = $(document.createElement('div'))
+      # image.addClass('thumb')
+      # image.attr('data-attribute', attribute)
+      # image.attr('data-place', $(@).data('place'))
+      # image.attr('style', 'cursor: pointer')
 
-        image = $(document.createElement('div'))
-        image.addClass('thumb')
-        image.attr('data-attribute', attribute)
-        image.attr('data-place', $(@).data('place'))
-        image.attr('style', 'cursor: pointer')
+      # target.find('a').html(image)
+      # target.find('.thumb').html(window.dragged)
+      # target.find('.btn').text(parseInt(target.find('.btn').text())+1)
+      # target.find('img').attr('style', '').prop('draggable', false)
 
-        target.find('a').html(image)
-        target.find('.thumb').html(window.dragged)
-        target.find('.btn').text(parseInt(target.find('.btn').text())+1)
-        target.find('img').attr('style', '').prop('draggable', false)
-        
 
-        imgbox = $(".imgbox##{attribute}")
+      # imgbox = $(".imgbox##{attribute}")
 
-        if imgbox.find("##{obj.id}").size() == 0
-          imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
-          imgbox.width(imgbox.width()+ 116)
-          new_image = $.clone(target.find('.thumb')[0])
-          imgbox.find('.thumbnail').last().prepend(new_image)
+      # if imgbox.find("##{obj.id}").size() == 0
+      #   imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
+      #   imgbox.width(imgbox.width()+ 116)
+      #   new_image = $.clone(target.find('.thumb')[0])
+      #   imgbox.find('.thumbnail').last().prepend(new_image)
 
-        data = {asset: target.data()}
-        console.log data
-        if target.data().attachable_type == 'Report'
-          $.ajax
-            url: "/reports/#{report_id}/assets/#{obj.id}.json"
-            data: data
-            type: 'PUT'
+      # data = {asset: target.data()}
+      # console.log data
+      # if target.data().attachable_type == 'Report'
+      #   $.ajax
+      #     url: "/reports/#{report_id}/assets/#{obj.id}.json"
+      #     data: data
+      #     type: 'PUT'
 
-        
+
 
 
 $ ->
@@ -109,20 +116,6 @@ $ ->
   window.datas = container.data()
 
   report_id = $('#report.container').data('id')
-
-  $(".upload").fileUploadUI
-    uploadTable: $(".photos .tab-pane.uploading")
-    downloadTable: $(".photos .tab-pane")
-    buildUploadRow: (files, index) ->
-      console.log "file: #{file} index: #{index}"
-      file = files[index]
-
-      $ "<tr><td>" + file.name + "</td>" + "<td class=\"file_upload_progress\"><div></div></td>" + "<td class=\"file_upload_cancel\">" + "</td></tr>"
-    buildDownloadRow: (file) ->
-      $('.photos').trigger ('custom_change')
-      $ "<div class='processing_image'><img alt='Missing' class='processing' draggable='true' id='#{file.id}' processing='#{file.id}' src='/assets/loading.gif' style='cursor: move;'></div>"
-
-
 
   assing_drops()
 
@@ -139,12 +132,9 @@ $ ->
           drop.find('img').attr('src', responce.images[place][0])
           drop.find('.btn').html(responce.images[place][1])
 
-  $.each $('.photos img'), ->
-    this.ondragstart = (event) ->
+  
 
-
-      window.dragged = event.target
-    $(".thumbnail img").prop('draggable', false)
+    # $(".thumbnail img").prop('draggable', false)
 
 
 
@@ -157,6 +147,7 @@ $ ->
 
 
     update_object(@)
+    console.log @
     console.log 'change'
     if $('.all_wheels').prop('checked')
       $("input[type='text']").val($("input[type='text']").first().val())

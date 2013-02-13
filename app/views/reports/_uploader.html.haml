@@ -1,11 +1,14 @@
-.files
-  = form_for [@report, Asset.new], :html => { :class => "upload", :multipart => true } do |f|
-    = f.file_field :data
-    %div{:style => 'color: #08C; font-size: 18pt;padding: 7px'} Перетащить сюда файлы
+.files.pull-left
+  %input{id: :fileupload, type: :file, name: "files[]", multiple: true}
   %table.upload_files
-.photos{:style => 'overflow-y: scroll;height: 500px'}
+
+  / .files
+  /   = form_for [@report, Asset.new], :html => { :class => "upload", :multipart => true } do |f|
+  /     = f.file_field :data
+  /     %div{:style => 'color: #08C; font-size: 18pt;padding: 7px'} Перетащить сюда файлы
 
 
+.photos.pull-left{:style => 'overflow-y: scroll;height: 500px'}
   .tabbable{:style => "margin-bottom: 18px;"}
 
     %ul.nav.nav-tabs

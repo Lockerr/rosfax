@@ -39,8 +39,8 @@ class AssetsController < ApplicationController
           expire_fragment ['edit', report]
         end
       elsif params[:point_id]
-        if point = Point.find(params[:point_id])  
-          @asset = point.assets.create(params[:asset])
+        if point = Point.find(params[:point_id])
+          @asset = point.assets.create(params[:files])
           expire_fragment ['show', point.report]
           expire_fragment ['edit', point.report]
         end
@@ -52,8 +52,21 @@ class AssetsController < ApplicationController
         expire_fragment ['edit', point.report]
       end
     end
+
+    if params[:files]
+      if params[:report_id]
+        if report = Report.find(params[:report_id])
+          params[:files].each do |data|
+
+            @asset = report.assets.create(data: data)
+          end
+
+          expire_fragment ['show', report]
+          expire_fragment ['edit', report]
+        end
+      end
+    end
     
-   
     respond_to do |format|
       format.json {render :json => { :pic_path => @asset.url.to_s , :name => @asset.name, :id => @asset.id }, :content_type => 'text/html'}
       format.html 

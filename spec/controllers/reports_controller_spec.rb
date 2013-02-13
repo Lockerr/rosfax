@@ -24,7 +24,7 @@ describe ReportsController do
   # Report. As you add validations to Report, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {model: Model.create!(name: 'Almera') }
+    {model: Model.create!(name: 'Almera'), publish: true }
   end
 
   # This should return the minimal set of values that should be in the session

@@ -57,49 +57,49 @@
     this.ondragstart = (event) ->
       window.dragged = event.target
       console.log "Dragged object id is #{event.target.id}"
-  
-  droppable = $('.drop')
-  
+      event.preventDefault()
+
+
   $.each $('.thumb'), ->
     console.log 'assign drop'
     this.ondrop = (event) ->
+      event.preventDefault()
       target = $(@)
       console.log target
       obj = window.dragged
       console.log "Dragged object id is #{obj.id}"
-      # event.preventDefault()
-      # event.dataTransfer.dropEffect = "copy"
-      # attribute = target.data().section
+      event.dataTransfer.dropEffect = "copy"
+      attribute = target.data().section
 
-      # report_id = $('#report.container').data('id')
+      report_id = $('#report.container').data('id')
 
-      # image = $(document.createElement('div'))
-      # image.addClass('thumb')
-      # image.attr('data-attribute', attribute)
-      # image.attr('data-place', $(@).data('place'))
-      # image.attr('style', 'cursor: pointer')
+      image = $(document.createElement('div'))
+      image.addClass('thumb')
+      image.attr('data-attribute', attribute)
+      image.attr('data-place', $(@).data('place'))
+      image.attr('style', 'cursor: pointer')
 
-      # target.find('a').html(image)
-      # target.find('.thumb').html(window.dragged)
-      # target.find('.btn').text(parseInt(target.find('.btn').text())+1)
-      # target.find('img').attr('style', '').prop('draggable', false)
+      target.find('a').html(image)
+      target.find('.thumb').html(window.dragged)
+      target.find('.btn').text(parseInt(target.find('.btn').text())+1)
+      target.find('img').attr('style', '').prop('draggable', false)
 
 
-      # imgbox = $(".imgbox##{attribute}")
+      imgbox = $(".imgbox##{attribute}")
 
-      # if imgbox.find("##{obj.id}").size() == 0
-      #   imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
-      #   imgbox.width(imgbox.width()+ 116)
-      #   new_image = $.clone(target.find('.thumb')[0])
-      #   imgbox.find('.thumbnail').last().prepend(new_image)
+      if imgbox.find("##{obj.id}").size() == 0
+        imgbox.append "<div class='thumbnail' style='width: 100px; float: left; margin-right: 5px; height: 67px'><div class='btn remove_asset btn-danger btn-mini' data-attribute = #{attribute} id='"+obj.id+"' style='position: relative; top: -20px; left: 80px'>x</div></div>"
+        imgbox.width(imgbox.width()+ 116)
+        new_image = $.clone(target.find('.thumb')[0])
+        imgbox.find('.thumbnail').last().prepend(new_image)
 
-      # data = {asset: target.data()}
-      # console.log data
-      # if target.data().attachable_type == 'Report'
-      #   $.ajax
-      #     url: "/reports/#{report_id}/assets/#{obj.id}.json"
-      #     data: data
-      #     type: 'PUT'
+      data = {asset: target.data()}
+      console.log data
+      if target.data().attachable_type == 'Report'
+        $.ajax
+          url: "/reports/#{report_id}/assets/#{obj.id}.json"
+          data: data
+          type: 'PUT'
 
 
 

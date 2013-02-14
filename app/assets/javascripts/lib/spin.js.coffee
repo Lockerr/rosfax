@@ -1,15 +1,3 @@
-#
-# 
-#You can now create a spinner using any of the variants below:
-# 
-#$("#el").spin(); // Produces default Spinner using the text color of #el.
-#$("#el").spin("small"); // Produces a 'small' Spinner using the text color of #el.
-#$("#el").spin("large", "white"); // Produces a 'large' Spinner in white (or any valid CSS color).
-#$("#el").spin({ ... }); // Produces a Spinner using your custom settings.
-# 
-#$("#el").spin(false); // Kills the spinner.
-# 
-#
 (($) ->
   $.fn.spin = (opts, color) ->
     if arguments.length is 1 and opts is false

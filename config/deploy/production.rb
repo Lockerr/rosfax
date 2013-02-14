@@ -8,6 +8,8 @@ puts "######################################################################\e[0
 
 load 'deploy/assets'
 
+require 'delayed/recipes'
+
 proceed = STDIN.gets[0..0] rescue nil 
 exit unless proceed == 'y' || proceed == 'Y' 
 
@@ -28,6 +30,10 @@ role :db, domain, :primary => true
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
 set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
+set 'delayed_job_args', '-n 2'
 namespace :deploy do
   
 

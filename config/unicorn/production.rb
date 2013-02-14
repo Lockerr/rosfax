@@ -1,3 +1,5 @@
+set :deploy_to, "/home/perekup/rosfax"
+
 deploy_to  = "/home/perekup/rosfax"
 rails_root = "#{deploy_to}/current"
 pid_file   = "#{deploy_to}/shared/pids/unicorn.pid"

@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/dimko/capistrano-unicorn.git
+  revision: 07338a03639788ab93ac84444a464131238930e0
+  specs:
+    capistrano-unicorn (0.1.6)
+      capistrano
+
+GIT
   remote: git://github.com/tommeier/delayed_paperclip
   revision: c23a537c0c5d7488059b07a036ebfa4f5e52d43e
   branch: fix_312
@@ -69,8 +76,6 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capistrano-unicorn (0.1.6)
-      capistrano
     capistrano_colors (0.5.5)
     capybara (1.1.4)
       mime-types (>= 1.16)
@@ -364,7 +369,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   cancan
-  capistrano-unicorn
+  capistrano-unicorn!
   capistrano_colors
   capybara
   capybara-webkit

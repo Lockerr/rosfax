@@ -58,7 +58,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'capistrano-unicorn', :require => false
+  gem 'capistrano-unicorn',git: 'git://github.com/dimko/capistrano-unicorn.git', :require => false
   gem 'poltergeist'
   gem 'rspec-core'
   gem 'rspec-expectations'

@@ -23,12 +23,8 @@ $(document).ready ->
     ]
     add: (e, data) ->
       $(this).fileupload("process", data).done ->
-      
         data.submit()
-        console.log data
-        console.log e
         $.each data.files, (index, file) ->
-          console.log file.name
     done: (e, data) ->
       $.each data.result.files, (index, file) ->
         console.log file.name

@@ -2,7 +2,14 @@ require 'capistrano/ext/multistage'
 require "rvm/capistrano"
 
 
+
+
+
 require 'capistrano_colors'
+
+set :application, "rosfax"
+
+require 'capistrano-unicorn'
 
 capistrano_color_matchers = [
  { :match => /command finished/,       :color => :hide,      :prio => 10 },
@@ -16,13 +23,15 @@ colorize( capistrano_color_matchers )
 
 set :default_stage, 'staging'
 
-set :application, "rosfax"
 
 
 set :use_sudo, false
 set :rvm_type, :user
 
 set :backup_dir, "#{deploy_to}/shared"
+
+after 'deploy:restart', 'unicorn:reload' # app IS NOT preloaded
+after 'deploy:restart', 'unicorn:restart'  # app preloaded
 
 after 'deploy:update_code', :roles => :app do
   run "cd #{current_release} ; bundle install"

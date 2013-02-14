@@ -13,6 +13,7 @@ exit unless proceed == 'y' || proceed == 'Y'
 
 set :domain, "perekup@perekup.net"
 set :deploy_to, "/home/perekup/rosfax"
+
 set :rails_env, "production"
 set :password, '12345trewq'
 set :rvm_ruby_string, 'r328'
@@ -21,10 +22,6 @@ set :scm, :git
 set :repository, "git@github.com:Lockerr/tradein.git"
 set :branch, "master"
 
-require 'capistrano-unicorn'
-
-after 'deploy:restart', 'unicorn:reload' # app IS NOT preloaded
-after 'deploy:restart', 'unicorn:restart'  # app preloaded
 
 require "delayed/recipes" 
 

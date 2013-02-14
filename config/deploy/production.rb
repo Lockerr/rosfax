@@ -21,6 +21,14 @@ set :scm, :git
 set :repository, "git@github.com:Lockerr/tradein.git"
 set :branch, "master"
 
+require "delayed/recipes" 
+
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
+
+set :delayed_job_args, "-n 2"
+
 role :web, domain
 role :app, domain
 role :db, domain, :primary => true

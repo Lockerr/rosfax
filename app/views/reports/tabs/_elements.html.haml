@@ -35,7 +35,7 @@
                         = @elements[tab][:legends][index]
                     - else
                       %legend{style: 'margin-bottom: 6px'}
-                        = t("elements.#{tab}.title")                      
+                        = t("elements.#{tab}.title")
                   - @elements[tab][:names][index].each do |place|
                     - parameters = {:report_id => @report.id, :object => 'elements', :section => tab, :place => place}
                     - if @points.select{|i| i.place == place}.select{|i| i.object == 'elements'}.any?
@@ -74,10 +74,9 @@
                               %span.caret
                       .span3
                         = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'
-                        
+
                       .span1
-                        = form_for 'asset', :remote => true, :html => {:onSubmit => "alert(this);",:id => "new_point_#{check.id}_asset", :data => {id: check.id}}  do |f|                        
-                          = f.file_field :data, class: 'file-upload'
+                        %input.file-upload{type: :file, name: "files[]", multiple: true, style: 'width: 21px', data: {url: "/points/#{check.id}/assets"}}
                       .span1
                         = render :partial => 'element_drop', :locals => {:object => check, :place => :one}
                     %hr{style: 'margin: 5px 0'}/

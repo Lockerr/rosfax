@@ -95,7 +95,7 @@
 
       data = {asset: target.data()}
       console.log data
-      window.container.remove()
+      
       if target.data().attachable_type == 'Report'
         $.ajax
           url: "/reports/#{report_id}/assets/#{obj.id}.json"

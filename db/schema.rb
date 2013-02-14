@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211092140) do
+ActiveRecord::Schema.define(:version => 20130214065729) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -159,10 +159,11 @@ ActiveRecord::Schema.define(:version => 20130211092140) do
     t.string   "place"
     t.string   "condition"
     t.string   "state"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.string   "images"
     t.string   "description"
+    t.integer  "assets_count", :default => 0, :null => false
   end
 
   add_index "points", ["report_id"], :name => "index_points_on_report_id"

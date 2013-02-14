@@ -8,8 +8,9 @@
       = link_to glyph(:print), report_path(@report, :format => :pdf, access_key: @report.access_key), :class => 'btn btn-primary'
   .row
     .span2
-      .thumb{:data => (@report.assets.first.attributes if @report.assets.any?)}
-        = image_tag( @report.assets.first.url(:thumb), :width => '120px', :id => @report.assets.first.id ) if @report.assets.any?
+      .thumb{:data => (@report.assets.first.attributes if @report.assets.present?)}
+        = image_tag( @report.assets.first.url(:thumb), :width => '120px', :id => @report.assets.first.id ) if @report.assets.present?
+
 
     .span10
       .row-fluid
@@ -20,33 +21,28 @@
           .span6{style: 'min-height: initial'}
             Гос. номер
           .span6{style: 'text-align: right;min-height: initial'}
-            %span.badge.badge-info
-              = @report.car['gov_number']
+            %span.badge.badge-info= @report.car['gov_number'] if @report.car['gov_number']
         .well.well-small.well-special.span4
           .span8{style: 'min-height: initial'}
             Пробег, км
           .span4{style: 'text-align: right;min-height: initial'}
-            %span.badge.badge-info
-              = @report.car['mileage']
+            %span.badge.badge-info= @report.car['mileage'] if @report.car['mileage']
       .row-fluid
         .well.well-small.well-special.span4
           .span8{style: 'min-height: initial'}
             Объем двигателя, см3
           .span4{style: 'text-align: right;min-height: initial'}
-            %span.badge.badge-info
-              =@report.car['cylinder_amount']
+            %span.badge.badge-info= @report.car['cylinder_amount'] if @report.car['cylinder_amount']
         .well.well-small.well-special.span4
           .span8{style: 'min-height: initial'}
             Топливо
           .span4{style: 'text-align: right;min-height: initial'}
-            %span.badge.badge-info
-              =@report.car['engine_type']
+            %span.badge.badge-info= @report.car['engine_type'] if @report.car['engine_type']
         .well.well-small.well-special.span4
           .span8{style: 'min-height: initial'}
             Привод
           .span4{style: 'text-align: right;min-height: initial'}
-            %span.badge.badge-info
-              =@report.car['drive']
+            %span.badge.badge-info= @report.car['drive'] if @report.car['drive']
   %hr/
   .row
     .span8
@@ -58,38 +54,46 @@
                 %h3{:style => 'margin: 0'}
                   Фото
                   %span{:style => 'font-size: 70%; color: #ddd'}
-                    ='(' + @report.assigned.size.to_s + ')'
-                  - if @report.assigned.any?
+                    ='(' + @report.assets.count.to_s + ')'
+                  - if @report.assets.present?
                     %a.btn.btn-link{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
                       Развернуть
                     %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => '#photo'}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
-                      Свернуть  
-          - if @report.assigned.any?
-            .row
-              .span8
-                #photo.collapse
-                  - Asset.where(:id => @report.assigned).each do |image|
-                    .thumb.pull-left{:data => image.attributes, :style => 'margin: 2px; border: 1px solid #ccc'}
-                      = image_tag image.url(:thumb), :id => image.id
-      
+                      Свернуть
+          - if @report.assets.present?
+            / .row
+            /   .span8
+            /     #photo.collapse
+            /       #myCarousel.carousel.slide
+            /         %ol.carousel-indicators
+            /           - @report.assets.each_index do |index|
+            /             %li{data: {'slide-to' => index, target: '#myCarousel', class: ('active' if index.zero?)}}
+
+
+            /         .carousel-inner
+            /           - @report.assets.each do |asset|
+            /             = image_tag asset.url(:thumb), :id => asset.id, class: (@report.assets.first == asset ? 'active item' : 'item' )
+            /         %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
+            /         %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
+
+            - @report.assets.each do |image|
+              .thumb.pull-left{:data => image.attributes, :style => 'margin: 2px; border: 1px solid #ccc'}
+                = image_tag image.url(:thumb), :id => image.id
       - %w( checklist elements ).each do |object|
         %hr{:style => 'margin: 0'}/
         .row
           .span12
-            %a.pull-left{:data => {:toggle => 'collapse', :target => "##{object}"}, :onclick => "$(this).siblings('a.btn').toggle()"}
-              %h3{:style => 'margin: 0'}
-                =t("#{object}.title")
-                %span{:style => 'font-size: 70%; color: #ddd'}
-                  = "(" + (@report.points.where(:object => object).size*100.0/46).round(0).to_i.to_s + "%)"
-                - if @report.points.where(:object => object).any?
+            - if @report.points.filled.where(:object => object).present?
+              %a.pull-left{:data => {:toggle => 'collapse', :target => "##{object}"}, :onclick => "$(this).siblings('a.btn').toggle()"}
+                %h3{:style => 'margin: 0'}
+                  =t("#{object}.title")
+                  %span{:style => 'font-size: 70%; color: #ddd'}
+                  / = "(" + (@report.points.where(:object => object).size*100.0/46).round(0).to_i.to_s + "%)"
                   %a.btn.btn-link{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
                     Развернуть
                   %a.btn.btn-link.hide{:data => {:toggle => 'collapse', :target => ".#{object}"}, :onclick => "$(this).siblings('a.btn').toggle(); $(this).hide()"}
                     Свернуть
-                    
-        
-        
-        - if @filled_points.any?
+        - if @filled_points.present?
           .row
             .span12
               .collapse{:id => object, :class => object}
@@ -103,7 +107,7 @@
                           %span{:style => 'font-size: 70%; color: #ddd'}
                             = "( #{size} #{RuPropisju.propisju_shtuk(size, 2,['дефект','дефекта', 'дефектов']).split(/\s/)[-1]} )"
                   .collapse{:id => "points_#{block}", :class => object}
-                    
+
                     .row
                       .span8
                         %ul.thumbnails
@@ -121,12 +125,10 @@
                             - @report.points.where(:section => block.to_sym).where('description is not null').each do |point|
 
                               = t("#{object}.#{block}.#{point.place}") + ': ' + point.description + '.'
-                              
-      
       .row
         .span12
           %a.pull-left{:style => 'color: #ddd',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).siblings().find('span').toggle()"}
-            %h3.pull-left Не проверенные    
+            %h3.pull-left Не проверенные
           %a.pull-left{:style => 'color: #ddd;margin-left: 11px; margin-top: 25px',:data => {:toggle => 'collapse', :target => '#unchecked'}, :onclick => "$(this).find('span').toggle()"}
             %span
               %b
@@ -148,7 +150,6 @@
                     %td
                       - for place in @diff[object][section]
                         %span.badge= t("#{object}.#{section}.#{place}")
-  
     / .span4
     /   / #vk_comments
     /   /   :javascript

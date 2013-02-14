@@ -19,11 +19,14 @@
 #= require ./app/reports
 
 
+$(document).bind "drop dragover", (e) ->
+  e.preventDefault()
 
 
 $("body").on "touchstart.dropdown", ".dropdown-menu", (e) ->
   e.stopPropagation()
   e.preventDefault()
+
 
 logger = ->
   oldConsoleLog = null

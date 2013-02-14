@@ -45,9 +45,12 @@ class AssetsController < ApplicationController
           expire_fragment ['edit', point.report]
         end
       end
+
     elsif params[:point_id]
       if point = Point.find(params[:point_id])  
-        @asset = point.assets.create(data: params['file-0'])
+        params[:files].each do |data|
+          @asset = point.assets.create(data: data)
+        end
         expire_fragment ['show', point.report]
         expire_fragment ['edit', point.report]
       end

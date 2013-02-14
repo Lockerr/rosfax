@@ -55,19 +55,18 @@
 @assing_drops = ->
   $.each $('.photos img'), ->
     this.ondragstart = (event) ->
+      console.log "Drag starts: #{this.id}"
       window.dragged = event.target
-      console.log "Dragged object id is #{event.target.id}"
+      window.container = $(@).parent()
+
+  $.each $('.drop'), ->
+    this.ondragover = (event) ->
       event.preventDefault()
-
-
-  $.each $('.thumb'), ->
-    console.log 'assign drop'
     this.ondrop = (event) ->
-      event.preventDefault()
       target = $(@)
-      console.log target
       obj = window.dragged
       console.log "Dragged object id is #{obj.id}"
+      
       event.dataTransfer.dropEffect = "copy"
       attribute = target.data().section
 
@@ -75,15 +74,16 @@
 
       image = $(document.createElement('div'))
       image.addClass('thumb')
-      image.attr('data-attribute', attribute)
-      image.attr('data-place', $(@).data('place'))
-      image.attr('style', 'cursor: pointer')
+      image.attr({
+        'data-attribute': attribute,
+        'data-place': target.data('position'),
+        'style': 'cursor: pointer'
+        })
 
       target.find('a').html(image)
       target.find('.thumb').html(window.dragged)
       target.find('.btn').text(parseInt(target.find('.btn').text())+1)
       target.find('img').attr('style', '').prop('draggable', false)
-
 
       imgbox = $(".imgbox##{attribute}")
 
@@ -95,6 +95,7 @@
 
       data = {asset: target.data()}
       console.log data
+      window.container.remove()
       if target.data().attachable_type == 'Report'
         $.ajax
           url: "/reports/#{report_id}/assets/#{obj.id}.json"

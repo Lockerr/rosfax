@@ -21,6 +21,11 @@ set :scm, :git
 set :repository, "git@github.com:Lockerr/tradein.git"
 set :branch, "master"
 
+require 'capistrano-unicorn'
+
+after 'deploy:restart', 'unicorn:reload' # app IS NOT preloaded
+after 'deploy:restart', 'unicorn:restart'  # app preloaded
+
 require "delayed/recipes" 
 
 after "deploy:stop",    "delayed_job:stop"
@@ -39,15 +44,15 @@ set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 namespace :deploy do
   
 
-  task :restart do
-    run "if [ -f #{unicorn_pid} ]; then kill -USR2 `cat #{unicorn_pid}`; else cd /home/perekup/rosfax/current && rvm r328 do bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D ; fi"
-  end
-  task :start do
-    run "cd /home/perekup/rosfax/current && rvm r328 do bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D "
-  end
-  task :stop do
-    run "if [ -f #{unicorn_pid} ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
-  end
+  # task :restart do
+  #   run "if [ -f #{unicorn_pid} ]; then kill -USR2 `cat #{unicorn_pid}`; else cd /home/perekup/rosfax/current && rvm r328 do bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D ; fi"
+  # end
+  # task :start do
+  #   run "cd /home/perekup/rosfax/current && rvm r328 do bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D "
+  # end
+  # task :stop do
+  #   run "if [ -f #{unicorn_pid} ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
+  # end
 
   task :migrate do
     run "cd /home/perekup/rosfax/current && bundle exec rake db:migrate"

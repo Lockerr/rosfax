@@ -7,6 +7,8 @@ gem 'jquery-rails', '2.1.4'
 gem 'jquery-ui-rails'
 gem 'kaminari-bootstrap'
 
+
+
 gem 'haml-rails'
 gem 'ruby-haml-js'
 gem 'paperclip'
@@ -56,6 +58,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'capistrano-unicorn', :require => false
   gem 'poltergeist'
   gem 'rspec-core'
   gem 'rspec-expectations'

@@ -13,8 +13,8 @@ class ReportSweeper < ActionController::Caching::Sweeper
 
   def expire_cache_for(record)
     object = record if record.is_a?(Report)
-    object = recоrd.report if record.is_a?(Point)
-    object = recоrd.report if record.is_a?(Asset)
+    object = record.report if record.is_a?(Point)
+    object = record.report if record.is_a?(Asset)
     
 
     expire_action edit_report_url(object)

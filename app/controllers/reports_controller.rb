@@ -63,6 +63,7 @@ class ReportsController < ApplicationController
     # end
 
     respond_to do |format|
+      format.xml {render xml: @report}
       format.html { render :layout => 'report_show'}
       format.json { render json: @report }
       format.pdf {render :pdf => "report_#{@report_id}", :layout => 'report_show_pdf.html.haml'}
@@ -124,6 +125,7 @@ class ReportsController < ApplicationController
         current_user.company ? current_user.company.reports << @report : nil
         format.html { redirect_to edit_report_path(@report)}
         format.json { render json: @report, status: :created, location: @report }
+
       else
         format.html { render action: "new" }
         format.json { render json: @report.errors, status: :unprocessable_entity }

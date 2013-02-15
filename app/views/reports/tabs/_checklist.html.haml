@@ -24,25 +24,22 @@
               .row-fluid
                 .span10
                   .accordion-toggle{id: "tab_#{tab}", data: {toggle: :collapse, target: "##{tab.to_s}"}}
-                    %h3{style: 'margin: -2px 0px'}= t("checklist.#{tab}.title")                    
+                    %h3{style: 'margin: -2px 0px'}= t("checklist.#{tab}.title")
                 .span2
                   .accordion-toggle
                     .btn.btn-large.new_all_ok.pull-right Все ок
-              
             .accordion-body.collapse.in{id: tab}
               .accordion-inner
                 - index = 0
                 - for block in Report::CHECKLIST[tab][:names]
-                   
                   - if Report::CHECKLIST[tab][:legends]
                     %legend{style: 'margin-bottom: 6px'}= Report::CHECKLIST[tab][:legends][index]
                   - for param in block
-                  
                     - parameters = {:report_id => report.id, :object => 'checklist', :section => tab, :place => param}  
                     - check = @points.select{|i| i.place == param}.first
                     - parameters[:id] = check.id
                     .row-fluid.object.form-inline{:data => parameters}
-                      .span3                    
+                      .span3
                         = t("checklist.#{tab}.#{param}").to_s+ ':'
                       .span4
                         .divv{:style => 'margin-top: 0px; text-align: center'}
@@ -57,12 +54,9 @@
                               %button.check.btn{:class => klass, :data => parameters}= i
                       .span3
                         = text_field 'point', 'description', :value => (check ? check.description : ''), :class => 'span12'
-                        
+
                       .span1
-                        = form_for 'asset', :remote => true, :html => {multipart: true, :id => "new_point_#{check.id}_asset", :data => {id: check.id}}  do |f|
-                          = f.file_field :data, class: 'file-upload'
-                        
-                      
+                        %input.file-upload{type: :file, name: "files[]", multiple: true, style: 'width: 21px', data: {url: "/points/#{check.id}/assets"}}
                       .span1
                         = render :partial => 'element_drop', :locals => {:object => check, :place => :one}
                       / .span1.camera

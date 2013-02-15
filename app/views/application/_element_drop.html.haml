@@ -4,9 +4,9 @@
       - assets = object.assets
       - if assets.any?
         - asset = assets.last
-        .thumb{:data => asset.attributes, style: 'width: 50px; height: 35px'}
+        .thumb{:data => asset.attributes, style: 'width: 50px; height: 35px', class: ('processing' if asset.data_processing)}
           - if asset.data_processing
-            = image_tag asset.url(:thumb), :processing => asset.id, :class => 'processing', :id => asset.id
+            = image_tag asset.url(:thumb), :processing => asset.id, :id => asset.id
           - else
             = image_tag asset.url(:thumb), id: asset.id
       - else

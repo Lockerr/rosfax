@@ -74,7 +74,7 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       if @schedule.save
         @schedule.notify_about_creation
-        flash[:js] = "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}."
+        flash[:js] = "Вы успешно забронировали осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}.<br/> В ближайшее время Вам перезвонит менеджер автосалона \"#{@schedule.company.name}\" для подтверждения бронирования и уточнения возможных вопросов.<br/> Спасибо, что воспользовались нашим сервисом!"
         format.html { redirect_to (current_user ? @schedule : root_path), notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
         format.js 

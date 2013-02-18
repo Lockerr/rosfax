@@ -38,6 +38,7 @@ gem 'russian'
 # gem 'spine-rails'
 gem 'coffee-rails'
 gem 'rb-inotify', '~> 0.8.8'
+gem 'xpath'
 
 
 group :assets do

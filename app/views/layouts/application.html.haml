@@ -12,6 +12,6 @@
       - unless request.path == '/'
         = render 'navbar'
       = render 'feed_back'
-      = bootstrap_flash
+      = bootstrap_flash.html_safe
       = yield
     = render 'yandex_metrika'

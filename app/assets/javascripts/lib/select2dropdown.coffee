@@ -1,6 +1,5 @@
 jQuery ($) ->
   $(".bootstrap-select").each (i, e) ->
-
     current = $(e).find("option:selected").html() or "&nbsp;"
     val = $(e).find("option:selected").val()
     name = e.name
@@ -22,13 +21,17 @@ jQuery ($) ->
     ul = $(document.createElement('ul'))
       .addClass('dropdown-menu from-selector')
 
+    attribute = $(e).attr('name').match(/\[\w+\]/)[0].match(/\w+/)[0]
+
     input = $(document.createElement('input'))
       .attr({
         type: 'hidden',
         value: val,
         name: name,
         id: e.id,
-        class: $(e).attr('class')
+        class: $(e).attr('class'),
+        'data-attribute': attribute,
+        'data-value': val
       })
 
     btn_group
@@ -43,8 +46,12 @@ jQuery ($) ->
       li = $(document.createElement('li'))
         .append(
           $(document.createElement('a'))
-            .attr({value: v.value})
-            .html(v.value)
+            .attr({
+                value: v.value,
+                data: attribute,
+                'data-value': v.value
+                            })
+            .html(v.text)
         )
       ul.append li
 
@@ -57,8 +64,10 @@ jQuery ($) ->
 
     $(".dropdown-menu.from-selector a").live 'click', (e) ->
       select = $(@).parents('.btn-group')
-      select.find("input[type=hidden]").val($(@).attr('value'))
+      select.find("input[type=hidden]").val($(@).attr('value')).attr('data-value', $(@).attr('value'))
+
       select.find(".btn:eq(0)").html($(@).html()).addClass('active')
+
       select.find("input[type=hidden]").trigger('change')
 
       e.preventDefault()

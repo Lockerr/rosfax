@@ -25,13 +25,8 @@
                 Год выпуска
               .controls
                 .btn-group
-                  %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 68px'}
-                    = @report.year || '---'
-                    %span.caret
-                  %ul.dropdown-menu.pull-left
-                    - (1980..2012).to_a.reverse.each do |i|
-                      %li
-                        .dropdown-element{:data => {attribute: :year, :value => i}}=i
+                  = select 'report', 'year', (1980..2012).to_a.reverse, {prompt: 'Год'},data: {attribute: :year}, class: 'bootstrap-select'
+
             .control-group
               .control-label
                 Гос. номер
@@ -52,17 +47,7 @@
                 Страна производитель
               .controls
                 .btn-group
-                  %button.btn.dropdown-toggle{"data-toggle" => "dropdown", :style => 'width: 100px'}
-                    = @report.country.try(:name) || '---'
-                    %span.caret
-                  %ul.dropdown-menu.pull-left
-                    - Country.where("name <> 'Прочие'").order(:name).each do |i|
-                      %li
-                        .dropdown-element{:data => {attribute: :country_id, value: i.id}}=i.name
-                    %li.divider
-                    - country = Country.where(name: "Прочие").first
-                    %li
-                      .dropdown-element{:data => {attribute: :country_id, value: country.id}}=country.name
+                  = select 'report', 'country_id', Country.where("name <> 'Прочие'").order(:name).collect{ |i| [i.name, i.id]}, {prompt: '---'}, class: 'bootstrap-select'
 
 
             %legend
@@ -72,13 +57,7 @@
                 Привод
               .controls
                 .btn-group
-                  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                    = @report.car['drive'] || '---'
-                    %span.caret
-                  %ul.dropdown-menu.pull-left
-                    - ['передний', 'задний', 'полный'].each do |i|
-                      %li
-                        .dropdown-element{:data => {:attribute => :car, :change => :drive, :drive => i}}=i
+                  = select 'report', 'drive', ['передний', 'задний', 'полный'], {prompt: '---'},data: {attribute: :drive}, class: 'bootstrap-select'
             .control-group
               .control-label
                 Пробег
@@ -89,25 +68,12 @@
                 Топливо
               .controls
                 .btn-group
-                  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                    = @report.engine_type.presence || '---'
-                    %span.caret
-                  %ul.dropdown-menu.pull-left
-                    - ['бензин', 'дизель', 'гибрид'].each do |i|
-                      %li
-                        .dropdown-element{:data => {:attribute => :engine_type, :value => i}}=i
+                  = select :report, :engine_type, ['бензин', 'дизель', 'гибрид'], {prompt: '---'},data: {attribute: :drive}, class: 'bootstrap-select'
             .control-group
               .control-label
                 Коробка передач
               .controls
-                .btn-group
-                  %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
-                    = @report.transmission.presence || '---'
-                    %span.caret
-                  %ul.dropdown-menu.pull-left
-                    - ['автомат', 'механика'].each do |i|
-                      %li
-                        .dropdown-element{:data => {:attribute => :transmission, :value => i}}=i
+                = select :report, :transmission, ['автомат', 'механика'], {prompt: '---'},data: {attribute: :drive}, class: 'bootstrap-select'
             .control-group
               .control-label
                 Объем двигателя

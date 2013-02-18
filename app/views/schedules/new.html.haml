@@ -7,14 +7,15 @@
         .control-label
           Выберите город:
         .controls
-          %select.bootstrap-select{name: :city}
-            %option.selected
-            %option{value: "Челябинск"}
-              Челябинск
-            %option{value: "Екатеринбург"}
-              Екатеринбург
-            %option{value: "Магнитогорск"}
-              Магнитогорск
+          = select 'xx', 'city', %w(Челябинск Екатеринбург Магнитогорск), {prompt:'---'}, class: 'bootstrap-select'
+          -#%select.bootstrap-select{name: :city}
+          -#  %option.selected
+          -#  %option{value: "Челябинск"}
+          -#    Челябинск
+          -#  %option{value: "Екатеринбург"}
+          -#    Екатеринбург
+          -#  %option{value: "Магнитогорск"}
+          -#    Магнитогорск
 
 
 
@@ -27,6 +28,6 @@
         .control-label
           Выберите центр:
         .controls
-          %select.bootstrap-select{name: :center}
+          = select 'xx', 'center', %w(), {prompt:'---'}, class: 'bootstrap-select'
 
 .container#scheduler{style: 'display: none;'}

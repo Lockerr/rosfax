@@ -23,7 +23,7 @@ $(document).bind "drop dragover", (e) ->
   e.preventDefault()
 
 
-$("body").on "touchstart.dropdown", ".dropdown-menu", (e) ->
+$("body").on "touchstart.dropdown", (e) ->
   e.stopPropagation()
   e.preventDefault()
 

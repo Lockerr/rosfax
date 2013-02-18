@@ -37,12 +37,12 @@
           .span8{style: 'min-height: initial'}
             Топливо
           .span4{style: 'text-align: right;min-height: initial'}
-            %span.badge.badge-info= @report.car['engine_type'] if @report.car['engine_type']
+            %span.badge.badge-info= @report.engine_type if @report.engine_type
         .well.well-small.well-special.span4
           .span8{style: 'min-height: initial'}
             Привод
           .span4{style: 'text-align: right;min-height: initial'}
-            %span.badge.badge-info= @report.car['drive'] if @report.car['drive']
+            %span.badge.badge-info= @report.drive if @report.drive
   %hr/
   .row
     .span8

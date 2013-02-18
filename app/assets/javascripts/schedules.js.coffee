@@ -68,14 +68,14 @@ $(document).ready ->
         url: '/schedules/new.js'
         data: {schedule:$(@).data()}
 
-  $('input[name=city]').live 'change', ->
+  $("input[name='xx[city]']").live 'change', ->
 
     $.ajax
       type: 'get'
       url: "/companies.js?city=#{$(@).val()}"
       $('.container#scheduler').empty()
 
-  $('input[name=center]').live 'change', ->
+  $("input[name='xx[center]']").live 'change', ->
     $('.container#scheduler').empty()
     city = $('input[name=city]').val()
     center = @.value

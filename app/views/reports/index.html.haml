@@ -31,12 +31,12 @@
           %td= report.company.try(:name)
           %td= report.created_at.strftime('%d.%m.%y')
           %td.actions{style: 'width: 140px'}
-            = link_to "<i class=\"icon-file\"></i>".html_safe, report_path(report), :class => 'hide btn btn-primary btn-small'
-            = link_to "<i class=\"icon-search\"></i>".html_safe, report_path(report), :class => 'hide btn btn-primary btn-small'
-            = link_to "<i class=\"icon-print\"></i>".html_safe, report_path(report, :format => :pdf), :class => 'hide btn btn-primary btn-small'
+            -#= link_to glyph(:file), report_path(report), :class => 'hide btn btn-primary btn-small'
+            = link_to glyph(:search), report_path(report), :class => 'hide btn btn-primary btn-small'
+            = link_to glyph(:print), report_path(report, :format => :pdf), :class => 'hide btn btn-primary btn-small'
             - if current_user
               - if report.can_manage?(current_user)
-                = link_to "<i class=\"icon-remove\"></i>".html_safe, report_path(report), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-danger hide btn-small'
+                = link_to glyph(:remove), report_path(report), :method => :delete, :confirm => 'Вы уверены?', :class => 'btn btn-danger hide btn-small'
   %br
 
   = paginate @reports

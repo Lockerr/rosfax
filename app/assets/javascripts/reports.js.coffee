@@ -11,7 +11,6 @@
 #= require ./app/magnify
 #= require ./app/links
 #= require ./app/input-file
-# require ./app/feedback
 #= require ./app/drop_down
 #= require ./app/checkbox_click
 #= require ./app/carousel

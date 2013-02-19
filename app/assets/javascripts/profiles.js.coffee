@@ -3,7 +3,7 @@
 #= require  twitter/bootstrap
 #= require ./app/index
 #= require ./app/static
-#= require ./lib/masked
+
 
 $ ->
   $('td:not(.actions)').click ->

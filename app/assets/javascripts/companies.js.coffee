@@ -2,4 +2,4 @@
 #= require jquery_ujs
 #= require  twitter/bootstrap
 #= require ./app/index
-#= require ./app/feedback
+#= require ./app/static

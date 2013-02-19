@@ -1,8 +1,8 @@
 #= require jquery.min
 #= require jquery_ujs
 #= require twitter/bootstrap
-#= require lib/masked
 #= require lib/select2dropdown
+#= require app/static
 
 $(document).ready ->
 

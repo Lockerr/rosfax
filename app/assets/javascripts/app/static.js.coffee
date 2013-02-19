@@ -1,3 +1,10 @@
+#= require lib/masked
+#= require lib/spin.min
+#= require lib/spin
+#= require jquery-ui
+#= require lib/jquery.ui.datepicker-ru
+
+
 jQuery.fn.forceNumeric = ->
   @each ->
     $(this).keydown (e) ->

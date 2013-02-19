@@ -8,4 +8,4 @@
 #= require ./app/magnify
 #= require ./app/carousel
 #= require ./app/image_load_loop
-#= require ./app/feedback
+

@@ -2,7 +2,8 @@
 #= require jquery_ujs
 #= require  twitter/bootstrap
 #= require ./app/index
-#= require ./app/feedback
+#= require ./app/static
+#= require ./lib/masked
 
 $ ->
   $('td:not(.actions)').click ->

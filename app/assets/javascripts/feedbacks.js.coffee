@@ -3,5 +3,8 @@
 #= require twitter/bootstrap
 #= require jquery-ui
 #= require_self
-#= require ./app/index
+#= require ./lib/spin
+#= require ./lib/spin.min
+#= require ./lib/masked
+#= require ./app/static
 

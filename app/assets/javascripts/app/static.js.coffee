@@ -42,3 +42,6 @@ $(document).ready ->
     $('.alert').toggleClass('alert-success').toggleClass('alert-error')
   ).mouseleave ->
     $('.alert').toggleClass('alert-success').toggleClass('alert-error')
+
+  $('.move_to_top').click ->
+    $(document).scrollTop(0)

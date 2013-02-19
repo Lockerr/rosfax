@@ -106,7 +106,6 @@
 
 
 $ ->
-
   $('#repor_car_mark_model').change ->
     console.log 'change'
   container = $('#report.container')

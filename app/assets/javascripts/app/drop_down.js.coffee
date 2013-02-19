@@ -25,7 +25,8 @@ $(document).ready ->
     data = $(@).data()
     attr = element.data('attribute')
     
-    
+    change = element.data('change')
+
     btns = element.parents('.btn-group').find('.btn')
 
     btns.first().text(@textContent).css('color', '#08c')
@@ -38,9 +39,14 @@ $(document).ready ->
 
       if (place = element.data('place'))
         container_data[place] ||= new Object
+
+        console.log "dropdown-element: preivous data => "
+        console.log container_data[place][change]
+
         container_data[place][change] = element.data(change)
-        console.log "dropdown-element: preivous data => #{container_data[place][change]}"
-        console.log "dropdown-element: data(change) => #{element.data(change)}"
+
+        console.log "dropdown-element: data(change) => "
+        console.log element.data(change)
       else if (change = element.data('change'))
         console.log 'container have change'
         container_data[change] = element.data(change)
@@ -48,6 +54,10 @@ $(document).ready ->
         console.log "dropdown-element: preivous data => #{container_data}"
         console.log "dropdown-element: change #{attr} => #{element.data().value}"
         container_data = element.data().value
+
+      console.log container.data()
+      console.log attr
+      console.log container_data
 
       container.data(attr, container_data)
       store_report()

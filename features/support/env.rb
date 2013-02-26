@@ -74,7 +74,7 @@ Capybara.javascript_driver = :poltergeist
 # be rendered instead.
 #
 # Sometimes we want to override this default behaviour and allow Rails to rescue
-# exceptions and display an error page (just like when the app is running in production).
+# exceptions and display an error page (just like when the application is running in production).
 # Typical scenarios where you want to do this is when you test your error pages.
 # There are two ways to allow Rails to rescue exceptions:
 #
@@ -85,7 +85,7 @@ Capybara.javascript_driver = :poltergeist
 #
 ActionController::Base.allow_rescue = false
 
-# Remove/comment out the lines below if your app doesn't have a database.
+# Remove/comment out the lines below if your application doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
   DatabaseCleaner.strategy = :truncation

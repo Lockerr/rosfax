@@ -221,6 +221,77 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def build_xml
+    report = self
+    points = report.points.includes(:assets).order('object', 'section')
+
+    object = report.attributes.except(
+        'under_the_hood', 'photo_others','car_id','exterior','interior',
+        'testdrive_description', 'transmissin','brand_id', 'company_id', 'publish',
+        'model_id','id', 'created_at', 'updated_at', 'user_id', 'country_id',
+        'assets_count', 'wheels', 'engine_type', 'transmission', 'drive', 'year', 'price')
+    object['car']['horse_power'] = object['car']['hors_power']
+    object['car'].delete('hors_power')
+    object['car'][:country] = report.country.try(:name)
+    object['car'][:model] = report.model.try(:name)
+    object['car'][:brand] = report.model.brand.try(:name) if report.model
+    object['car'][:engine_type] = report.engine_type
+    object['car'][:transmission] = report.transmission
+    object['car'][:drive] = report.drive
+    object['car'][:year] = report.year
+    object['car'][:price] = report.price
+    object[:links] = report.links.map &:url
+
+    points_hash = {}
+    points.where(:object => ['checklist', 'elements']).each do |point|
+      point_hash = {}
+      point_object = point.attributes.except('id', 'report_id', 'created_at', 'updated_at', 'images','assets_count', 'object', 'section')
+
+      point_object[:assets] = []
+
+      point.assets.each do |asset|
+        point_object[:assets].push thumb: asset.url(:thumb), normal: asset.url(:carousel), large: asset.url(:magnify)
+      end
+      points_hash[point.object] ||= {}
+
+      points_hash[point.object][point.section] ||= []
+      Rails.logger.info "[#{point.object}][#{point.section}] == #{points_hash[point.object][point.section]}"
+      points_hash[point.object][point.section].push point_object
+    end
+
+    object[:points] = points_hash
+    object[:assets] = assets.map{|i| {thumb: i.url(:thumb), normal: i.url(:carousel), large: i.url(:magnify)} }
+
+        object['documents']['pts'] ||= {}
+
+    for key in %w( issued series whom country document_validity)
+      if object['documents'][key]
+        object['documents']['pts'][key] = object['documents'][key]
+        object['documents'].delete key
+      end
+    end
+
+    object['documents']['owners'] ||= {}
+    5.times do |i|
+      for key in ["start_owning_#{i+1}", "end_owning_#{i+1}"]
+        if object['documents'][key]
+          object['documents']['owners'][key] = object['documents'][key]
+          object['documents'].delete key
+        end
+
+        if object['documents']['documents']["owner_#{i+1}_jur"]
+          object['documents']['owners']["owner_#{i+1}"] = object['documents']['documents']["owner_#{i+1}_jur"]
+          object['documents']['documents'].delete "owner_#{i+1}_jur"
+        end
+      end
+    end
+
+
+    object.to_xml
+
+
+  end
+
   def diff
     result = {'checklist' => {}, 'elements' => {}}
     empty = points.where(object: [:checklist, :testdrive]).where('`condition` is NULL').where('`description` is NULL')

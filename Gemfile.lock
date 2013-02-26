@@ -312,6 +312,8 @@ GEM
       activesupport (>= 3.2)
       rails (>= 3.2)
     slop (3.4.3)
+    spine-rails (0.1.0)
+      rails (>= 3.1.0)
     spork (1.0.0rc3)
     spork-rails (3.2.1)
       rails (>= 3.0.0, < 3.3.0)
@@ -418,6 +420,7 @@ DEPENDENCIES
   sass
   sass-rails
   sextant
+  spine-rails
   spork-rails
   symbolize
   therubyracer

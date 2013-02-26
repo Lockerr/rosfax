@@ -8,7 +8,7 @@ gem 'jquery-rails', '2.1.4'
 gem 'jquery-ui-rails'
 gem 'kaminari-bootstrap'
 
-
+gem 'spine-rails'
 
 gem 'haml-rails'
 gem 'ruby-haml-js'

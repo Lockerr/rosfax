@@ -30,10 +30,10 @@ set :rvm_type, :user
 
 set :backup_dir, "#{deploy_to}/shared"
 
-after 'deploy:restart', 'unicorn:reload' # app IS NOT preloaded
-after 'deploy:restart', 'unicorn:restart'  # app preloaded
+after 'deploy:restart', 'unicorn:reload' # application IS NOT preloaded
+after 'deploy:restart', 'unicorn:restart'  # application preloaded
 
-after 'deploy:update_code', :roles => :app do
+after 'deploy:update_code', :roles => :application do
   run "cd #{current_release} ; bundle install"
   %w{database config}.each do |yaml_name|
     run "rm -f #{current_release}/config/#{yaml_name}.yml"

@@ -63,7 +63,7 @@ class ReportsController < ApplicationController
     # end
 
     respond_to do |format|
-      format.xml {render xml: @report}
+      format.xml {render xml: @report.build_xml}
       format.html { render :layout => 'report_show'}
       format.json { render json: @report }
       format.pdf {render :pdf => "report_#{@report_id}", :layout => 'report_show_pdf.html.haml'}

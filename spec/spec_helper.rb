@@ -24,6 +24,6 @@ end
 
 Spork.each_run do
   load "#{Rails.root}/config/routes.rb"
-  Dir["#{Rails.root}/app/**/*.rb"].each {|f| load f}
+  Dir["#{Rails.root}/application/**/*.rb"].each {|f| load f}
 end
 

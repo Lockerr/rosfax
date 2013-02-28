@@ -97,3 +97,6 @@ end
 То /^администраторы компании должны получить письма$/ do
   ActionMailer::Base.deliveries.count.should == 2
 end
+When /^элемент '([^\"]*)' должен иметь класс '([^\"]*)'$/ do |element, klasse|
+  page.find(element)['class'].split(/\s/).include?(klasse).should == true
+end

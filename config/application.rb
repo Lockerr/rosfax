@@ -50,7 +50,7 @@ module Tradein
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.1'
-    config.action_mailer.default_url_options = { :host => "rosfax.ru" }
+    config.action_mailer.default_url_options = { :host => "partners.rosfax.ru" }
     config.action_mailer.delivery_method   = :postmark
     config.action_mailer.postmark_settings = { :api_key => "6095ac2c-94a4-4e2c-b8b7-afd8ffbd3d7d" }
   end

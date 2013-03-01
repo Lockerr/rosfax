@@ -2,10 +2,14 @@
   %legend
     Осмотры
 
-  %table.table.table-striped.table-bordered.table-condenced
+  %table.table.table-striped.table-bordered.table-condensed
     %tr
-      %th
-      %th
+      %th Имя
+      %th Телефон
+      %th Организация
+      %th Время
+      %th Дата
+      %th Управление
     - for schedule in @schedules
       %tr.schedule{id: schedule.id}
         %td= schedule.name
@@ -16,13 +20,12 @@
           часов
         %td
           = Russian::strftime(schedule.date, '%-d %B %Y')
-        %td.actions
-          = link_to glyph(:edit), schedule_path(schedule), class: :btn, id: :edit_schedule
-          = link_to glyph(:clock), '#', class: :btn
+        %td.actions{style: 'width: 140px'}
+          = link_to glyph(:edit), schedule_path(schedule), class: 'btn btn-primary btn-small hide', id: :edit_schedule
           - if schedule.confirmed
-            = link_to glyph(:ok), schedule_confirm_path(schedule, :schedule => {:confirmed => false}, :format => :js),method: :put, remote: true, class: 'btn btn-success', id: 'unconfirm'
+            = link_to glyph(:ok), schedule_confirm_path(schedule, :schedule => {:confirmed => false}, :format => :js),method: :put, remote: true, class: 'btn btn-success btn-small hide', id: 'unconfirm'
           - else
-            = link_to '!', schedule_confirm_path(schedule, :schedule => {:confirmed => true}, :format => :js),method: :put, remote: true, class: 'btn btn-danger', id: 'confirm'
+            = link_to '!', schedule_confirm_path(schedule, :schedule => {:confirmed => true}, :format => :js),method: :put, remote: true, class: 'btn btn-danger btn-small hide', id: 'confirm'
 
 
 

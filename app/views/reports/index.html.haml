@@ -1,4 +1,3 @@
-
 .container
   
   .row{style: 'margin-top: 10px'}
@@ -20,7 +19,7 @@
 
         %th Дата создания
 
-    %tbody
+    %tbody#report_table
       - @reports.each do |report|
         %tr{data: {report: report.id}}
           %td= report.model_name

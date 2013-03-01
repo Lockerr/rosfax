@@ -168,10 +168,8 @@ jQuery ->
   $(".tooltip").tooltip()
   $("a[rel=tooltip]").tooltip()
 
-  $('td:not(.actions)').click ->
-    console.log 'clickl'
-    console.log $(@)
-    window.location = "/reports/#{$(@).parent().data().report}/edit"
+  $('#report_table tr').click ->
+    window.location = "/reports/#{$(@).data().report}/edit"
 
 
 $(document).bind "drop dragover", (e) ->

@@ -81,7 +81,7 @@ describe ReportsController do
 
       it "redirects to the created report" do
         post :create, {:report => valid_attributes}, valid_session
-        response.should redirect_to(Report.last)
+        response.should redirect_to edit_report_path(Report.last)
       end
     end
 
@@ -120,29 +120,6 @@ describe ReportsController do
         assigns(:report).should eq(report)
       end
 
-      it "redirects to the report" do
-        report = Report.create! valid_attributes
-        put :update, {:id => report.to_param, :report => valid_attributes}, valid_session
-        response.should redirect_to(report)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the report as @report" do
-        report = Report.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Report.any_instance.stub(:save).and_return(false)
-        put :update, {:id => report.to_param, :report => {  }}, valid_session
-        assigns(:report).should eq(report)
-      end
-
-      it "re-renders the 'edit' template" do
-        report = Report.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Report.any_instance.stub(:save).and_return(false)
-        put :update, {:id => report.to_param, :report => {  }}, valid_session
-        response.should render_template("edit")
-      end
     end
   end
 

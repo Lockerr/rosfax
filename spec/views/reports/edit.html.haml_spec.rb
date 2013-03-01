@@ -6,6 +6,7 @@ describe "reports/edit" do
   end
 
   it "renders the edit report form" do
+    view.lookup_context.prefixes = %w[reports application]
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers

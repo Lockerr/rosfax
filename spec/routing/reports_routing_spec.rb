@@ -3,6 +3,12 @@ require "spec_helper"
 describe ReportsController do
   describe "routing" do
 
+    before(:each) do
+      @report = mock_model(Report, id: 1, slug: 'some')
+      Report.stub!(find_by_slug: @report, :all => [@report])
+      Tradein::Application.reload_routes!
+    end
+
     it "routes to #index" do
       get("/reports").should route_to("reports#index")
     end

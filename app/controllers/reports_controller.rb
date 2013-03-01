@@ -24,7 +24,6 @@ class ReportsController < ApplicationController
   end
 
   def index
-
     if current_user
       if current_user.admin?
         @reports = Report.scoped
@@ -38,9 +37,7 @@ class ReportsController < ApplicationController
     end
 
     @reports = @reports.joins([:brand, :country]).where(Subscribtion.find(params[:subscribtion_id]).filter) if params[:subscribtion_id]
-
     @reports = @reports.page params[:page]
-
     @reports = @reports.order('id desc')
 
     respond_to do |format|
@@ -113,7 +110,6 @@ class ReportsController < ApplicationController
   def create
 
     @report = current_user.reports.new(params[:report])
-
 
     @models = {}
     Model.includes(:brand).select(['models.name', 'brands.name', 'models.id']).map {|y| @models[[y.brand.name, y.name].join(' ')] = y.id}.sort

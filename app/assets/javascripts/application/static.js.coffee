@@ -45,10 +45,5 @@ $(document).ready ->
   $.each $('.nav-tabs'), ->
     $(this).children().first().addClass('active')
 
-  $('.feedback').mouseenter(->
-    $('.alert').toggleClass('alert-success').toggleClass('alert-error')
-  ).mouseleave ->
-    $('.alert').toggleClass('alert-success').toggleClass('alert-error')
-
   $('.move_to_top').click ->
     $(document).scrollTop(0)

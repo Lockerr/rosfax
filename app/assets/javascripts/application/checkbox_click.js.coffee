@@ -26,6 +26,3 @@ $(document).ready ->
     store_report()
 
     $('.all_wheels').trigger('change') if $('.all_wheels').prop('checked')
-
-  # $('.check').click ->
-  #   store_point($(@).parents('.object'))

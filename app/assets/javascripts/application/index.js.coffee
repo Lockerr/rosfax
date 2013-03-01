@@ -47,10 +47,3 @@ $(document).ready ->
 
     window.location.href = "/reports/models/?ids=#{arr}"
 
-  $('td').hover (->
-    $(@).parent().find('td:not(.actions)').css('text-decoration', 'underline')
-    $(@).parent().find('.btn').show()
-  ), ->
-    $(@).parent().find('td:not(.actions)').css('text-decoration', 'none')
-    $(@).parent().find('.btn').hide()
-

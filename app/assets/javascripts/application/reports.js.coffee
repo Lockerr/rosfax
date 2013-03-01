@@ -107,7 +107,6 @@
 
 $ ->
   $('#repor_car_mark_model').change ->
-    console.log 'change'
   container = $('#report.container')
 
   if container.attr('source')
@@ -131,12 +130,6 @@ $ ->
           drop = $(".drop[data-attribute=#{$(@).data('attribute')}][data-place='#{place}']")
           drop.find('img').attr('src', responce.images[place][0])
           drop.find('.btn').html(responce.images[place][1])
-
-  
-
-    # $(".thumbnail img").prop('draggable', false)
-
-
 
   $('input:not(#point_description):not(.file-upload), textarea').change ->
     element = $(@)
@@ -246,3 +239,4 @@ $ ->
         success: (response) ->
           object.data('id', response.id)
           object.find('.btn').data('id', response.id)
+

@@ -194,12 +194,6 @@ logger = ->
 
   pub
 $(document).ready ->
-  $('.free').live 'mouseenter', ->
-    $(@).find('.alert-success').fadeIn(200)
-    $(@).find('.alert-success').addClass('active')
-  $('.free').live 'mouseleave', ->
-    $(@).find('.alert-success').fadeOut(200)
-    $(@).find('.alert-success').removeClass('active')
 
   $('#move_schedule').click ->
     $('#schedule_block').removeClass('active')
@@ -285,6 +279,10 @@ $(document).ready ->
       $('.btn[disabled=disabled]').removeAttr('disabled')
     else
       $('#schedule_phone').parents('form').find('.btn').attr('disabled', '')
+
+  $('.feedback').live 'click', ->
+    $('.feedback-modal').modal('show')
+
 
 
 

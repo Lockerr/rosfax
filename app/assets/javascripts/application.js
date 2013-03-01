@@ -4,4 +4,5 @@
 //= require twitter/bootstrap
 //= require_tree ./lib
 //= require_tree ./application
+//= require_tree ./templates
 

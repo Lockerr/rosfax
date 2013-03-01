@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Rosfax.ru - как это работает?</title>
+
+  <%= stylesheet_link_tag 'home/style_2' %>
+  <%= javascript_include_tag '_home' %>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+
+</head>
+<body>
+
+<div class="main">
+<div class="container">
+
+<header id="head" class="even">
+  <div id="logo">
+    <a href="#"><img src="<%= asset_path 'home/logo.png'%>" width="191" height="78" /></a>
+  </div>
+  <div id="top_menu">
+    <ul>
+      <li><a href="#">Как работает Rosfax</a></li>
+      <li><a href="#">Отзывы</a></li>
+      <li><a href="#">Проверенные авто</a></li>
+      <li><a href="#">Пункты осмотра</a></li>
+    </ul>
+  </div>
+  <div id="request">
+    <a href="#">Запись на осмотр</a>
+  </div>
+</header>
+
+<section id="wrapper">
+<div class="brochure_block top_part">
+  <h3>Как работает Rosfax? Мы + официальные дилеры.</h3>
+  <p>Осмотр проводится только на территории авторизованных дилерских центров. По времени занимает примерно 45 минут.</p>
+  <p>Инспектор при осмотре зафиксирует состояние кузова, салона, электрики, а также подвески
+    и ходовой части автомобиля (насколько это будет возможно). </p>
+  <span>Вот некоторые пункты отчета:</span>
+</div>
+<div class="brochure_block center_part">
+  <div class="expertise_block">
+    <div class="box box_01">
+      <div class="more"><img src="<%= asset_path 'home/painting.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Перекрашивались ли детали кузова
+      </div>
+    </div>
+    <div class="box box_02">
+      <div class="more"><img src="<%= asset_path 'home/rust.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Следы ржавчины на кузове
+      </div>
+    </div>
+    <div class="box box_03">
+      <div class="more"><img src="<%= asset_path 'home/glass.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Дефекты на стеклах
+      </div>
+    </div>
+    <div class="box box_04">
+      <div class="more"><img src="<%= asset_path 'home/tires.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Состояние шин и износ протектора
+      </div>
+    </div>
+    <div class="box box_05">
+      <div class="more"><img src="<%= asset_path 'home/gaps.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Зазоры между кузовными элементами
+      </div>
+    </div>
+    <div class="box box_06">
+      <div class="more other"><img src="<%= asset_path 'home/repair.jpg' %>" alt=""></div>
+      <div class="more_text contrary">
+        Следы предыдущего ремонта кузова и рамы
+      </div>
+    </div>
+    <div class="box box_07">
+      <div class="more other"><img src="<%= asset_path 'home/car_body.jpg' %>" alt=""></div>
+      <div class="more_text contrary">
+        Дефекты на кузовных панелях
+      </div>
+    </div>
+    <div class="expertise_block_name">
+      <h4>Кузов</h4>
+    </div>
+  </div>
+  <div class="expertise_block">
+    <div class="box box_08">
+      <div class="more"><img src="<%= asset_path 'home/smell.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Присутствие посторонних запахов в салоне
+      </div>
+    </div>
+    <div class="box box_09">
+      <div class="more"><img src="<%= asset_path 'home/dashboard.jpg' %>" alt=""></div>
+      <div class="more_text long">
+        Работоспособность приборной панели, показания приборов, состояние контрольных ламп
+      </div>
+    </div>
+    <div class="box box_10">
+      <div class="more"><img src="<%= asset_path 'home/climate_control.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Работу климат-контроля и кондиционера
+      </div>
+    </div>
+    <div class="box box_11">
+      <div class="more"><img src="<%= asset_path 'home/standard_f.jpg' %>" alt=""></div>
+      <div class="more_text long foot">
+        Работоспособность стандартных функций: открывание багажника и бензобака, ручного тормоза, регулировки зеркал и т.д.
+      </div>
+    </div>
+    <div class="box box_12">
+      <div class="more other"><img src="<%= asset_path 'home/vin.jpg' %>" alt=""></div>
+      <div class="more_text contrary foot">
+        Соответствие VIN на кузове и в документах
+      </div>
+    </div>
+    <div class="box box_13">
+      <div class="more other"><img src="<%= asset_path 'home/cover.jpg' %>" alt=""></div>
+      <div class="more_text contrary">
+        Состояние обивки и коврового покрытия
+      </div>
+    </div>
+    <div class="box box_14">
+      <div class="more other"><img src="<%= asset_path 'home/electric.jpg' %>" alt=""></div>
+      <div class="more_text contrary foot">
+        Работоспособность электрооборудования: замки, стеклоподъемники, аудиосистема, люк, дворники, фары, фонари и т.д.
+      </div>
+    </div>
+    <div class="expertise_block_name">
+      <h4>Интерьер</h4>
+    </div>
+  </div>
+  <div class="expertise_block front">
+    <div class="box box_15">
+      <div class="more"><img src="<%= asset_path 'home/noise.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Необычные шумы в двигателе или КПП
+      </div>
+    </div>
+    <div class="box box_16">
+      <div class="more"><img src="<%= asset_path 'home/oil.jpg' %>" alt=""></div>
+      <div class="more_text foot">
+        Масло в гидроусилителе. Уровень и состояние
+      </div>
+    </div>
+    <div class="box box_17">
+      <div class="more"><img src="<%= asset_path 'home/shock.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Следы удара в передней части авто автомобиля
+      </div>
+    </div>
+    <div class="box box_18">
+      <div class="more other"><img src="<%= asset_path 'home/flow.jpg' %>" alt=""></div>
+      <div class="more_text contrary">
+        Течи жидкостей
+      </div>
+    </div>
+    <div class="box box_19">
+      <div class="more other02"><img src="<%= asset_path 'home/brake_fluid.jpg' %>" alt=""></div>
+      <div class="more_text contrary long">
+        Тормозную жидкость. Уровень и состояние
+      </div>
+    </div>
+    <div class="box box_20">
+      <div class="more other02"><img src="<%= asset_path 'home/oil_02.jpg' %>" alt=""></div>
+      <div class="more_text contrary long">
+        Масло в двигателе. Уровень и состояние
+      </div>
+    </div>
+    <div class="box box_21">
+      <div class="more other02"><img src="<%= asset_path 'home/oil_03.jpg' %>" alt=""></div>
+      <div class="more_text contrary long">
+        Масло в АКПП. Уровень и состояние
+      </div>
+    </div>
+    <div class="expertise_block_name">
+      <h4>Под <br> капотом</h4>
+    </div>
+  </div>
+</div>
+<div class="brochure_block bottom_part">
+  <div class="expertise_block front_even">
+    <div class="box box_22">
+      <div class="more"><img src="<%= asset_path 'home/body_repair.jpg' %>" alt=""></div>
+      <div class="more_text long">
+        Следы предыдущих ремонтов кузова
+      </div>
+    </div>
+    <div class="box box_23">
+      <div class="more"><img src="<%= asset_path 'home/rust_02.jpg' %>" alt=""></div>
+      <div class="more_text foot">
+        Следы коррозии
+      </div>
+    </div>
+    <div class="box box_24">
+      <div class="more"><img src="<%= asset_path 'home/shock.jpg' %>" alt=""></div>
+      <div class="more_text">
+        Состояние поддонов двигателя, кпп
+      </div>
+    </div>
+    <div class="box box_25">
+      <div class="more other"><img src="<%= asset_path 'home/flow.jpg' %>" alt=""></div>
+      <div class="more_text contrary">
+        Течи жидкостей
+      </div>
+    </div>
+    <div class="box box_26">
+      <div class="more other"><img src="<%= asset_path 'home/final_sys.jpg' %>" alt=""></div>
+      <div class="more_text contrary">
+        Состояние выпускной системы
+      </div>
+    </div>
+    <div class="box box_27">
+      <div class="more other"><img src="<%= asset_path 'home/bearing_el.jpg' %>" alt=""></div>
+      <div class="more_text contrary">
+        Визуальная проверка несущих элементов кузова
+      </div>
+    </div>
+    <div class="expertise_block_name blue">
+      <h4>На <br> подъемнике</h4>
+    </div>
+  </div>
+  <div class="test">
+    <div class="test_name">
+      Тест-драйв
+    </div>
+    <p>По возможности инспектор RosFax проводит тестовую поездку на осматриваемом автомобиле. Если собственник авто
+      (или его представитель) отказывает пустить инспектора за руль, то он проводит тест-драйв на месте пассажира.
+      Это позволяет составить мнение о работоспособности/проблемах:
+    </p>
+    <ul>
+      <li>Двигателя/Трансмиссии/Сцепления</li>
+      <li>Тормозной системы и подвески</li>
+      <li>Динамике и управляемости автомобиля</li>
+      <li>Работе приборов (спидометр, тахометр и т.д.)</li>
+    </ul>
+    <p>Инспектор RosFax оставляет за собой право не участвовать в тест-драйве, если дорожные и/или погодные условия
+      не позволяют обеспечить безопасность. Решение о проведении тест-драйва принимается инспектором.
+    </p>
+  </div>
+</div>
+<section class="how_much">
+  <h4>Сколько стоит Rosfax?</h4>
+  <div class="price">
+    <span>1000 р</span>
+    до 1 июня 2013
+  </div>
+  <p>До лета действует специальное предложение. Обычная цена 2000 руб. минус скидка 50%.</p>
+</section>
+<section class="order">
+  <h4>Как пройти осмотр?</h4>
+  <p>Запишитесь на осмотр онлайн - в 2 клика! Бронирование БЕСПЛАТНО и ни к чему Вас не обязывает. Выберите ближайший центр Rosfax, удобную дату/время и оставьте Ваш номер телефона. <br><br> Вуаля! Вас уже ждут. Приезжайте!
+  </p>
+  <a class="order_link">Запись на осмотр</a>
+</section>
+<section class="detailed">
+  <div class="detailed_block">
+    <div class="detailed_block_img">
+      <img src="<%= asset_path 'home/i5.png' %>" alt="">
+    </div>
+    <a href="#">Как работает Rosfax</a>
+  </div>
+  <div class="detailed_block">
+    <div class="detailed_block_img">
+      <img src="<%= asset_path 'home/i6.png' %>">
+    </div>
+    <a href="#">Проверенные авто</a>
+  </div>
+  <div class="detailed_block">
+    <div class="detailed_block_img">
+      <img src="<%= asset_path 'home/i7.png' %>" alt="">
+    </div>
+    <a href="#">Отзывы</a>
+  </div>
+  <div class="detailed_block">
+    <div class="detailed_block_img">
+      <img src="<%= asset_path 'home/i8.png' %>" alt="">
+    </div>
+    <a href="#">Пункты осмотра</a>
+  </div>
+</section>
+
+</section>
+
+</div>
+
+<div class="hfooter"></div>
+</div>
+
+<footer id="footer">
+  <div class="main">
+    <div class="container">
+      <div id="about">
+        &copy; 2009-2013 «Росфакс»
+      </div>
+      <div id="soc">
+        <ul>
+          <li><a href="#"><img src="<%= asset_path 'home/soc01.png' %>"></a></li>
+          <li><a href="#"><img src="<%= asset_path 'home/soc02.png' %>"></a></li>
+          <li><a href="#"><img src="<%= asset_path 'home/soc03.png' %>"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+
+</body>
+</html>

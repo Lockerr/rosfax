@@ -44,6 +44,10 @@ Tradein::Application.routes.draw do
   get 'assets/processed'
   get "home/index"
   get 'home/demo'
+  match 'how-it-works', controller: :home, action: :how_it_works
+  match 'for-buyers', controller: :home, action: :for_buyers
+  match 'for-sellers', controller: :home, action: :for_sellers
+
 
   match 'view/22', :controller => :home, :action => :demo
 

@@ -26,7 +26,7 @@
                   = t.select :price_from, [50000, 100000, 400000, 1000000, 2000000], {:prompt => 'цена от'}, {class: 'bootstrap-select span1', style: 'margin-left: 25px'}
                   = t.select :price_to, [50000, 100000, 400000, 1000000, 2000000], {:prompt => 'цена до'}, {class: 'bootstrap-select span1', style: 'margin-left: 0px'}
               .control-group
-                #subscribtions
+                #filtered-models
                 .btn{onclick: "$('.modal#cars_selector').modal('show')"} Выбрать марку
               .modal#cars_selector.hide.fade{style: 'width: 70%'}
                 .modal-header
@@ -47,6 +47,49 @@
 
 
             = f.submit 'Подписать на рассылку', class: 'btn btn-primary btn-large'
+        .span9
+          .rendered_reports
+          - report = Report.first
+          .row-fluid
+            .span2
+              фотка
+            .span2
+              марка
+            .span1
+              цена
+            .span1
+              год
+            .span1
+              пробег
+            .span2
+              коробка
+            .span1
+              Город
+            .span2.actions
+
+
+
+
+
+          %ul.thumbnails
+            - 12.times do
+              %li.span2{style: 'width: 21.6%'}
+                .thumbnail
+                  = image_tag report.assets.first.url(:thumb), style: 'width: 100%'
+                  .caption
+                    %h4
+                      = report.car['mark_model']
+                    %p= report.price
+                    %p
+                      = report.year
+                      г.,&nbsp;
+                      = report.car['mileage']
+                      км.
+                    = link_to 'нажать', '#'
+
+
+
+
     #choose.tab-pane.fade.in
       .form-inline
         #inputType.select.btn{"data-name" => 'filter[engine_type]'}

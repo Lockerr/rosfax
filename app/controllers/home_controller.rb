@@ -14,6 +14,18 @@ class HomeController < ApplicationController
     render :layout => false
   end
 
+  def how_it_works
+    render layout: false
+  end
+
+  def for_buyers
+    render layout: false
+  end
+
+  def for_sellers
+    render layout: false
+  end
+
   def demo
   	@report = Report.find_by_id(19)
     @report ||= Report.find(46)

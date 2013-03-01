@@ -1,0 +1,18 @@
+.row-fluid{style: 'background-color: #eee'}
+  .span2
+    %img{src: image_src}
+  .span2{style: 'line-height: 5em;'}
+    =mark_model
+  .span1{style: 'line-height: 5em;'}
+    =price
+  .span1{style: 'line-height: 5em;'}
+    =year
+  .span1{style: 'line-height: 5em;'}
+    =mileage
+  .span2{style: 'line-height: 5em;'}
+    =transmission
+  .span1{style: 'line-height: 5em;'}
+    =city
+  .span2{style: 'line-height: 5em;'}
+    .btn
+      что-то нажать

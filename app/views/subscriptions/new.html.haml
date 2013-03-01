@@ -1,0 +1,98 @@
+.container{style: 'margin-top: 10px;'}
+
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#specify"} Мне нужны конкретные марки/модели
+    %li
+      %a{"data-toggle" => "tab", :href => "#choose"} Я не знаю какую хочу машину
+  .tab-content
+    #specify.tab-pane.fade.active.in
+      .row
+        .span3
+
+          = form_for Subscription.new, :class => 'form form-horizontal' do |f|
+
+            = f.fields_for :filter do |t|
+              .control-group
+                .form-inline
+                  = t.select :engine_type, %w(дизель бензин гибрид), {:prompt => 'топливо'}, {class: 'span1 bootstrap-select', style: 'margin-left: 30px'}
+                  = t.select :transmission, %w(автомат механика), {:prompt => 'коробка'}, {class: 'bootstrap-select span1', style: 'margin-left: 25px'}
+              .control-group
+                .form-inline
+                  = t.select :year_from, (1980..Time.now.year).to_a.reverse, {:prompt => 'год от'}, {class: 'bootstrap-select span1', style: 'margin-left: 25px'}
+                  = t.select :year_to, (1980..Time.now.year).to_a.reverse, {:prompt => 'год до'}, {class: 'bootstrap-select span1', style: 'margin-left: 0px'}
+              .control-group
+                .form-inline
+                  = t.select :price_from, [50000, 100000, 400000, 1000000, 2000000], {:prompt => 'цена от'}, {class: 'bootstrap-select span1', style: 'margin-left: 25px'}
+                  = t.select :price_to, [50000, 100000, 400000, 1000000, 2000000], {:prompt => 'цена до'}, {class: 'bootstrap-select span1', style: 'margin-left: 0px'}
+              .control-group
+                #subscribtions
+                .btn{onclick: "$('.modal#cars_selector').modal('show')"} Выбрать марку
+              .modal#cars_selector.hide.fade{style: 'width: 70%'}
+                .modal-header
+                  %h3
+                    У вас есть выбор
+                .model-body
+                  %hr{style: 'margin: 0 0 3px 0'}/
+                  - for country in Country.all
+
+                    .row-fluid
+                      .span1.offset1
+                        = t.check_box :countries, {:multiple => true, class: 'bootstrap-check'}, country.name, nil
+                      .span9.offset1
+                        - for brand in country.brands
+                          = t.check_box :brands, {:multiple => true, class: 'bootstrap-check'}, brand.name,nil
+                    %hr{style: 'margin: 0 0 3px 0'}/
+                .modal-footer
+
+
+            = f.submit 'Подписать на рассылку', class: 'btn btn-primary btn-large'
+    #choose.tab-pane.fade.in
+      .form-inline
+        #inputType.select.btn{"data-name" => 'filter[engine_type]'}
+          .option.selected
+            автомат
+          .option{"data-value" => "автомат"}
+            автомат
+          .option{"data-value" => "механика"}
+            механика
+        #inputType.select.btn{"data-name" => 'filter[suspension]'}
+          .option.selected
+            Коробка
+          .option{"data-value" => "Челябинск"}
+            Челябинск
+          .option{"data-value" => "Екатеринбург"}
+            Екатеринбург
+          .option{"data-value" => "Магнитогорск"}
+            Магнитогорск
+      .form-inline
+        .control-group
+          .controls
+            #inputType.select.btn{"data-name" => 'city'}
+              .option.selected
+                &nbsp;
+              .option{"data-value" => "Челябинск"}
+                Челябинск
+              .option{"data-value" => "Екатеринбург"}
+                Екатеринбург
+              .option{"data-value" => "Магнитогорск"}
+                Магнитогорск
+      .form-inline
+        .control-group
+          .controls
+            #inputType.select.btn{"data-name" => 'city'}
+              .option.selected
+                &nbsp;
+              .option{"data-value" => "Челябинск"}
+                Челябинск
+              .option{"data-value" => "Екатеринбург"}
+                Екатеринбург
+              .option{"data-value" => "Магнитогорск"}
+                Магнитогорск
+
+
+
+
+
+
+

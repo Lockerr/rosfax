@@ -131,7 +131,7 @@ $ ->
           drop.find('img').attr('src', responce.images[place][0])
           drop.find('.btn').html(responce.images[place][1])
 
-  $('input:not(#point_description):not(.file-upload), textarea').change ->
+  $('.container#report input:not(#point_description):not(.file-upload), textarea').change ->
     element = $(@)
     if element.data('change') 
       element.data(element.data('change'), element.val())

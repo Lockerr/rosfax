@@ -36,7 +36,7 @@ class ReportsController < ApplicationController
       @reports = Report.public.scoped
     end
 
-    @reports = @reports.joins([:brand, :country]).where(Subscribtion.find(params[:subscribtion_id]).filter) if params[:subscribtion_id]
+    @reports = @reports.joins([:brand, :country]).where(Subscription.find(params[:subscribtion_id]).filter) if params[:subscribtion_id]
     @reports = @reports.page params[:page]
     @reports = @reports.order('id desc')
 

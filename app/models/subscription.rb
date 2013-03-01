@@ -1,17 +1,11 @@
-class Subscribtion < ActiveRecord::Base
+class Subscription < ActiveRecord::Base
+
   attr_accessible :by_email, :email_period, :filter, :user_id
   belongs_to :user
    
   serialize :filter, Hash
 
   before_save :process_filter
-
-  def humanize_filter
-    
-  end
-
-  def reports
-  end
 
   def process_filter
     

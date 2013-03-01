@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Subscribtion do
+describe Subscription do
   pending "add some examples to (or delete) #{__FILE__}"
 end

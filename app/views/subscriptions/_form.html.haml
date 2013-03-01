@@ -1,9 +1,9 @@
-= form_for current_user.subscribtions.new do |f|
-  - if @subscribtion.errors.any?
+= form_for current_user.subscriptions.new do |f|
+  - if @subscription.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@subscribtion.errors.count, "error")} prohibited this subscribtion from being saved:"
+      %h2= "#{pluralize(@subscription.errors.count, "error")} prohibited this subscribtion from being saved:"
       %ul
-        - @subscribtion.errors.full_messages.each do |msg|
+        - @subscription.errors.full_messages.each do |msg|
           %li= msg
 
   .field

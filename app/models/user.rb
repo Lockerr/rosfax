@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   include Devise::Async::Model
   has_one :profile
   has_many :reports
-  has_many :subscribtions
+  has_many :subscriptions
 
   belongs_to :company
   has_many :assets, :as => :attachable

@@ -76,11 +76,17 @@ jQuery ($) ->
     btn = $(document.createElement('button'))
       .attr({
         type: 'button',
-        class: 'btn',
+        class: "btn #{e.id}",
+        'data-input': e.id,
         style: 'float: left; margin-left: 5px; margin-bottom: 5px',
-        'data-toggle': 'button'
+        'data-toggle': 'button',
+
            }).html(
            e.value
            )
     $(e).parent().append(btn)
     $(e).hide()
+    btn.live 'click', ->
+      box = $("input##{$(@).data('input')}")
+      console.log box
+      box.prop("checked", !box.prop("checked")).trigger('change')

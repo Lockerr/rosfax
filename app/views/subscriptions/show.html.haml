@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @subscription.user_id
+%p
+  %b Filter:
+  = @subscription.filter
+%p
+  %b By email:
+  = @subscription.by_email
+%p
+  %b Email period:
+  = @subscription.email_period
+
+= link_to 'Edit', edit_subscribtion_path(@subscription)
+\|
+= link_to 'Back', subscribtions_path

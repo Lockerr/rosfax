@@ -11,7 +11,7 @@ Tradein::Application.routes.draw do
 
   resources :blocks
 
-  resources :subscribtions do
+  resources :subscriptions do
     resources :reports
   end
 

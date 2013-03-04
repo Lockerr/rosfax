@@ -217,6 +217,7 @@ $(document).ready ->
           alert.hide()
 
   $('.free').live 'click', ->
+    that = this
     if $('#move_schedule.btn.active').length > 0
       console.log 'moving schedule'
       $.ajax
@@ -225,14 +226,15 @@ $(document).ready ->
         data: {schedule:$(@).data()}
         success: ->
           console.log 'moving return success'
-          free = $('.alert-success.active').parent()
-          free_alert = $('.alert-success.active')
+          free_alert = $(that).find('.alert')
+          free = $(that)
           booked_alert = $('.alert-error')
           booked = booked_alert.parent()
           booked.append(free_alert)
           booked.removeClass('booked')
           booked.addClass('free')
-          free.append(booked_alert)
+          booked_alert.remove()
+          free.html(JST['templates/calendar_booked'])
           free.removeClass('free')
           free.addClass('booked')
     else if $('#schedule_block.btn.active').length > 0

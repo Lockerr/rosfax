@@ -3,6 +3,11 @@
     Управление осмотром
   %p=@schedule.name
   %p=@schedule.phone
+  %p=@schedule.company.name
+  %p
+    =@schedule.hour
+    часов
+    = Russian::strftime(@schedule.date, '%-d %B %Y')
   %button.btn#move_schedule{data:{toggle: :button}}
     Передвинуть
   %button.btn#schedule_block{data:{toggle: :button}}

@@ -1,0 +1,4 @@
+.alert.alert-error{style: "margin: 0px"}
+  %span{style: "cursor: default"}
+  %h4
+    Эта

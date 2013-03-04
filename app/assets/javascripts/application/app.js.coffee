@@ -237,6 +237,8 @@ $(document).ready ->
           free.html(JST['templates/calendar_booked'])
           free.removeClass('free')
           free.addClass('booked')
+          $('#move_schedule.btn.active').removeClass('active')
+
     else if $('#schedule_block.btn.active').length > 0
       $.ajax
         type: 'post'

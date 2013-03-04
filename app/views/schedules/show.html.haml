@@ -12,5 +12,5 @@
     Передвинуть
   %button.btn#schedule_block{data:{toggle: :button}}
     Блокировать
-  
+  = link_to 'Удалить', @schedule, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
   = render 'calendar'

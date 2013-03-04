@@ -26,6 +26,7 @@
             = link_to glyph(:ok), schedule_confirm_path(schedule, :schedule => {:confirmed => false}, :format => :js),method: :put, remote: true, class: 'btn btn-success btn-small hide', id: 'unconfirm'
           - else
             = link_to '!', schedule_confirm_path(schedule, :schedule => {:confirmed => true}, :format => :js),method: :put, remote: true, class: 'btn btn-danger btn-small hide', id: 'confirm'
+          = link_to glyph(:remove), schedule, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-small btn-danger hide'
 
 
 

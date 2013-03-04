@@ -31,7 +31,7 @@ after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
 
-set :delayed_job_args, "-n 2"
+#set :delayed_job_args, "-n 1"
 
 role :web, domain
 role :app, domain
@@ -62,16 +62,16 @@ namespace :deploy do
   end
   
 
-  namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
-      from = source.next_revision(current_revision)
-      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ application/assets/ | wc -l").to_i > 0
-        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
-      else
-        logger.info "Skipping asset pre-compilation because there were no asset changes"
-      end
-    end
-  end
+  #namespace :assets do
+  #  task :precompile, :roles => :web, :except => { :no_release => true } do
+  #    from = source.next_revision(current_revision)
+  #    if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ application/assets/ | wc -l").to_i > 0
+  #      run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+  #    else
+  #      logger.info "Skipping asset pre-compilation because there were no asset changes"
+  #    end
+  #  end
+  #end
 
 end
 

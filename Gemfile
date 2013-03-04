@@ -41,6 +41,7 @@ gem 'xpath'
 
 
 group :assets do
+  gem 'turbo-sprockets-rails3'
   gem 'sass-rails'
   gem 'uglifier'
 

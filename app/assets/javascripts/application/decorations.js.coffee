@@ -11,6 +11,7 @@ $ ->
   ), ->
     $('.alert').toggleClass('alert-success').toggleClass('alert-error')
 
+
   $('.free').live 'mouseenter', ->
     $(@).find('.alert-success').fadeIn(200)
     $(@).find('.alert-success').addClass('active')

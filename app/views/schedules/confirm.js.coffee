@@ -1,2 +1,4 @@
-$(".schedule#<%= @schedule.id %>").html("<%=j render partial: 'schedule_row' %>")
-$(".schedule#<%= @schedule.id %>").trigger('hover')
+that = $(".schedule#<%= @schedule.id %>")
+that.html("<%=j render partial: 'schedule_row' %>")
+that.find('td:not(.actions)').css('text-decoration', 'underline')
+that.find('.btn').show()

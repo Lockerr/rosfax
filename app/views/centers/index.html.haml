@@ -1,0 +1,27 @@
+.container
+  %legend
+    Список центров
+    -if params[:city]
+      в (
+      = @city.name
+      \)
+
+  .row
+    .span9
+      %ul.thumbnails#centers_list
+        = render @centers
+    .span3#centers_cities
+      - for city in City.all
+        - link = "<span style='font-size: 16px'>"
+        - link += city.name
+        - if city.centers_count.to_i > 0
+          - link += "</span>&nbsp;&nbsp;<span class=\"badge badge-warning\" style='font-size: 14px'>#{city.centers_count}</span>"
+          %p
+            %a{href: '#', data:{city_id: city.id}}
+              = link.html_safe
+        - else
+          %p
+            = city.name
+
+
+

@@ -1,0 +1,24 @@
+%h1 Listing cities
+
+%table
+  %tr
+    %th Name
+    %th Companies count
+    %th Integer
+    %th
+    %th
+    %th
+
+  - @cities.each do |city|
+    %tr
+      %td= city.name
+      %td= city.companies_count
+      %td= city.integer
+      %td= link_to 'Show', city
+      %td= link_to 'Edit', edit_city_path(city)
+      %td= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New City', new_city_path
+

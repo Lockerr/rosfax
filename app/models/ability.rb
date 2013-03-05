@@ -5,12 +5,12 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.is_admin?
         can :manage, :all
-    elsif user.company != nil
+    elsif user.center != nil
         can [:read, :update, :create], Report
         can :manage, Schedule
         can :manage, Profile
         can :manage, Point
-        can :manage, Company, id: user.company_id
+        can :manage, Center, id: user.company_id
         can :manage, User, user_id: user.id
         can :manage, Block
     else
@@ -18,7 +18,7 @@ class Ability
         can :read, Report, publish: true
         can :read, Report, publish: false if Report.where(id: request.params[:id], access_key: request.params[:access_key]).count == 1
         can :access, Report
-        can :read, Company
+        can :read, Center
         can :create, Schedule
         can :read, Schedule if request.format == 'js'
     end

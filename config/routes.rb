@@ -1,5 +1,8 @@
 Tradein::Application.routes.draw do
 
+  resources :cities
+
+
   resources :reports
 
 
@@ -29,7 +32,8 @@ Tradein::Application.routes.draw do
   match ':id' => 'reports#show', :constraints => { :id => /\d.+/ }
 
   resources :feedbacks
-  resources :companies do
+  resources :centers do
+    resource :schedules
     put 'upload_logotype'
   end
 

@@ -24,20 +24,7 @@
     <div class="container">
     
         <header id="head">
-            <div id="logo">
-                <a href="#"><img src="images/logo.png"></a>
-            </div>
-            <div id="top_menu">
-                <ul>
-                    <li><a href="#">Как работает Rosfax</a></li>
-                    <li><a href="#">Отзывы</a></li>
-                    <li><a href="#">Проверенные авто</a></li>
-                    <li><a href="#">Пункты осмотра</a></li>
-                </ul>
-            </div>
-            <div id="request">
-                <a href="#">Запись на осмотр</a>
-            </div>
+            <%= render 'application/top_menu' %>
             <div id="top_text">
                 <h3>Зачем проверять авто при продаже?</h3>                   
                 <p>Вы знаете, что продаете автомобиль, который всегда обслуживался вовремя, не имеет никаких серьезных технических проблем, и всего лишь несколько мелких сколов на краске, которые появляются при нормальной эксплуатации автомобиля!?
@@ -73,34 +60,34 @@
                 <h4>Как пройти осмотр?</h4>
                 <p>Запишитесь на осмотр онлайн - в 2 клика! Бронирование БЕСПЛАТНО и ни к чему Вас не обязывает. Выберите ближайший центр Rosfax, удобную дату/время и оставьте Ваш номер телефона. <br><br> Вуаля! Вас уже ждут. Приезжайте! 
                 </p>
-                <a class="order_link">Запись на осмотр</a>
+              <a href="<%= new_schedule_url %>" class="order_link">Запись на осмотр</a>
             </section>
-            <section class="detailed">
-                  <div class="detailed_block">
-                      <div class="detailed_block_img">
-                          <img src="images/i5.png" alt="">
-                      </div>
-                      <a href="#">Как работает Rosfax</a>
-                  </div>
-                  <div class="detailed_block">
-                      <div class="detailed_block_img">
-                          <img src="images/i6.png">
-                      </div>
-                      <a href="#">Проверенные авто</a>
-                  </div>
-                  <div class="detailed_block">
-                      <div class="detailed_block_img">
-                          <img src="images/i7.png" alt="">
-                      </div>
-                      <a href="#">Отзывы</a>
-                  </div>
-                  <div class="detailed_block">
-                      <div class="detailed_block_img">
-                          <img src="images/i8.png" alt="">
-                      </div>
-                      <a href="#">Пункты осмотра</a>
-                  </div>
-            </section>
+            <!--<section class="detailed">-->
+                  <!--<div class="detailed_block">-->
+                      <!--<div class="detailed_block_img">-->
+                          <!--<img src="<%= asset_path 'home/i5.png" alt="'%>">-->
+                      <!--</div>-->
+                      <!--<a href="#">Как работает Rosfax</a>-->
+                  <!--</div>-->
+                  <!--<div class="detailed_block">-->
+                      <!--<div class="detailed_block_img">-->
+                          <!--<img src="<%= asset_path 'home/i6.png'%>">-->
+                      <!--</div>-->
+                      <!--<a href="#">Проверенные авто</a>-->
+                  <!--</div>-->
+                  <!--<div class="detailed_block">-->
+                      <!--<div class="detailed_block_img">-->
+                          <!--<img src="<%= asset_path 'home/i7.png" alt="'%>">-->
+                      <!--</div>-->
+                      <!--<a href="#">Отзывы</a>-->
+                  <!--</div>-->
+                  <!--<div class="detailed_block">-->
+                      <!--<div class="detailed_block_img">-->
+                          <!--<img src="<%= asset_path 'home/i8.png" alt="'%>">-->
+                      <!--</div>-->
+                      <!--<a href="#">Пункты осмотра</a>-->
+                  <!--</div>-->
+            <!--</section>-->
         </section>
         
     </div>
@@ -116,9 +103,9 @@
             </div>
             <div id="soc">
                 <ul>
-                    <li><a href="#"><img src="images/soc01.png"></a></li>
-                    <li><a href="#"><img src="images/soc02.png"></a></li>
-                    <li><a href="#"><img src="images/soc03.png"></a></li>
+                    <li><a href="#"><img src="<%= asset_path 'home/soc01.png'%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path 'home/soc02.png'%>"></a></li>
+                    <li><a href="#"><img src="<%= asset_path 'home/soc03.png'%>"></a></li>
                 </ul>
             </div>
         </div>

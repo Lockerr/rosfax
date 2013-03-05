@@ -6,7 +6,8 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body{:data => {:spy => :scroll, :target => '.nav'}}
-
+    - if Rails.env.development?
+      = session.inspect
     .container-fluid
       
       - unless request.path == '/'
@@ -15,3 +16,6 @@
       = bootstrap_flash.html_safe
       = yield
     = render 'yandex_metrika'
+    .footer
+
+

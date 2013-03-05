@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :reports
   has_many :subscriptions
 
-  belongs_to :company
+  belongs_to :center
   has_many :assets, :as => :attachable
 
   def admin?
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def company_name
-    company.name if company
+    center.name if center
   end
 
 

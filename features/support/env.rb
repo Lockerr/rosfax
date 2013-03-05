@@ -66,6 +66,9 @@ require 'capybara/poltergeist'
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
 Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app,{phantomjs: '/home/anton/opt/phantomjs-1.8.1-linux-i686/bin/phantomjs'})
+end
 
 
 # By default, any exception happening in your Rails application will bubble up

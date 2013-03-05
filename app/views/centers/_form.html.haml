@@ -1,0 +1,55 @@
+.row
+  - if flash[:error]
+    .alert.alert-error= flash[:error]
+  - if flash[:notice]
+    .alert.alert-success= flash[:notice]
+.row
+  .span5
+    = form_for @center, :html => {:class => 'form form-horizontal'} do |f|
+      %legend
+        Профиль центра
+      -if @center.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@profile.errors.count, "error")} prohibited this profile from being saved:"
+          %ul
+            - @pcenter.errors.full_messages.each do |msg|
+              %li= msg
+      .control-group
+        = f.label 'Наименование', :class => 'control-label'
+        .controls
+          = f.text_field :name
+      .control-group
+        = f.label 'Телефон', :class => 'control-label'
+        .controls
+          = f.text_field :phone
+      .control-group
+        = f.label 'Адрес', :class => 'control-label'
+        .controls
+          = f.text_field :address
+      .control-group
+        = f.label 'Часы работы', :class => 'control-label'
+        .controls
+          = f.text_field :timing
+      .control-group
+        .controls
+          = f.submit 'Сохранить', :class => 'btn'
+
+    = form_for(@center, :url => company_upload_logotype_path(@center), :remote => true, :html => {:class => 'form form-horizontal'} ) do |f|
+      .logotype
+        - if asset = @center.asset
+          - if asset.data_processing
+            %img{src: "/system/assets/data/000/001/#{asset.id}/original/#{asset.data_file_name}"}
+          -else
+            %img{src: asset.url(:carousel)}
+      %legend
+        Прикрепить логотип
+      .control-group
+        .controls
+          = f.file_field :logo
+      .control-group
+        .controls
+          = f.submit "Прикрепить файл", :class => 'btn'
+  .form_for_new_schedule_emails
+    = render 'form_for_new_schedule_emails'
+  .form_for_change_schedule_emails
+    = render 'form_for_change_schedule_emails'

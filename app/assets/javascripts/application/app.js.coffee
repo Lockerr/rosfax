@@ -258,8 +258,22 @@ $(document).ready ->
 
     $.ajax
       type: 'get'
-      url: "/companies.js?city=#{$(@).val()}"
-      $('.container#scheduler').empty()
+      url: "/centers.json?city_name=#{$(@).val()}"
+      success: (data) ->
+        $('.container#scheduler').empty()
+        $('#schedule-company-selector').show()
+        companies = data
+        selector = $('#schedule-company-selector')
+        ul = selector.find('ul')
+        ul.empty()
+        for company in companies
+          ul.append("<li><a value=#{company.id}>#{company.name}</a></li>")
+
+
+        select = selector.find('.bootstrap-select')
+        select.removeClass('active')
+        select.text('---')
+
 
   $("input[name='xx[center]']").live 'change', ->
     $('.container#scheduler').empty()

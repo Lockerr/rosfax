@@ -1,18 +1,19 @@
 #encoding: utf-8
 class Schedule < ActiveRecord::Base
-  attr_accessible :company_id, :inspection_start_date, :inspection_start_time, :name, :phone, :hour, :confirmed, :time, :date
-  belongs_to :company
+  attr_accessible :center_id, :inspection_start_date, :inspection_start_time, :name, :phone, :hour, :confirmed, :time, :date
 
-  validates_presence_of :company_id
+  belongs_to :center
+
+  validates_presence_of :center_id
 
   def notify_about_creation
-    for email in company.new_schedule_emails.delete_if{|e| e.empty?}
+    for email in center.new_schedule_emails.delete_if{|e| e.empty?}
       UserMailer.delay.new_schedule_notification(self, email)
     end 
   end
 
   def notify_about_moving
-    for email in company.new_schedule_emails.delete_if{|e| e.empty?}
+    for email in center.new_schedule_emails.delete_if{|e| e.empty?}
       UserMailer.delay.change_schedule_notification(self, email)
     end
   end
@@ -24,12 +25,9 @@ class Schedule < ActiveRecord::Base
 
 
   def match(day, hour)
-
     return false unless inspection_start_time.to_date == Date.today + day.days
     return false unless inspection_start_time.hour == hour
-
     true
-
   end
 
   private

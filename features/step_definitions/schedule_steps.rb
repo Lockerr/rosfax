@@ -7,8 +7,8 @@ def sign_in
 end
 
 Пусть /^у пользователя должна быть компания$/ do
-  @user.company.should_not be_nil
-  @user.company.name.should == 'Уах'
+  @user.center.should_not be_nil
+  @user.center.name.should == 'Уах'
 end
 
 
@@ -18,21 +18,21 @@ end
 
 
 Допустим /^я создал компанию$/ do
-  @company = Company.create(:name => 'Уах', :city => 'Челябинск', new_schedule_emails: ['antiqe@gmail.com', 'lockerr@mail.ru'])
+  @center = Center.create(:name => 'Уах', :city => City.find_or_create_by_name('Челябинск'), new_schedule_emails: ['antiqe@gmail.com', 'lockerr@mail.ru'])
 end
 
-Допустим /^я создал scedule на завтра для этой компании$/ do
-  @schedule = @company.schedules.create(:name => 'Антон', :phone => '+7 908 815 51 07', :date => Date.today + 2.days, :hour => 12, :confirmed => false)
+Допустим /^я создал schedule на завтра для этой компании$/ do
+  @schedule = @center.schedules.create(:name => 'Антон', :phone => '+7 908 815 51 07', :date => Date.today + 2.days, :hour => 12, :confirmed => false)
 end
 
 Допустим /^есть пользователь$/ do
   @user = User.create(:email => 'antiqe@gmail.com', :password => '12345', :password_confirmation => '12345')
-  @user.company = @company
+  @user.center = @center
   @user.save
 end
 
 Допустим /^пользователь принадлежит этой компании$/ do
-  @user.company.should == @company
+  @user.center.should == @center
 end
 
 Если /^я зайду на '([^\"]*)'$/ do |arg1|
@@ -48,11 +48,16 @@ end
 end
 
 Если /^я нажму на '([^\"]*)'$/ do |arg1|
-  page.find(arg1).click
+  page.execute_script("$('#{arg1}').show()")
+  el = page.find(arg1)
+  el.click
 end
 
 Если /^я нажму '([^\"]*)'$/ do |arg1|
-  page.find(arg1).click
+  page.execute_script("$('#{arg1}').show()")
+  el = page.find(arg1)
+  el.click
+
 end
 
 То /^я должен увидеть '(.*?)'$/ do |arg1|
@@ -61,6 +66,7 @@ end
 
 
 То /^шедуля должна быть верифицирована$/ do
+  page.execute_script("$('#unconfirm').show()")
   page.should have_selector('#unconfirm')
 end
 

@@ -6,17 +6,15 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @center = Company.find(params[:center]) if params[:center]
+    @center = Center.find(params[:center]) if params[:center]
+
     if @center 
       @schedules = @center.schedules
     elsif current_user
-      @schedules = current_user.company.schedules
+      @schedules = current_user.center.schedules
     else
       @schedules = []
     end
-    # @schedules = Schedule.all
-
-
     respond_to do |format|
       format.html
       format.json { render json: @schedules }
@@ -29,8 +27,8 @@ class SchedulesController < ApplicationController
   def show
 
     @schedule = Schedule.find(params[:id])
-    @schedules = @schedule.company.schedules
-    @center = @schedule.company
+    @schedules = @schedule.center.schedules
+    @center = @schedule.center
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,10 +40,19 @@ class SchedulesController < ApplicationController
   # GET /schedules/new.json
   def new
     if params[:city] and params[:center]
-      @center = Company.find(params[:center])
+      @center = Center.find(params[:center])
       @schedules = @center.schedules
+      @schedule = Schedule.new
+    elsif params[:center_id]
+      @center = Center.find(params[:center_id]) if params[:center_id]
+      @schedule = @center.schedules.new
+      @schedules = @center.schedules
+    else
+      @schedule = Schedule.new
     end
-    @schedule = Schedule.new
+
+
+
     if params[:schedule]
       for key in params[:schedule].keys
         @schedule[key] = params[:schedule][key]
@@ -74,8 +81,8 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       if @schedule.save
         @schedule.notify_about_creation
-        flash[:js] = "Вы успешно забронировали осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}.<br/> В ближайшее время Вам перезвонит менеджер автосалона \"#{@schedule.company.name}\" для подтверждения бронирования и уточнения возможных вопросов.<br/> Спасибо, что воспользовались нашим сервисом!"
-        format.html { redirect_to (current_user ? @schedule : root_path), notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.company.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
+        flash[:js] = "Вы успешно забронировали осмотр Rosfax в #{@schedule.center.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}.<br/> В ближайшее время Вам перезвонит менеджер автосалона \"#{@schedule.center.name}\" для подтверждения бронирования и уточнения возможных вопросов.<br/> Спасибо, что воспользовались нашим сервисом!"
+        format.html { redirect_to (current_user ? @schedule : root_path), notice: "Вы успешно записаны на осмотр Rosfax в #{@schedule.center.name} на #{@schedule.hour} часов #{Russian::strftime(@schedule.date, '%d %B %Y')}." }
         format.json { render json: @schedule, status: :created, location: @schedule }
         format.js 
       else

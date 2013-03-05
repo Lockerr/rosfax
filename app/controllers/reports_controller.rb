@@ -27,8 +27,8 @@ class ReportsController < ApplicationController
     if current_user
       if current_user.admin?
         @reports = Report.scoped
-      elsif current_user.company
-        @reports = current_user.company.reports.scoped
+      elsif current_user.center
+        @reports = current_user.center.reports.scoped
       else current_user
         @reports = current_user.reports.scoped
       end
@@ -118,7 +118,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
-        current_user.company ? current_user.company.reports << @report : nil
+        current_user.center ? current_user.center.reports << @report : nil
         format.html { redirect_to edit_report_path(@report)}
         format.json { render json: @report, status: :created, location: @report }
 

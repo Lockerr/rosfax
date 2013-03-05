@@ -16,11 +16,13 @@
           - if current_user
             %li= link_to 'Отчеты', reports_path
             %li= link_to 'Новый отчет', new_report_path
-            - unless Rails.root.to_s.split('/')[2] == 'user'
-              %li= link_to 'Профиль', edit_user_profile_path(current_user)
+            %li= link_to 'Профиль', edit_user_profile_path(current_user)
+            %li= link_to 'Центр', edit_center_path(current_user.center) if current_user.center
+            %li= link_to 'Центры',centers_path if current_user.admin?
           
             - if current_user.admin?
               %li= link_to 'Feedback', feedbacks_path
+
           %li= link_to 'Запись на осмотр', new_schedule_path
         %ul.nav.pull-right
           %li

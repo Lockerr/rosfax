@@ -1,9 +1,9 @@
 class CityConstraints
   def initialize
-    @names = Company.all.map(&:name)
+    @names = Center.all.map(&:name)
   end
 
   def matches?(request)
-    @names.include?(request.params[:company])
+    @names.include?(request.params[:center])
   end
 end

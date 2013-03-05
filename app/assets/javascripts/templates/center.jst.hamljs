@@ -1,0 +1,16 @@
+%li.span3
+  .thumbnail
+    .caption
+      .row-fluid
+        .span12
+          %h3=name
+      .row-fluid
+        .span6
+          %img{src: asset_url}
+        .span6
+          %p=address
+          %p=phone
+      .row-fluid{style: 'margin-top: 5px'}
+        %a.btn{href: "centers/#{id}/schedules/new"}
+          Записаться на осмотр
+        %a.btn.btn-danger{href: "centers/#{id}/edit"}

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @city.name
+%p
+  %b Cities count:
+  = @city.cities_count
+%p
+  %b Integer:
+  = @city.integer
+
+= link_to 'Edit', edit_city_path(@city)
+\|
+= link_to 'Back', cities_path

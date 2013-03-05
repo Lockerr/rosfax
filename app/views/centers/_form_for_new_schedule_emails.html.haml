@@ -1,0 +1,10 @@
+= form_for current_user.center , :remote => true,  :html => {class: 'form form-horizontal'} do |f|
+  %legend
+    Почтовые ящики для отправки уведомлений о появлении нового осмотра
+  - 5.times do |i|
+    .control-group
+      .controls
+        = email_field_tag 'company[new_schedule_emails][]', current_user.center.new_schedule_emails[i]
+  .control-group
+    .controls
+      = f.submit 'Сохранить', class: :btn

@@ -1,33 +1,29 @@
 .container#selector
-  %legend
-    Запись на осмотр
-  #schedule-city-selection
-    %form.form-horizontal
-      .control-group
-        .control-label
-          Выберите город:
-        .controls
-          = select 'xx', 'city', %w(Челябинск Екатеринбург Магнитогорск), {prompt:'---'}, class: 'bootstrap-select'
-          -#%select.bootstrap-select{name: :city}
-          -#  %option.selected
-          -#  %option{value: "Челябинск"}
-          -#    Челябинск
-          -#  %option{value: "Екатеринбург"}
-          -#    Екатеринбург
-          -#  %option{value: "Магнитогорск"}
-          -#    Магнитогорск
 
+  - if @center
+    %legend
+      Запись на осмотр в
+      = @center.name
 
-
-
-
-
-  #schedule-company-selector{style: 'display: none;'}
-    %form.form-horizontal
-      .control-group
-        .control-label
-          Выберите центр:
-        .controls
-          = select 'xx', 'center', %w(), {prompt:'---'}, class: 'bootstrap-select'
+    = render 'calendar'
+  - else
+    %legend
+      Запись на осмотр
+    #schedule-city-selection
+      %form.form-horizontal
+        .control-group
+          .control-label
+            Выберите город:
+          .controls
+            = select 'xx', 'city', %w(Челябинск Екатеринбург Магнитогорск), {prompt:'---'}, class: 'bootstrap-select'
+    #schedule-company-selector{style: 'display: none;'}
+      %form.form-horizontal
+        .control-group
+          .control-label
+            Выберите центр:
+          .controls
+            = select 'xx', 'center', %w(), {prompt:'---'}, class: 'bootstrap-select'
 
 .container#scheduler{style: 'display: none;'}
+
+

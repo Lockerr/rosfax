@@ -1,0 +1,20 @@
+%li.span3
+  .thumbnail
+    .caption
+      .row-fluid
+        .span12
+          %h3
+            = center.name
+      .row-fluid
+        .span6
+          - if center.asset
+            %img{src: center.asset.url}
+        .span6
+          %p
+            = center.address
+          %p
+            = center.phone
+      .row-fluid{style: 'margin-top: 5px'}
+        %a.btn{href: new_center_schedules_path(center)}
+          Записаться на осмотр
+

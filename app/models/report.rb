@@ -16,7 +16,7 @@ class Report < ActiveRecord::Base
   belongs_to :user
   belongs_to :model
   belongs_to :brand
-  belongs_to :company
+  belongs_to :center
   belongs_to :country
 
   attr_accessor :car_mark_model, :counters
@@ -479,7 +479,7 @@ class Report < ActiveRecord::Base
   def can_manage?(current_user)
     return false unless current_user
     current_user.admin? or
-    company == current_user.company or
+    center == current_user.center or
     user == current_user
   end
 

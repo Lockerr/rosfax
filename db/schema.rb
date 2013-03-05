@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301103205) do
+ActiveRecord::Schema.define(:version => 20130304125224) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20130301103205) do
     t.string   "city"
     t.text     "new_schedule_emails"
     t.text     "change_schedule_emails"
+    t.string   "timing"
+    t.integer  "assets_count"
   end
 
   create_table "countries", :force => true do |t|

@@ -4,7 +4,6 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   
-  layout 'profile'
 
   def index
     @profiles = Profile.all

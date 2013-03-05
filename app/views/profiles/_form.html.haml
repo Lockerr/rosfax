@@ -27,6 +27,14 @@
         .controls
           = f.text_field :phone
       .control-group
+        = f.label 'Адрес', :class => 'control-label'
+        .controls
+          = f.text_field :address
+      .control-group
+        = f.label 'Часы работы', :class => 'control-label'
+        .controls
+          = f.text_field :timing
+      .control-group
         .controls
           = f.submit 'Сохранить', :class => 'btn'
     
@@ -35,7 +43,7 @@
         .logotype
           - if asset = current_user.company.asset
             - if asset.data_processing
-              %img{src: "/system/assets/data/000/000/#{asset.id}/original/#{asset.data_file_name}"}
+              %img{src: "/system/assets/data/000/001/#{asset.id}/original/#{asset.data_file_name}"}
             -else
               %img{src: asset.url(:carousel)}
         %legend
@@ -68,5 +76,5 @@
   .span5
     .alert.alert-info
       %h3
-        Информация для пользователей Eye-Fi
-      %p Здесь будет инструкция для Eye-Fi
+        Полезная информация
+      %p Lorem ipsum

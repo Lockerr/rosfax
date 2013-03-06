@@ -13,7 +13,7 @@
           %p
             = center.address
           %p
-            = center.phone
+            = center.phone ? "+7 (#{center.phone.to_s[0..2]}) #{center.phone.to_s[3..5]}  #{center.phone.to_s[6..7]}  #{center.phone.to_s[8..-1]}" : ''
       .row-fluid{style: 'margin-top: 5px'}
         %a.btn{href: new_center_schedules_path(center)}
           Записаться на осмотр

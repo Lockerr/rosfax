@@ -7,10 +7,10 @@
       \)
 
   .row
-    .span9
+    .span10
       %ul.thumbnails#centers_list
         = render @centers
-    .span3#centers_cities
+    .span2#centers_cities
       - for city in City.all
         - link = "<span style='font-size: 16px'>"
         - link += city.name

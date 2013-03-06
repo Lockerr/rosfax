@@ -26,4 +26,5 @@
           %li= link_to 'Запись на осмотр', new_schedule_path
         %ul.nav.pull-right
           %li
-            = link_to 'Шедули', schedules_path
+            - if current_user
+              = link_to 'Шедули', schedules_path

@@ -15,7 +15,7 @@ class CentersController < ApplicationController
               id: i.id,
               name: i.name,
               address: i.address || '',
-              phone: i.phone || '',
+              phone: i.phone ? "+7 (#{i.phone.to_s[0..2]}) #{i.phone.to_s[3..5]}  #{i.phone.to_s[6..7]}  #{i.phone.to_s[8..-1]}" : '',
               asset_url: i.asset_url || '',
               timing_from: i.timing_from || '',
               timing_to: i.timing_to || ''

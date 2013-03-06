@@ -1,9 +1,4 @@
 .row
-  - if flash[:error]
-    .alert.alert-error= flash[:error]
-  - if flash[:notice]
-    .alert.alert-success= flash[:notice]
-.row
   .span5
     = form_for @center, :html => {:class => 'form form-horizontal'} do |f|
       %legend
@@ -21,7 +16,7 @@
       .control-group
         = f.label 'Телефон', :class => 'control-label'
         .controls
-          = f.text_field :phone
+          = f.text_field :telephone
       .control-group
         = f.label 'Адрес', :class => 'control-label'
         .controls
@@ -29,12 +24,13 @@
       .control-group
         = f.label 'Часы работы', :class => 'control-label'
         .controls
-          = f.text_field :timing
+          = f.select 'timing_from', (0..24).to_a, {prompt:'---'}, class: 'bootstrap-select'
+          = f.select 'timing_to', (0..24).to_a, {prompt:'---'}, class: 'bootstrap-select'
       .control-group
         .controls
           = f.submit 'Сохранить', :class => 'btn'
 
-    = form_for(@center, :url => company_upload_logotype_path(@center), :remote => true, :html => {:class => 'form form-horizontal'} ) do |f|
+    = form_for(@center, :url => center_upload_logotype_path(@center), :remote => true, :html => {:class => 'form form-horizontal'} ) do |f|
       .logotype
         - if asset = @center.asset
           - if asset.data_processing

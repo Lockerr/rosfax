@@ -16,7 +16,9 @@ class CentersController < ApplicationController
               name: i.name,
               address: i.address || '',
               phone: i.phone || '',
-              asset_url: i.asset_url || ''
+              asset_url: i.asset_url || '',
+              timing_from: i.timing_from || '',
+              timing_to: i.timing_to || ''
           ]} if @city
       elsif params[:city_name]
         @city = City.find_by_name(params[:city_name]) if params[:city_name]
@@ -83,7 +85,7 @@ class CentersController < ApplicationController
 
     respond_to do |format|
       if @center.update_attributes(params[:center])
-        format.html { redirect_to @center, notice: 'Company was successfully updated.' }
+        format.html { redirect_to edit_center_path(@center), notice: 'Company was successfully updated.' }
         format.json { head :no_content }
         format.js
       else
@@ -106,7 +108,7 @@ class CentersController < ApplicationController
   end
 
   def upload_logotype
-    @center = Center.find(params[:company_id])
+    @center = Center.find(params[:center_id])
     asset = @center.build_asset(data: params[:center][:logo])
     asset.save
     redirect_to :back

@@ -1,4 +1,4 @@
-%li.span3
+%li.span4
   .thumbnail
     .caption
       .row-fluid
@@ -10,7 +10,12 @@
         .span6
           %p=address
           %p=phone
+          %p
+            &nbsp;c&nbsp;
+            =timing_from
+            &nbsp;до&nbsp;
+            =timing_to
+
       .row-fluid{style: 'margin-top: 5px'}
         %a.btn{href: "centers/#{id}/schedules/new"}
           Записаться на осмотр
-        %a.btn.btn-danger{href: "centers/#{id}/edit"}

@@ -22,7 +22,7 @@ $(document).ready ->
   $.mask.definitions['~'] = "[AАBВСCEЕHНKКMМOОPРTТXХYУ]"
   
   $('input#report_car_gov_number').mask("~ 999 ~~ 99?9", {upcase: true})
-  $('input#profile_phone').mask("+7(999) 999 99 99")
+  $('input#profile_phone, input#center_telephone').mask("+7(999) 999 99 99")
   $('input#report_car_vin').mask("*** ****** ****9999",{upcase: true})
   $('input#report_car_buyer_phone, input#report_car_seller_phone').mask("+7(999) 999 99 99")
   $('input#report_car_price').forceNumeric()

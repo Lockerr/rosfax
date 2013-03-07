@@ -49,7 +49,8 @@ jQuery ($) ->
             .attr({
                 value: v.value,
                 data: attribute,
-                'data-value': v.value
+                'data-value': v.value,
+                href: '#'
                             })
             .html(v.text)
         )

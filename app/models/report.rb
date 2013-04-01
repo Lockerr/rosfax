@@ -246,6 +246,7 @@ class Report < ActiveRecord::Base
     points.where(:object => ['checklist', 'elements']).each do |point|
       point_hash = {}
       point_object = point.attributes.except('id', 'report_id', 'created_at', 'updated_at', 'images','assets_count', 'object', 'section')
+      point_object['place'] = I18n.translate("#{point.object}.#{point.section}.#{point.place}").to_s
 
       point_object[:assets] = []
 

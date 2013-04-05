@@ -8,8 +8,8 @@
   %body{:data => {:spy => :scroll, :target => '.nav'}}
     - if Rails.env.development?
       = session.inspect
-    - User.all.each do |user|
-      = link_to user.email, "/switch_user?scope_identifier=user_#{user.id}"
+      - User.all.each do |user|
+        = link_to user.email, "/switch_user?scope_identifier=user_#{user.id}"
     .container-fluid
       
       - unless request.path == '/'

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'switch_user'
+
 gem 'cancan'
 gem 'rails', '3.2.11'
 gem 'mysql2'
@@ -58,6 +58,7 @@ group :development do
   gem 'sextant'
   gem 'thin'
   gem "binding_of_caller"
+  gem 'switch_user'
 end
 
 group :development, :test do

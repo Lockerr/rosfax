@@ -1,5 +1,7 @@
 Tradein::Application.routes.draw do
 
+  match '/switch_user', :controller => 'switch_user', :action => 'set_current_user'
+
   resources :cities
 
 

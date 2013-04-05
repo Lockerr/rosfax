@@ -58,3 +58,12 @@ end
 
         require './config/boot'
         require 'airbrake/capistrano'
+desc "tail production log files"
+task :logs, :roles => :app do
+  trap("INT") { puts 'Interupted'; exit 0; }
+  run "tail -f #{deploy_to}/shared/log/production.log" do |channel, stream, data|
+    puts  # for an extra line break before the host name
+    puts "#{channel[:host]}: #{data}"
+    break if stream == :err
+  end
+end

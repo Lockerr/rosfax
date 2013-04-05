@@ -43,7 +43,7 @@ set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
-set 'delayed_job_args', '-n 2'
+# set 'delayed_job_args', '-n 2'
 namespace :deploy do
   
 

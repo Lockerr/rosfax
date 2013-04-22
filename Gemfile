@@ -37,7 +37,7 @@ gem "devise-async"
 gem 'russian'
 # gem 'spine-rails'
 gem 'coffee-rails'
-gem 'rb-inotify', '~> 0.8.8'
+# gem 'rb-inotify', '~> 0.8.8'
 gem 'xpath'
 
 
@@ -62,7 +62,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'capistrano-unicorn',git: 'git://github.com/dimko/capistrano-unicorn.git', :require => false
+  gem 'capistrano-unicorn'
+  # ,git: 'git://github.com/dimko/capistrano-unicorn.git', :require => false
   gem 'poltergeist'
   gem 'rspec-core'
   gem 'rspec-expectations'
@@ -91,5 +92,5 @@ group :test do
   gem 'email_spec'
   gem 'capybara'
   gem 'ZenTest', '4.4.1'
-  gem 'rb-notifu'
+  # gem 'rb-notifu'
 end

@@ -92,7 +92,7 @@ Tradein::Application.routes.draw do
   root :to => 'home#index'
 
   match 'new_file', :controller => 'ftp', :action => 'file'
-
+  match 'f83a1dd76bdae0c18f2afed973b38acd', controller: 'reports', action: :list, format: :xml
   match 'google5bf74eb79251ba45.html',  :controller => 'static', :action => 'google_validation'
   # match 'yandex_4ed32e0d73358fa4.html', :controller => 'static', :action => 'yandex_validation'
 

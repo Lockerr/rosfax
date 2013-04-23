@@ -56,6 +56,17 @@ class ReportsController < ApplicationController
       }
     end
   end
+  
+  def list
+    @reports = Report.all
+
+        render xml: @reports.map{|i|
+          {
+            vin: i.car['vin'],
+            url: report_url(i, access_key: i.access_key, format: :xml)
+          }
+        }
+  end
 
   def show
 

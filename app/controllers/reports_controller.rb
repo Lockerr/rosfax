@@ -46,6 +46,14 @@ class ReportsController < ApplicationController
         @reports = @reports.includes(:assets)
       }
       format.json { render json: @reports }
+      format.xml {
+        render xml: @reports.map{|i| 
+          {
+            vin: i.car['vin'], 
+            url: report_url(i, access_key: i.access_key, format: :xml)
+          }
+        }
+      }
     end
   end
 

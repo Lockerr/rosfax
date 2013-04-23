@@ -17,6 +17,7 @@ class Ability
         # raise request.params[:access_key]
         can :read, Report, publish: true
         can :read, Report, publish: false if Report.where(id: request.params[:id], access_key: request.params[:access_key]).count == 1
+        can :read, Report, publish: false if request.params[:secret_key] == 'f83a1dd76bdae0c18f2afed973b38acd'
         can :access, Report
         can :read, Center
         can :create, Schedule

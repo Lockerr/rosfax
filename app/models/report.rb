@@ -281,9 +281,13 @@ class Report < ActiveRecord::Base
           object['documents'].delete key
         end
 
-        if object['documents']['documents']["owner_#{i+1}_jur"]
-          object['documents']['owners']["owner_#{i+1}"] = object['documents']['documents']["owner_#{i+1}_jur"]
-          object['documents']['documents'].delete "owner_#{i+1}_jur"
+        if object['documents']
+          if object['documents']['documents']
+            if object['documents']['documents']["owner_#{i+1}_jur"]
+              object['documents']['owners']["owner_#{i+1}"] = object['documents']['documents']["owner_#{i+1}_jur"]
+              object['documents']['documents'].delete "owner_#{i+1}_jur"
+            end
+          end
         end
       end
     end

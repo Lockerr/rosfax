@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  # include Devise::Async::Model
+  include Devise::Async::Model
   has_one :profile
   has_many :reports
   has_many :subscriptions
